@@ -1,88 +1,77 @@
 ﻿using kck_api.Controller;
 using kck_api.Database;
 using kck_projekt1.View;
-using kck_projekt2;
+using Spectre.Console;
 using System.Diagnostics;
 
 namespace kck_projekt1
 {
-    internal class Program
+    public class Program
     {
-        [STAThread]
+
         static void Main(string[] args)
         {
-
-            var x = Console.ReadLine();
-
-            if (x == "1")
-            {
-                RunWPF();
-            }
-
-            if(x== "2")
-            {
-                string exePath = Path.Combine(Directory.GetCurrentDirectory(), "kck_projekt2.exe");
-
-                    // Tworzenie nowego procesu do uruchomienia exe
-                    Process process = new Process();
-                    process.StartInfo.FileName = exePath;
-
-                    // Uruchomienie procesu
-                    process.Start();
-
-                    // Zakończenie aplikacji konsolowej
-                    Environment.Exit(0); // lub `return;` aby zakończyć metodę Main
-            }
-
-
-
             ApplicationDbContext context = new ApplicationDbContext();
             var userController = new UserController(context);
 
             var menuView = new MenuView();
             var userView = new UserView();
 
-            var choice = menuView.ShowStartMenu();
-            switch (choice)
+            while (true)
             {
-                case "Zaloguj się":
-                    var user = userView.LoginUser();
-                    user = userController.GetUser(user);
-                    if (user == null)
-                    {
-                        Console.WriteLine("Błędne dane logowania");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Zalogowano pomyślnie");
-                        Console.Clear();
-                        menuView.ShowActionMenu();
-                    }
-                    break;
+                var choice = menuView.ShowStartMenu();
+                switch (choice)
+                {
+                    case "Log in":
+                        var user = userView.LoginUser();
+                        AnsiConsole.Status()
+                        .Spinner(Spinner.Known.Weather) // Wybór spinnera typu "dots"
+                        .Start("Loading...", ctx =>
+                        {
+                            ctx.Status("Logging in...");
+                            user = userController.GetUser(user);
+                        });
+                        if (user == null)
+                        {
+                            Console.WriteLine("Wrong nick or password, press anything to try again");
+                            Console.ReadLine();
+                            Console.Clear();
+                            break;
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            menuView.ShowActionMenu(user);
+                        }
+                        break;
 
-                case "Zarejestruj się":
-                    userController.AddUser(userView.AddNewUser());
-                    Console.WriteLine("Dodano nowego użytkownika");
-                    break;
+                    case "Register":
+                        userController.AddUser(userView.AddNewUser());
+                        Console.WriteLine("New user added");
+                        Console.ReadLine();
+                        break;
 
+                    case "Graphic Mode":
+                        SwitchToGraphicMode();
+                        break;
 
-                case "Wyjście":
-                    Environment.Exit(0);
-                    break;
+                    case "Exit":
+                        Environment.Exit(0);
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
             }
         }
 
-
-        static void RunWPF()
+        public static void SwitchToGraphicMode()
         {
-            var wpfApp = new App();
-            var mainWindow = new MainWindow();
-            mainWindow.InitializeComponent();
-            wpfApp.Run(mainWindow);
+            string exePath = Path.Combine(Directory.GetCurrentDirectory(), "kck_projekt2.exe");
+            Process process = new Process();
+            process.StartInfo.FileName = exePath;
+            process.Start();
+            Environment.Exit(0);
         }
-
     }
 }

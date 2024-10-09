@@ -7,28 +7,35 @@ namespace kck_projekt1.View
     {
         public UserModel AddNewUser()
         {
-            AnsiConsole.Markup("Nick:");
-            var nick = Console.ReadLine();
 
-            AnsiConsole.Markup("Passowrd:");
-            var password = Console.ReadLine();
+            var rule = new Rule("[aqua]Add new user:[/]");
+            rule.Style = new Style(Color.Blue);
+            rule.LeftJustified();
+            AnsiConsole.Write(rule);
+
+            var nick = AnsiConsole.Prompt(
+            new TextPrompt<string>("[aqua]Enter your nick:[/]"));
+
+            var password = AnsiConsole.Prompt(
+            new TextPrompt<string>("[aqua]Enter your password:[/]"));
 
             return new UserModel(nick, password);
         }
 
         public UserModel LoginUser()
         {
-            var rule = new Rule("[red]Logowanie:[/]");
+            var rule = new Rule("[aqua]Log in:[/]");
+            rule.Style = new Style(Color.Blue); 
             rule.LeftJustified();
             AnsiConsole.Write(rule);
 
-            var name = AnsiConsole.Prompt(
-            new TextPrompt<string>("Podaj Nick:"));
+            var nick = AnsiConsole.Prompt(
+            new TextPrompt<string>("[aqua]Enter your nick:[/]"));
 
             var password = AnsiConsole.Prompt(
-            new TextPrompt<string>("Podaj Hasło:").Secret());
+            new TextPrompt<string>("[aqua]Enter your password:[/]").Secret());
 
-            return new UserModel(name, password);
+            return new UserModel(nick, password);
         }
     }
 }

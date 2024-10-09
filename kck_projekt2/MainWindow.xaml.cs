@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -30,7 +32,16 @@ namespace kck_projekt2
             var user = new UserModel("userWPF","wpf");
             userController.AddUser(user);
 
-            MessageBox.Show("User Dodany");
+            MessageBox.Show("User added");
+        }
+
+        private void SwitchToTextMode(object sender, RoutedEventArgs e)
+        {
+            string exePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "kck_projekt1.exe");
+            Process process = new Process();
+            process.StartInfo.FileName = exePath;
+            process.Start();
+            Environment.Exit(0);
         }
     }
 }

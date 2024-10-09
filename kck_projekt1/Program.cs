@@ -25,10 +25,10 @@ namespace kck_projekt1
                     case "Log in":
                         var user = userView.LoginUser();
                         AnsiConsole.Status()
-                        .Spinner(Spinner.Known.Weather) // Wybór spinnera typu "dots"
-                        .Start("Loading...", ctx =>
+                        .Spinner(Spinner.Known.BouncingBar)
+                        .SpinnerStyle(Style.Parse("blue"))
+                        .Start("[aqua]Loading[/]", ctx =>
                         {
-                            ctx.Status("Logging in...");
                             user = userController.GetUser(user);
                         });
                         if (user == null)

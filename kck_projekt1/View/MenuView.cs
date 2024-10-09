@@ -5,7 +5,7 @@ namespace kck_projekt1.View
     public class MenuView : View
     {
 
-        public string ShowStartMenu(UserModel user)
+        public string ShowStartMenu()
         {
             AnsiConsole.Write(
             new FigletText("Notes")
@@ -14,7 +14,7 @@ namespace kck_projekt1.View
 
             var choice = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-            .Title("Welcome in Notes and Reminders App "+)
+            .Title("Welcome in Notes and Reminders App ")
             .PageSize(4)
             .AddChoices(new[] {
                 "Log in",
@@ -26,11 +26,11 @@ namespace kck_projekt1.View
             return choice;
         }
 
-        public string ShowActionMenu()
+        public string ShowActionMenu(UserModel user)
         {
             var choice = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-            .Title("Choose Action: ")
+            .Title("Hello "+user.Nick +" choose Action: ")
             .PageSize(5)
             .AddChoices(new[] {
                 "Notes",

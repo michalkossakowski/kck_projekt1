@@ -5,9 +5,9 @@ VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kck_projekt1", "kck_projekt1\kck_projekt1.csproj", "{DC166919-D10B-4E57-825C-7E1AB1557A3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kck_projekt2", "kck_projekt2\kck_projekt2.csproj", "{9BAD1151-F01C-481A-86A7-68C790632B5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kck_projekt2", "kck_projekt2\kck_projekt2.csproj", "{9BAD1151-F01C-481A-86A7-68C790632B5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kck_api", "kck_api\kck_api.csproj", "{642E655C-7C4E-4E3C-A545-E3688C4EAF12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kck_api", "kck_api\kck_api.csproj", "{642E655C-7C4E-4E3C-A545-E3688C4EAF12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace kck_projekt1.Database
+namespace kck_api.Database
 {
     public class ApplicationDbContext : DbContext
     {
         public DbSet<UserModel> Users { get; set; }
+        public DbSet<NoteModel> Notes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

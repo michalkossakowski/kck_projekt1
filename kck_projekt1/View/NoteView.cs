@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace kck_projekt1.View
 {
-    internal class BookView
+    public class NoteView
     {
     }
 }

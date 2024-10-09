@@ -11,8 +11,7 @@ namespace kck_projekt1
 
         static void Main(string[] args)
         {
-            ApplicationDbContext context = new ApplicationDbContext();
-            var userController = new UserController(context);
+            var userController = new UserController();
 
             var menuView = new MenuView();
             var userView = new UserView();

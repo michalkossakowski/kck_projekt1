@@ -2,14 +2,22 @@
 
 namespace kck_api.Controller
 {
-    public class UserController : Controller
+    public class UserController
     {
+
+        private static UserController _instance;
 
         private readonly ApplicationDbContext _context;
 
-        public UserController(ApplicationDbContext context)
+        public UserController()
         {
-            _context = context;
+            _context = ApplicationDbContext.GetInstance();
+        }
+        public static UserController GetInstance()
+        {
+            if (_instance == null)
+                _instance = new UserController();
+            return _instance;
         }
 
         public void AddUser(UserModel user)

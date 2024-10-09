@@ -27,11 +27,8 @@ namespace kck_projekt2
 
         private void myButton_Click(object sender, RoutedEventArgs e)
         {
-            ApplicationDbContext context = new ApplicationDbContext();
-            var userController = new UserController(context);
-            var user = new UserModel("userWPF","wpf");
-            userController.AddUser(user);
-
+            var userController = UserController.GetInstance();
+            userController.AddUser(new UserModel("userWPF", "wpf"));
             MessageBox.Show("User added");
         }
 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace kck_projekt1.UserView
+namespace kck_projekt1.View
 {
     public class UserView : View
     {

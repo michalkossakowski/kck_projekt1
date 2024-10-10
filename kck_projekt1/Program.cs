@@ -1,8 +1,4 @@
-﻿using kck_api.Controller;
-using kck_api.Database;
-using kck_projekt1.View;
-using Spectre.Console;
-using System.Diagnostics;
+﻿using kck_projekt1.View;
 
 namespace kck_projekt1
 {

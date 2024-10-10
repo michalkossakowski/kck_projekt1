@@ -1,6 +1,5 @@
 ﻿using kck_api.Database;
 
-
 namespace kck_api.Controller
 {
     public class NoteController

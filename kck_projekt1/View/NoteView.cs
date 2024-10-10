@@ -55,7 +55,7 @@ namespace kck_projekt1.View
 
             foreach (var note in notes) 
             {
-                var noteContent = new Panel(new Markup($"{note.ModifiedDate}\n{note.Content}").Wrap())
+                var noteContent = new Panel(new Markup($"{note.ModifiedDate}\n{note.Content}"))
                 .Header($"[yellow]{note.Category} Id:{note.Id}[/]")
                 .Border(BoxBorder.Rounded)
                 .Padding(2, 2);

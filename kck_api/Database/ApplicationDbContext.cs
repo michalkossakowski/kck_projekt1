@@ -15,10 +15,11 @@ namespace kck_api.Database
 
         public DbSet<UserModel> Users { get; set; }
         public DbSet<NoteModel> Notes { get; set; }
+        public DbSet<EventModel> Events { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=kckDb;Trusted_Connection=True;MultipleActiveResultSets=true;");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=kck_projektDb;Trusted_Connection=True;MultipleActiveResultSets=true;");
         }
     }
 }

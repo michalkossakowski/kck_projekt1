@@ -5,7 +5,7 @@ namespace kck_projekt1.View
 {
     public class UserView : View
     {
-        public UserModel AddNewUser()
+        public UserModel RegisterUser()
         {
 
             var rule = new Rule("[aqua]Add new user:[/]");
@@ -17,7 +17,7 @@ namespace kck_projekt1.View
             new TextPrompt<string>("[aqua]Enter your nick:[/]"));
 
             var password = AnsiConsole.Prompt(
-            new TextPrompt<string>("[aqua]Enter your password:[/]"));
+            new TextPrompt<string>("[aqua]Enter your password:[/]").Secret());
 
             return new UserModel(nick, password);
         }

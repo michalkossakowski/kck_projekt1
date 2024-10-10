@@ -20,15 +20,28 @@ namespace kck_api.Controller
             return _instance;
         }
 
-        public void AddUser(UserModel user)
+        public bool AddUser(UserModel user)
         {
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            if(GetUserByNick(user.Nick) == null)
+            {
+                _context.Users.Add(user);
+                _context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public UserModel GetUser(UserModel user)
         {
             return _context.Users.FirstOrDefault(u => (u.Nick == user.Nick) && (u.Password == user.Password));
+        }
+
+        public UserModel GetUserByNick(string nick)
+        {
+            return _context.Users.FirstOrDefault(u => u.Nick == nick);
         }
     }
 }

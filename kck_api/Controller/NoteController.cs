@@ -1,4 +1,5 @@
 ﻿using kck_api.Database;
+using static Azure.Core.HttpHeader;
 
 namespace kck_api.Controller
 {
@@ -29,6 +30,24 @@ namespace kck_api.Controller
         public List<NoteModel> GetNotesByUserId(int userId)
         {
             return _context.Notes.Where(n => n.AuthorId == userId).ToList();
+        }
+
+        public List<NoteModel> GetLatestNotesByUserId(int userId,int count)
+        {    
+            var notes = _context.Notes.Where(n => n.AuthorId == userId).ToList();
+            return notes.TakeLast(count).ToList();
+        }
+
+        public NoteModel GetNoteById(int noteId)
+        {
+            return _context.Notes.FirstOrDefault(n => n.Id == noteId);
+        }
+
+        public void RemoveNote(int noteId)
+        {
+            var note = _context.Notes.FirstOrDefault(n => n.Id == noteId);
+            _context.Notes.Remove(note);
+            _context.SaveChanges();
         }
 
     }

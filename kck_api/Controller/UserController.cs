@@ -36,12 +36,14 @@ namespace kck_api.Controller
 
         public UserModel GetUser(UserModel user)
         {
-            return _context.Users.FirstOrDefault(u => (u.Nick == user.Nick) && (u.Password == user.Password));
+            var users = _context.Users.ToList();
+            return users.FirstOrDefault(u => u.Nick == user.Nick && u.Password == user.Password);
         }
 
         public UserModel GetUserByNick(string nick)
         {
-            return _context.Users.FirstOrDefault(u => u.Nick == nick);
+            var users = _context.Users.ToList();
+            return users.FirstOrDefault(u => u.Nick == nick);
         }
     }
 }

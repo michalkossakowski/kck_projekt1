@@ -14,6 +14,7 @@ namespace kck_projekt1.View
             var userController = UserController.GetInstance();
             while (true)
             {
+                Console.Clear();
                 var choice = ShowLoginMenu();
                 switch (choice)
                 {
@@ -35,7 +36,6 @@ namespace kck_projekt1.View
                         else
                         {
                             _loggedUser = user;
-                            Console.Clear();
                             ShowActionMenu();
                         }
                         break;
@@ -59,13 +59,12 @@ namespace kck_projekt1.View
                     default:
                         break;
                 }
-                Console.Clear();
             }
         }
         public string ShowLoginMenu()
         {
             AnsiConsole.Write(
-            new FigletText("Notes App")
+            new FigletText("Notes")
                 .LeftJustified()
                 .Color(Color.Aqua));
 
@@ -90,10 +89,12 @@ namespace kck_projekt1.View
 
         public void ShowActionMenu()
         {
+            Console.Clear();
             var noteView = new NoteView();
             var noteController = NoteController.GetInstance();
             while (true)
             {
+                Console.Clear();
                 AnsiConsole.Write(
                 new FigletText("Menu")
                     .LeftJustified()
@@ -107,10 +108,12 @@ namespace kck_projekt1.View
                 var choice = ActionSelect();
                 switch (choice)
                 {
-                    case "My notes":
-                        Console.Clear();
-                        noteView.ShowNotes(_loggedUser.Id);
-                        Console.Clear();
+                    case "Latest notes":
+                        noteView.ShowLatestNotes(_loggedUser.Id);
+                        break;
+
+                    case "Explore notes":
+                        noteView.ShowNote(noteView.ExploreNotes(_loggedUser.Id));
                         break;
 
                     case "Add note":
@@ -120,15 +123,10 @@ namespace kck_projekt1.View
                         break;
 
                     case "Calendar":
-
-                        break;
-
-                    case "Add event":
-
+                        noteView.ShowCalendar();
                         break;
 
                     case "Log out":
-                        Console.Clear();
                         return;
 
                     case "Exit":
@@ -138,7 +136,6 @@ namespace kck_projekt1.View
                     default:
                         break;
                 }
-                Console.Clear();
             }
 
         }
@@ -150,10 +147,10 @@ namespace kck_projekt1.View
             .Title($"[blue]Hello {_loggedUser.Nick} what do you want to do?/-[/]")
             .HighlightStyle(Color.Aqua)
             .AddChoices(new[] {
-                            "My notes",
+                            "Latest notes",
+                            "Explore notes",
                             "Add note",
                             "Calendar",
-                            "Add Event",
                             "Log out",
                             "Exit"
              }));

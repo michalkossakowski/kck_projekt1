@@ -9,7 +9,6 @@ namespace kck_api
         {
             Console.WriteLine("kck_api DZIAŁA, NACIŚNIEJ 'ENTER' ABY ZATRZYMAĆ");
             Console.ReadLine();
-
         }
     }
 }

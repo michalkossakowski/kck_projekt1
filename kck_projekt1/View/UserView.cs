@@ -6,33 +6,53 @@ namespace kck_projekt1.View
     {
         public UserModel RegisterUser()
         {
+            AnsiConsole.Clear();
 
-            var rule = new Rule("[aqua]Add new user:[/]");
-            rule.Style = new Style(Color.Blue);
+            AnsiConsole.Write(
+            new FigletText("Register")
+            .LeftJustified()
+            .Color(Color.Gold1));
+
+            var rule = new Rule("[gold1]Add new user:[/]");
+            rule.Style = new Style(Color.Gold1);
             rule.LeftJustified();
             AnsiConsole.Write(rule);
 
             var nick = AnsiConsole.Prompt(
-            new TextPrompt<string>("[aqua]Enter your nick:[/]"));
+            new TextPrompt<string>("[gold1]Enter your[/] [darkorange]nick:[/]"));
 
             var password = AnsiConsole.Prompt(
-            new TextPrompt<string>("[aqua]Enter your password:[/]").Secret());
+            new TextPrompt<string>("[gold1]Enter your[/] [darkorange]password:[/]").Secret());
 
+            var confirm = AnsiConsole.Prompt(
+            new TextPrompt<string>("[gold1]Confirm your[/] [darkorange]password:[/]").Secret());
+
+            if(confirm != password)
+                return null;
             return new UserModel(nick, password);
         }
 
         public UserModel LoginUser()
         {
-            var rule = new Rule("[aqua]Log in:[/]");
-            rule.Style = new Style(Color.Blue); 
+            AnsiConsole.Clear();
+
+            AnsiConsole.Write(
+            new FigletText("Login")
+            .LeftJustified()
+            .Color(Color.Gold1));
+
+            var rule = new Rule("[gold1]Enter your login information:[/]");
+            rule.Style = new Style(Color.Gold1); 
             rule.LeftJustified();
             AnsiConsole.Write(rule);
 
+            Console.WriteLine("");
+
             var nick = AnsiConsole.Prompt(
-            new TextPrompt<string>("[aqua]Enter your nick:[/]"));
+            new TextPrompt<string>("[gold1]Enter your[/] [darkorange]nick:[/]"));
 
             var password = AnsiConsole.Prompt(
-            new TextPrompt<string>("[aqua]Enter your password:[/]").Secret());
+            new TextPrompt<string>("[gold1]Enter your[/] [darkorange]password:[/]").Secret());
 
             return new UserModel(nick, password);
         }

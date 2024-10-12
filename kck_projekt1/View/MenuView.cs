@@ -14,7 +14,7 @@ namespace kck_projekt1.View
             var userController = UserController.GetInstance();
             while (true)
             {
-                Console.Clear();
+                AnsiConsole.Clear();
                 var choice = ShowLoginMenu();
                 switch (choice)
                 {
@@ -22,14 +22,14 @@ namespace kck_projekt1.View
                         var user = userView.LoginUser();
                         AnsiConsole.Status()
                         .Spinner(Spinner.Known.BouncingBar)
-                        .SpinnerStyle(Style.Parse("blue"))
-                        .Start("[aqua]Loading[/]", ctx =>
+                        .SpinnerStyle(Style.Parse("darkorange"))
+                        .Start("[gold1]Loading[/]", ctx =>
                         {
                             user = userController.GetUser(user);
                         });
                         if (user == null)
                         {
-                            AnsiConsole.Markup("[red]Wrong nick or password, press anything to continue[/]");
+                            AnsiConsole.Markup("[red1]Wrong nick or password, press anything to continue[/]");
                             Console.ReadKey();
                             break;
                         }
@@ -41,10 +41,13 @@ namespace kck_projekt1.View
                         break;
 
                     case "Register":
-                        if (userController.AddUser(userView.RegisterUser()))
-                            AnsiConsole.Markup("[green]New user added, press anything to continue[/]");
+                        var newUser = userView.RegisterUser();
+                        if(newUser == null)
+                            AnsiConsole.Markup("[red1]Passwords don't match, press anything to continue[/]");
+                        else if (userController.AddUser(newUser))
+                            AnsiConsole.Markup("[green1]New user added, press anything to continue[/]");
                         else
-                            AnsiConsole.Markup("[yellow]This nick is occupied, press anything to continue[/]");
+                            AnsiConsole.Markup("[red1]This nick is occupied, press anything to continue[/]");
                         Console.ReadKey();
                         break;
 
@@ -63,20 +66,21 @@ namespace kck_projekt1.View
         }
         public string ShowLoginMenu()
         {
+
             AnsiConsole.Write(
             new FigletText("Notes")
                 .LeftJustified()
-                .Color(Color.Aqua));
+                .Color(Color.Gold1));
 
-            var rule = new Rule();
-            rule.Style = new Style(Color.Blue);
+            var rule = new Rule("[gold1]Welcome in Notes App choose action:[/]");
+            rule.Style = new Style(Color.Gold1);
             rule.LeftJustified();
             AnsiConsole.Write(rule);
 
             var choice = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-            .HighlightStyle(Color.Aqua)
-            .Title("[blue]Welcome in Notes App choose action:[/]")
+            .Title("")
+            .HighlightStyle(Color.DarkOrange)
             .AddChoices(new[] {
                 "Log in",
                 "Register",
@@ -89,41 +93,42 @@ namespace kck_projekt1.View
 
         public void ShowActionMenu()
         {
-            Console.Clear();
+            AnsiConsole.Clear();
             var noteView = new NoteView();
             var noteController = NoteController.GetInstance();
             while (true)
             {
-                Console.Clear();
+                AnsiConsole.Clear();
                 AnsiConsole.Write(
                 new FigletText("Menu")
                     .LeftJustified()
-                    .Color(Color.Aqua));
-
-                var rule = new Rule();
-                rule.Style = new Style(Color.Blue);
-                rule.LeftJustified();
-                AnsiConsole.Write(rule);
+                    .Color(Color.Gold1));
 
                 var choice = ActionSelect();
                 switch (choice)
                 {
+                    case "Add note":
+                        noteController.AddNote(noteView.WriteNote(_loggedUser));
+                        AnsiConsole.Markup("[green1]New note added, press anything to continue[/]");
+                        Console.ReadKey();
+                        break;
+
                     case "Latest notes":
                         noteView.ShowLatestNotes(_loggedUser.Id);
                         break;
 
                     case "Explore notes":
-                        noteView.ShowNote(noteView.ExploreNotes(_loggedUser.Id));
-                        break;
-
-                    case "Add note":
-                        noteController.AddNote(noteView.WriteNote(_loggedUser));
-                        AnsiConsole.Markup("[green]New note added, press anything to continue[/]");
-                        Console.ReadKey();
+                        while (true)
+                        {
+                            var noteId = noteView.ExploreNotes(_loggedUser.Id);
+                            if (noteId == -1)
+                                break;
+                            noteView.ShowNote(noteId);
+                        }
                         break;
 
                     case "Calendar":
-                        noteView.ShowCalendar();
+                        noteView.ShowCalendar(_loggedUser.Id);
                         break;
 
                     case "Log out":
@@ -142,14 +147,19 @@ namespace kck_projekt1.View
 
         public string ActionSelect()
         {
+            var rule = new Rule($"[gold1]Hello[/] [darkorange]{_loggedUser.Nick}[/] [gold1]what do you want to do?[/]");
+            rule.Style = new Style(Color.Gold1);
+            rule.LeftJustified();
+            AnsiConsole.Write(rule);
+
             var choice = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-            .Title($"[blue]Hello {_loggedUser.Nick} what do you want to do?/-[/]")
-            .HighlightStyle(Color.Aqua)
+            .Title("")
+            .HighlightStyle(Color.DarkOrange)
             .AddChoices(new[] {
+                            "Add note",
                             "Latest notes",
                             "Explore notes",
-                            "Add note",
                             "Calendar",
                             "Log out",
                             "Exit"

@@ -32,15 +32,32 @@ namespace kck_api.Controller
             return _context.Notes.Where(n => n.AuthorId == userId).ToList();
         }
 
-        public List<NoteModel> GetLatestNotesByUserId(int userId,int count)
-        {    
+        public NoteModel GetNoteById(int noteId)
+        {
+            return _context.Notes.FirstOrDefault(n => n.Id == noteId);
+        }
+
+        public List<NoteModel> GetLatestNotesByUserId(int userId, int count)
+        {
             var notes = _context.Notes.Where(n => n.AuthorId == userId).ToList();
             return notes.TakeLast(count).ToList();
         }
 
-        public NoteModel GetNoteById(int noteId)
+        public List<NoteModel> GetCurrentMonthNotesByUserId(int userId, DateTime date)
         {
-            return _context.Notes.FirstOrDefault(n => n.Id == noteId);
+            return _context.Notes.Where(n => n.AuthorId == userId
+            && n.ModifiedDate.Month == date.Month
+            && n.ModifiedDate.Year == date.Year)
+                .ToList();
+        }
+
+        public List<NoteModel> GetNotesByUserIdAndDay(int userId, DateTime date, int day)
+        {
+            return _context.Notes.Where(n => n.AuthorId == userId
+            && n.ModifiedDate.Month == date.Month
+            && n.ModifiedDate.Year == date.Year
+            && n.ModifiedDate.Day == day)
+                .ToList();
         }
 
         public void RemoveNote(int noteId)

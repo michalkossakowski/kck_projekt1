@@ -8,8 +8,19 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignColors" Version="3.1.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<ProjectReference Include="..\kck_api\kck_api.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Wpf.Ui">
+	    <HintPath>..\..\..\..\..\.nuget\packages\wpf-ui\3.0.5\lib\net8.0-windows7.0\Wpf.Ui.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 </Project>

@@ -5,11 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kck_projekt2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Content="Button" Click="myButton_Click" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top"/>
+        Title="MainWindow" Height="600" Width="600"
+        ResizeMode="NoResize"
+        
+        Style="{StaticResource MaterialDesignWindow}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Foreground="White"
+        >
 
-        <Button Content="Przejdź do trybu tekstowego" Click="SwitchToTextMode" HorizontalAlignment="Center" Margin="0,273,0,0" VerticalAlignment="Top"/>
+    
+    <Grid Name="MainGrid">
+        
+        <ContentControl x:Name="contentControl" />
 
+        <Grid x:Name="MainMenuGrid">
+            <TextBlock
+                Padding="0,16"
+                VerticalAlignment="Top"
+                TextAlignment="Center"
+                Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
+                Text="Notes App" Margin="0,20,0,0" />
+
+            <Button Content="Log in" Click="OpenLoginPage" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top"/>
+            <Button Content="Register" Click="Register" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top"/>
+            <Button Content="Console mode" Click="SwitchToConsoleMode" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Top"/>
+            <Button Content="Exit" Click="Exit" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top"  Background="Orange"/>
+        </Grid>
     </Grid>
+
 </Window>

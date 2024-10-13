@@ -25,20 +25,35 @@ namespace kck_projekt2
             InitializeComponent();
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
+        private void OpenLoginPage(object sender, RoutedEventArgs e)
         {
-            var userController = UserController.GetInstance();
-            userController.AddUser(new UserModel("userWPF", "wpf"));
-            MessageBox.Show("User added");
+            MainMenuGrid.Visibility = Visibility.Collapsed;
+            contentControl.Content = new LoginPage(this);
         }
 
-        private void SwitchToTextMode(object sender, RoutedEventArgs e)
+        private void Register(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SwitchToConsoleMode(object sender, RoutedEventArgs e)
         {
             string exePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "kck_projekt1.exe");
             Process process = new Process();
             process.StartInfo.FileName = exePath;
             process.Start();
             Environment.Exit(0);
+        }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        public void ReturnToMainMenu()
+        {
+            MainMenuGrid.Visibility = Visibility.Visible;
+            contentControl.Content = null;
         }
     }
 }

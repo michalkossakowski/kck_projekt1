@@ -9,7 +9,7 @@ namespace kck_api.Controller
 
         private readonly ApplicationDbContext _context;
 
-        public NoteController()
+        private NoteController()
         {
             _context = ApplicationDbContext.GetInstance();
         }
@@ -58,6 +58,12 @@ namespace kck_api.Controller
             && n.ModifiedDate.Year == date.Year
             && n.ModifiedDate.Day == day)
                 .ToList();
+        }
+
+        public List<NoteModel> GetNotesByUserIdAndTitle(int userId, string title)
+        {
+            return _context.Notes.Where(n => n.AuthorId == userId 
+            && n.Title.Contains(title)).ToList();
         }
 
         public void RemoveNote(int noteId)

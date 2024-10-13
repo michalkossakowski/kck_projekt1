@@ -131,6 +131,14 @@ namespace kck_projekt1.View
                         noteView.ShowCalendar(_loggedUser.Id);
                         break;
 
+                    case "Search":
+                        var searchingTitle = noteView.SearchNotes();
+                        var searchingNoteId = noteView.ShowNotesBySearch(_loggedUser.Id,searchingTitle);
+                        if (searchingNoteId == -1)
+                            break;
+                        noteView.ShowNote(searchingNoteId);
+                        break;
+
                     case "Log out":
                         return;
 
@@ -161,6 +169,7 @@ namespace kck_projekt1.View
                             "Latest notes",
                             "Explore notes",
                             "Calendar",
+                            "Search",
                             "Log out",
                             "Exit"
              }));

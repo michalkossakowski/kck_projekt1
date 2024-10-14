@@ -28,9 +28,34 @@ namespace kck_projekt2
             _mainWindow = mainWindow;
         }
 
-        private void BackClick(object sender, RoutedEventArgs e)
+        private void OpenAddNotePage(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void OpenLatestNotesPage(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void OpenExploreNotesPage(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void OpenCalendarPage(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void OpenSearchPage(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LogOutClick(object sender, RoutedEventArgs e)
         {
             _mainWindow.ReturnToMainMenu();
+        }
+        private void ExitClick(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

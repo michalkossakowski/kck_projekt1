@@ -15,6 +15,11 @@ using kck_api.Database;
 
 namespace kck_projekt2
 {
+    public class SampleItem()
+    {
+
+    }
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -31,9 +36,10 @@ namespace kck_projekt2
             contentControl.Content = new LoginPage(this);
         }
 
-        private void Register(object sender, RoutedEventArgs e)
+        private void OpenRegisterPage(object sender, RoutedEventArgs e)
         {
-
+            MainMenuGrid.Visibility = Visibility.Collapsed;
+            contentControl.Content = new RegisterPage(this);
         }
 
         private void SwitchToConsoleMode(object sender, RoutedEventArgs e)

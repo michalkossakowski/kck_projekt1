@@ -17,10 +17,8 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Foreground="White"
         >
 
-    
     <Grid Name="MainGrid">
         
         <ContentControl x:Name="contentControl" />
@@ -34,9 +32,9 @@
                 Text="Notes App" Margin="0,20,0,0" />
 
             <Button Content="Log in" Click="OpenLoginPage" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top"/>
-            <Button Content="Register" Click="Register" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top"/>
+            <Button Content="Register" Click="OpenRegisterPage" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top"/>
             <Button Content="Console mode" Click="SwitchToConsoleMode" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Top"/>
-            <Button Content="Exit" Click="Exit" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top"  Background="Orange"/>
+            <Button Content="Exit" Click="Exit" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Background="#FF1A237E" BorderBrush="#FF1A237E"/>
         </Grid>
     </Grid>
 

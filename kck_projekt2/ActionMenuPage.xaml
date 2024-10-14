@@ -6,14 +6,25 @@
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}"
-             Foreground="White"
              >
 
     <Grid>
+        <StackPanel HorizontalAlignment="Center">
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Name="errorMessage" Content="Action Menu Page" Foreground="Red"/>
-            <Button Content="Back" Width="70" Height="30" Margin="0,10,0,0" Click="BackClick" Background="Orange"/>
+            <TextBlock
+                Padding="0,16"
+                VerticalAlignment="Top"
+                TextAlignment="Center"
+                Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
+                Text="Choose action" Margin="0,20,0,0" />
+
+            <Button Content="Add note" Width="90" Height="30" Margin="0,10,0,0" Click="OpenAddNotePage"/>
+            <Button Content="Latest notes" Width="110" Height="30" Margin="0,10,0,0" Click="OpenLatestNotesPage"/>
+            <Button Content="Explore notes" Width="110" Height="30" Margin="0,10,0,0" Click="OpenExploreNotesPage"/>
+            <Button Content="Calendar" Width="90" Height="30" Margin="0,10,0,0" Click="OpenCalendarPage"/>
+            <Button Content="Search" Width="80" Height="30" Margin="0,10,0,0" Click="OpenSearchPage"/>
+            <Button Content="LogOut" Width="80" Height="30" Margin="0,10,0,0" Click="LogOutClick" Background="#FF1A237E" BorderBrush="#FF1A237E"/>
+            <Button Content="Exit" Click="ExitClick"  Width="60" Height="30" Margin="0,10,0,0"  Background="#FF1A237E" BorderBrush="#FF1A237E"/>
         </StackPanel>
     </Grid>
 

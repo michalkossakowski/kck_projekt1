@@ -19,45 +19,52 @@ namespace kck_projekt2
     /// <summary>
     /// Logika interakcji dla klasy LoginPage.xaml
     /// </summary>
-    public partial class LoginPage : UserControl
+    public partial class RegisterPage : UserControl
     {
         private MainWindow _mainWindow;
 
-        public LoginPage(MainWindow mainWindow)
+        public RegisterPage(MainWindow mainWindow)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
 
         }
 
-        private async void LoginClick(object sender, RoutedEventArgs e)
+        private async void RegisterClick(object sender, RoutedEventArgs e)
         {
             Loading.Visibility = Visibility.Visible;
             LoginButton.IsEnabled = false;
             string nickValue = nick.Text;
             string passwordValue = password.Password;
+            string confirmValue = confirm.Password;
 
-            if (nickValue.Length == 0 || passwordValue.Length == 0)
+            if (nickValue.Length == 0 || passwordValue.Length == 0 || confirmValue.Length ==  0)
             {
-                errorMessage.Content = "Nick and password cannot be null !";
+                errorMessage.Content = "Nick, password and confirmation cannot be null !";
                 errorMessage.Visibility = Visibility.Visible;
+            }
+            else if (passwordValue != confirmValue)
+            {
+                errorMessage.Content = ("Passwords don't match !");
             }
             else
             {
                 var userController = UserController.GetInstance();
                 var user = new UserModel(nickValue, passwordValue);
-                user = await Task.Run(() => userController.GetUser(user));
-                if (user == null)
+                if (await Task.Run(() => userController.AddUser(user)))
                 {
-                    errorMessage.Content = "Wrong nick or password !";
-                    errorMessage.Visibility = Visibility.Visible;
-
+                    errorMessage.Content = ("New user added you can login now !");
+                    errorMessage.Foreground = new SolidColorBrush(Colors.Green);
+                    Loading.Visibility = Visibility.Hidden;
+                    nick.IsEnabled = false;
+                    password.IsEnabled = false;
+                    confirm.IsEnabled = false;
+                    return;
                 }
                 else
                 {
-                    _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
+                    errorMessage.Content = ("This nick is occupied !");
                 }
-
             }
             LoginButton.IsEnabled = true;
             Loading.Visibility = Visibility.Hidden;

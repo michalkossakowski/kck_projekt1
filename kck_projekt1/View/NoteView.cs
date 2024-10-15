@@ -278,9 +278,6 @@ namespace kck_projekt1.View
 
         public void ShowNotesBasics(List<NoteModel> notes)
         {
-
-
-
             foreach (var note in notes)
             {
                 var table = new Table()

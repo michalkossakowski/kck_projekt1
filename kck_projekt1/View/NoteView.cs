@@ -235,7 +235,7 @@ namespace kck_projekt1.View
                     new SelectionPrompt<string>()
                     .Title("")
                     .HighlightStyle(Color.DarkOrange)
-                    .PageSize(10)
+                    .PageSize(5)
                     .AddChoices(list));
 
                     switch (choice)

@@ -40,7 +40,9 @@ namespace kck_api.Controller
         public List<NoteModel> GetLatestNotesByUserId(int userId, int count)
         {
             var notes = _context.Notes.Where(n => n.AuthorId == userId).ToList();
-            return notes.TakeLast(count).ToList();
+            notes = notes.TakeLast(count).ToList(); 
+            notes.Reverse();
+            return notes;
         }
 
         public List<NoteModel> GetCurrentMonthNotesByUserId(int userId, DateTime date)

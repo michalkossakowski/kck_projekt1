@@ -45,7 +45,12 @@ namespace kck_projekt1.View
                 category = AnsiConsole.Prompt(
                 new TextPrompt<string>("[gold1]Enter[/] [darkorange]category:[/]"));
             }
-
+            else
+            {
+                AnsiConsole.Markup("[gold1]Choosen[/] [darkorange]category: [/]" + category);
+                Console.WriteLine("");
+            }
+           
             return new NoteModel(user.Id, title, note, category);
         }
         public int ExploreNotes(int userId)
@@ -104,6 +109,8 @@ namespace kck_projekt1.View
             rule.LeftJustified();
             AnsiConsole.Write(rule);
 
+            Console.WriteLine();
+
             var noteController = NoteController.GetInstance();
             var note = noteController.GetNoteById(noteId);
 
@@ -118,6 +125,7 @@ namespace kck_projekt1.View
             table.AddRow(panel);
             AnsiConsole.Write(table);
 
+            Console.WriteLine();
 
             var choice = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
@@ -150,8 +158,10 @@ namespace kck_projekt1.View
             rule.LeftJustified();
             AnsiConsole.Write(rule);
 
+            Console.WriteLine();
+
             var noteController = NoteController.GetInstance();
-            var notes = noteController.GetLatestNotesByUserId(userId,3);
+            var notes = noteController.GetLatestNotesByUserId(userId,4);
 
             if (notes.Count == 0)
             {
@@ -160,7 +170,7 @@ namespace kck_projekt1.View
             else
             {
                 ShowNotesBasics(notes);
-                AnsiConsole.Markup("[green1]Here are your notes, press anything to continue[/]");
+                AnsiConsole.Markup("[green1]\nHere are your notes, press anything to continue[/]");
             }
 
             Console.ReadKey();
@@ -181,6 +191,8 @@ namespace kck_projekt1.View
                 titleRule.Style = new Style(Color.Gold1);
                 titleRule.LeftJustified();
                 AnsiConsole.Write(titleRule);
+
+                Console.WriteLine();
 
                 var currentDate = DateTime.Now;
                 var calendar = new Calendar(currentDate.Year, currentDate.Month);
@@ -252,18 +264,23 @@ namespace kck_projekt1.View
             rule.LeftJustified();
             AnsiConsole.Write(rule);
 
+            Console.WriteLine();
+
             var noteController = NoteController.GetInstance();
             var notes = noteController.GetNotesByUserIdAndDay(userId, date, day);
 
             ShowNotesBasics(notes);
 
-            AnsiConsole.Markup("[green1]Here are your notes from chosen day, press anything to continue[/]");
+            AnsiConsole.Markup("[green1]\nHere are your notes from chosen day, press anything to continue[/]");
             Console.ReadKey();
             AnsiConsole.Clear();
         }
 
         public void ShowNotesBasics(List<NoteModel> notes)
         {
+
+
+
             foreach (var note in notes)
             {
                 var table = new Table()
@@ -273,6 +290,7 @@ namespace kck_projekt1.View
                 table.AddRow(note.Content);
                 AnsiConsole.Write(table);
 
+                Thread.Sleep(200);
             }
         }
 

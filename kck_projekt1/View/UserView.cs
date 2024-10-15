@@ -18,6 +18,8 @@ namespace kck_projekt1.View
             rule.LeftJustified();
             AnsiConsole.Write(rule);
 
+            Console.WriteLine("");
+
             var nick = AnsiConsole.Prompt(
             new TextPrompt<string>("[gold1]Enter your[/] [darkorange]nick:[/]"));
 

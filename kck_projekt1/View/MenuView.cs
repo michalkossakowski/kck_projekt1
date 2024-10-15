@@ -26,10 +26,11 @@ namespace kck_projekt1.View
                         .Start("[gold1]Loading[/]", ctx =>
                         {
                             user = userController.GetUser(user);
+                            Thread.Sleep(1000);
                         });
                         if (user == null)
                         {
-                            AnsiConsole.Markup("[red1]Wrong nick or password, press anything to continue[/]");
+                            AnsiConsole.Markup("[red1]\nWrong nick or password, press anything to continue[/]");
                             Console.ReadKey();
                             break;
                         }
@@ -42,12 +43,27 @@ namespace kck_projekt1.View
 
                     case "Register":
                         var newUser = userView.RegisterUser();
-                        if(newUser == null)
-                            AnsiConsole.Markup("[red1]Passwords don't match, press anything to continue[/]");
-                        else if (userController.AddUser(newUser))
-                            AnsiConsole.Markup("[green1]New user added, press anything to continue[/]");
+                        if (newUser == null)
+                        {
+                            AnsiConsole.Markup("[red1]\nPasswords don't match, press anything to continue[/]");
+                            Console.ReadKey();
+                            break;
+                        }
+
+                        bool isAdded = false;
+                        AnsiConsole.Status()
+                        .Spinner(Spinner.Known.BouncingBar)
+                        .SpinnerStyle(Style.Parse("darkorange"))
+                        .Start("[gold1]Loading[/]", ctx =>
+                        {
+                            isAdded = userController.AddUser(newUser);
+                            Thread.Sleep(1000);
+                        });
+
+                        if (isAdded)
+                            AnsiConsole.Markup("[green1]\nNew user added, press anything to continue[/]");
                         else
-                            AnsiConsole.Markup("[red1]This nick is occupied, press anything to continue[/]");
+                            AnsiConsole.Markup("[red1]\nThis nick is occupied, press anything to continue[/]");
                         Console.ReadKey();
                         break;
 
@@ -109,7 +125,7 @@ namespace kck_projekt1.View
                 {
                     case "Add note":
                         noteController.AddNote(noteView.WriteNote(_loggedUser));
-                        AnsiConsole.Markup("[green1]New note added, press anything to continue[/]");
+                        AnsiConsole.Markup("[green1]\nNew note added, press anything to continue[/]");
                         Console.ReadKey();
                         break;
 

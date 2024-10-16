@@ -159,13 +159,13 @@ namespace kck_projekt1.View
                 .LeftJustified()
                 .Color(Color.Gold1));
 
-            var rule = new Rule($"[gold1]You editing[/] [darkorange]'{note.Title}' [gold1]({note.Category})[/] [ {note.ModifiedDate}:[/]");
+            var rule = new Rule($"[gold1]You editing[/] [darkorange]'{note.Title}'[/] [gold1]({note.Category})[/] [darkorange]{note.ModifiedDate}:[/]");
             rule.Style = new Style(Color.Gold1);
             rule.LeftJustified();
             AnsiConsole.Write(rule);
 
 
-            AnsiConsole.Markup($"[gold1]You can copy old[/] [darkorange]content:\n[/] [grey70]{note.Content}[/]");
+            AnsiConsole.Markup($"[gold1]\nYou can copy old[/] [darkorange]content:\n[/] [grey70]{note.Content}\n[/]");
 
             var newContent = AnsiConsole.Prompt(
             new TextPrompt<string>("[gold1]\nEnter new[/] [darkorange]content:[/]"));

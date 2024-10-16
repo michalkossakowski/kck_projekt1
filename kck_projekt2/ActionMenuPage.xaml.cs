@@ -30,7 +30,7 @@ namespace kck_projekt2
 
         private void OpenAddNotePage(object sender, RoutedEventArgs e)
         {
-
+            _mainWindow.contentControl.Content = new AddNotePage(_mainWindow);
         }
         private void OpenLatestNotesPage(object sender, RoutedEventArgs e)
         {

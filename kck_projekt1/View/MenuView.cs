@@ -149,10 +149,13 @@ namespace kck_projekt1.View
 
                     case "Search":
                         var searchingTitle = noteView.SearchNotes();
-                        var searchingNoteId = noteView.ShowNotesBySearch(_loggedUser.Id,searchingTitle);
-                        if (searchingNoteId == -1)
-                            break;
-                        noteView.ShowNote(searchingNoteId);
+                        while (true)
+                        {
+                            var searchingNoteId = noteView.ShowNotesBySearch(_loggedUser.Id, searchingTitle);
+                            if (searchingNoteId == -1)
+                                break;
+                            noteView.ShowNote(searchingNoteId);
+                        }
                         break;
 
                     case "Log out":

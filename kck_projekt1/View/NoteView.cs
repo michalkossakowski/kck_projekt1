@@ -1,6 +1,8 @@
 ﻿using kck_api.Controller;
 using Spectre.Console;
-using static Azure.Core.HttpHeader;
+using System.Globalization;
+using static System.Net.Mime.MediaTypeNames;
+using Calendar = Spectre.Console.Calendar;
 
 namespace kck_projekt1.View
 {
@@ -132,6 +134,7 @@ namespace kck_projekt1.View
             .HighlightStyle(Color.DarkOrange)
             .AddChoices(new[] {
                 "Back",
+                "Edit",
                 "Delete"
              }));
 
@@ -139,11 +142,39 @@ namespace kck_projekt1.View
             {
                 case "Back":
                     return;
+                case "Edit":
+                    ShowEditNote(note);
+                    return;
                 case "Delete":
                     noteController.RemoveNote(noteId);
                     return;
             }
         }
+
+        public void ShowEditNote(NoteModel note)
+        {
+            AnsiConsole.Clear();
+            AnsiConsole.Write(
+            new FigletText("Edit")
+                .LeftJustified()
+                .Color(Color.Gold1));
+
+            var rule = new Rule($"[gold1]You editing[/] [darkorange]'{note.Title}' [gold1]({note.Category})[/] [ {note.ModifiedDate}:[/]");
+            rule.Style = new Style(Color.Gold1);
+            rule.LeftJustified();
+            AnsiConsole.Write(rule);
+
+
+            AnsiConsole.Markup($"[gold1]You can copy old[/] [darkorange]content:\n[/] [grey70]{note.Content}[/]");
+
+            var newContent = AnsiConsole.Prompt(
+            new TextPrompt<string>("[gold1]\nEnter new[/] [darkorange]content:[/]"));
+
+            var noteController = NoteController.GetInstance();
+            noteController.EditNoteContent(note.Id, newContent);
+        }
+
+
 
         public void ShowLatestNotes(int userId)
         {
@@ -161,7 +192,7 @@ namespace kck_projekt1.View
             Console.WriteLine();
 
             var noteController = NoteController.GetInstance();
-            var notes = noteController.GetLatestNotesByUserId(userId,4);
+            var notes = noteController.GetLatestNotesByUserId(userId,3);
 
             if (notes.Count == 0)
             {
@@ -169,7 +200,7 @@ namespace kck_projekt1.View
             }
             else
             {
-                ShowNotesBasics(notes);
+                ShowNotes(notes);
                 AnsiConsole.Markup("[green1]\nHere are your notes, press anything to continue[/]");
             }
 
@@ -200,11 +231,11 @@ namespace kck_projekt1.View
                 var noteController = NoteController.GetInstance();
                 var currentMonthNotes = noteController.GetCurrentMonthNotesByUserId(userId, currentDate);
             
-                var days = new HashSet<string>();
+                var days = new HashSet<int>();
                 foreach ( var note in currentMonthNotes)
                 {
                     calendar.AddCalendarEvent(note.ModifiedDate.Year, note.ModifiedDate.Month, note.ModifiedDate.Day);
-                    days.Add($"{note.ModifiedDate.Day.ToString()}.{note.ModifiedDate.Month}.{note.ModifiedDate.Year}");
+                    days.Add(note.ModifiedDate.Day);
                 }
             
            
@@ -226,7 +257,7 @@ namespace kck_projekt1.View
                     rule.LeftJustified();
                     AnsiConsole.Write(rule);
 
-                    var list = days.ToList();
+                    var list = days.OrderBy(day => day).Select(day => new DateTime(currentDate.Year, currentDate.Month, day).ToString("dd.MM.yyyy")).ToList();
                     list.Add("Back");
                     list.Reverse();
 
@@ -269,14 +300,14 @@ namespace kck_projekt1.View
             var noteController = NoteController.GetInstance();
             var notes = noteController.GetNotesByUserIdAndDay(userId, date, day);
 
-            ShowNotesBasics(notes);
+            ShowNotes(notes);
 
             AnsiConsole.Markup("[green1]\nHere are your notes from chosen day, press anything to continue[/]");
             Console.ReadKey();
             AnsiConsole.Clear();
         }
 
-        public void ShowNotesBasics(List<NoteModel> notes)
+        public void ShowNotes(List<NoteModel> notes)
         {
             foreach (var note in notes)
             {
@@ -284,7 +315,11 @@ namespace kck_projekt1.View
                     .BorderColor(Color.Grey70)
                     .Border(TableBorder.Rounded);
                 table.AddColumn(new TableColumn($"[darkorange]{note.Title}[/] [gold1]({note.Category})[/]").Centered());
-                table.AddRow(note.Content);
+                table.AddRow($"[darkorange]{note.ModifiedDate}[/]");
+                var panel = new Panel(note.Content)
+                    .Expand()
+                    .BorderColor(Color.Grey50);
+                table.AddRow(panel);
                 AnsiConsole.Write(table);
 
                 Thread.Sleep(200);

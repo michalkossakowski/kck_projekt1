@@ -1,5 +1,4 @@
 ﻿using kck_api.Database;
-using static Azure.Core.HttpHeader;
 
 namespace kck_api.Controller
 {
@@ -29,7 +28,7 @@ namespace kck_api.Controller
 
         public List<NoteModel> GetNotesByUserId(int userId)
         {
-            return _context.Notes.Where(n => n.AuthorId == userId).ToList();
+            return _context.Notes.Where(n => n.AuthorId == userId).OrderBy(n => n.ModifiedDate).ToList();
         }
 
         public NoteModel GetNoteById(int noteId)
@@ -39,7 +38,10 @@ namespace kck_api.Controller
 
         public List<NoteModel> GetLatestNotesByUserId(int userId, int count)
         {
-            var notes = _context.Notes.Where(n => n.AuthorId == userId).ToList();
+            var notes = _context.Notes
+                .Where(n => n.AuthorId == userId)
+                .OrderBy(n => n.ModifiedDate)
+                .ToList();
             notes = notes.TakeLast(count).ToList(); 
             notes.Reverse();
             return notes;
@@ -68,6 +70,13 @@ namespace kck_api.Controller
             && n.Title.Contains(title)).ToList();
         }
 
+        public void EditNoteContent(int noteId, string newContent)
+        {
+            var note = _context.Notes.FirstOrDefault(n => n.Id == noteId);
+            note.Content = newContent;
+            note.ModifiedDate = DateTime.Now;
+            _context.SaveChanges();
+        }
         public void RemoveNote(int noteId)
         {
             var note = _context.Notes.FirstOrDefault(n => n.Id == noteId);

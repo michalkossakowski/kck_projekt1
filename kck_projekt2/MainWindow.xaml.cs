@@ -15,16 +15,13 @@ using kck_api.Database;
 
 namespace kck_projekt2
 {
-    public class SampleItem()
-    {
-
-    }
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        public int loggedUserId;
         public MainWindow()
         {
             InitializeComponent();
@@ -60,6 +57,7 @@ namespace kck_projekt2
         {
             MainMenuGrid.Visibility = Visibility.Visible;
             contentControl.Content = null;
+            loggedUserId = -1;
         }
     }
 }

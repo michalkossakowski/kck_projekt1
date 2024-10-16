@@ -32,21 +32,31 @@ namespace kck_projekt2
         private async void AddNoteClick(object sender, RoutedEventArgs e)
         {
             string titleValue = Title.Text;
-            string categoryValue = CustomCategory.Text;
+            var selectedCategory = SelectedCategory.SelectedItem as ComboBoxItem;
+            string categoryValue = SelectedCategory.IsEnabled ? selectedCategory.Content.ToString() : CustomCategory.Text;
             string contentValue = NoteContent.Text;
 
             var noteController = NoteController.GetInstance();
 
-            var note = new NoteModel(1, titleValue, contentValue, categoryValue);
+            var note = new NoteModel(_mainWindow.loggedUserId, titleValue, contentValue, categoryValue);
             noteController.AddNote(note);
 
             _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
+
+            MessageBox.Show($"Dodano notatkę \nTitle:{note.Title} \nCategory:{note.Category} \nContent:{note.Content}");
         }
 
         private void BackClick(object sender, RoutedEventArgs e)
         {
             _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
         }
+
+        private void ChangeCategoryTypeClick(object sender, RoutedEventArgs e)
+        {
+            CustomCategory.IsEnabled = !CustomCategory.IsEnabled;
+            SelectedCategory.IsEnabled = !SelectedCategory.IsEnabled;
+        }
+
 
         private void MaterialDesignFilledTextBoxEnabledComboBox_Checked(object sender, RoutedEventArgs e)
         {

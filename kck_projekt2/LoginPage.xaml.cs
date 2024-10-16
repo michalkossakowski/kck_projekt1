@@ -55,6 +55,7 @@ namespace kck_projekt2
                 }
                 else
                 {
+                    _mainWindow.loggedUserId = user.Id;
                     _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
                 }
 

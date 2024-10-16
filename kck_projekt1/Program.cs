@@ -6,7 +6,6 @@ namespace kck_projekt1
     {
         static void Main(string[] args)
         {
-
             var menuView = new MenuView();
             menuView.MainMenu();
         }

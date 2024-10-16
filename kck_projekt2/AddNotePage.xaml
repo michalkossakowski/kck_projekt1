@@ -18,40 +18,72 @@
                 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
                 Text="Add Note" Margin="0,20,0,0" />
 
-            <Label Name="errorMessage" Visibility="Visible" Content="" Foreground="#FFFF0000" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox Name="Title" materialDesign:HintAssist.HelperText="Enter note title"  
-                     materialDesign:HintAssist.Hint="Title" Width="200" Height="30" Margin="0,20,0,0"
-                     />
-
-
-            <StackPanel Orientation="Horizontal">
-                <TextBox Name="CustomCategory" materialDesign:HintAssist.HelperText="Enter custom category"  
-                     materialDesign:HintAssist.Hint="Custom category" Width="180" Height="30" Margin="20,20,0,0"
-                     IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxEnabledComboBox}"
-                     />
-                <CheckBox HorizontalAlignment="Center" x:Name="MaterialDesignFilledTextBoxEnabledComboBox" FontSize="10" Margin="0,20,0,0" Checked="MaterialDesignFilledTextBoxEnabledComboBox_Checked"/>
-            </StackPanel>
-
             <TextBox 
-            x:Name="NoteContent" 
-            AcceptsReturn="True"
-                VerticalScrollBarVisibility="Auto"
-                HorizontalScrollBarVisibility="Auto"
-                TextWrapping="Wrap"
-                FontSize="12" 
-                Height="100"
-                Width="200"
-                Margin="20,20,20,0"
-                materialDesign:HintAssist.Hint="Note content"
-                materialDesign:HintAssist.HelperText="Enter your note content"  
+                Name="Title" 
+                materialDesign:HintAssist.HelperText="Enter note title"  
+                materialDesign:HintAssist.Hint="Title" 
+                Width="200" Height="30" Margin="0,0,0,0"
                 />
 
-                <materialDesign:Card Name="Loading" Visibility="Hidden" Padding="4" UniformCornerRadius="14" Width="28">
-                <ProgressBar IsIndeterminate="True" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="50" />
-            </materialDesign:Card>
-            <Button Name="AddNoteButton" Content="Add Note" Width="90" Height="30" Margin="0,20,0,0" Click="AddNoteClick"/>
-            <Button Content="Back" Width="70" Height="30" Margin="0,20,0,0" Click="BackClick" Background="#FF1A237E" BorderBrush="#FF1A237E"/>
-            <materialDesign:DialogHost Content="DialogHost" Height="2" Width="22"/>
+            <ComboBox
+                x:Name="SelectedCategory"
+                Width="200"
+                Height="25"
+                Margin="0,25,0,0"
+                Padding="5"
+                Background="LightGray"
+                materialDesign:HintAssist.Hint="Select Category"
+                IsEnabled="True">
+
+                <ComboBoxItem Content="Studies"/>
+                <ComboBoxItem Content="Work"/>
+                <ComboBoxItem Content="Home"/>
+                <ComboBoxItem Content="Hobby"/>
+                <ComboBoxItem Content="Other"/>
+                
+            </ComboBox>
+
+            <CheckBox 
+                HorizontalAlignment="Left" 
+                x:Name="MaterialDesignFilledTextBoxEnabledComboBox" 
+                FontSize="10" Margin="20,10,0,0" 
+                Checked="MaterialDesignFilledTextBoxEnabledComboBox_Checked"
+                Content="Use custom category"
+                Foreground="gray"
+                Click="ChangeCategoryTypeClick"/>
+
+            <TextBox 
+                Name="CustomCategory" 
+                materialDesign:HintAssist.HelperText="Enter custom category"  
+                materialDesign:HintAssist.Hint="Category (optional)" 
+                Width="200" Height="30" Margin="0,0,0,0"
+                IsEnabled="False"
+                />
+
+            <TextBox
+                Name="NoteContent"
+                Height="100"
+                materialDesign:HintAssist.Hint="Write note here ..."
+                AcceptsReturn="True"
+                Margin="20,30,20,20"
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                TextWrapping="Wrap"
+                VerticalScrollBarVisibility="Auto" 
+                Width="200"
+            />
+            
+            <Button 
+                Name="AddNoteButton" 
+                Content="Add Note" 
+                Width="90" Height="30" Margin="0,0,0,0" 
+                Click="AddNoteClick"/>
+
+            <Button 
+                Content="Back" 
+                Width="70" Height="30" Margin="0,20,0,0" 
+                Click="BackClick" 
+                Background="#FF1A237E" BorderBrush="#FF1A237E"/>
+
         </StackPanel>
     </Grid>
 

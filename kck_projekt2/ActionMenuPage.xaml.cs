@@ -34,7 +34,7 @@ namespace kck_projekt2
         }
         private void OpenLatestNotesPage(object sender, RoutedEventArgs e)
         {
-
+            _mainWindow.contentControl.Content = new LatestNotesPage(_mainWindow);
         }
         private void OpenExploreNotesPage(object sender, RoutedEventArgs e)
         {

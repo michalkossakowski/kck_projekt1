@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-	<TargetFramework>net8.0-windows</TargetFramework>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -18,15 +18,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-    <PackageReference Include="Spectre.Console" Version="0.49.1" />
-    <PackageReference Include="Spectre.Console.Cli" Version="0.49.1" />
-    <PackageReference Include="Spectre.Console.ImageSharp" Version="0.49.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\kck_api\kck_api.csproj" />
-    <ProjectReference Include="..\kck_projekt2\kck_projekt2.csproj" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

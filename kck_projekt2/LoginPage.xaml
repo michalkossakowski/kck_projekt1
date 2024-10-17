@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="kck_projekt2.LoginPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"      
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             >
+
+    <Grid>
+
+        <StackPanel HorizontalAlignment="Center" >
+            <TextBlock
+                Padding="0,16"
+                VerticalAlignment="Top"
+                TextAlignment="Center"
+                Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
+                Text="Log in" Margin="0,20,0,0" />
+
+            <Label Name="errorMessage" Visibility="Hidden" Content="" Foreground="#FFFF0000" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox Name="nick" materialDesign:HintAssist.HelperText="Enter your nick"  materialDesign:HintAssist.Hint="Nick" Width="200" Height="30" Margin="0,20,0,0" />
+            <PasswordBox Name="password" materialDesign:HintAssist.HelperText="Enter your password"  materialDesign:HintAssist.Hint="Password" materialDesign:TextFieldAssist.HasClearButton="True" Width="200" Height="30"  Margin="0,20,0,0" />
+            <materialDesign:Card Name="Loading" Visibility="Hidden" Padding="4" UniformCornerRadius="14" Width="28">
+                <ProgressBar IsIndeterminate="True" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="50" />
+            </materialDesign:Card>
+            <Button Name="LoginButton" Content="Login" Width="80" Height="30" Margin="0,20,0,0" Click="LoginClick"/>
+            <Button Content="Back" Width="70" Height="30" Margin="0,20,0,0" Click="BackClick" Background="#FF200E67" BorderBrush="#FF1A237E"/>
+        </StackPanel>
+    </Grid>
+
+</UserControl>

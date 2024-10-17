@@ -19,8 +19,8 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         >
 
+
     <Grid Name="MainGrid">
-        
         <ContentControl x:Name="contentControl" />
 
         <Grid x:Name="MainMenuGrid">
@@ -36,6 +36,20 @@
             <Button Content="Console mode" Click="SwitchToConsoleMode" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Top"/>
             <Button Content="Exit" Click="Exit" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Background="#FF1A237E" BorderBrush="#FF1A237E"/>
         </Grid>
+
+        <Menu VerticalAlignment="Top" Margin="0,440,0,0" FontSize="12" Style="{StaticResource MaterialDesignMenu}">
+            <MenuItem Header="Log in" Click="OpenLoginPage"
+                       Margin="10" 
+                       BorderBrush="Black" BorderThickness="1"/>
+            <MenuItem Header="Register" Click="OpenRegisterPage"
+                      Margin="10" BorderBrush="Black" BorderThickness="1"/>
+
+            <MenuItem Header="Console mode" Click="SwitchToConsoleMode" 
+                      Margin="10" BorderBrush="Black" BorderThickness="1"/>
+            
+            <MenuItem Header="Exit" Click="Exit"  BorderBrush="Black" 
+                      Margin="10" BorderThickness="1"/>
+        </Menu>
     </Grid>
 
 </Window>

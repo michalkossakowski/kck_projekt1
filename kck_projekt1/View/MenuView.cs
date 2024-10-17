@@ -1,6 +1,8 @@
 ﻿using kck_api.Controller;
 using Spectre.Console;
 using System.Diagnostics;
+using System.Windows.Controls;
+using Panel = Spectre.Console.Panel;
 
 namespace kck_projekt1.View
 {
@@ -15,10 +17,80 @@ namespace kck_projekt1.View
             while (true)
             {
                 AnsiConsole.Clear();
-                var choice = ShowLoginMenu();
+                var layout = new Layout("Root")
+                    .SplitRows(
+                        new Layout("Title"), 
+                        new Layout("Actions")
+                            .SplitColumns(
+                                new Layout("Left")
+                                    .SplitRows(
+                                        new Layout("Top"),
+                                        new Layout("Bottom")),
+                                new Layout("Right")
+                                    .SplitRows(
+                                        new Layout("Top"),
+                                        new Layout("Bottom"))));
+
+                layout["Title"].Update(
+                    new Panel(
+                        Align.Center(
+                            new Rows(
+                                new FigletText("Notes App")
+                                    .LeftJustified()
+                                    .Color(Color.Gold1),
+                                new Markup("\n"),
+                                new Rule("[gold1]Press the[/] [darkorange]{KEY}[/] [gold1]on your keyboard to select the action[/]").RuleStyle("gold1")
+                            ),
+                            VerticalAlignment.Middle))
+                    .Expand());
+
+                layout["Left"]["Top"].Update(
+                    new Panel(
+                        Align.Center(
+                            new Rows(
+                                new Markup("[darkorange]LOGIN -> {L}[/]"),
+                                new Markup("[gold1]Login into your account[/]")
+                            ),
+                            VerticalAlignment.Middle))
+                        .Expand());
+
+                layout["Left"]["Bottom"].Update(
+                    new Panel(
+                        Align.Center(
+                            new Rows(
+                                new Markup("[darkorange]REGISTER -> {R}[/]"),
+                                new Markup("[gold1]Create a new user account[/]")
+                            ),
+                            VerticalAlignment.Middle))
+                        .Expand());
+
+                layout["Right"]["Top"].Update(
+                    new Panel(
+                        Align.Center(
+                            new Rows(
+                                new Markup("[darkorange]GRAPHIC MODE -> {G}[/]"),
+                                new Markup("[gold1]Open graphic version of the application[/]")
+                            ),
+                            VerticalAlignment.Middle))
+                        .Expand());
+
+                layout["Right"]["Bottom"].Update(
+                    new Panel(
+                        Align.Center(
+                           new Rows(
+                                new Markup("[darkorange]EXIT -> {ESC}[/]"),
+                                new Markup("[gold1]Close the application[/]")
+                            ),
+                            VerticalAlignment.Middle))
+                        .Expand());
+
+                AnsiConsole.Write(layout);
+
+                var pressedKey = Console.ReadKey();
+                var choice = pressedKey.Key.ToString(); 
                 switch (choice)
                 {
-                    case "Log in":
+                    case "L":
                         var user = userView.LoginUser();
                         AnsiConsole.Status()
                         .Spinner(Spinner.Known.BouncingBar)
@@ -41,7 +113,7 @@ namespace kck_projekt1.View
                         }
                         break;
 
-                    case "Register":
+                    case "R":
                         var newUser = userView.RegisterUser();
                         if (newUser == null)
                         {
@@ -61,17 +133,17 @@ namespace kck_projekt1.View
                         });
 
                         if (isAdded)
-                            AnsiConsole.Markup("[green1]\nNew user added, press anything to continue[/]");
+                            AnsiConsole.Markup("[green1]\nNew user added you can now login into your account, press anything to continue[/]");
                         else
                             AnsiConsole.Markup("[red1]\nThis nick is occupied, press anything to continue[/]");
                         Console.ReadKey();
                         break;
 
-                    case "Graphic Mode":
+                    case "G":
                         SwitchToGraphicMode();
                         break;
 
-                    case "Exit":
+                    case "Escape":
                         Environment.Exit(0);
                         break;
 
@@ -79,32 +151,6 @@ namespace kck_projekt1.View
                         break;
                 }
             }
-        }
-        public string ShowLoginMenu()
-        {
-
-            AnsiConsole.Write(
-            new FigletText("Notes")
-                .LeftJustified()
-                .Color(Color.Gold1));
-
-            var rule = new Rule("[gold1]Welcome in Notes App choose action:[/]");
-            rule.Style = new Style(Color.Gold1);
-            rule.LeftJustified();
-            AnsiConsole.Write(rule);
-
-            var choice = AnsiConsole.Prompt(
-            new SelectionPrompt<string>()
-            .Title("")
-            .HighlightStyle(Color.DarkOrange)
-            .AddChoices(new[] {
-                "Log in",
-                "Register",
-                "Graphic Mode",
-                "Exit"
-             }));
-
-            return choice;
         }
 
         public void ShowActionMenu()
@@ -115,25 +161,116 @@ namespace kck_projekt1.View
             while (true)
             {
                 AnsiConsole.Clear();
-                AnsiConsole.Write(
-                new FigletText("Menu")
-                    .LeftJustified()
-                    .Color(Color.Gold1));
+                var layout = new Layout("Root")
+                    .SplitRows(
+                        new Layout("Title"),
+                        new Layout("Actions")
+                            .SplitColumns(
+                                new Layout("Left")
+                                    .SplitRows(
+                                        new Layout("Top"),
+                                        new Layout("Middle"),
+                                        new Layout("Bottom")),
+                                new Layout("Right")
+                                    .SplitRows(
+                                        new Layout("Top"),
+                                        new Layout("Middle"),
+                                        new Layout("Bottom"))));
 
-                var choice = ActionSelect();
+                layout["Title"].Update(
+                    new Panel(
+                        Align.Center(
+                            new Rows(
+                            new FigletText("Menu")
+                                .LeftJustified()
+                                .Color(Color.Gold1),
+                            new Markup("\n"),
+                            new Rule("[gold1]Press the[/] [darkorange]{KEY}[/] [gold1]on your keyboard to select the action[/]").RuleStyle("gold1"),
+                            new Markup("[gold1]Press[/] [darkorange]{ESC}[/] [gold1]to close the application[/]")
+                            ),
+                            VerticalAlignment.Middle))
+                    .Expand());
+
+                layout["Left"]["Top"].Update(
+                    new Panel(
+                        Align.Center(
+                            new Rows(
+                                new Markup("[darkorange]LATEST NOTES -> {N}[/]"),
+                                new Markup("[gold1]Explore latest written notes[/]")
+                            ),
+                            VerticalAlignment.Middle))
+                        .Expand());
+
+                layout["Left"]["Middle"].Update(
+                new Panel(
+                    Align.Center(
+                        new Rows(
+                            new Markup("[darkorange]EXPLORE NOTES -> {E}[/]"),
+                            new Markup("[gold1]Explore all your notes[/]")
+                        ),
+                        VerticalAlignment.Middle))
+                    .Expand());
+
+                layout["Left"]["Bottom"].Update(
+                    new Panel(
+                        Align.Center(
+                            new Rows(
+                                new Markup("[darkorange]CALENDAR -> {C}[/]"),
+                                new Markup("[gold1]Explore notes by date[/]")
+                            ),
+                            VerticalAlignment.Middle))
+                        .Expand());
+
+                layout["Right"]["Top"].Update(
+                    new Panel(
+                        Align.Center(
+                            new Rows(
+                                new Markup("[darkorange]ADD NOTE -> {A}[/]"),
+                                new Markup("[gold1]Open graphic version of the application[/]")
+                            ),
+                            VerticalAlignment.Middle))
+                        .Expand());
+
+                layout["Right"]["Middle"].Update(
+                    new Panel(
+                        Align.Center(
+                            new Rows(
+                                new Markup("[darkorange]SEARCH -> {S}[/]"),
+                                new Markup("[gold1]Find note by the title[/]")
+                            ),
+                            VerticalAlignment.Middle))
+                        .Expand());
+
+                layout["Right"]["Bottom"].Update(
+                    new Panel(
+                        Align.Center(
+                           new Rows(
+                                new Markup("[darkorange]LOG OUT -> {L}[/]"),
+                                new Markup("[gold1]Log out of the current account[/]")
+                            ),
+                            VerticalAlignment.Middle))
+                        .Expand());
+
+                AnsiConsole.Write(layout);
+
+
+
+                var pressedKey = Console.ReadKey();
+                var choice = pressedKey.Key.ToString();
+
                 switch (choice)
                 {
-                    case "Add note":
+                    case "A":
                         noteController.AddNote(noteView.WriteNote(_loggedUser));
                         AnsiConsole.Markup("[green1]\nNew note added, press anything to continue[/]");
                         Console.ReadKey();
                         break;
 
-                    case "Latest notes":
+                    case "N":
                         noteView.ShowLatestNotes(_loggedUser.Id);
                         break;
 
-                    case "Explore notes":
+                    case "E":
                         while (true)
                         {
                             var noteId = noteView.ExploreNotes(_loggedUser.Id);
@@ -143,11 +280,11 @@ namespace kck_projekt1.View
                         }
                         break;
 
-                    case "Calendar":
+                    case "C":
                         noteView.ShowCalendar(_loggedUser.Id);
                         break;
 
-                    case "Search":
+                    case "S":
                         var searchingTitle = noteView.SearchNotes();
                         while (true)
                         {
@@ -158,10 +295,10 @@ namespace kck_projekt1.View
                         }
                         break;
 
-                    case "Log out":
+                    case "L":
                         return;
 
-                    case "Exit":
+                    case "Escape":
                         Environment.Exit(0);
                         break;
 
@@ -170,30 +307,6 @@ namespace kck_projekt1.View
                 }
             }
 
-        }
-
-        public string ActionSelect()
-        {
-            var rule = new Rule($"[gold1]Hello[/] [darkorange]{_loggedUser.Nick}[/] [gold1]what do you want to do?[/]");
-            rule.Style = new Style(Color.Gold1);
-            rule.LeftJustified();
-            AnsiConsole.Write(rule);
-
-            var choice = AnsiConsole.Prompt(
-            new SelectionPrompt<string>()
-            .Title("")
-            .HighlightStyle(Color.DarkOrange)
-            .AddChoices(new[] {
-                            "Add note",
-                            "Latest notes",
-                            "Explore notes",
-                            "Calendar",
-                            "Search",
-                            "Log out",
-                            "Exit"
-             }));
-
-            return choice;
         }
 
         public static void SwitchToGraphicMode()

@@ -15,10 +15,63 @@ namespace kck_projekt1.View
             while (true)
             {
                 AnsiConsole.Clear();
-                var choice = ShowLoginMenu();
+                var layout = new Layout("Root")
+                    .SplitRows(
+                        new Layout("Title"), 
+                        new Layout("Actions")
+                            .SplitColumns(
+                                new Layout("Left")
+                                    .SplitRows(
+                                        new Layout("Top"),
+                                        new Layout("Bottom")),
+                                new Layout("Right")
+                                    .SplitRows(
+                                        new Layout("Top"),
+                                        new Layout("Bottom"))));
+
+                layout["Title"].Update(
+                new Panel(
+                    Align.Center(
+                         new FigletText("Notes App")
+                        .LeftJustified()
+                        .Color(Color.Gold1),
+                        VerticalAlignment.Middle))
+                    .Expand()).Ratio(1);
+
+                layout["Left"]["Top"]
+                    .Update(
+                    new Panel(
+                        Align.Center(
+                            new Markup("[darkorange]LOGIN - PRESS L[/]"),
+                            VerticalAlignment.Middle))
+                        .Expand()).Ratio(2);
+                layout["Left"]["Bottom"].Update(
+                    new Panel(
+                        Align.Center(
+                            new Markup("[darkorange]REGISTER - PRESS R[/]"),
+                            VerticalAlignment.Middle))
+                        .Expand()).Ratio(2);
+
+                layout["Right"]["Top"].Update(
+                    new Panel(
+                        Align.Center(
+                            new Markup("[darkorange]GRAPHIC MODE - PRESS G[/]"),
+                            VerticalAlignment.Middle))
+                        .Expand()).Ratio(2);
+                layout["Right"]["Bottom"].Update(
+                    new Panel(
+                        Align.Center(
+                            new Markup("[darkorange]EXIT - PRESS E[/]"),
+                            VerticalAlignment.Middle))
+                        .Expand()).Ratio(2);
+
+                AnsiConsole.Write(layout);
+
+                var pressedKey = Console.ReadKey();
+                var choice = pressedKey.Key.ToString(); 
                 switch (choice)
                 {
-                    case "Log in":
+                    case "L":
                         var user = userView.LoginUser();
                         AnsiConsole.Status()
                         .Spinner(Spinner.Known.BouncingBar)
@@ -41,7 +94,7 @@ namespace kck_projekt1.View
                         }
                         break;
 
-                    case "Register":
+                    case "R":
                         var newUser = userView.RegisterUser();
                         if (newUser == null)
                         {
@@ -67,11 +120,11 @@ namespace kck_projekt1.View
                         Console.ReadKey();
                         break;
 
-                    case "Graphic Mode":
+                    case "G":
                         SwitchToGraphicMode();
                         break;
 
-                    case "Exit":
+                    case "E":
                         Environment.Exit(0);
                         break;
 
@@ -79,32 +132,6 @@ namespace kck_projekt1.View
                         break;
                 }
             }
-        }
-        public string ShowLoginMenu()
-        {
-
-            AnsiConsole.Write(
-            new FigletText("Notes")
-                .LeftJustified()
-                .Color(Color.Gold1));
-
-            var rule = new Rule("[gold1]Welcome in Notes App choose action:[/]");
-            rule.Style = new Style(Color.Gold1);
-            rule.LeftJustified();
-            AnsiConsole.Write(rule);
-
-            var choice = AnsiConsole.Prompt(
-            new SelectionPrompt<string>()
-            .Title("")
-            .HighlightStyle(Color.DarkOrange)
-            .AddChoices(new[] {
-                "Log in",
-                "Register",
-                "Graphic Mode",
-                "Exit"
-             }));
-
-            return choice;
         }
 
         public void ShowActionMenu()

@@ -9,7 +9,7 @@ namespace kck_projekt1.View
             AnsiConsole.Clear();
 
             AnsiConsole.Write(
-            new FigletText("Register")
+            new FigletText(Program.font,"Register")
             .LeftJustified()
             .Color(Color.Gold1));
 
@@ -39,7 +39,7 @@ namespace kck_projekt1.View
             AnsiConsole.Clear();
 
             AnsiConsole.Write(
-            new FigletText("Login")
+            new FigletText(Program.font,"Login")
             .LeftJustified()
             .Color(Color.Gold1));
 

@@ -12,7 +12,7 @@ namespace kck_projekt1.View
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText("Create")
+            new FigletText(Program.font,"Create")
             .LeftJustified()
             .Color(Color.Gold1));
 
@@ -59,7 +59,7 @@ namespace kck_projekt1.View
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText("Explore")
+            new FigletText(Program.font,"Explore")
             .LeftJustified()
                 .Color(Color.Gold1));
 
@@ -102,7 +102,7 @@ namespace kck_projekt1.View
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText("Note")
+            new FigletText(Program.font,"Note")
                 .LeftJustified()
                 .Color(Color.Gold1));
 
@@ -155,7 +155,7 @@ namespace kck_projekt1.View
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText("Edit")
+            new FigletText(Program.font,"Edit")
                 .LeftJustified()
                 .Color(Color.Gold1));
 
@@ -180,7 +180,7 @@ namespace kck_projekt1.View
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText("Latest")
+            new FigletText(Program.font,"Latest")
                 .LeftJustified()
                 .Color(Color.Gold1));
 
@@ -214,7 +214,7 @@ namespace kck_projekt1.View
                 AnsiConsole.Clear();
 
                 AnsiConsole.Write(
-                new FigletText("Calendar")
+                new FigletText(Program.font,"Calendar")
                     .LeftJustified()
                     .Color(Color.Gold1));
 
@@ -266,7 +266,7 @@ namespace kck_projekt1.View
                     new SelectionPrompt<string>()
                     .Title("")
                     .HighlightStyle(Color.DarkOrange)
-                    .PageSize(5)
+                    .PageSize(4)
                     .AddChoices(list));
 
                     switch (choice)
@@ -286,7 +286,7 @@ namespace kck_projekt1.View
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText($"{day}.{date.Month}.{date.Year}")
+            new FigletText(Program.font,$"{day}.{date.Month}.{date.Year}")
                 .LeftJustified()
                 .Color(Color.Gold1));
 
@@ -331,7 +331,7 @@ namespace kck_projekt1.View
             AnsiConsole.Clear();
 
             AnsiConsole.Write(
-            new FigletText("Search")
+            new FigletText(Program.font,"Search")
             .LeftJustified()
             .Color(Color.Gold1));
 
@@ -353,7 +353,7 @@ namespace kck_projekt1.View
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText("Results")
+            new FigletText(Program.font,"Results")
             .LeftJustified()
                 .Color(Color.Gold1));
 

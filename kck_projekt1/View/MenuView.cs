@@ -29,11 +29,13 @@ namespace kck_projekt1.View
                                         new Layout("Top"),
                                         new Layout("Bottom"))));
 
+               
+
                 layout["Title"].Update(
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new FigletText("Notes App")
+                                new FigletText(Program.font,"Notes App")
                                     .LeftJustified()
                                     .Color(Color.Gold1),
                                 new Markup("\n"),
@@ -179,7 +181,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                            new FigletText("Menu")
+                            new FigletText(Program.font,"Menu")
                                 .LeftJustified()
                                 .Color(Color.Gold1),
                             new Markup("\n"),

@@ -12,11 +12,12 @@
 
         <StackPanel HorizontalAlignment="Center">
             <TextBlock
-                Padding="0,16"
                 VerticalAlignment="Top"
                 TextAlignment="Center"
                 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
-                Text="Register" Margin="0,20,0,0" />
+                Text="Register" 
+                Margin="0,20,0,20" 
+                />
 
             <Label Name="errorMessage" Visibility="Visible" Content="" Foreground="#FFFF0000" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox Name="nick" materialDesign:HintAssist.HelperText="Enter your nick"  materialDesign:HintAssist.Hint="Nick" Width="200" Height="30" Margin="0,20,0,0" />

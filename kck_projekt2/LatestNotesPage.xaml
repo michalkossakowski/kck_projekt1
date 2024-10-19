@@ -12,11 +12,11 @@
 
         <StackPanel HorizontalAlignment="Center">
             <TextBlock
-                Padding="0,16"
                 VerticalAlignment="Top"
                 TextAlignment="Center"
                 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
-                Text="Latest notes" Margin="0,20,0,0" />
+                Text="Latest notes" 
+                Margin="0,20,0,20" />
 
             <ScrollViewer Width="400" Height="300" Margin="0,20,0,0">
                 <ItemsControl ItemsSource="{Binding Notes}">

@@ -6,10 +6,6 @@ namespace kck_projekt1
 {
     public class Program
     {
-        // "ANSI Shadow.flf"
-        // "Dos Rebel.flf"
-        // "Bloody.flf"
-        // "Delta Corps Priest 1.flf" 
         public static FigletFont font = FigletFont.Load("ANSI Shadow.flf");
 
         static void Main(string[] args)

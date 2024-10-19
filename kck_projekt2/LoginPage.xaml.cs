@@ -55,6 +55,9 @@ namespace kck_projekt2
                 }
                 else
                 {
+                    _mainWindow.LoginMenuItem.Visibility = Visibility.Collapsed;
+                    _mainWindow.RegisterMenuItem.Visibility = Visibility.Collapsed;
+                    _mainWindow.LogoutMenuItem.Visibility = Visibility.Visible;
                     _mainWindow.loggedUserId = user.Id;
                     _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
                 }

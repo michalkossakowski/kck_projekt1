@@ -1,7 +1,6 @@
 ﻿<UserControl x:Class="kck_projekt2.ActionMenuPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"      
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              Background="{DynamicResource MaterialDesignPaper}"
@@ -10,21 +9,46 @@
 
     <Grid>
         <StackPanel HorizontalAlignment="Center">
-
+            
             <TextBlock
-                Padding="0,16"
                 VerticalAlignment="Top"
                 TextAlignment="Center"
                 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
-                Text="Choose action" Margin="0,20,0,0" />
+                Text="Choose action" 
+                Margin="0,20,0,20"
+                />
+            
+            <Button 
+                Content="Add note" 
+                Width="90" Height="30"
+                Margin="0,10,0,0" 
+                Click="OpenAddNotePage"/>
+            
+            <Button 
+                Content="Latest notes" 
+                Width="110" Height="30" 
+                Margin="0,10,0,0" 
+                Click="OpenLatestNotesPage"/>
+            
+            <Button 
+                Content="Explore notes"
+                Width="110" 
+                Height="30"
+                Margin="0,10,0,0" 
+                Click="OpenExploreNotesPage"/>
+            
+            <Button Content="Calendar" 
+                    Width="90" 
+                    Height="30"
+                    Margin="0,10,0,0" 
+                    Click="OpenCalendarPage"/>
 
-            <Button Content="Add note" Width="90" Height="30" Margin="0,10,0,0" Click="OpenAddNotePage"/>
-            <Button Content="Latest notes" Width="110" Height="30" Margin="0,10,0,0" Click="OpenLatestNotesPage"/>
-            <Button Content="Explore notes" Width="110" Height="30" Margin="0,10,0,0" Click="OpenExploreNotesPage"/>
-            <Button Content="Calendar" Width="90" Height="30" Margin="0,10,0,0" Click="OpenCalendarPage"/>
-            <Button Content="Search" Width="80" Height="30" Margin="0,10,0,0" Click="OpenSearchPage"/>
-            <Button Content="LogOut" Width="80" Height="30" Margin="0,10,0,0" Click="LogOutClick" Background="#FF1A237E" BorderBrush="#FF1A237E"/>
-            <Button Content="Exit" Click="ExitClick"  Width="60" Height="30" Margin="0,10,0,0"  Background="#FF1A237E" BorderBrush="#FF1A237E"/>
+            <Button Content="Search" 
+                    Width="80" 
+                    Height="30"
+                    Margin="0,10,0,0" 
+                    Click="OpenSearchPage"/>
+            
         </StackPanel>
     </Grid>
 

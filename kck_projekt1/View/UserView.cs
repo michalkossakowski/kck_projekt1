@@ -10,12 +10,12 @@ namespace kck_projekt1.View
 
             AnsiConsole.Write(
             new FigletText(Program.font,"Register")
-            .LeftJustified()
+            .Centered()
             .Color(Color.Gold1));
 
             var rule = new Rule("[gold1]Add new user:[/]");
             rule.Style = new Style(Color.Gold1);
-            rule.LeftJustified();
+            rule.Centered();
             AnsiConsole.Write(rule);
 
             Console.WriteLine("");
@@ -40,12 +40,12 @@ namespace kck_projekt1.View
 
             AnsiConsole.Write(
             new FigletText(Program.font,"Login")
-            .LeftJustified()
+            .Centered()
             .Color(Color.Gold1));
 
             var rule = new Rule("[gold1]Enter your login information:[/]");
-            rule.Style = new Style(Color.Gold1); 
-            rule.LeftJustified();
+            rule.Style = new Style(Color.Gold1);
+            rule.Centered();
             AnsiConsole.Write(rule);
 
             Console.WriteLine("");

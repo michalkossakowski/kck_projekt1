@@ -38,7 +38,6 @@ namespace kck_projekt1.View
                                 new FigletText(Program.font,"Notes App")
                                     .LeftJustified()
                                     .Color(Color.Gold1),
-                                new Markup("\n"),
                                 new Rule("[gold1]Press the[/] [darkorange]{KEY}[/] [gold1]on your keyboard to select the action[/]").RuleStyle("gold1")
                             ),
                             VerticalAlignment.Middle))
@@ -184,7 +183,6 @@ namespace kck_projekt1.View
                             new FigletText(Program.font,"Menu")
                                 .LeftJustified()
                                 .Color(Color.Gold1),
-                            new Markup("\n"),
                             new Rule("[gold1]Press the[/] [darkorange]{KEY}[/] [gold1]on your keyboard to select the action[/]").RuleStyle("gold1"),
                             new Markup("[gold1]Press[/] [darkorange]{ESC}[/] [gold1]to close the application[/]")
                             ),

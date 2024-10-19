@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="kck_projekt2.CalendarPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"      
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             >
+
+    <Grid>
+
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock
+                VerticalAlignment="Top"
+                TextAlignment="Center"
+                Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
+                Text="Calendar" 
+                Margin="0,20,0,20" 
+                Foreground="#3f51b5"/>
+
+            <Calendar x:Name="myCalendar" 
+                      HorizontalAlignment="Center" 
+                      VerticalAlignment="Center"
+                      Width="350"
+                      Height="auto"/>
+
+            <Button 
+                Content="Back" 
+                Width="70" Height="30" Margin="0,20,0,0" 
+                Click="BackClick" 
+                Background="MidnightBlue" BorderBrush="MidnightBlue"/>
+
+        </StackPanel>
+    </Grid>
+
+</UserControl>

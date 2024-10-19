@@ -77,6 +77,16 @@ namespace kck_api.Controller
             note.ModifiedDate = DateTime.Now;
             _context.SaveChanges();
         }
+
+        public void EditNote(int noteId, string newTitle, string newCategory, string newContent)
+        {
+            var note = _context.Notes.FirstOrDefault(n => n.Id == noteId);
+            note.Title = newTitle;
+            note.Category = newCategory;
+            note.Content = newContent;
+            note.ModifiedDate = DateTime.Now;
+            _context.SaveChanges();
+        }
         public void RemoveNote(int noteId)
         {
             var note = _context.Notes.FirstOrDefault(n => n.Id == noteId);

@@ -6,7 +6,7 @@ namespace kck_projekt1
 {
     public class Program
     {
-        public static FigletFont font = FigletFont.Load("ANSI Shadow.flf");
+        public static FigletFont font = FigletFont.Load("Fonts/ANSI Shadow.flf");
 
         static void Main(string[] args)
         {

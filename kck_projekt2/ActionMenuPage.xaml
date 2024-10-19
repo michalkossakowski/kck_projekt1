@@ -9,45 +9,52 @@
 
     <Grid>
         <StackPanel HorizontalAlignment="Center">
-            
-            <TextBlock
+
+            <TextBlock Text="Choose action" 
                 VerticalAlignment="Top"
                 TextAlignment="Center"
                 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
-                Text="Choose action" 
                 Margin="0,20,0,20"
+                Foreground="#3f51b5"
                 />
             
             <Button 
                 Content="Add note" 
                 Width="90" Height="30"
-                Margin="0,10,0,0" 
-                Click="OpenAddNotePage"/>
+                Margin="0,20,0,0" 
+                Click="OpenAddNotePage"
+                />
             
             <Button 
                 Content="Latest notes" 
                 Width="110" Height="30" 
-                Margin="0,10,0,0" 
-                Click="OpenLatestNotesPage"/>
+                Margin="0,20,0,0" 
+                Click="OpenLatestNotesPage"
+                />
             
             <Button 
                 Content="Explore notes"
                 Width="110" 
                 Height="30"
-                Margin="0,10,0,0" 
-                Click="OpenExploreNotesPage"/>
+                Margin="0,20,0,0" 
+                Click="OpenExploreNotesPage"
+                />
             
-            <Button Content="Calendar" 
-                    Width="90" 
-                    Height="30"
-                    Margin="0,10,0,0" 
-                    Click="OpenCalendarPage"/>
+            <Button 
+                Content="Calendar"    
+                Width="90"   
+                Height="30"
+                Margin="0,20,0,0"  
+                Click="OpenCalendarPage"
+                />
 
-            <Button Content="Search" 
-                    Width="80" 
-                    Height="30"
-                    Margin="0,10,0,0" 
-                    Click="OpenSearchPage"/>
+            <Button 
+                Content="Search" 
+                Width="80"    
+                Height="30"
+                Margin="0,20,0,0" 
+                Click="OpenSearchPage"
+                />
             
         </StackPanel>
     </Grid>

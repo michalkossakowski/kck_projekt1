@@ -19,34 +19,39 @@ namespace kck_projekt2
     /// <summary>
     /// Logika interakcji dla klasy LoginPage.xaml
     /// </summary>
-    public partial class AddNotePage : UserControl
+    public partial class EditNotePage : UserControl
     {
         private MainWindow _mainWindow;
+        private int _noteId;
+        private NoteController _noteController;
 
-        public AddNotePage(MainWindow mainWindow)
+        public EditNotePage(MainWindow mainWindow,int noteId)
         {
-            InitializeComponent();
             _mainWindow = mainWindow;
+            _noteController = NoteController.GetInstance();
+            _noteId = noteId;
+            var note = _noteController.GetNoteById(_noteId);
+            InitializeComponent();
+
+            Title.Text = note.Title;
+            SelectedCategory.IsEnabled = false;
+            CategoryCheckBox.IsChecked = true;
+            CustomCategory.IsEnabled = true;
+            CustomCategory.Text = note.Category;
+            NoteContent.Text = note.Content;
         }
 
-        private async void AddNoteClick(object sender, RoutedEventArgs e)
+        private async void SaveNoteClick(object sender, RoutedEventArgs e)
         {
-            string titleValue = Title.Text;
             var selectedCategory = SelectedCategory.SelectedItem as ComboBoxItem;
             string categoryValue = SelectedCategory.IsEnabled ? selectedCategory.Content.ToString() : CustomCategory.Text;
-            string contentValue = NoteContent.Text;
-
-            var noteController = NoteController.GetInstance();
-
-            var note = new NoteModel(_mainWindow.loggedUserId, titleValue, contentValue, categoryValue);
-            noteController.AddNote(note);
-
-            _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
+            _noteController.EditNote(_noteId, Title.Text, categoryValue,NoteContent.Text);
+            _mainWindow.contentControl.Content = new ExploreNotesPage(_mainWindow);
         }
 
         private void BackClick(object sender, RoutedEventArgs e)
         {
-            _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
+            _mainWindow.contentControl.Content = new ExploreNotesPage(_mainWindow);
         }
 
         private void ChangeCategoryTypeClick(object sender, RoutedEventArgs e)

@@ -39,6 +39,11 @@ namespace kck_projekt2
             contentControl.Content = new RegisterPage(this);
         }
 
+        private void OpenActionMenu(object sender, RoutedEventArgs e)
+        {
+            contentControl.Content = new ActionMenuPage(this);
+        }
+
         private void SwitchToConsoleMode(object sender, RoutedEventArgs e)
         {
             string exePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "kck_projekt1.exe");
@@ -55,9 +60,8 @@ namespace kck_projekt2
 
         private void LogoutClick(object sender, RoutedEventArgs e)
         {
-            LoginMenuItem.Visibility = Visibility.Visible;
-            RegisterMenuItem.Visibility = Visibility.Visible;
             LogoutMenuItem.Visibility = Visibility.Collapsed;
+            ActionMenuMenuItem.Visibility = Visibility.Collapsed;
             ReturnToMainMenu();
         }
 
@@ -67,6 +71,11 @@ namespace kck_projekt2
             WelcomePanel.Visibility = Visibility.Visible;
             contentControl.Content = null;
             loggedUserId = -1;
+        }
+
+        private void Image_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
+        {
+
         }
     }
 }

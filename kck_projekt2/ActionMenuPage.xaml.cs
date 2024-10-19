@@ -38,24 +38,15 @@ namespace kck_projekt2
         }
         private void OpenExploreNotesPage(object sender, RoutedEventArgs e)
         {
-
+            _mainWindow.contentControl.Content = new ExploreNotesPage(_mainWindow);
         }
         private void OpenCalendarPage(object sender, RoutedEventArgs e)
         {
-
+            _mainWindow.contentControl.Content = new CalendarPage(_mainWindow);
         }
         private void OpenSearchPage(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void LogOutClick(object sender, RoutedEventArgs e)
-        {
-            _mainWindow.ReturnToMainMenu();
-        }
-        private void ExitClick(object sender, RoutedEventArgs e)
-        {
-            Environment.Exit(0);
+            _mainWindow.contentControl.Content = new SearchPage(_mainWindow);
         }
     }
 }

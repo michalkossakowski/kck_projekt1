@@ -28,7 +28,8 @@
                 materialDesign:HintAssist.HelperText="Enter note title"  
                 materialDesign:HintAssist.Hint="Title" 
                 Width="200" Height="30" Margin="0,0,0,0"
-                />
+                Foreground="Black"
+                TextChanged="Title_TextChanged" />
 
             <ComboBox
                 x:Name="SelectedCategory"
@@ -37,8 +38,11 @@
                 Margin="0,25,0,0"
                 Padding="5"
                 Background="LightGray"
-                materialDesign:HintAssist.Hint="Select Category"
-                IsEnabled="True">
+                materialDesign:HintAssist.Hint="Category"
+                IsEnabled="True"
+                Foreground="Black"
+                materialDesign:HintAssist.HelperText="Select category"  
+                SelectionChanged="SelectedCategory_SelectionChanged">
 
                 <ComboBoxItem Content="Studies"/>
                 <ComboBoxItem Content="Work"/>
@@ -48,12 +52,11 @@
 
             </ComboBox>
 
-            <StackPanel  Orientation="Horizontal" Margin="-50,10,0,0" HorizontalAlignment="Center">
+            <StackPanel  Orientation="Horizontal" Margin="-50,20,0,0" HorizontalAlignment="Center">
                 <ToggleButton
                     x:Name="CategoryToggle" 
                     IsChecked="False"
-                    Click="CategoryToggleClick"
-                    >
+                    Click="CategoryToggleClick">
                     <ToggleButton.LayoutTransform>
                         <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
                     </ToggleButton.LayoutTransform>
@@ -63,20 +66,21 @@
                     Margin="5,0,0,0"
                     Text="Use custom category"
                     Foreground="gray"
-                    VerticalAlignment="Center"
-                    />
+                    VerticalAlignment="Center"/>
             </StackPanel>
 
             <TextBox 
                 Name="CustomCategory" 
                 materialDesign:HintAssist.HelperText="Enter custom category"  
-                materialDesign:HintAssist.Hint="Category (optional)" 
+                materialDesign:HintAssist.Hint="Custom category" 
                 Width="200" Height="30" Margin="0,0,0,0"
                 IsEnabled="False"
-                />
+                Foreground="Black"
+                TextChanged="CustomCategory_TextChanged"/>
 
             <TextBox
                 Name="NoteContent"
+                Foreground="Black"
                 Height="200"
                 materialDesign:HintAssist.Hint="Write note here ..."
                 AcceptsReturn="True"
@@ -85,7 +89,7 @@
                 TextWrapping="Wrap"
                 VerticalScrollBarVisibility="Auto" 
                 Width="300"
-            />
+                TextChanged="NoteContent_TextChanged"/>
 
             <Button 
                 Name="AddNoteButton" 

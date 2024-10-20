@@ -51,15 +51,10 @@ namespace kck_projekt2
 
             foreach (var note in currentMonthNotes)
             {
-                HighlightDate(note.ModifiedDate);
+                foreach (var day in FindChildren<CalendarDayButton>(MyCalendar))
+                    if (((DateTime)day.DataContext).Date == note.ModifiedDate.Date)
+                        day.Background = Brushes.LightSkyBlue;
             }
-        }
-
-        private void HighlightDate(DateTime noteDate)
-        {
-            foreach (var day in FindChildren<CalendarDayButton>(MyCalendar))
-                if (((DateTime)day.DataContext).Date == noteDate.Date)
-                    day.Background = Brushes.LightSkyBlue;
         }
 
         public static List<CalendarDayButton> FindChildren<CalendarDayButton>(DependencyObject parent)

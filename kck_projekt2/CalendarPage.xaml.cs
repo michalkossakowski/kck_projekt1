@@ -36,7 +36,7 @@ namespace kck_projekt2
 
             if (selectedDate.HasValue)
             {
-                MessageBox.Show($"Wybrana data: {selectedDate.Value.ToShortDateString()}");
+                _mainWindow.contentControl.Content = new ExploreNotesByDayPage(_mainWindow, selectedDate.Value);
             }
         }
 

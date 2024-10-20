@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="kck_projekt2.ExploreNotesByDayPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"      
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             >
+
+    <Grid>
+        <TextBlock Name="Information"
+                   VerticalAlignment="Top"
+                   TextAlignment="Center"
+                   Text="You don't have any notes from that day"
+                   FontSize="16"
+                   Margin="0,200,0,20" 
+                   Foreground="Red"
+                   Visibility="Hidden"/>
+        
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock  Name="HeaderTitle"
+                        Text="Explore notes by day" 
+                        VerticalAlignment="Top"
+                        TextAlignment="Center"
+                        Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
+                        Margin="0,20,0,10" 
+                        Foreground="#3f51b5"
+                        />
+            
+            <ScrollViewer Width="400" Height="550" Margin="17,0,0,0">
+                <ItemsControl ItemsSource="{Binding Notes}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="5" Padding="10,5,10,5" CornerRadius="10" MouseUp="OpenEditPage">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background" Value="#FFE0E0E0" />
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#afb9ef"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <StackPanel >
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding Title}" 
+                                                   TextAlignment="Center"
+                                                   FontWeight="Bold" 
+                                                   Foreground="#3f51b5"
+                                                   FontSize="16"
+                                                   />
+
+                                        <TextBlock Text="{Binding Category, StringFormat=' ({0})'}" 
+                                                   TextAlignment="Center"
+                                                   FontSize="16"
+                                                   Foreground="MidnightBlue"
+                                                   />
+                                    </StackPanel>
+
+                                    <TextBlock Text="{Binding ModifiedDate, StringFormat='Modified: {0:HH:mm:ss dd.MM.yyyy}'}"
+                                               TextAlignment="Center"
+                                             
+                                               FontSize="14"
+                                               />
+
+                                    <Border Background="LightGray" Margin="5" CornerRadius="10">
+                                        <TextBlock Text="{Binding Content}"
+                                                   TextAlignment="Center"
+                                                   TextWrapping="Wrap" 
+                                                   FontSize="16"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                   Padding="10"
+                                                   />
+                                    </Border>
+                                    
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <TextBlock Text="(Press at the note to edit)" 
+                       TextAlignment="Center"
+                       FontSize="14"
+                       Foreground="Gray"
+                       VerticalAlignment="Center"/>
+            
+            <Button 
+                Content="Back" 
+                Width="70" Height="30" Margin="0,10,0,0" 
+                Click="BackClick" 
+                Background="MidnightBlue" BorderBrush="MidnightBlue"/>
+
+        </StackPanel>
+    </Grid>
+
+</UserControl>

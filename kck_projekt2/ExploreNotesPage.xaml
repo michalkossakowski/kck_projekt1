@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="kck_projekt2.LatestNotesPage"
+﻿<UserControl x:Class="kck_projekt2.ExploreNotesPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
@@ -9,16 +9,24 @@
              >
 
     <Grid>
-
+        <TextBlock Name="Information"
+                   VerticalAlignment="Top"
+                   TextAlignment="Center"
+                   Text="You don't have any notes right now"
+                   FontSize="16"
+                   Margin="0,200,0,20" 
+                   Foreground="Red"
+                   Visibility="Hidden"/>
+        
         <StackPanel HorizontalAlignment="Center">
-            <TextBlock
-                VerticalAlignment="Top"
-                TextAlignment="Center"
-                Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
-                Text="Latest notes" 
-                Margin="0,20,0,0" 
-                Foreground="#3f51b5"
-                />
+            <TextBlock  Text="Explore notes" 
+                        VerticalAlignment="Top"
+                        TextAlignment="Center"
+                        Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
+                        Margin="0,20,0,10" 
+                        Foreground="#3f51b5"
+                        />
+            
             <ScrollViewer Width="400" Height="550" Margin="17,0,0,0">
                 <ItemsControl ItemsSource="{Binding Notes}">
                     <ItemsControl.ItemTemplate>
@@ -67,7 +75,7 @@
                                                    Padding="10"
                                                    />
                                     </Border>
-
+                                    
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
@@ -80,13 +88,12 @@
                        FontSize="14"
                        Foreground="Gray"
                        VerticalAlignment="Center"/>
+            
             <Button 
                 Content="Back" 
                 Width="70" Height="30" Margin="0,10,0,0" 
                 Click="BackClick" 
-                Background="MidnightBlue" 
-                BorderBrush="MidnightBlue"
-                />
+                Background="MidnightBlue" BorderBrush="MidnightBlue"/>
 
         </StackPanel>
     </Grid>

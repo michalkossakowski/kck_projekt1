@@ -20,20 +20,24 @@ namespace kck_projekt2
     /// <summary>
     /// Logika interakcji dla klasy LoginPage.xaml
     /// </summary>
-    public partial class LatestNotesPage : UserControl
+    public partial class CalendarPage : UserControl
     {
         private MainWindow _mainWindow;
-        public ObservableCollection<NoteModel> Notes { get; set; }
-        public LatestNotesPage(MainWindow mainWindow)
+        public CalendarPage(MainWindow mainWindow)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
 
-            var noteController = NoteController.GetInstance();
-            var notes = noteController.GetLatestNotesByUserId(_mainWindow.loggedUserId, 5);
+            myCalendar.SelectedDatesChanged += MyCalendar_SelectedDatesChanged;
+        }
+        private void MyCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DateTime? selectedDate = myCalendar.SelectedDate;
 
-            Notes = new ObservableCollection<NoteModel>(notes);
-            DataContext = this;
+            if (selectedDate.HasValue)
+            {
+                MessageBox.Show($"Wybrana data: {selectedDate.Value.ToShortDateString()}");
+            }
         }
 
         private void BackClick(object sender, RoutedEventArgs e)
@@ -41,12 +45,5 @@ namespace kck_projekt2
             _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
         }
 
-        private void OpenEditPage(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is Border border && border.DataContext is NoteModel note)
-            {
-                _mainWindow.contentControl.Content = new EditNotePage(_mainWindow, note.Id);
-            }
-        }
     }
 }

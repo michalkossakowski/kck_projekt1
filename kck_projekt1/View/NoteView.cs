@@ -12,13 +12,13 @@ namespace kck_projekt1.View
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText("Create")
-            .LeftJustified()
+            new FigletText(Program.font,"Create")
+            .Centered()
             .Color(Color.Gold1));
 
             var rule = new Rule("[gold1]Write a new note:[/]");
             rule.Style = new Style(Color.Gold1);
-            rule.LeftJustified();
+            rule.Centered();
             AnsiConsole.Write(rule);
 
             Console.WriteLine("");
@@ -59,13 +59,13 @@ namespace kck_projekt1.View
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText("Explore")
-            .LeftJustified()
+            new FigletText(Program.font,"Explore")
+            .Centered()
                 .Color(Color.Gold1));
 
             var rule = new Rule("[gold1]Choose note to show:[/]");
             rule.Style = new Style(Color.Gold1);
-            rule.LeftJustified();
+            rule.Centered();
             AnsiConsole.Write(rule);
 
             var noteController = NoteController.GetInstance();
@@ -102,13 +102,13 @@ namespace kck_projekt1.View
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText("Note")
-                .LeftJustified()
+            new FigletText(Program.font,"Note")
+                .Centered()
                 .Color(Color.Gold1));
 
             var rule = new Rule("[gold1]Your chosen note:[/]");
             rule.Style = new Style(Color.Gold1);
-            rule.LeftJustified();
+            rule.Centered();
             AnsiConsole.Write(rule);
 
             Console.WriteLine();
@@ -124,7 +124,7 @@ namespace kck_projekt1.View
             var panel = new Panel(note.Content)
                 .Expand()
                 .BorderColor(Color.Grey50);
-            table.AddRow(panel);
+            table.AddRow(panel).Centered();
             AnsiConsole.Write(table);
 
             Console.WriteLine();
@@ -155,13 +155,13 @@ namespace kck_projekt1.View
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText("Edit")
-                .LeftJustified()
+            new FigletText(Program.font,"Edit")
+                .Centered()
                 .Color(Color.Gold1));
 
             var rule = new Rule($"[gold1]You editing[/] [darkorange]'{note.Title}'[/] [gold1]({note.Category})[/] [darkorange]{note.ModifiedDate}:[/]");
             rule.Style = new Style(Color.Gold1);
-            rule.LeftJustified();
+            rule.Centered();
             AnsiConsole.Write(rule);
 
 
@@ -180,13 +180,13 @@ namespace kck_projekt1.View
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText("Latest")
-                .LeftJustified()
+            new FigletText(Program.font,"Latest")
+                .Centered()
                 .Color(Color.Gold1));
 
             var rule = new Rule("[gold1]Your latest notes:[/]");
             rule.Style = new Style(Color.Gold1);
-            rule.LeftJustified();
+            rule.Centered();
             AnsiConsole.Write(rule);
 
             Console.WriteLine();
@@ -214,13 +214,13 @@ namespace kck_projekt1.View
                 AnsiConsole.Clear();
 
                 AnsiConsole.Write(
-                new FigletText("Calendar")
-                    .LeftJustified()
+                new FigletText(Program.font,"Calendar")
+                    .Centered()
                     .Color(Color.Gold1));
 
                 var titleRule = new Rule("[gold1]Notes in current month:[/]");
                 titleRule.Style = new Style(Color.Gold1);
-                titleRule.LeftJustified();
+                titleRule.Centered();
                 AnsiConsole.Write(titleRule);
 
                 Console.WriteLine();
@@ -254,7 +254,7 @@ namespace kck_projekt1.View
                     Console.WriteLine("");
                     var rule = new Rule("[gold1]Select day:[/]");
                     rule.Style = new Style(Color.Gold1);
-                    rule.LeftJustified();
+                    rule.Centered();
                     AnsiConsole.Write(rule);
 
                     var list = days.OrderBy(day => day).Select(day => new DateTime(currentDate.Year, currentDate.Month, day).ToString("dd.MM.yyyy")).ToList();
@@ -266,7 +266,7 @@ namespace kck_projekt1.View
                     new SelectionPrompt<string>()
                     .Title("")
                     .HighlightStyle(Color.DarkOrange)
-                    .PageSize(5)
+                    .PageSize(4)
                     .AddChoices(list));
 
                     switch (choice)
@@ -286,13 +286,13 @@ namespace kck_projekt1.View
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText($"{day}.{date.Month}.{date.Year}")
-                .LeftJustified()
+            new FigletText(Program.font,$"{day}.{date.Month}.{date.Year}")
+                .Centered()
                 .Color(Color.Gold1));
 
             var rule = new Rule($"[gold1]Your notes from[/] [darkorange]{day}.{date.Month}.{date.Year}:[/]");
             rule.Style = new Style(Color.Gold1);
-            rule.LeftJustified();
+            rule.Centered();
             AnsiConsole.Write(rule);
 
             Console.WriteLine();
@@ -319,7 +319,7 @@ namespace kck_projekt1.View
                 var panel = new Panel(note.Content)
                     .Expand()
                     .BorderColor(Color.Grey50);
-                table.AddRow(panel);
+                table.AddRow(panel).Centered();
                 AnsiConsole.Write(table);
 
                 Thread.Sleep(200);
@@ -331,13 +331,13 @@ namespace kck_projekt1.View
             AnsiConsole.Clear();
 
             AnsiConsole.Write(
-            new FigletText("Search")
-            .LeftJustified()
+            new FigletText(Program.font,"Search")
+            .Centered()
             .Color(Color.Gold1));
 
             var rule = new Rule("[gold1]Search in your notes:[/]");
             rule.Style = new Style(Color.Gold1);
-            rule.LeftJustified();
+            rule.Centered();
             AnsiConsole.Write(rule);
 
             Console.WriteLine("");
@@ -353,13 +353,13 @@ namespace kck_projekt1.View
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText("Results")
-            .LeftJustified()
+            new FigletText(Program.font,"Results")
+            .Centered()
                 .Color(Color.Gold1));
 
             var rule = new Rule("[gold1]Choose note to show:[/]");
             rule.Style = new Style(Color.Gold1);
-            rule.LeftJustified();
+            rule.Centered();
             AnsiConsole.Write(rule);
 
             AnsiConsole.Markup("");

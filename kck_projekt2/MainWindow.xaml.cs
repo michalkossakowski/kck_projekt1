@@ -29,14 +29,19 @@ namespace kck_projekt2
 
         private void OpenLoginPage(object sender, RoutedEventArgs e)
         {
-            MainMenuGrid.Visibility = Visibility.Collapsed;
+            WelcomePanel.Visibility = Visibility.Collapsed;
             contentControl.Content = new LoginPage(this);
         }
 
         private void OpenRegisterPage(object sender, RoutedEventArgs e)
         {
-            MainMenuGrid.Visibility = Visibility.Collapsed;
+            WelcomePanel.Visibility = Visibility.Collapsed;
             contentControl.Content = new RegisterPage(this);
+        }
+
+        private void OpenActionMenu(object sender, RoutedEventArgs e)
+        {
+            contentControl.Content = new ActionMenuPage(this);
         }
 
         private void SwitchToConsoleMode(object sender, RoutedEventArgs e)
@@ -48,16 +53,29 @@ namespace kck_projekt2
             Environment.Exit(0);
         }
 
-        private void Exit(object sender, RoutedEventArgs e)
+        private void ExitClick(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
         }
 
+        private void LogoutClick(object sender, RoutedEventArgs e)
+        {
+            LogoutMenuItem.Visibility = Visibility.Collapsed;
+            ActionMenuMenuItem.Visibility = Visibility.Collapsed;
+            ReturnToMainMenu();
+        }
+
+
         public void ReturnToMainMenu()
         {
-            MainMenuGrid.Visibility = Visibility.Visible;
+            WelcomePanel.Visibility = Visibility.Visible;
             contentControl.Content = null;
             loggedUserId = -1;
+        }
+
+        private void Image_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
+        {
+
         }
     }
 }

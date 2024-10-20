@@ -10,23 +10,81 @@
 
     <Grid>
 
+        <materialDesign:Card Name="Loading" 
+                             Panel.ZIndex="10"
+                             Visibility="Hidden" 
+                             Padding="5" 
+                             UniformCornerRadius="30" 
+                             Width="40"
+                             Height="40"
+                             Margin="0,160,0,0"
+                             VerticalAlignment="Top">
+
+            <ProgressBar IsIndeterminate="True" 
+                         Style="{StaticResource MaterialDesignCircularProgressBar}" 
+                         Value="70" 
+                         Height="30"
+                         Width="30"
+                         />
+
+        </materialDesign:Card>
+        
         <StackPanel HorizontalAlignment="Center">
             <TextBlock
-                Padding="0,16"
                 VerticalAlignment="Top"
                 TextAlignment="Center"
                 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
-                Text="Register" Margin="0,20,0,0" />
+                Text="Register" 
+                Margin="0,20,0,20"
+                Foreground="#3f51b5"
+                />
 
-            <Label Name="errorMessage" Visibility="Visible" Content="" Foreground="#FFFF0000" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox Name="nick" materialDesign:HintAssist.HelperText="Enter your nick"  materialDesign:HintAssist.Hint="Nick" Width="200" Height="30" Margin="0,20,0,0" />
-            <PasswordBox Name="password" materialDesign:HintAssist.HelperText="Enter your password"  materialDesign:HintAssist.Hint="Password" materialDesign:TextFieldAssist.HasClearButton="True" Width="200" Height="30"  Margin="0,20,0,0" />
-            <PasswordBox Name="confirm" materialDesign:HintAssist.HelperText="Confirm your password"  materialDesign:HintAssist.Hint="Password" materialDesign:TextFieldAssist.HasClearButton="True" Width="200" Height="30"  Margin="0,20,0,0" />
-            <materialDesign:Card Name="Loading" Visibility="Hidden" Padding="4" UniformCornerRadius="14" Width="28">
-                <ProgressBar IsIndeterminate="True" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="50" />
-            </materialDesign:Card>
-            <Button Name="LoginButton" Content="Register" Width="90" Height="30" Margin="0,20,0,0" Click="RegisterClick"/>
-            <Button Content="Back" Width="70" Height="30" Margin="0,20,0,0" Click="BackClick" Background="#FF1A237E" BorderBrush="#FF1A237E"/>
+            <Label Name="errorMessage" 
+                   Visibility="Visible" 
+                   Content="" Foreground="#FFFF0000" 
+                   FontSize="16" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   />
+            
+            <TextBox Name="nick" 
+                     materialDesign:HintAssist.HelperText="Enter your nick"  
+                     materialDesign:HintAssist.Hint="Nick" 
+                     Width="200" Height="30" 
+                     Margin="0,20,0,0" 
+                     />
+            
+            <PasswordBox Name="password" 
+                         materialDesign:HintAssist.HelperText="Enter your password"  
+                         materialDesign:HintAssist.Hint="Password" 
+                         materialDesign:TextFieldAssist.HasClearButton="True" 
+                         Width="200" Height="30"  
+                         Margin="0,20,0,0" 
+                         />
+
+            <PasswordBox Name="confirm" 
+                         materialDesign:HintAssist.HelperText="Confirm your password"  
+                         materialDesign:HintAssist.Hint="Password" 
+                         materialDesign:TextFieldAssist.HasClearButton="True" 
+                         Width="200" Height="30"  
+                         Margin="0,20,0,0" 
+                         />
+
+            <Button Name="LoginButton" 
+                    Content="Register" 
+                    Width="90" Height="30" 
+                    Margin="0,30,0,0" 
+                    Click="RegisterClick"
+                    />
+            
+            <Button Content="Back" 
+                    Width="70" Height="30" 
+                    Margin="0,20,0,0"
+                    Click="BackClick" 
+                    Background="MidnightBlue" 
+                    BorderBrush="MidnightBlue"
+                    />
+            
         </StackPanel>
     </Grid>
 

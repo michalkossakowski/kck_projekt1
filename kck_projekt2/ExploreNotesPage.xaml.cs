@@ -20,33 +20,43 @@ namespace kck_projekt2
     /// <summary>
     /// Logika interakcji dla klasy LoginPage.xaml
     /// </summary>
-    public partial class LatestNotesPage : UserControl
+    public partial class ExploreNotesPage : UserControl
     {
         private MainWindow _mainWindow;
         public ObservableCollection<NoteModel> Notes { get; set; }
-        public LatestNotesPage(MainWindow mainWindow)
+        public ExploreNotesPage(MainWindow mainWindow)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
 
             var noteController = NoteController.GetInstance();
-            var notes = noteController.GetLatestNotesByUserId(_mainWindow.loggedUserId, 5);
-
-            Notes = new ObservableCollection<NoteModel>(notes);
-            DataContext = this;
-        }
-
-        private void BackClick(object sender, RoutedEventArgs e)
-        {
-            _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
+            var notes = noteController.GetNotesByUserId(_mainWindow.loggedUserId);
+            if(notes.Count == 0)
+            {
+                Information.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Information.Visibility = Visibility.Collapsed;
+                notes.Reverse();
+                Notes = new ObservableCollection<NoteModel>(notes);
+                DataContext = this;
+            }
         }
 
         private void OpenEditPage(object sender, MouseButtonEventArgs e)
         {
             if (sender is Border border && border.DataContext is NoteModel note)
             {
-                _mainWindow.contentControl.Content = new EditNotePage(_mainWindow, note.Id);
+                _mainWindow.contentControl.Content = new EditNotePage(_mainWindow,note.Id);
             }
         }
+
+
+        private void BackClick(object sender, RoutedEventArgs e)
+        {
+            _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
+        }
+
     }
 }

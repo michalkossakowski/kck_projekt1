@@ -1,8 +1,6 @@
 ﻿using kck_api.Controller;
 using Spectre.Console;
 using System.Diagnostics;
-using System.Windows.Controls;
-using Panel = Spectre.Console.Panel;
 
 namespace kck_projekt1.View
 {
@@ -19,7 +17,7 @@ namespace kck_projekt1.View
                 AnsiConsole.Clear();
                 var layout = new Layout("Root")
                     .SplitRows(
-                        new Layout("Title"), 
+                        new Layout("Title"),
                         new Layout("Actions")
                             .SplitColumns(
                                 new Layout("Left")
@@ -31,14 +29,15 @@ namespace kck_projekt1.View
                                         new Layout("Top"),
                                         new Layout("Bottom"))));
 
+               
+
                 layout["Title"].Update(
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new FigletText("Notes App")
+                                new FigletText(Program.font,"Notes App")
                                     .LeftJustified()
                                     .Color(Color.Gold1),
-                                new Markup("\n"),
                                 new Rule("[gold1]Press the[/] [darkorange]{KEY}[/] [gold1]on your keyboard to select the action[/]").RuleStyle("gold1")
                             ),
                             VerticalAlignment.Middle))
@@ -87,7 +86,7 @@ namespace kck_projekt1.View
                 AnsiConsole.Write(layout);
 
                 var pressedKey = Console.ReadKey();
-                var choice = pressedKey.Key.ToString(); 
+                var choice = pressedKey.Key.ToString();
                 switch (choice)
                 {
                     case "L":
@@ -181,10 +180,9 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                            new FigletText("Menu")
+                            new FigletText(Program.font,"Menu")
                                 .LeftJustified()
                                 .Color(Color.Gold1),
-                            new Markup("\n"),
                             new Rule("[gold1]Press the[/] [darkorange]{KEY}[/] [gold1]on your keyboard to select the action[/]").RuleStyle("gold1"),
                             new Markup("[gold1]Press[/] [darkorange]{ESC}[/] [gold1]to close the application[/]")
                             ),
@@ -196,7 +194,7 @@ namespace kck_projekt1.View
                         Align.Center(
                             new Rows(
                                 new Markup("[darkorange]LATEST NOTES -> {N}[/]"),
-                                new Markup("[gold1]Explore latest written notes[/]")
+                                new Markup("[gold1]Explore your latest written notes[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -216,7 +214,7 @@ namespace kck_projekt1.View
                         Align.Center(
                             new Rows(
                                 new Markup("[darkorange]CALENDAR -> {C}[/]"),
-                                new Markup("[gold1]Explore notes by date[/]")
+                                new Markup("[gold1]Explore your notes by date[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -226,7 +224,7 @@ namespace kck_projekt1.View
                         Align.Center(
                             new Rows(
                                 new Markup("[darkorange]ADD NOTE -> {A}[/]"),
-                                new Markup("[gold1]Open graphic version of the application[/]")
+                                new Markup("[gold1]Write a new note[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());

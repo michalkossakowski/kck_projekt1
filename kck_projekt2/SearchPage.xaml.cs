@@ -20,25 +20,39 @@ namespace kck_projekt2
     /// <summary>
     /// Logika interakcji dla klasy LoginPage.xaml
     /// </summary>
-    public partial class LatestNotesPage : UserControl
+    public partial class SearchPage : UserControl
     {
         private MainWindow _mainWindow;
         public ObservableCollection<NoteModel> Notes { get; set; }
-        public LatestNotesPage(MainWindow mainWindow)
+        private NoteController _noteController;
+        public SearchPage(MainWindow mainWindow)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-
-            var noteController = NoteController.GetInstance();
-            var notes = noteController.GetLatestNotesByUserId(_mainWindow.loggedUserId, 5);
-
-            Notes = new ObservableCollection<NoteModel>(notes);
-            DataContext = this;
+            _noteController = NoteController.GetInstance();
         }
 
         private void BackClick(object sender, RoutedEventArgs e)
         {
             _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
+        }
+
+        private void SearchClick(object sender, RoutedEventArgs e) 
+        {
+            DataContext = null;
+            var notes = _noteController.GetNotesByUserIdAndTitle(_mainWindow.loggedUserId, SearchInput.Text);
+            if (notes.Count == 0) 
+            { 
+                Information.Visibility = Visibility.Visible;
+                Information.Text = "There is no notes that match your search";
+                Information.Foreground = new SolidColorBrush(Color.FromRgb(255,0,0));
+            }
+            else
+            {
+                Information.Visibility = Visibility.Collapsed;
+                Notes = new ObservableCollection<NoteModel>(notes);
+                DataContext = this;
+            }
         }
 
         private void OpenEditPage(object sender, MouseButtonEventArgs e)

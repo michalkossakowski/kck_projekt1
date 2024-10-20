@@ -46,7 +46,11 @@ namespace kck_projekt2
             {
                 var userController = UserController.GetInstance();
                 var user = new UserModel(nickValue, passwordValue);
-                user = await Task.Run(() => userController.GetUser(user));
+                user = await Task.Run(async () =>
+                {
+                    await Task.Delay(1000); 
+                    return userController.GetUser(user); 
+                });
                 if (user == null)
                 {
                     errorMessage.Content = "Wrong nick or password !";
@@ -55,6 +59,8 @@ namespace kck_projekt2
                 }
                 else
                 {
+                    _mainWindow.LogoutMenuItem.Visibility = Visibility.Visible;
+                    _mainWindow.ActionMenuMenuItem.Visibility = Visibility.Visible;
                     _mainWindow.loggedUserId = user.Id;
                     _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
                 }

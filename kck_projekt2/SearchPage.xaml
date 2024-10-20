@@ -14,7 +14,7 @@
                 VerticalAlignment="Top"
                 TextAlignment="Center"
                 Text="(Area for notes that match your search)" 
-                Margin="0,200,0,20" 
+                Margin="0,165,0,20" 
                    FontSize="16"
                 Foreground="#3f51b5"/>
 
@@ -44,7 +44,7 @@
 
             </StackPanel>
 
-            <ScrollViewer Width="400" Height="450" Margin="17,20,0,0">
+            <ScrollViewer Width="400" MaxHeight="450" Margin="17,20,0,0">
                 <ItemsControl ItemsSource="{Binding Notes}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

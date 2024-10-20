@@ -309,9 +309,8 @@ namespace kck_projekt1.View
 
         public static void SwitchToGraphicMode()
         {
-            string exePath = Path.Combine(Directory.GetCurrentDirectory(), "kck_projekt2.exe");
             Process process = new Process();
-            process.StartInfo.FileName = exePath;
+            process.StartInfo.FileName = Path.Combine(Directory.GetCurrentDirectory(), "kck_projekt2.exe");
             process.Start();
             Environment.Exit(0);
         }

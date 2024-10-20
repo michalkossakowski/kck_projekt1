@@ -49,7 +49,7 @@ namespace kck_projekt2
             _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
         }
 
-        private void ChangeCategoryTypeClick(object sender, RoutedEventArgs e)
+        private void CategoryToggleClick(object sender, RoutedEventArgs e)
         {
             CustomCategory.IsEnabled = !CustomCategory.IsEnabled;
             SelectedCategory.IsEnabled = !SelectedCategory.IsEnabled;

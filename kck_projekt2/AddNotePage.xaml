@@ -44,13 +44,24 @@
                 
             </ComboBox>
 
-            <CheckBox 
-                HorizontalAlignment="Left" 
-                x:Name="MaterialDesignFilledTextBoxEnabledComboBox" 
-                FontSize="10" Margin="20,10,0,0" 
-                Content="Use custom category"
-                Foreground="gray"
-                Click="ChangeCategoryTypeClick"/>
+            <StackPanel  Orientation="Horizontal" Margin="-50,10,0,0" HorizontalAlignment="Center">
+                <ToggleButton
+                    x:Name="CategoryToggle" 
+                    IsChecked="False"
+                    Click="CategoryToggleClick"
+                    >
+                    <ToggleButton.LayoutTransform>
+                        <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
+                    </ToggleButton.LayoutTransform>
+                </ToggleButton>
+
+                <TextBlock
+                    Margin="5,0,0,0"
+                    Text="Use custom category"
+                    Foreground="gray"
+                    VerticalAlignment="Center"
+                    />
+            </StackPanel>
 
             <TextBox 
                 Name="CustomCategory" 
@@ -69,7 +80,7 @@
                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                 TextWrapping="Wrap"
                 VerticalScrollBarVisibility="Auto" 
-                Width="200"
+                Width="300"
             />
             
             <Button 

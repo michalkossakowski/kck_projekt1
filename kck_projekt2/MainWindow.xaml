@@ -107,7 +107,7 @@
                        Width="150" 
                        Margin="35,20,0,0"
                        />
-                
+
                 <TextBlock VerticalAlignment="Top"           
                            TextAlignment="Center"
                            FontSize="70"
@@ -122,29 +122,26 @@
                            Margin="0,0,0,20"
                            Foreground="#3f51b5"
                            />
-                
+
                 <Button Content="Log in" 
                         Click="OpenLoginPage" 
                         HorizontalAlignment="Center" 
                         Margin="0,20,0,0" 
                         />
-                
+
                 <Button Content="Register" 
                         Click="OpenRegisterPage" 
                         HorizontalAlignment="Center" 
                         Margin="0,20,0,0" 
                         />
 
-
                 <TextBlock Text="@2024 made by Michał Kossakowski" 
-                       TextAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Center"
                        FontSize="14"
                        Foreground="Gray"
-                       Margin="0,260,0,0"
-                       VerticalAlignment="Center"/>
+                       Margin="0,260,0,0"/>
             </StackPanel>
-            
-            
         </Grid>
     </Grid>
 </Window>

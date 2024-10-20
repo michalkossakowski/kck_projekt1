@@ -35,7 +35,7 @@ namespace kck_projekt2
 
             Title.Text = note.Title;
             SelectedCategory.IsEnabled = false;
-            CategoryCheckBox.IsChecked = true;
+            CategoryToggle.IsChecked = true;
             CustomCategory.IsEnabled = true;
             CustomCategory.Text = note.Category;
             NoteContent.Text = note.Content;
@@ -54,7 +54,7 @@ namespace kck_projekt2
             _mainWindow.contentControl.Content = new ExploreNotesPage(_mainWindow);
         }
 
-        private void ChangeCategoryTypeClick(object sender, RoutedEventArgs e)
+        private void CategoryToggleClick(object sender, RoutedEventArgs e)
         {
             CustomCategory.IsEnabled = !CustomCategory.IsEnabled;
             SelectedCategory.IsEnabled = !SelectedCategory.IsEnabled;

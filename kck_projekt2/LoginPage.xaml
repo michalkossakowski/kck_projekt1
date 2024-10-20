@@ -65,7 +65,7 @@
             <Button Name="LoginButton" 
                     Content="Login" 
                     Width="80" Height="30" 
-                    Margin="0,20,0,0" 
+                    Margin="0,30,0,0" 
                     Click="LoginClick"
                     />
 

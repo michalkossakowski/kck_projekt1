@@ -73,7 +73,7 @@
             <Button Name="LoginButton" 
                     Content="Register" 
                     Width="90" Height="30" 
-                    Margin="0,20,0,0" 
+                    Margin="0,30,0,0" 
                     Click="RegisterClick"
                     />
             

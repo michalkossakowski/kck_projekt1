@@ -114,7 +114,7 @@ namespace kck_projekt1.View
 
             AnsiConsole.Markup($"[gold1]\nOld[/] [darkorange]content:[/] [grey70]{note.Content}[/]\n");
             ClipboardService.SetText(note.Content);
-            AnsiConsole.Markup($"[grey70]\n(Press Ctrl+V to use old content)[/]");
+            AnsiConsole.Markup("[grey35]\n(Press {Ctrl+V} to use old content)[/]");
             var newContent = AnsiConsole.Prompt(
             new TextPrompt<string>("[gold1]\nEnter new[/] [darkorange]content:[/]"));
 

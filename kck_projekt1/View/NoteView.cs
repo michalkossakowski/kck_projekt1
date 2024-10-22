@@ -114,7 +114,7 @@ namespace kck_projekt1.View
 
             AnsiConsole.Markup($"[gold1]\nOld[/] [darkorange]content:[/] [grey70]{note.Content}[/]\n");
             ClipboardService.SetText(note.Content);
-            AnsiConsole.Markup($"[grey70]\n(Press Ctrl+V to use old content)[/]");
+            AnsiConsole.Markup("[grey35]\n(Press {Ctrl+V} to use old content)[/]");
             var newContent = AnsiConsole.Prompt(
             new TextPrompt<string>("[gold1]\nEnter new[/] [darkorange]content:[/]"));
 
@@ -337,6 +337,82 @@ namespace kck_projekt1.View
             if (notes.Count == 0)
             {
                 AnsiConsole.Markup($"[red1]\nYou dont have notes with[/] [darkorange]'{searchingTitle}'[/] [red1]in the title, press anything to continue[/]");
+                Console.ReadKey();
+                return -1;
+            }
+            else
+            {
+                var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.Category})[/] - {n.ModifiedDate}").ToList();
+                list.Add("Back");
+                list.Reverse();
+
+                var choice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("")
+                .HighlightStyle(Color.DarkOrange)
+                .PageSize(10)
+                .AddChoices(list));
+
+                var id = choice == "Back" ? -1 : int.Parse(choice.Split(':')[0]);
+
+                return id;
+            }
+        }
+
+        public string ChooseCategoryToFilter()
+        {
+            AnsiConsole.Clear();
+
+            AnsiConsole.Write(
+            new FigletText(Program.font, "Filter")
+            .Centered()
+            .Color(Color.Gold1));
+
+            var rule = new Rule("[gold1]Select a category to filter:[/]");
+            rule.Style = new Style(Color.Gold1);
+            rule.LeftJustified();
+            AnsiConsole.Write(rule);
+
+            var category = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+            .HighlightStyle(Color.DarkOrange)
+            .AddChoices(new[] {
+                                        "Studies",
+                                        "Work",
+                                        "Home",
+                                        "Hobby",
+                                        "Other",
+                                        "[grey50]Custom[/]"
+             }));
+
+            if (category == "[grey50]Custom[/]")
+            {
+                category = AnsiConsole.Prompt(
+                new TextPrompt<string>("[gold1]Enter custom[/] [darkorange]category:[/]"));
+            }
+
+            return category;
+        }
+
+        public int ShowNotesByCategory(int userId, string categoryFilter)
+        {
+            AnsiConsole.Clear();
+            AnsiConsole.Write(
+            new FigletText(Program.font, "Results")
+            .Centered()
+                .Color(Color.Gold1));
+
+            var rule = new Rule("[gold1]Choose note to show:[/]");
+            rule.Style = new Style(Color.Gold1);
+            rule.LeftJustified();
+            AnsiConsole.Write(rule);
+
+            AnsiConsole.Markup("");
+            var noteController = NoteController.GetInstance();
+            var notes = noteController.GetNotesByUserIdAndCategory(userId, categoryFilter);
+            if (notes.Count == 0)
+            {
+                AnsiConsole.Markup($"[red1]\nYou dont have notes from[/] [darkorange]'{categoryFilter}'[/] [red1]category, press anything to continue[/]");
                 Console.ReadKey();
                 return -1;
             }

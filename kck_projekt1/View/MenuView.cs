@@ -168,12 +168,14 @@ namespace kck_projekt1.View
                                 new Layout("Left")
                                     .SplitRows(
                                         new Layout("Top"),
-                                        new Layout("Middle"),
+                                        new Layout("MiddleTop"),
+                                        new Layout("MiddleBottom"),
                                         new Layout("Bottom")),
                                 new Layout("Right")
                                     .SplitRows(
                                         new Layout("Top"),
-                                        new Layout("Middle"),
+                                        new Layout("MiddleTop"),
+                                        new Layout("MiddleBottom"),
                                         new Layout("Bottom"))));
 
                 layout["Title"].Update(
@@ -187,7 +189,7 @@ namespace kck_projekt1.View
                             new Markup("[gold1]Press[/] [darkorange]{ESC}[/] [gold1]to close the application[/]")
                             ),
                             VerticalAlignment.Middle))
-                    .Expand());
+                    .Expand()).Size(11);
 
                 layout["Left"]["Top"].Update(
                     new Panel(
@@ -199,7 +201,7 @@ namespace kck_projekt1.View
                             VerticalAlignment.Middle))
                         .Expand());
 
-                layout["Left"]["Middle"].Update(
+                layout["Left"]["MiddleTop"].Update(
                 new Panel(
                     Align.Center(
                         new Rows(
@@ -209,12 +211,22 @@ namespace kck_projekt1.View
                         VerticalAlignment.Middle))
                     .Expand());
 
-                layout["Left"]["Bottom"].Update(
+                layout["Left"]["MiddleBottom"].Update(
                     new Panel(
                         Align.Center(
                             new Rows(
                                 new Markup("[darkorange]CALENDAR -> {C}[/]"),
                                 new Markup("[gold1]Explore your notes by date[/]")
+                            ),
+                            VerticalAlignment.Middle))
+                        .Expand());
+
+                layout["Left"]["Bottom"].Update(
+                    new Panel(
+                        Align.Center(
+                            new Rows(
+                                new Markup("[darkorange]LOG OUT -> {O}[/]"),
+                                new Markup("[gold1]Log out of the current account[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -229,7 +241,7 @@ namespace kck_projekt1.View
                             VerticalAlignment.Middle))
                         .Expand());
 
-                layout["Right"]["Middle"].Update(
+                layout["Right"]["MiddleTop"].Update(
                     new Panel(
                         Align.Center(
                             new Rows(
@@ -239,12 +251,22 @@ namespace kck_projekt1.View
                             VerticalAlignment.Middle))
                         .Expand());
 
+                layout["Right"]["MiddleBottom"].Update(
+                    new Panel(
+                        Align.Center(
+                            new Rows(
+                                new Markup("[darkorange]BY CATEGORY -> {F}[/]"),
+                                new Markup("[gold1]Filter notes by category[/]")
+                            ),
+                            VerticalAlignment.Middle))
+                        .Expand());
+
                 layout["Right"]["Bottom"].Update(
                     new Panel(
                         Align.Center(
                            new Rows(
-                                new Markup("[darkorange]LOG OUT -> {O}[/]"),
-                                new Markup("[gold1]Log out of the current account[/]")
+                                new Markup("[darkorange]EXIT -> {ESC}[/]"),
+                                new Markup("[gold1]Close the application[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -290,6 +312,17 @@ namespace kck_projekt1.View
                             if (searchingNoteId == -1)
                                 break;
                             noteView.ShowNote(searchingNoteId);
+                        }
+                        break;
+
+                    case "F":
+                        var categoryFilter = noteView.ChooseCategoryToFilter();
+                        while (true)
+                        {
+                            var chosenNoteId = noteView.ShowNotesByCategory(_loggedUser.Id, categoryFilter);
+                            if (chosenNoteId == -1)
+                                break;
+                            noteView.ShowNote(chosenNoteId);
                         }
                         break;
 

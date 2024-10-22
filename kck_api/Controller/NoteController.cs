@@ -70,6 +70,12 @@ namespace kck_api.Controller
             && n.Title.Contains(title)).ToList();
         }
 
+        public List<NoteModel> GetNotesByUserIdAndCategory(int userId, string category)
+        {
+            return _context.Notes.Where(n => n.AuthorId == userId
+            && n.Category.Contains(category)).ToList();
+        }
+
         public void EditNoteContent(int noteId, string newContent)
         {
             var note = _context.Notes.FirstOrDefault(n => n.Id == noteId);

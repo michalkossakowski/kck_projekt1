@@ -64,17 +64,11 @@ namespace kck_projekt2
             ReturnToMainMenu();
         }
 
-
         public void ReturnToMainMenu()
         {
             WelcomePanel.Visibility = Visibility.Visible;
             contentControl.Content = null;
             loggedUserId = -1;
-        }
-
-        private void Image_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
-        {
-
         }
     }
 }

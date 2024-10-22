@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace kck_projekt1.View
 {
-    public class MenuView : View
+    public class MenuView
     {
         UserModel _loggedUser = null;
 
@@ -29,13 +29,13 @@ namespace kck_projekt1.View
                                         new Layout("Top"),
                                         new Layout("Bottom"))));
 
-               
+
 
                 layout["Title"].Update(
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new FigletText(Program.font,"Notes App")
+                                new FigletText(Program.font, "Notes App")
                                     .LeftJustified()
                                     .Color(Color.Gold1),
                                 new Rule("[gold1]Press the[/] [darkorange]{KEY}[/] [gold1]on your keyboard to select the action[/]").RuleStyle("gold1")
@@ -94,7 +94,7 @@ namespace kck_projekt1.View
                         AnsiConsole.Status()
                         .Spinner(Spinner.Known.BouncingBar)
                         .SpinnerStyle(Style.Parse("darkorange"))
-                        .Start("[gold1]Loading[/]", ctx =>
+                        .Start("[gold1]Logging in[/]", ctx =>
                         {
                             user = userController.GetUser(user);
                             Thread.Sleep(1000);
@@ -180,7 +180,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                            new FigletText(Program.font,"Menu")
+                            new FigletText(Program.font, "Menu")
                                 .LeftJustified()
                                 .Color(Color.Gold1),
                             new Rule("[gold1]Press the[/] [darkorange]{KEY}[/] [gold1]on your keyboard to select the action[/]").RuleStyle("gold1"),
@@ -193,7 +193,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]LATEST NOTES -> {N}[/]"),
+                                new Markup("[darkorange]LATEST NOTES -> {L}[/]"),
                                 new Markup("[gold1]Explore your latest written notes[/]")
                             ),
                             VerticalAlignment.Middle))
@@ -243,7 +243,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                            new Rows(
-                                new Markup("[darkorange]LOG OUT -> {L}[/]"),
+                                new Markup("[darkorange]LOG OUT -> {O}[/]"),
                                 new Markup("[gold1]Log out of the current account[/]")
                             ),
                             VerticalAlignment.Middle))
@@ -264,7 +264,7 @@ namespace kck_projekt1.View
                         Console.ReadKey();
                         break;
 
-                    case "N":
+                    case "L":
                         noteView.ShowLatestNotes(_loggedUser.Id);
                         break;
 
@@ -293,7 +293,7 @@ namespace kck_projekt1.View
                         }
                         break;
 
-                    case "L":
+                    case "O":
                         return;
 
                     case "Escape":
@@ -309,9 +309,8 @@ namespace kck_projekt1.View
 
         public static void SwitchToGraphicMode()
         {
-            string exePath = Path.Combine(Directory.GetCurrentDirectory(), "kck_projekt2.exe");
             Process process = new Process();
-            process.StartInfo.FileName = exePath;
+            process.StartInfo.FileName = Path.Combine(Directory.GetCurrentDirectory(), "kck_projekt2.exe");
             process.Start();
             Environment.Exit(0);
         }

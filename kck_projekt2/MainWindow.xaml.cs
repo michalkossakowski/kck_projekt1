@@ -46,9 +46,8 @@ namespace kck_projekt2
 
         private void SwitchToConsoleMode(object sender, RoutedEventArgs e)
         {
-            string exePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "kck_projekt1.exe");
             Process process = new Process();
-            process.StartInfo.FileName = exePath;
+            process.StartInfo.FileName = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "kck_projekt1.exe");
             process.Start();
             Environment.Exit(0);
         }

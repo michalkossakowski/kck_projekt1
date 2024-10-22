@@ -100,14 +100,6 @@
             <ContentControl x:Name="contentControl"/>
 
             <StackPanel x:Name="WelcomePanel">
-
-
-                <Image Source="pack://application:,,,/Assets/logo.png" 
-                       Height="150" 
-                       Width="150" 
-                       Margin="35,20,0,0"
-                       />
-
                 <TextBlock VerticalAlignment="Top"           
                            TextAlignment="Center"
                            FontSize="70"
@@ -134,13 +126,6 @@
                         HorizontalAlignment="Center" 
                         Margin="0,20,0,0" 
                         />
-
-                <TextBlock Text="@2024 made by Michał Kossakowski" 
-                       VerticalAlignment="Bottom"
-                       HorizontalAlignment="Center"
-                       FontSize="14"
-                       Foreground="Gray"
-                       Margin="0,260,0,0"/>
             </StackPanel>
         </Grid>
     </Grid>

@@ -309,21 +309,40 @@ namespace kck_projekt1.View
 
         public void ShowNotes(List<NoteModel> notes)
         {
+            var column = new List<Table>();
+
+            int columnWidth = 30;
+
             foreach (var note in notes)
             {
                 var table = new Table()
                     .BorderColor(Color.Grey70)
                     .Border(TableBorder.Rounded);
-                table.AddColumn(new TableColumn($"[darkorange]{note.Title}[/] [gold1]({note.Category})[/]").Centered());
+
+                table.AddColumn(new TableColumn($"[darkorange]{note.Title}[/] [gold1]({note.Category})[/]")
+                    .Centered()
+                    .Width(columnWidth));
+
                 table.AddRow($"[darkorange]{note.ModifiedDate}[/]");
+
                 var panel = new Panel(note.Content)
                     .Expand()
                     .BorderColor(Color.Grey50);
+
                 table.AddRow(panel).Centered();
-                AnsiConsole.Write(table);
+
+                column.Add(table);
+
+                if (AnsiConsole.Console.Profile.Width < column.Count * columnWidth)
+                {
+                    AnsiConsole.Write(new Columns(column));
+                    column.Clear();
+                }
 
                 Thread.Sleep(200);
             }
+
+            AnsiConsole.Write(new Columns(column));
         }
 
         public string SearchNotes()

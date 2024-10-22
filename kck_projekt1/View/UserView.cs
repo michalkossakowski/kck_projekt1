@@ -2,7 +2,7 @@
 
 namespace kck_projekt1.View
 {
-    public class UserView : View
+    public class UserView
     {
         public UserModel RegisterUser()
         {
@@ -15,7 +15,7 @@ namespace kck_projekt1.View
 
             var rule = new Rule("[gold1]Add new user:[/]");
             rule.Style = new Style(Color.Gold1);
-            rule.Centered();
+            rule.LeftJustified();
             AnsiConsole.Write(rule);
 
             Console.WriteLine("");
@@ -45,7 +45,7 @@ namespace kck_projekt1.View
 
             var rule = new Rule("[gold1]Enter your login information:[/]");
             rule.Style = new Style(Color.Gold1);
-            rule.Centered();
+            rule.LeftJustified();
             AnsiConsole.Write(rule);
 
             Console.WriteLine("");

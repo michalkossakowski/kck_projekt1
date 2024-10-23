@@ -373,6 +373,8 @@ namespace kck_projekt1.View
             rule.LeftJustified();
             AnsiConsole.Write(rule);
 
+            Console.WriteLine("");
+
             var category = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
             .HighlightStyle(Color.DarkOrange)

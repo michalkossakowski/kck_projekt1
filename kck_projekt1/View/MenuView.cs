@@ -255,7 +255,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]BY CATEGORY -> {F}[/]"),
+                                new Markup("[darkorange]FILTER -> {F}[/]"),
                                 new Markup("[gold1]Filter notes by category[/]")
                             ),
                             VerticalAlignment.Middle))

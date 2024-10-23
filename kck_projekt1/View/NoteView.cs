@@ -91,6 +91,15 @@ namespace kck_projekt1.View
                     return;
                 case "Edit":
                     ShowEditNote(note);
+                    Console.WriteLine();
+                    var editedNoteRule = new Rule("[gold1]Edited note:[/]");
+                    editedNoteRule.Style = new Style(Color.Gold1);
+                    editedNoteRule.Centered();
+                    AnsiConsole.Write(editedNoteRule);
+                    Console.WriteLine();
+                    ShowNotes(new List<NoteModel> {note});
+                    AnsiConsole.Markup("[green1]\nNote successful edited, press anything to continue[/]");
+                    Console.ReadKey();
                     return;
                 case "Delete":
                     noteController.RemoveNote(noteId);
@@ -110,16 +119,28 @@ namespace kck_projekt1.View
             rule.Style = new Style(Color.Gold1);
             rule.Centered();
             AnsiConsole.Write(rule);
+            Console.WriteLine();
 
 
-            AnsiConsole.Markup($"[gold1]\nOld[/] [darkorange]content:[/] [grey70]{note.Content}[/]\n");
+            AnsiConsole.MarkupLine("[grey35]Press {Enter} to use[/] [green](old title)[/]");
+            var newTitle = AnsiConsole.Prompt(
+            new TextPrompt<string>("[gold1]Enter[/] [darkorange]title[/]")
+            .DefaultValue(note.Title));
+
+            AnsiConsole.MarkupLine("[grey35]\nPress {Enter} to use[/] [green](old category)[/]");
+            var newCategory = AnsiConsole.Prompt(
+            new TextPrompt<string>("[gold1]Enter new[/] [darkorange]category[/]")
+            .DefaultValue(note.Category));
+           
             ClipboardService.SetText(note.Content);
-            AnsiConsole.Markup("[grey35]\n(Press {Ctrl+V} to use old content)[/]");
+            AnsiConsole.MarkupLine("[grey35]\nPress {Ctrl+V} to edit[/] [green](old content)[/]");
+            AnsiConsole.Markup($"[grey35]Old content:[/] [green]({note.Content})[/]\n");
+
             var newContent = AnsiConsole.Prompt(
-            new TextPrompt<string>("[gold1]\nEnter new[/] [darkorange]content:[/]"));
+            new TextPrompt<string>("[gold1]Enter new[/] [darkorange]content:[/]"));
 
             var noteController = NoteController.GetInstance();
-            noteController.EditNoteContent(note.Id, newContent);
+            noteController.EditNote(note.Id, newTitle, newCategory, newContent);
         }
 
         public void ShowLatestNotes(int userId)
@@ -138,7 +159,7 @@ namespace kck_projekt1.View
             Console.WriteLine();
 
             var noteController = NoteController.GetInstance();
-            var notes = noteController.GetLatestNotesByUserId(userId,3);
+            var notes = noteController.GetLatestNotesByUserId(userId,6);
 
             if (notes.Count == 0)
             {

@@ -67,21 +67,13 @@ namespace kck_api.Controller
         public List<NoteModel> GetNotesByUserIdAndTitle(int userId, string title)
         {
             return _context.Notes.Where(n => n.AuthorId == userId 
-            && n.Title.Contains(title)).ToList();
+            && n.Title.Contains(title)).OrderBy(n => n.ModifiedDate).ToList();
         }
 
         public List<NoteModel> GetNotesByUserIdAndCategory(int userId, string category)
         {
             return _context.Notes.Where(n => n.AuthorId == userId
-            && n.Category.Contains(category)).ToList();
-        }
-
-        public void EditNoteContent(int noteId, string newContent)
-        {
-            var note = _context.Notes.FirstOrDefault(n => n.Id == noteId);
-            note.Content = newContent;
-            note.ModifiedDate = DateTime.Now;
-            _context.SaveChanges();
+            && n.Category.Contains(category)).OrderBy(n => n.ModifiedDate).ToList();
         }
 
         public void EditNote(int noteId, string newTitle, string newCategory, string newContent)

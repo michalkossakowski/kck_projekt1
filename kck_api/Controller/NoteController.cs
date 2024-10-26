@@ -47,7 +47,7 @@ namespace kck_api.Controller
             return notes;
         }
 
-        public List<NoteModel> GetCurrentMonthNotesByUserId(int userId, DateTime date)
+        public List<NoteModel> GetNotesByUserIdAndMonth(int userId, DateTime date)
         {
             return _context.Notes.Where(n => n.AuthorId == userId
             && n.ModifiedDate.Month == date.Month
@@ -55,12 +55,13 @@ namespace kck_api.Controller
                 .ToList();
         }
 
-        public List<NoteModel> GetNotesByUserIdAndDay(int userId, DateTime date, int day)
+
+        public List<NoteModel> GetNotesByUserIdAndDay(int userId, DateTime date)
         {
             return _context.Notes.Where(n => n.AuthorId == userId
             && n.ModifiedDate.Month == date.Month
             && n.ModifiedDate.Year == date.Year
-            && n.ModifiedDate.Day == day)
+            && n.ModifiedDate.Day == date.Day)
                 .ToList();
         }
 

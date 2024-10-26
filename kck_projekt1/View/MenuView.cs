@@ -85,7 +85,7 @@ namespace kck_projekt1.View
 
                 AnsiConsole.Write(layout);
 
-                var pressedKey = Console.ReadKey();
+                var pressedKey = Console.ReadKey(true);
                 var choice = pressedKey.Key.ToString();
                 switch (choice)
                 {
@@ -102,7 +102,7 @@ namespace kck_projekt1.View
                         if (user == null)
                         {
                             AnsiConsole.Markup("[red1]\nWrong nick or password, press anything to continue[/]");
-                            Console.ReadKey();
+                            Console.ReadKey(true);
                             break;
                         }
                         else
@@ -117,7 +117,7 @@ namespace kck_projekt1.View
                         if (newUser == null)
                         {
                             AnsiConsole.Markup("[red1]\nPasswords don't match, press anything to continue[/]");
-                            Console.ReadKey();
+                            Console.ReadKey(true);
                             break;
                         }
 
@@ -135,7 +135,7 @@ namespace kck_projekt1.View
                             AnsiConsole.Markup("[green1]\nNew user added you can now login into your account, press anything to continue[/]");
                         else
                             AnsiConsole.Markup("[red1]\nThis nick is occupied, press anything to continue[/]");
-                        Console.ReadKey();
+                        Console.ReadKey(true);
                         break;
 
                     case "G":
@@ -186,7 +186,7 @@ namespace kck_projekt1.View
                                 .LeftJustified()
                                 .Color(Color.Gold1),
                             new Rule("[gold1]Press the[/] [darkorange]{KEY}[/] [gold1]on your keyboard to select the action[/]").RuleStyle("gold1"),
-                            new Markup("[gold1]Press[/] [darkorange]{ESC}[/] [gold1]to close the application[/]")
+                            new Markup("[gold1]Press[/] [darkorange]{ESC}[/] [gold1]to log out[/]")
                             ),
                             VerticalAlignment.Middle))
                     .Expand()).Size(11);
@@ -216,7 +216,7 @@ namespace kck_projekt1.View
                         Align.Center(
                             new Rows(
                                 new Markup("[darkorange]CALENDAR -> {C}[/]"),
-                                new Markup("[gold1]Explore your notes by date[/]")
+                                new Markup("[gold1]Explore notes in current month[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -225,8 +225,8 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]LOG OUT -> {O}[/]"),
-                                new Markup("[gold1]Log out of the current account[/]")
+                                new Markup("[darkorange]DATE -> {D}[/]"),
+                                new Markup("[gold1]Find notes by chosen date[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -236,7 +236,7 @@ namespace kck_projekt1.View
                         Align.Center(
                             new Rows(
                                 new Markup("[darkorange]ADD NOTE -> {A}[/]"),
-                                new Markup("[gold1]Write a new note[/]")
+                                new Markup("[gold1]Create a new note[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -256,7 +256,7 @@ namespace kck_projekt1.View
                         Align.Center(
                             new Rows(
                                 new Markup("[darkorange]FILTER -> {F}[/]"),
-                                new Markup("[gold1]Filter notes by category[/]")
+                                new Markup("[gold1]Explore notes by category[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -265,8 +265,8 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                            new Rows(
-                                new Markup("[darkorange]EXIT -> {ESC}[/]"),
-                                new Markup("[gold1]Close the application[/]")
+                                new Markup("[darkorange]MONTH -> {M}[/]"),
+                                new Markup("[gold1]Explore notes by month[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -275,7 +275,7 @@ namespace kck_projekt1.View
 
 
 
-                var pressedKey = Console.ReadKey();
+                var pressedKey = Console.ReadKey(true);
                 var choice = pressedKey.Key.ToString();
 
                 switch (choice)
@@ -291,7 +291,7 @@ namespace kck_projekt1.View
                         Console.WriteLine();
                         noteView.ShowNotes(new List<NoteModel> { newNote });
                         AnsiConsole.Markup("[green1]\nNew note added, press anything to continue[/]");
-                        Console.ReadKey();
+                        Console.ReadKey(true);
                         break;
 
                     case "L":
@@ -334,15 +334,30 @@ namespace kck_projekt1.View
                         }
                         break;
 
-                    case "O":
-                        return;
+                    case "D":
+                        DateTime chosenDate = noteView.ChooseDate();
+                        while (chosenDate!= DateTime.MinValue)
+                        {
+                            var chosenNoteId = noteView.ExploreNotesByDate(_loggedUser.Id, chosenDate);
+                            if (chosenNoteId == -1)
+                                break;
+                            noteView.ShowNote(chosenNoteId);
+                        }
+                        break;
+
+                    case "M":
+                        var chosenMonth = noteView.ChooseMonth(_loggedUser.Id);
+                        while (chosenMonth != DateTime.MinValue)
+                        {
+                            var chosenNoteId = noteView.ShowNotesByMonth(_loggedUser.Id, chosenMonth);
+                            if (chosenNoteId == -1)
+                                break;
+                            noteView.ShowNote(chosenNoteId);
+                        }
+                        break;
 
                     case "Escape":
-                        Environment.Exit(0);
-                        break;
-
-                    default:
-                        break;
+                        return;
                 }
             }
 

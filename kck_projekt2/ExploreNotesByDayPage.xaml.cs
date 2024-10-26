@@ -31,7 +31,7 @@ namespace kck_projekt2
             _mainWindow = mainWindow;
 
             var noteController = NoteController.GetInstance();
-            var notes = noteController.GetNotesByUserIdAndDay(_mainWindow.loggedUserId, date, date.Day);
+            var notes = noteController.GetNotesByUserIdAndDay(_mainWindow.loggedUserId, date);
             if(notes.Count == 0)
             {
                 Information.Text = $"You don't have any notes from: {date.Day}.{date.Month}.{date.Year}";

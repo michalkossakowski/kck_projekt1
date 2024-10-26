@@ -1,5 +1,7 @@
 ﻿using kck_api.Controller;
 using Spectre.Console;
+using System.Globalization;
+using System;
 using TextCopy;
 using Calendar = Spectre.Console.Calendar;
 
@@ -56,54 +58,69 @@ namespace kck_projekt1.View
         }
         public void ShowNote(int noteId)
         {
-            AnsiConsole.Clear();
-            AnsiConsole.Write(
-            new FigletText(Program.font, "Note")
-                .Centered()
-                .Color(Color.Gold1));
-
-            var rule = new Rule("[gold1]Your chosen note:[/]");
-            rule.Style = new Style(Color.Gold1);
-            rule.Centered();
-            AnsiConsole.Write(rule);
-
-            Console.WriteLine();
-
-            var noteController = NoteController.GetInstance();
-            var note = noteController.GetNoteById(noteId);
-
-            ShowNotes(new List<NoteModel> { note });
-
-            Console.WriteLine();
-
-            var choice = AnsiConsole.Prompt(
-            new SelectionPrompt<string>()
-            .HighlightStyle(Color.DarkOrange)
-            .AddChoices(new[] {
-                "Back",
-                "Edit",
-                "Delete"
-             }));
-
-            switch (choice)
+            while (true)
             {
-                case "Back":
-                    return;
-                case "Edit":
-                    ShowEditNote(note);
-                    Console.WriteLine();
-                    var editedNoteRule = new Rule("[gold1]Edited note:[/]");
-                    editedNoteRule.Style = new Style(Color.Gold1);
-                    editedNoteRule.Centered();
-                    AnsiConsole.Write(editedNoteRule);
-                    Console.WriteLine();
-                    ShowNotes(new List<NoteModel> {note});
-                    AnsiConsole.Markup("[green1]\nNote successful edited, press anything to continue[/]");
-                    Console.ReadKey();
-                    return;
-                case "Delete":
-                    noteController.RemoveNote(noteId);
-                    return;
+                AnsiConsole.Clear();
+                AnsiConsole.Write(
+                new FigletText(Program.font, "Note")
+                    .Centered()
+                    .Color(Color.Gold1));
+
+                var rule = new Rule("[gold1]Your chosen note:[/]");
+                rule.Style = new Style(Color.Gold1);
+                rule.Centered();
+                AnsiConsole.Write(rule);
+
+                Console.WriteLine();
+
+                var noteController = NoteController.GetInstance();
+                var note = noteController.GetNoteById(noteId);
+
+                ShowNotes(new List<NoteModel> { note });
+
+                Console.WriteLine();
+
+                var actionRule = new Rule("[gold1]Choose action:[/]");
+                actionRule.Style = new Style(Color.Gold1);
+                actionRule.Centered();
+                AnsiConsole.Write(actionRule);
+
+                Console.WriteLine();
+
+                var colWidth = 30;
+                var table = new Table()
+                    .Centered()
+                    .BorderColor(Color.White)
+                    .AddColumn(new TableColumn("[darkorange]Back -> {B}[/]").Centered().Width(colWidth)) 
+                    .AddColumn(new TableColumn("[darkorange]Edit -> {E}[/]").Centered().Width(colWidth))
+                    .AddColumn(new TableColumn("[darkorange]Delete -> {D}[/]").Centered().Width(colWidth))
+                    .Expand(); 
+
+                AnsiConsole.Write(table);
+
+
+                var pressedKey = Console.ReadKey();
+                var choice = pressedKey.Key.ToString();
+                switch (choice)
+                {
+                    case "B":
+                        return;
+                    case "E":
+                        ShowEditNote(note);
+                        Console.WriteLine();
+                        var editedNoteRule = new Rule("[gold1]Edited note:[/]");
+                        editedNoteRule.Style = new Style(Color.Gold1);
+                        editedNoteRule.Centered();
+                        AnsiConsole.Write(editedNoteRule);
+                        Console.WriteLine();
+                        ShowNotes(new List<NoteModel> {note});
+                        AnsiConsole.Markup("[green1]\nNote successful edited, press anything to continue[/]");
+                        Console.ReadKey();
+                        return;
+                    case "D":
+                        noteController.RemoveNote(noteId);
+                        return;
+                }
             }
         }
 
@@ -115,27 +132,35 @@ namespace kck_projekt1.View
                 .Centered()
                 .Color(Color.Gold1));
 
-            var rule = new Rule($"[gold1]Editing[/] [darkorange]'{note.Title}'[/] [gold1]({note.Category})[/] [darkorange]{note.ModifiedDate}:[/]");
+            var oldNoteRule = new Rule("[gold1]You are editing note:[/]");
+            oldNoteRule.Style = new Style(Color.Gold1);
+            oldNoteRule.Centered();
+            AnsiConsole.Write(oldNoteRule);
+
+            Console.WriteLine();
+            ShowNotes(new List<NoteModel> { note });
+            Console.WriteLine();
+
+            var rule = new Rule($"[gold1]Edit your note:[/]");
             rule.Style = new Style(Color.Gold1);
-            rule.Centered();
+            rule.LeftJustified();
             AnsiConsole.Write(rule);
             Console.WriteLine();
 
-
-            AnsiConsole.MarkupLine("[grey35]Press {Enter} to use[/] [green](old title)[/]");
+            AnsiConsole.MarkupLine("[grey35]Leave blank and press {Enter} to use old title[/]");
             var newTitle = AnsiConsole.Prompt(
             new TextPrompt<string>("[gold1]Enter[/] [darkorange]title[/]")
-            .DefaultValue(note.Title));
+            .DefaultValue(note.Title)
+            .HideDefaultValue());
 
-            AnsiConsole.MarkupLine("[grey35]\nPress {Enter} to use[/] [green](old category)[/]");
+            AnsiConsole.MarkupLine("[grey35]\nLeave blank and press {Enter} to use old category[/]");
             var newCategory = AnsiConsole.Prompt(
             new TextPrompt<string>("[gold1]Enter new[/] [darkorange]category[/]")
-            .DefaultValue(note.Category));
-           
-            ClipboardService.SetText(note.Content);
-            AnsiConsole.MarkupLine("[grey35]\nPress {Ctrl+V} to edit[/] [green](old content)[/]");
-            AnsiConsole.Markup($"[grey35]Old content:[/] [green]({note.Content})[/]\n");
+            .DefaultValue(note.Category)
+            .HideDefaultValue());
 
+            ClipboardService.SetText(note.Content);
+            AnsiConsole.MarkupLine("[grey35]\nPress {Ctrl+V} to edit old content[/]");
             var newContent = AnsiConsole.Prompt(
             new TextPrompt<string>("[gold1]Enter new[/] [darkorange]content:[/]"));
 
@@ -213,7 +238,6 @@ namespace kck_projekt1.View
 
                 return id;
             }
-
         }
 
         public void ShowCalendar(int userId)
@@ -238,7 +262,7 @@ namespace kck_projekt1.View
                 var calendar = new Calendar(currentDate.Year, currentDate.Month).Centered();
 
                 var noteController = NoteController.GetInstance();
-                var currentMonthNotes = noteController.GetCurrentMonthNotesByUserId(userId, currentDate);
+                var currentMonthNotes = noteController.GetNotesByUserIdAndMonth(userId, currentDate);
             
                 var days = new HashSet<int>();
                 foreach ( var note in currentMonthNotes)
@@ -285,22 +309,22 @@ namespace kck_projekt1.View
                             return;
                         default:
                             var day = int.Parse(choice.Split('.')[0]);
-                            ShowNotesByDay(userId, currentDate, day);
+                            ShowNotesByDay(userId, new DateTime(currentDate.Year, currentDate.Month, day));
                             break;
                     }
                 }
             }
         }
 
-        public void ShowNotesByDay(int userId,DateTime date, int day)
+        public void ShowNotesByDay(int userId,DateTime date)
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText(Program.font,$"{day}.{date.Month}.{date.Year}")
+            new FigletText(Program.font,$"{date.Day}.{date.Month}.{date.Year}")
                 .Centered()
                 .Color(Color.Gold1));
 
-            var rule = new Rule($"[gold1]Your notes from[/] [darkorange]{day}.{date.Month}.{date.Year}:[/]");
+            var rule = new Rule($"[gold1]Your notes from[/] [darkorange]{date.Day}.{date.Month}.{date.Year}:[/]");
             rule.Style = new Style(Color.Gold1);
             rule.Centered();
             AnsiConsole.Write(rule);
@@ -308,7 +332,7 @@ namespace kck_projekt1.View
             Console.WriteLine();
 
             var noteController = NoteController.GetInstance();
-            var notes = noteController.GetNotesByUserIdAndDay(userId, date, day);
+            var notes = noteController.GetNotesByUserIdAndDay(userId, date);
 
             ShowNotes(notes);
 
@@ -352,7 +376,7 @@ namespace kck_projekt1.View
             rule.LeftJustified();
             AnsiConsole.Write(rule);
 
-            AnsiConsole.Markup("");
+
             var noteController = NoteController.GetInstance();
             var notes = noteController.GetNotesByUserIdAndTitle(userId, searchingTitle);
             if (notes.Count == 0)
@@ -382,38 +406,63 @@ namespace kck_projekt1.View
 
         public string ChooseCategoryToFilter()
         {
-            AnsiConsole.Clear();
-
-            AnsiConsole.Write(
-            new FigletText(Program.font, "Filter")
-            .Centered()
-            .Color(Color.Gold1));
-
-            var rule = new Rule("[gold1]Select a category to filter:[/]");
-            rule.Style = new Style(Color.Gold1);
-            rule.LeftJustified();
-            AnsiConsole.Write(rule);
-
-            Console.WriteLine("");
-
-            var category = AnsiConsole.Prompt(
-            new SelectionPrompt<string>()
-            .HighlightStyle(Color.DarkOrange)
-            .AddChoices(new[] {
-                                        "Studies",
-                                        "Work",
-                                        "Home",
-                                        "Hobby",
-                                        "Other",
-                                        "[grey50]Custom[/]"
-             }));
-
-            if (category == "[grey50]Custom[/]")
+            string category = "";
+            while(category.Length <= 1)
             {
-                category = AnsiConsole.Prompt(
-                new TextPrompt<string>("[gold1]Enter custom[/] [darkorange]category:[/]"));
-            }
+                AnsiConsole.Clear();
 
+                AnsiConsole.Write(
+                new FigletText(Program.font, "Filter")
+                .Centered()
+                .Color(Color.Gold1));
+
+                var rule = new Rule("[gold1]Select a category to filter:[/]");
+                rule.Style = new Style(Color.Gold1);
+                rule.LeftJustified();
+                AnsiConsole.Write(rule);
+
+                Console.WriteLine("");
+
+                var colWidth = 30;
+                var table = new Table()
+                    .Centered()
+                    .BorderColor(Color.White)
+                    .AddColumn(new TableColumn("[darkorange]Studies -> {S}[/]").Centered().Width(colWidth))
+                    .AddColumn(new TableColumn("[darkorange]Work -> {W}[/]").Centered().Width(colWidth))
+                    .AddColumn(new TableColumn("[darkorange]Home -> {H}[/]").Centered().Width(colWidth))
+                    .Expand();
+
+                table.AddRow("[darkorange]Hobby -> {F}[/]", "[darkorange]Other -> {O}[/]", "[darkorange]Custom -> {C}[/]");
+
+                AnsiConsole.Write(table);
+
+
+                var pressedKey = Console.ReadKey(true);
+                category = pressedKey.Key.ToString();
+
+                switch (category)
+                {
+                    case "S":
+                        category = "Studies";
+                        break;
+                    case "W":
+                        category = "Work";
+                        break;
+                    case "H":
+                        category = "Home";
+                        break;
+                    case "F":
+                        category = "Hobby";
+                        break;
+                    case "O":
+                        category = "Other";
+                        break;
+                    case "C":
+                        category = AnsiConsole.Prompt(
+                        new TextPrompt<string>("[gold1]\nEnter custom[/] [darkorange]category:[/]"));
+                        break;
+                }
+            }
             return category;
         }
 
@@ -430,7 +479,6 @@ namespace kck_projekt1.View
             rule.LeftJustified();
             AnsiConsole.Write(rule);
 
-            AnsiConsole.Markup("");
             var noteController = NoteController.GetInstance();
             var notes = noteController.GetNotesByUserIdAndCategory(userId, categoryFilter);
             if (notes.Count == 0)
@@ -456,6 +504,158 @@ namespace kck_projekt1.View
 
                 return id;
             }
+        }
+
+        public DateTime ChooseDate()
+        {
+            AnsiConsole.Clear();
+
+            AnsiConsole.Write(
+            new FigletText(Program.font, "Date")
+            .Centered()
+            .Color(Color.Gold1));
+
+            var rule = new Rule("[gold1]Enter a searching date:[/]");
+            rule.Style = new Style(Color.Gold1);
+            rule.LeftJustified();
+            AnsiConsole.Write(rule);
+
+            Console.WriteLine();
+
+            DateTime chosenDate;
+            var inputDate = AnsiConsole.Prompt(
+            new TextPrompt<string>("[gold1]Enter[/] [darkorange]date[/] [gold1]in format ([/][darkorange]dd.MM.yyyy[/][gold1]):[/]"));
+
+            if(!(DateTime.TryParseExact(inputDate, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,out chosenDate)))
+            {
+                AnsiConsole.MarkupLine($"[red1]\nYou used wrong date format, press anything to continue[/]");
+                Console.ReadKey(true);
+                return DateTime.MinValue;
+            }
+
+            return chosenDate;
+        }
+
+        public int ExploreNotesByDate(int userId, DateTime date)
+        {
+            AnsiConsole.Clear();
+            AnsiConsole.Write(
+            new FigletText(Program.font, "Explore")
+            .Centered()
+                .Color(Color.Gold1));
+
+            var rule = new Rule("[gold1]Choose note to show:[/]");
+            rule.Style = new Style(Color.Gold1);
+            rule.LeftJustified();
+            AnsiConsole.Write(rule);
+
+            var noteController = NoteController.GetInstance();
+            var notes = noteController.GetNotesByUserIdAndDay(userId, date);
+
+            if (notes.Count == 0)
+            {
+                AnsiConsole.Markup($"[red1]\nYou don't have any notes from [/][darkorange]{date.Day}.{date.Month}.{date.Year}[/][red1], press anything to continue[/]");
+                Console.ReadKey();
+                return -1;
+            }
+            else
+            {
+                var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.Category})[/] - {n.ModifiedDate}").ToList();
+                list.Add("Back");
+                list.Reverse();
+
+                var choice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("")
+                .HighlightStyle(Color.DarkOrange)
+                .PageSize(10)
+                .AddChoices(list));
+
+                var id = choice == "Back" ? -1 : int.Parse(choice.Split(':')[0]);
+
+                return id;
+            }
+
+        }
+
+        public DateTime ChooseMonth(int userId)
+        {
+            AnsiConsole.Clear();
+
+            AnsiConsole.Write(
+            new FigletText(Program.font, "MONTHS")
+            .Centered()
+            .Color(Color.Gold1));
+
+            var rule = new Rule("[gold1]Select month:[/]");
+            rule.Style = new Style(Color.Gold1);
+            rule.LeftJustified();
+            AnsiConsole.Write(rule);
+
+            var noteController = NoteController.GetInstance();
+
+            var allNotes = noteController.GetNotesByUserId(userId);
+            var yearAndMonth = new HashSet<(int, int)>();
+            foreach (var note in allNotes)
+            {
+                yearAndMonth.Add((note.ModifiedDate.Year, note.ModifiedDate.Month));
+            }
+            var list = yearAndMonth.OrderBy(date => date).Select(date => new DateTime(date.Item1, date.Item2, 1).ToString("MM.yyyy")).ToList();
+            list.Add("Back");
+            list.Reverse();
+
+            var choice = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+            .Title("")
+            .HighlightStyle(Color.DarkOrange)
+            .PageSize(10)
+            .AddChoices(list));
+
+
+            DateTime date;
+            switch (choice)
+            {
+                case "Back":
+                    AnsiConsole.Clear();
+                    return DateTime.MinValue;
+                default:
+                    var month = int.Parse(choice.Split('.')[0]);
+                    var year = int.Parse(choice.Split('.')[1]);
+                    date = new DateTime(year, month, 1);
+                    break;
+            }
+            return date;
+        }
+
+        public int ShowNotesByMonth(int userId, DateTime date)
+        {
+            AnsiConsole.Clear();
+            AnsiConsole.Write(
+            new FigletText(Program.font, "Results")
+            .Centered()
+                .Color(Color.Gold1));
+
+            var rule = new Rule("[gold1]Choose note to show:[/]");
+            rule.Style = new Style(Color.Gold1);
+            rule.LeftJustified();
+            AnsiConsole.Write(rule);
+
+            var noteController = NoteController.GetInstance();
+            var notes = noteController.GetNotesByUserIdAndMonth(userId, date);
+            var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.Category})[/] - {n.ModifiedDate}").ToList();
+            list.Add("Back");
+            list.Reverse();
+
+            var choice = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+            .Title("")
+            .HighlightStyle(Color.DarkOrange)
+            .PageSize(10)
+            .AddChoices(list));
+
+            var id = choice == "Back" ? -1 : int.Parse(choice.Split(':')[0]);
+
+            return id;
         }
 
         public void ShowNotes(List<NoteModel> notes)

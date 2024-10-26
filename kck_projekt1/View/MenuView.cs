@@ -216,7 +216,7 @@ namespace kck_projekt1.View
                         Align.Center(
                             new Rows(
                                 new Markup("[darkorange]CALENDAR -> {C}[/]"),
-                                new Markup("[gold1]Explore your notes by date[/]")
+                                new Markup("[gold1]Explore your notes in current month[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -225,8 +225,8 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]LOG OUT -> {O}[/]"),
-                                new Markup("[gold1]Log out of the current account[/]")
+                                new Markup("[darkorange]MONTH -> {M}[/]"),
+                                new Markup("[gold1]Find notes by month[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -265,8 +265,8 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                            new Rows(
-                                new Markup("[darkorange]EXIT -> {ESC}[/]"),
-                                new Markup("[gold1]Close the application[/]")
+                                new Markup("[darkorange]LOG OUT -> {ESC}[/]"),
+                                new Markup("[gold1]Log out of the current account[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -334,15 +334,19 @@ namespace kck_projekt1.View
                         }
                         break;
 
-                    case "O":
-                        return;
+                    case "M":
+                        var chosenDate = noteView.ChooseMonth(_loggedUser.Id);
+                        while (chosenDate!= DateTime.MinValue)
+                        {
+                            var chosenNoteId = noteView.ShowNotesByMonth(_loggedUser.Id, chosenDate);
+                            if (chosenNoteId == -1)
+                                break;
+                            noteView.ShowNote(chosenNoteId);
+                        }
+                        break;
 
                     case "Escape":
-                        Environment.Exit(0);
-                        break;
-
-                    default:
-                        break;
+                        return;;
                 }
             }
 

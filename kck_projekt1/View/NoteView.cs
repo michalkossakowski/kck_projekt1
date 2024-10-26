@@ -375,7 +375,7 @@ namespace kck_projekt1.View
             rule.LeftJustified();
             AnsiConsole.Write(rule);
 
-            AnsiConsole.Markup("");
+
             var noteController = NoteController.GetInstance();
             var notes = noteController.GetNotesByUserIdAndTitle(userId, searchingTitle);
             if (notes.Count == 0)
@@ -478,7 +478,6 @@ namespace kck_projekt1.View
             rule.LeftJustified();
             AnsiConsole.Write(rule);
 
-            AnsiConsole.Markup("");
             var noteController = NoteController.GetInstance();
             var notes = noteController.GetNotesByUserIdAndCategory(userId, categoryFilter);
             if (notes.Count == 0)
@@ -504,6 +503,86 @@ namespace kck_projekt1.View
 
                 return id;
             }
+        }
+
+        public DateTime ChooseMonth(int userId)
+        {
+            AnsiConsole.Clear();
+
+            AnsiConsole.Write(
+            new FigletText(Program.font, "MONTHS")
+            .Centered()
+            .Color(Color.Gold1));
+
+            var rule = new Rule("[gold1]Select a month:[/]");
+            rule.Style = new Style(Color.Gold1);
+            rule.LeftJustified();
+            AnsiConsole.Write(rule);
+
+            var noteController = NoteController.GetInstance();
+
+            var allNotes = noteController.GetNotesByUserId(userId);
+            var yearAndMonth = new HashSet<(int,int)>();
+            foreach (var note in allNotes)
+            {
+                yearAndMonth.Add((note.ModifiedDate.Year,note.ModifiedDate.Month));
+            }
+            var list = yearAndMonth.OrderBy(date => date).Select(date => new DateTime(date.Item1, date.Item2, 1).ToString("MM.yyyy")).ToList();
+            list.Add("Back");
+            list.Reverse();
+
+            var choice = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+            .Title("")
+            .HighlightStyle(Color.DarkOrange)
+            .PageSize(4)
+            .AddChoices(list));
+
+
+            DateTime date;
+            switch (choice)
+            {
+                case "Back":
+                    AnsiConsole.Clear();
+                    return DateTime.MinValue;
+                default:
+                    var month = int.Parse(choice.Split('.')[0]);
+                    var year = int.Parse(choice.Split('.')[1]);
+                    date = new DateTime(year, month, 1);
+                    break;
+            }
+            return date;
+        }
+
+        public int ShowNotesByMonth(int userId, DateTime date)
+        {
+            AnsiConsole.Clear();
+            AnsiConsole.Write(
+            new FigletText(Program.font, "Results")
+            .Centered()
+                .Color(Color.Gold1));
+
+            var rule = new Rule("[gold1]Choose note to show:[/]");
+            rule.Style = new Style(Color.Gold1);
+            rule.LeftJustified();
+            AnsiConsole.Write(rule);
+
+            var noteController = NoteController.GetInstance();
+            var notes = noteController.GetNotesByUserIdAndMonth(userId, date);
+            var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.Category})[/] - {n.ModifiedDate}").ToList();
+            list.Add("Back");
+            list.Reverse();
+
+            var choice = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+            .Title("")
+            .HighlightStyle(Color.DarkOrange)
+            .PageSize(10)
+            .AddChoices(list));
+
+            var id = choice == "Back" ? -1 : int.Parse(choice.Split(':')[0]);
+
+            return id;
         }
 
         public void ShowNotes(List<NoteModel> notes)

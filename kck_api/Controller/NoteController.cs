@@ -64,6 +64,14 @@ namespace kck_api.Controller
                 .ToList();
         }
 
+        public List<NoteModel> GetNotesByUserIdAndMonth(int userId, DateTime date)
+        {
+            return _context.Notes.Where(n => n.AuthorId == userId
+            && n.ModifiedDate.Month == date.Month
+            && n.ModifiedDate.Year == date.Year)
+                .ToList();
+        }
+
         public List<NoteModel> GetNotesByUserIdAndTitle(int userId, string title)
         {
             return _context.Notes.Where(n => n.AuthorId == userId 

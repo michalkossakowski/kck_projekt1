@@ -85,7 +85,7 @@ namespace kck_projekt1.View
 
                 AnsiConsole.Write(layout);
 
-                var pressedKey = Console.ReadKey();
+                var pressedKey = Console.ReadKey(true);
                 var choice = pressedKey.Key.ToString();
                 switch (choice)
                 {
@@ -102,7 +102,7 @@ namespace kck_projekt1.View
                         if (user == null)
                         {
                             AnsiConsole.Markup("[red1]\nWrong nick or password, press anything to continue[/]");
-                            Console.ReadKey();
+                            Console.ReadKey(true);
                             break;
                         }
                         else
@@ -117,7 +117,7 @@ namespace kck_projekt1.View
                         if (newUser == null)
                         {
                             AnsiConsole.Markup("[red1]\nPasswords don't match, press anything to continue[/]");
-                            Console.ReadKey();
+                            Console.ReadKey(true);
                             break;
                         }
 
@@ -135,7 +135,7 @@ namespace kck_projekt1.View
                             AnsiConsole.Markup("[green1]\nNew user added you can now login into your account, press anything to continue[/]");
                         else
                             AnsiConsole.Markup("[red1]\nThis nick is occupied, press anything to continue[/]");
-                        Console.ReadKey();
+                        Console.ReadKey(true);
                         break;
 
                     case "G":
@@ -275,7 +275,7 @@ namespace kck_projekt1.View
 
 
 
-                var pressedKey = Console.ReadKey();
+                var pressedKey = Console.ReadKey(true);
                 var choice = pressedKey.Key.ToString();
 
                 switch (choice)
@@ -291,7 +291,7 @@ namespace kck_projekt1.View
                         Console.WriteLine();
                         noteView.ShowNotes(new List<NoteModel> { newNote });
                         AnsiConsole.Markup("[green1]\nNew note added, press anything to continue[/]");
-                        Console.ReadKey();
+                        Console.ReadKey(true);
                         break;
 
                     case "L":

@@ -225,8 +225,8 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]MONTH -> {M}[/]"),
-                                new Markup("[gold1]Find notes by month[/]")
+                                new Markup("[darkorange]DATE -> {D}[/]"),
+                                new Markup("[gold1]Find notes by chosen date[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -334,11 +334,11 @@ namespace kck_projekt1.View
                         }
                         break;
 
-                    case "M":
-                        var chosenDate = noteView.ChooseMonth(_loggedUser.Id);
+                    case "D":
+                        DateTime chosenDate = noteView.ChooseDate();
                         while (chosenDate!= DateTime.MinValue)
                         {
-                            var chosenNoteId = noteView.ShowNotesByMonth(_loggedUser.Id, chosenDate);
+                            var chosenNoteId = noteView.ExploreNotesByDate(_loggedUser.Id, chosenDate);
                             if (chosenNoteId == -1)
                                 break;
                             noteView.ShowNote(chosenNoteId);

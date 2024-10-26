@@ -55,20 +55,12 @@ namespace kck_api.Controller
                 .ToList();
         }
 
-        public List<NoteModel> GetNotesByUserIdAndDay(int userId, DateTime date, int day)
+        public List<NoteModel> GetNotesByUserIdAndDay(int userId, DateTime date)
         {
             return _context.Notes.Where(n => n.AuthorId == userId
             && n.ModifiedDate.Month == date.Month
             && n.ModifiedDate.Year == date.Year
-            && n.ModifiedDate.Day == day)
-                .ToList();
-        }
-
-        public List<NoteModel> GetNotesByUserIdAndMonth(int userId, DateTime date)
-        {
-            return _context.Notes.Where(n => n.AuthorId == userId
-            && n.ModifiedDate.Month == date.Month
-            && n.ModifiedDate.Year == date.Year)
+            && n.ModifiedDate.Day == date.Day)
                 .ToList();
         }
 

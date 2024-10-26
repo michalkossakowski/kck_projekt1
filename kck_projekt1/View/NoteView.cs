@@ -1,5 +1,7 @@
 ﻿using kck_api.Controller;
 using Spectre.Console;
+using System.Globalization;
+using System;
 using TextCopy;
 using Calendar = Spectre.Console.Calendar;
 
@@ -236,7 +238,6 @@ namespace kck_projekt1.View
 
                 return id;
             }
-
         }
 
         public void ShowCalendar(int userId)
@@ -308,22 +309,22 @@ namespace kck_projekt1.View
                             return;
                         default:
                             var day = int.Parse(choice.Split('.')[0]);
-                            ShowNotesByDay(userId, currentDate, day);
+                            ShowNotesByDay(userId, new DateTime(currentDate.Year, currentDate.Month, day));
                             break;
                     }
                 }
             }
         }
 
-        public void ShowNotesByDay(int userId,DateTime date, int day)
+        public void ShowNotesByDay(int userId,DateTime date)
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText(Program.font,$"{day}.{date.Month}.{date.Year}")
+            new FigletText(Program.font,$"{date.Day}.{date.Month}.{date.Year}")
                 .Centered()
                 .Color(Color.Gold1));
 
-            var rule = new Rule($"[gold1]Your notes from[/] [darkorange]{day}.{date.Month}.{date.Year}:[/]");
+            var rule = new Rule($"[gold1]Your notes from[/] [darkorange]{date.Day}.{date.Month}.{date.Year}:[/]");
             rule.Style = new Style(Color.Gold1);
             rule.Centered();
             AnsiConsole.Write(rule);
@@ -331,7 +332,7 @@ namespace kck_projekt1.View
             Console.WriteLine();
 
             var noteController = NoteController.GetInstance();
-            var notes = noteController.GetNotesByUserIdAndDay(userId, date, day);
+            var notes = noteController.GetNotesByUserIdAndDay(userId, date);
 
             ShowNotes(notes);
 
@@ -505,60 +506,41 @@ namespace kck_projekt1.View
             }
         }
 
-        public DateTime ChooseMonth(int userId)
+        public DateTime ChooseDate()
         {
             AnsiConsole.Clear();
 
             AnsiConsole.Write(
-            new FigletText(Program.font, "MONTHS")
+            new FigletText(Program.font, "Date")
             .Centered()
             .Color(Color.Gold1));
 
-            var rule = new Rule("[gold1]Select a month:[/]");
+            var rule = new Rule("[gold1]Enter a searching date:[/]");
             rule.Style = new Style(Color.Gold1);
             rule.LeftJustified();
             AnsiConsole.Write(rule);
 
-            var noteController = NoteController.GetInstance();
+            Console.WriteLine();
 
-            var allNotes = noteController.GetNotesByUserId(userId);
-            var yearAndMonth = new HashSet<(int,int)>();
-            foreach (var note in allNotes)
+            DateTime chosenDate;
+            var inputDate = AnsiConsole.Prompt(
+            new TextPrompt<string>("[gold1]Enter[/] [darkorange]date[/] [gold1]in format ([/][darkorange]dd.MM.yyyy[/][gold1]):[/]"));
+
+            if(!(DateTime.TryParseExact(inputDate, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,out chosenDate)))
             {
-                yearAndMonth.Add((note.ModifiedDate.Year,note.ModifiedDate.Month));
+                AnsiConsole.MarkupLine($"[red1]\nYou used wrong date format, press anything to continue[/]");
+                Console.ReadKey(true);
+                return DateTime.MinValue;
             }
-            var list = yearAndMonth.OrderBy(date => date).Select(date => new DateTime(date.Item1, date.Item2, 1).ToString("MM.yyyy")).ToList();
-            list.Add("Back");
-            list.Reverse();
 
-            var choice = AnsiConsole.Prompt(
-            new SelectionPrompt<string>()
-            .Title("")
-            .HighlightStyle(Color.DarkOrange)
-            .PageSize(4)
-            .AddChoices(list));
-
-
-            DateTime date;
-            switch (choice)
-            {
-                case "Back":
-                    AnsiConsole.Clear();
-                    return DateTime.MinValue;
-                default:
-                    var month = int.Parse(choice.Split('.')[0]);
-                    var year = int.Parse(choice.Split('.')[1]);
-                    date = new DateTime(year, month, 1);
-                    break;
-            }
-            return date;
+            return chosenDate;
         }
 
-        public int ShowNotesByMonth(int userId, DateTime date)
+        public int ExploreNotesByDate(int userId, DateTime date)
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText(Program.font, "Results")
+            new FigletText(Program.font, "Explore")
             .Centered()
                 .Color(Color.Gold1));
 
@@ -568,21 +550,32 @@ namespace kck_projekt1.View
             AnsiConsole.Write(rule);
 
             var noteController = NoteController.GetInstance();
-            var notes = noteController.GetNotesByUserIdAndMonth(userId, date);
-            var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.Category})[/] - {n.ModifiedDate}").ToList();
-            list.Add("Back");
-            list.Reverse();
+            var notes = noteController.GetNotesByUserIdAndDay(userId, date);
 
-            var choice = AnsiConsole.Prompt(
-            new SelectionPrompt<string>()
-            .Title("")
-            .HighlightStyle(Color.DarkOrange)
-            .PageSize(10)
-            .AddChoices(list));
+            if (notes.Count == 0)
+            {
+                AnsiConsole.Markup($"[red1]\nYou don't have any notes from [/][darkorange]{date.Day}.{date.Month}.{date.Year}[/][red1], press anything to continue[/]");
+                Console.ReadKey();
+                return -1;
+            }
+            else
+            {
+                var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.Category})[/] - {n.ModifiedDate}").ToList();
+                list.Add("Back");
+                list.Reverse();
 
-            var id = choice == "Back" ? -1 : int.Parse(choice.Split(':')[0]);
+                var choice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("")
+                .HighlightStyle(Color.DarkOrange)
+                .PageSize(10)
+                .AddChoices(list));
 
-            return id;
+                var id = choice == "Back" ? -1 : int.Parse(choice.Split(':')[0]);
+
+                return id;
+            }
+
         }
 
         public void ShowNotes(List<NoteModel> notes)

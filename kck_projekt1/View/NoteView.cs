@@ -56,54 +56,69 @@ namespace kck_projekt1.View
         }
         public void ShowNote(int noteId)
         {
-            AnsiConsole.Clear();
-            AnsiConsole.Write(
-            new FigletText(Program.font, "Note")
-                .Centered()
-                .Color(Color.Gold1));
-
-            var rule = new Rule("[gold1]Your chosen note:[/]");
-            rule.Style = new Style(Color.Gold1);
-            rule.Centered();
-            AnsiConsole.Write(rule);
-
-            Console.WriteLine();
-
-            var noteController = NoteController.GetInstance();
-            var note = noteController.GetNoteById(noteId);
-
-            ShowNotes(new List<NoteModel> { note });
-
-            Console.WriteLine();
-
-            var choice = AnsiConsole.Prompt(
-            new SelectionPrompt<string>()
-            .HighlightStyle(Color.DarkOrange)
-            .AddChoices(new[] {
-                "Back",
-                "Edit",
-                "Delete"
-             }));
-
-            switch (choice)
+            while (true)
             {
-                case "Back":
-                    return;
-                case "Edit":
-                    ShowEditNote(note);
-                    Console.WriteLine();
-                    var editedNoteRule = new Rule("[gold1]Edited note:[/]");
-                    editedNoteRule.Style = new Style(Color.Gold1);
-                    editedNoteRule.Centered();
-                    AnsiConsole.Write(editedNoteRule);
-                    Console.WriteLine();
-                    ShowNotes(new List<NoteModel> {note});
-                    AnsiConsole.Markup("[green1]\nNote successful edited, press anything to continue[/]");
-                    Console.ReadKey();
-                    return;
-                case "Delete":
-                    noteController.RemoveNote(noteId);
-                    return;
+                AnsiConsole.Clear();
+                AnsiConsole.Write(
+                new FigletText(Program.font, "Note")
+                    .Centered()
+                    .Color(Color.Gold1));
+
+                var rule = new Rule("[gold1]Your chosen note:[/]");
+                rule.Style = new Style(Color.Gold1);
+                rule.Centered();
+                AnsiConsole.Write(rule);
+
+                Console.WriteLine();
+
+                var noteController = NoteController.GetInstance();
+                var note = noteController.GetNoteById(noteId);
+
+                ShowNotes(new List<NoteModel> { note });
+
+                Console.WriteLine();
+
+                var actionRule = new Rule("[gold1]Choose action:[/]");
+                actionRule.Style = new Style(Color.Gold1);
+                actionRule.Centered();
+                AnsiConsole.Write(actionRule);
+
+                Console.WriteLine();
+
+                var colWidth = 30;
+                var table = new Table()
+                    .Centered()
+                    .BorderColor(Color.White)
+                    .AddColumn(new TableColumn("[darkorange]Back -> {B}[/]").Centered().Width(colWidth)) 
+                    .AddColumn(new TableColumn("[darkorange]Edit -> {E}[/]").Centered().Width(colWidth))
+                    .AddColumn(new TableColumn("[darkorange]Delete -> {D}[/]").Centered().Width(colWidth))
+                    .Expand(); 
+
+                AnsiConsole.Write(table);
+
+
+                var pressedKey = Console.ReadKey();
+                var choice = pressedKey.Key.ToString();
+                switch (choice)
+                {
+                    case "B":
+                        return;
+                    case "E":
+                        ShowEditNote(note);
+                        Console.WriteLine();
+                        var editedNoteRule = new Rule("[gold1]Edited note:[/]");
+                        editedNoteRule.Style = new Style(Color.Gold1);
+                        editedNoteRule.Centered();
+                        AnsiConsole.Write(editedNoteRule);
+                        Console.WriteLine();
+                        ShowNotes(new List<NoteModel> {note});
+                        AnsiConsole.Markup("[green1]\nNote successful edited, press anything to continue[/]");
+                        Console.ReadKey();
+                        return;
+                    case "D":
+                        noteController.RemoveNote(noteId);
+                        return;
+                }
             }
         }
 
@@ -115,27 +130,35 @@ namespace kck_projekt1.View
                 .Centered()
                 .Color(Color.Gold1));
 
-            var rule = new Rule($"[gold1]Editing[/] [darkorange]'{note.Title}'[/] [gold1]({note.Category})[/] [darkorange]{note.ModifiedDate}:[/]");
+            var oldNoteRule = new Rule("[gold1]You are editing note:[/]");
+            oldNoteRule.Style = new Style(Color.Gold1);
+            oldNoteRule.Centered();
+            AnsiConsole.Write(oldNoteRule);
+
+            Console.WriteLine();
+            ShowNotes(new List<NoteModel> { note });
+            Console.WriteLine();
+
+            var rule = new Rule($"[gold1]Edit your note:[/]");
             rule.Style = new Style(Color.Gold1);
-            rule.Centered();
+            rule.LeftJustified();
             AnsiConsole.Write(rule);
             Console.WriteLine();
 
-
-            AnsiConsole.MarkupLine("[grey35]Press {Enter} to use[/] [green](old title)[/]");
+            AnsiConsole.MarkupLine("[grey35]Leave blank and press {Enter} to use old title[/]");
             var newTitle = AnsiConsole.Prompt(
             new TextPrompt<string>("[gold1]Enter[/] [darkorange]title[/]")
-            .DefaultValue(note.Title));
+            .DefaultValue(note.Title)
+            .HideDefaultValue());
 
-            AnsiConsole.MarkupLine("[grey35]\nPress {Enter} to use[/] [green](old category)[/]");
+            AnsiConsole.MarkupLine("[grey35]\nLeave blank and press {Enter} to use old category[/]");
             var newCategory = AnsiConsole.Prompt(
             new TextPrompt<string>("[gold1]Enter new[/] [darkorange]category[/]")
-            .DefaultValue(note.Category));
-           
-            ClipboardService.SetText(note.Content);
-            AnsiConsole.MarkupLine("[grey35]\nPress {Ctrl+V} to edit[/] [green](old content)[/]");
-            AnsiConsole.Markup($"[grey35]Old content:[/] [green]({note.Content})[/]\n");
+            .DefaultValue(note.Category)
+            .HideDefaultValue());
 
+            ClipboardService.SetText(note.Content);
+            AnsiConsole.MarkupLine("[grey35]\nPress {Ctrl+V} to edit old content[/]");
             var newContent = AnsiConsole.Prompt(
             new TextPrompt<string>("[gold1]Enter new[/] [darkorange]content:[/]"));
 
@@ -382,38 +405,63 @@ namespace kck_projekt1.View
 
         public string ChooseCategoryToFilter()
         {
-            AnsiConsole.Clear();
-
-            AnsiConsole.Write(
-            new FigletText(Program.font, "Filter")
-            .Centered()
-            .Color(Color.Gold1));
-
-            var rule = new Rule("[gold1]Select a category to filter:[/]");
-            rule.Style = new Style(Color.Gold1);
-            rule.LeftJustified();
-            AnsiConsole.Write(rule);
-
-            Console.WriteLine("");
-
-            var category = AnsiConsole.Prompt(
-            new SelectionPrompt<string>()
-            .HighlightStyle(Color.DarkOrange)
-            .AddChoices(new[] {
-                                        "Studies",
-                                        "Work",
-                                        "Home",
-                                        "Hobby",
-                                        "Other",
-                                        "[grey50]Custom[/]"
-             }));
-
-            if (category == "[grey50]Custom[/]")
+            string category = "";
+            while(category.Length <= 1)
             {
-                category = AnsiConsole.Prompt(
-                new TextPrompt<string>("[gold1]Enter custom[/] [darkorange]category:[/]"));
-            }
+                AnsiConsole.Clear();
 
+                AnsiConsole.Write(
+                new FigletText(Program.font, "Filter")
+                .Centered()
+                .Color(Color.Gold1));
+
+                var rule = new Rule("[gold1]Select a category to filter:[/]");
+                rule.Style = new Style(Color.Gold1);
+                rule.LeftJustified();
+                AnsiConsole.Write(rule);
+
+                Console.WriteLine("");
+
+                var colWidth = 30;
+                var table = new Table()
+                    .Centered()
+                    .BorderColor(Color.White)
+                    .AddColumn(new TableColumn("[darkorange]Studies -> {S}[/]").Centered().Width(colWidth))
+                    .AddColumn(new TableColumn("[darkorange]Work -> {W}[/]").Centered().Width(colWidth))
+                    .AddColumn(new TableColumn("[darkorange]Home -> {H}[/]").Centered().Width(colWidth))
+                    .Expand();
+
+                table.AddRow("[darkorange]Hobby -> {F}[/]", "[darkorange]Other -> {O}[/]", "[darkorange]Custom -> {C}[/]");
+
+                AnsiConsole.Write(table);
+
+
+                var pressedKey = Console.ReadKey(true);
+                category = pressedKey.Key.ToString();
+
+                switch (category)
+                {
+                    case "S":
+                        category = "Studies";
+                        break;
+                    case "W":
+                        category = "Work";
+                        break;
+                    case "H":
+                        category = "Home";
+                        break;
+                    case "F":
+                        category = "Hobby";
+                        break;
+                    case "O":
+                        category = "Other";
+                        break;
+                    case "C":
+                        category = AnsiConsole.Prompt(
+                        new TextPrompt<string>("[gold1]\nEnter custom[/] [darkorange]category:[/]"));
+                        break;
+                }
+            }
             return category;
         }
 

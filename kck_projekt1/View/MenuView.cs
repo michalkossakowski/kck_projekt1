@@ -186,7 +186,7 @@ namespace kck_projekt1.View
                                 .LeftJustified()
                                 .Color(Color.Gold1),
                             new Rule("[gold1]Press the[/] [darkorange]{KEY}[/] [gold1]on your keyboard to select the action[/]").RuleStyle("gold1"),
-                            new Markup("[gold1]Press[/] [darkorange]{ESC}[/] [gold1]to close the application[/]")
+                            new Markup("[gold1]Press[/] [darkorange]{ESC}[/] [gold1]to log out[/]")
                             ),
                             VerticalAlignment.Middle))
                     .Expand()).Size(11);
@@ -216,7 +216,7 @@ namespace kck_projekt1.View
                         Align.Center(
                             new Rows(
                                 new Markup("[darkorange]CALENDAR -> {C}[/]"),
-                                new Markup("[gold1]Explore your notes in current month[/]")
+                                new Markup("[gold1]Explore notes in current month[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -236,7 +236,7 @@ namespace kck_projekt1.View
                         Align.Center(
                             new Rows(
                                 new Markup("[darkorange]ADD NOTE -> {A}[/]"),
-                                new Markup("[gold1]Write a new note[/]")
+                                new Markup("[gold1]Create a new note[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -256,7 +256,7 @@ namespace kck_projekt1.View
                         Align.Center(
                             new Rows(
                                 new Markup("[darkorange]FILTER -> {F}[/]"),
-                                new Markup("[gold1]Filter notes by category[/]")
+                                new Markup("[gold1]Explore notes by category[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -265,8 +265,8 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                            new Rows(
-                                new Markup("[darkorange]LOG OUT -> {ESC}[/]"),
-                                new Markup("[gold1]Log out of the current account[/]")
+                                new Markup("[darkorange]MONTH -> {M}[/]"),
+                                new Markup("[gold1]Explore notes by month[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -345,8 +345,19 @@ namespace kck_projekt1.View
                         }
                         break;
 
+                    case "M":
+                        var chosenMonth = noteView.ChooseMonth(_loggedUser.Id);
+                        while (chosenMonth != DateTime.MinValue)
+                        {
+                            var chosenNoteId = noteView.ShowNotesByMonth(_loggedUser.Id, chosenMonth);
+                            if (chosenNoteId == -1)
+                                break;
+                            noteView.ShowNote(chosenNoteId);
+                        }
+                        break;
+
                     case "Escape":
-                        return;;
+                        return;
                 }
             }
 

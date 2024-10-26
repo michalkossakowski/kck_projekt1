@@ -42,7 +42,7 @@ namespace kck_projekt2
         private void MyCalendar_Loaded(object sender, RoutedEventArgs e)
         {
             var noteController = NoteController.GetInstance();
-            var currentMonthNotes = noteController.GetCurrentMonthNotesByUserId(_mainWindow.loggedUserId, DateTime.Now);
+            var currentMonthNotes = noteController.GetNotesByUserIdAndMonth(_mainWindow.loggedUserId, DateTime.Now);
 
             DateTime firstDayOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);

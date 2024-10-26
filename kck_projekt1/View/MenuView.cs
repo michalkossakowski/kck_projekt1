@@ -255,7 +255,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]BY CATEGORY -> {F}[/]"),
+                                new Markup("[darkorange]FILTER -> {F}[/]"),
                                 new Markup("[gold1]Filter notes by category[/]")
                             ),
                             VerticalAlignment.Middle))
@@ -281,7 +281,15 @@ namespace kck_projekt1.View
                 switch (choice)
                 {
                     case "A":
-                        noteController.AddNote(noteView.WriteNote(_loggedUser));
+                        var newNote = noteView.WriteNote(_loggedUser);
+                        noteController.AddNote(newNote);
+                        Console.WriteLine();
+                        var newNoteRule = new Rule("[gold1]Added note:[/]");
+                        newNoteRule.Style = new Style(Color.Gold1);
+                        newNoteRule.Centered();
+                        AnsiConsole.Write(newNoteRule);
+                        Console.WriteLine();
+                        noteView.ShowNotes(new List<NoteModel> { newNote });
                         AnsiConsole.Markup("[green1]\nNew note added, press anything to continue[/]");
                         Console.ReadKey();
                         break;

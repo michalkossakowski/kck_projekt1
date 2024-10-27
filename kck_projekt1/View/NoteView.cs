@@ -407,7 +407,7 @@ namespace kck_projekt1.View
         public string ChooseCategoryToFilter()
         {
             string category = "";
-            while(category.Length <= 1)
+            while(category.Length <= 1 )
             {
                 AnsiConsole.Clear();
 
@@ -460,6 +460,9 @@ namespace kck_projekt1.View
                     case "C":
                         category = AnsiConsole.Prompt(
                         new TextPrompt<string>("[gold1]\nEnter custom[/] [darkorange]category:[/]"));
+                        break;
+                    default:
+                        category = "";
                         break;
                 }
             }

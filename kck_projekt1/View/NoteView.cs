@@ -91,9 +91,9 @@ namespace kck_projekt1.View
                 var table = new Table()
                     .Centered()
                     .BorderColor(Color.White)
-                    .AddColumn(new TableColumn("[darkorange]Back -> {B}[/]").Centered().Width(colWidth)) 
-                    .AddColumn(new TableColumn("[darkorange]Edit -> {E}[/]").Centered().Width(colWidth))
-                    .AddColumn(new TableColumn("[darkorange]Delete -> {D}[/]").Centered().Width(colWidth))
+                    .AddColumn(new TableColumn("[darkorange]Back ▶ {B}[/]").Centered().Width(colWidth)) 
+                    .AddColumn(new TableColumn("[darkorange]Edit ▶ {E}[/]").Centered().Width(colWidth))
+                    .AddColumn(new TableColumn("[darkorange]Delete ▶ {D}[/]").Centered().Width(colWidth))
                     .Expand(); 
 
                 AnsiConsole.Write(table);
@@ -114,7 +114,7 @@ namespace kck_projekt1.View
                         AnsiConsole.Write(editedNoteRule);
                         Console.WriteLine();
                         ShowNotes(new List<NoteModel> {note});
-                        AnsiConsole.Markup("[green1]\nNote successful edited, press anything to continue[/]");
+                        AnsiConsole.Markup("[green1]\n✅ Note successful edited, press anything to continue...[/]");
                         Console.ReadKey(true);
                         return;
                     case "D":
@@ -188,12 +188,12 @@ namespace kck_projekt1.View
 
             if (notes.Count == 0)
             {
-                AnsiConsole.Markup("[red1]You don't have any notes, press anything to continue[/]");
+                AnsiConsole.Markup("[red1]⛔ You don't have any notes, press anything to continue...[/]");
             }
             else
             {
                 ShowNotes(notes);
-                AnsiConsole.Markup("[green1]\nHere are your notes, press anything to continue[/]");
+                AnsiConsole.Markup("[green1]\n✅ Here are your notes, press anything to continue...[/]");
             }
 
             Console.ReadKey(true);
@@ -217,7 +217,7 @@ namespace kck_projekt1.View
 
             if (notes.Count == 0)
             {
-                AnsiConsole.Markup("[red1]\nYou don't have any notes, press anything to continue[/]");
+                AnsiConsole.Markup("[red1]\n⛔You don't have any notes, press anything to continue...[/]");
                 Console.ReadKey(true);
                 return -1;
             }
@@ -278,7 +278,7 @@ namespace kck_projekt1.View
 
                 if (currentMonthNotes.Count == 0)
                 {
-                    AnsiConsole.Markup($"[red1]\nYou don't have any notes in current month, press anything to continue[/]");
+                    AnsiConsole.Markup($"[red1]\n⛔ You don't have any notes in current month, press anything to continue...[/]");
                     Console.ReadKey(true);
                     return;
                 }
@@ -336,7 +336,7 @@ namespace kck_projekt1.View
 
             ShowNotes(notes);
 
-            AnsiConsole.Markup("[green1]\nHere are your notes from chosen day, press anything to continue[/]");
+            AnsiConsole.Markup("[green1]\n✅ Here are your notes from chosen day, press anything to continue...[/]");
             Console.ReadKey(true);
             AnsiConsole.Clear();
         }
@@ -381,7 +381,7 @@ namespace kck_projekt1.View
             var notes = noteController.GetNotesByUserIdAndTitle(userId, searchingTitle);
             if (notes.Count == 0)
             {
-                AnsiConsole.Markup($"[red1]\nYou don't have notes with[/] [darkorange]'{searchingTitle}'[/] [red1]in the title, press anything to continue[/]");
+                AnsiConsole.Markup($"[red1]\n⛔ You don't have notes with[/] [darkorange]'{searchingTitle}'[/] [red1]in the title, press anything to continue...[/]");
                 Console.ReadKey(true);
                 return -1;
             }
@@ -427,12 +427,12 @@ namespace kck_projekt1.View
                 var table = new Table()
                     .Centered()
                     .BorderColor(Color.White)
-                    .AddColumn(new TableColumn("[darkorange]Studies -> {S}[/]").Centered().Width(colWidth))
-                    .AddColumn(new TableColumn("[darkorange]Work -> {W}[/]").Centered().Width(colWidth))
-                    .AddColumn(new TableColumn("[darkorange]Home -> {H}[/]").Centered().Width(colWidth))
+                    .AddColumn(new TableColumn("[darkorange]🎓 Studies ▶ {S}[/]").Centered().Width(colWidth))
+                    .AddColumn(new TableColumn("[darkorange]💼 Work ▶ {W}[/]").Centered().Width(colWidth))
+                    .AddColumn(new TableColumn("[darkorange]🏠 Home ▶ {H}[/]").Centered().Width(colWidth))
                     .Expand();
 
-                table.AddRow("[darkorange]Hobby -> {B}[/]", "[darkorange]Other -> {O}[/]", "[darkorange]Custom -> {C}[/]");
+                table.AddRow("[darkorange]🎨 Hobby ▶ {B}[/]", "[darkorange]🌐 Other ▶ {O}[/]", "[darkorange]✨ Custom ▶ {C}[/]");
 
                 AnsiConsole.Write(table);
 
@@ -460,6 +460,7 @@ namespace kck_projekt1.View
                     case "C":
                         category = AnsiConsole.Prompt(
                         new TextPrompt<string>("[gold1]\nEnter custom[/] [darkorange]category:[/]"));
+                        return category;
                         break;
                     default:
                         category = "";
@@ -486,7 +487,7 @@ namespace kck_projekt1.View
             var notes = noteController.GetNotesByUserIdAndCategory(userId, categoryFilter);
             if (notes.Count == 0)
             {
-                AnsiConsole.Markup($"[red1]\nYou don't have notes from[/] [darkorange]'{categoryFilter}'[/] [red1]category, press anything to continue[/]");
+                AnsiConsole.Markup($"[red1]\n⛔ You don't have notes from[/] [darkorange]'{categoryFilter}'[/] [red1]category, press anything to continue...[/]");
                 Console.ReadKey(true);
                 return -1;
             }
@@ -531,7 +532,7 @@ namespace kck_projekt1.View
 
             if(!(DateTime.TryParseExact(inputDate, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,out chosenDate)))
             {
-                AnsiConsole.MarkupLine($"[red1]\nYou used wrong date format, press anything to continue[/]");
+                AnsiConsole.MarkupLine($"[red1]\n⛔ You used wrong date format, press anything to continue...[/]");
                 Console.ReadKey(true);
                 return DateTime.MinValue;
             }
@@ -557,7 +558,7 @@ namespace kck_projekt1.View
 
             if (notes.Count == 0)
             {
-                AnsiConsole.Markup($"[red1]\nYou don't have any notes from [/][darkorange]{date.Day}.{date.Month}.{date.Year}[/][red1], press anything to continue[/]");
+                AnsiConsole.Markup($"[red1]\n⛔ You don't have any notes from [/][darkorange]{date.Day}.{date.Month}.{date.Year}[/][red1], press anything to continue...[/]");
                 Console.ReadKey(true);
                 return -1;
             }
@@ -600,7 +601,7 @@ namespace kck_projekt1.View
             var allNotes = noteController.GetNotesByUserId(userId);
             if(allNotes.Count() == 0)
             {
-                AnsiConsole.Markup("[red1]\nYou don't have any notes, press anything to continue[/]");
+                AnsiConsole.Markup("[red1]\n⛔ You don't have any notes, press anything to continue...[/]");
                 Console.ReadKey(true);
                 return DateTime.MinValue;
             }

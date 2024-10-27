@@ -47,7 +47,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]LOGIN -> {L}[/]"),
+                                new Markup("[darkorange]🔒 LOGIN ▶ {L}[/]"),
                                 new Markup("[gold1]Log in to your account[/]")
                             ),
                             VerticalAlignment.Middle))
@@ -57,7 +57,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]GRAPHIC MODE -> {G}[/]"),
+                                new Markup("[darkorange]🖥️ GRAPHIC MODE ▶ {G}[/]"),
                                 new Markup("[gold1]Open graphic version of the application[/]")
                             ),
                             VerticalAlignment.Middle))
@@ -67,7 +67,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]REGISTER -> {R}[/]"),
+                                new Markup("[darkorange]✍  REGISTER ▶ {R}[/]"),
                                 new Markup("[gold1]Create a new user account[/]")
                             ),
                             VerticalAlignment.Middle))
@@ -77,7 +77,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                            new Rows(
-                                new Markup("[darkorange]EXIT -> {ESC}[/]"),
+                                new Markup("[darkorange]❌ EXIT ▶ {ESC}[/]"),
                                 new Markup("[gold1]Close the application[/]")
                             ),
                             VerticalAlignment.Middle))
@@ -89,7 +89,7 @@ namespace kck_projekt1.View
                 }
                 catch
                 {
-                    AnsiConsole.Markup("[red1]Window is to small, expand the window please[/]");
+                    AnsiConsole.Markup("[red1]⛔ Window is to small, expand the window please...[/]");
                 }
 
                 var pressedKey = Console.ReadKey(true);
@@ -99,16 +99,17 @@ namespace kck_projekt1.View
                     case "L":
                         var user = userView.LoginUser();
                         AnsiConsole.Status()
-                        .Spinner(Spinner.Known.BouncingBar)
+                        .Spinner(Spinner.Known.Moon)
                         .SpinnerStyle(Style.Parse("darkorange"))
                         .Start("[gold1]Logging in[/]", ctx =>
                         {
                             user = userController.GetUser(user);
-                            Thread.Sleep(1000);
+                            Thread.Sleep(1500);
                         });
+
                         if (user == null)
                         {
-                            AnsiConsole.Markup("[red1]\nWrong nick or password, press anything to continue[/]");
+                            AnsiConsole.Markup("[red1]\n⛔ Wrong nick or password, press anything to continue...[/]");
                             Console.ReadKey(true);
                             break;
                         }
@@ -123,7 +124,7 @@ namespace kck_projekt1.View
                         var newUser = userView.RegisterUser();
                         if (newUser == null)
                         {
-                            AnsiConsole.Markup("[red1]\nPasswords don't match, press anything to continue[/]");
+                            AnsiConsole.Markup("[red1]\n⛔ Passwords don't match, press anything to continue...[/]");
                             Console.ReadKey(true);
                             break;
                         }
@@ -139,9 +140,9 @@ namespace kck_projekt1.View
                         });
 
                         if (isAdded)
-                            AnsiConsole.Markup("[green1]\nNew user added you can now login into your account, press anything to continue[/]");
+                            AnsiConsole.Markup("[green1]\n✅ New user added you can now login into your account, press anything to continue...[/]");
                         else
-                            AnsiConsole.Markup("[red1]\nThis nick is occupied, press anything to continue[/]");
+                            AnsiConsole.Markup("[red1]\n⛔ This nick is occupied, press anything to continue...[/]");
                         Console.ReadKey(true);
                         break;
 
@@ -202,7 +203,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]ADD NOTE -> {A}[/]"),
+                                new Markup("[darkorange]🖋️ ADD NOTE ▶ {A}[/]"),
                                 new Markup("[gold1]Create a new note[/]")
                             ),
                             VerticalAlignment.Middle))
@@ -212,7 +213,7 @@ namespace kck_projekt1.View
                 new Panel(
                     Align.Center(
                         new Rows(
-                            new Markup("[darkorange]SEARCH -> {S}[/]"),
+                            new Markup("[darkorange]🔍 SEARCH ▶ {S}[/]"),
                             new Markup("[gold1]Find notes by the title[/]")
                         ),
                         VerticalAlignment.Middle))
@@ -222,7 +223,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                            new Markup("[darkorange]EXPLORE ALL NOTES -> {E}[/]"),
+                            new Markup("[darkorange]🌍 EXPLORE ALL NOTES ▶ {E}[/]"),
                             new Markup("[gold1]Explore all your notes[/]")
                             ),
                             VerticalAlignment.Middle))
@@ -232,7 +233,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]FIND BY CATEGORY -> {F}[/]"),
+                                new Markup("[darkorange]🔠 FIND BY CATEGORY ▶ {F}[/]"),
                                 new Markup("[gold1]Find notes by chosen category[/]")
 
                             ),
@@ -243,7 +244,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]LATEST NOTES -> {L}[/]"),
+                                new Markup("[darkorange]🆕 LATEST NOTES ▶ {L}[/]"),
                                 new Markup("[gold1]Your latest notes preview[/]")
                             ),
                             VerticalAlignment.Middle))
@@ -253,7 +254,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]CALENDAR -> {C}[/]"),
+                                new Markup("[darkorange]🗓️ CALENDAR ▶ {C}[/]"),
                                 new Markup("[gold1]Current month notes preview[/]")
 
                             ),
@@ -264,7 +265,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]EXPLORE BY MONTH -> {M}[/]"),
+                                new Markup("[darkorange]📌 EXPLORE BY MONTH ▶ {M}[/]"),
                                 new Markup("[gold1]Explore notes by chosen month[/]")
                             ),
                             VerticalAlignment.Middle))
@@ -274,7 +275,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                            new Rows(
-                                new Markup("[darkorange]FIND BY DATE -> {D}[/]"),
+                                new Markup("[darkorange]📅 FIND BY DATE ▶ {D}[/]"),
                                 new Markup("[gold1]Find notes by chosen date[/]")
                             ),
                             VerticalAlignment.Middle))
@@ -286,7 +287,7 @@ namespace kck_projekt1.View
                 }
                 catch
                 {
-                    AnsiConsole.Markup("[red1]Window is to small, expand the window please[/]");
+                    AnsiConsole.Markup("[red1]⛔ Window is to small, expand the window please...[/]");
                 }
 
                 var pressedKey = Console.ReadKey(true);
@@ -304,7 +305,7 @@ namespace kck_projekt1.View
                         AnsiConsole.Write(newNoteRule);
                         Console.WriteLine();
                         noteView.ShowNotes(new List<NoteModel> { newNote });
-                        AnsiConsole.Markup("[green1]\nNew note added, press anything to continue[/]");
+                        AnsiConsole.Markup("[green1]\n✅ New note added, press anything to continue...[/]");
                         Console.ReadKey(true);
                         break;
 

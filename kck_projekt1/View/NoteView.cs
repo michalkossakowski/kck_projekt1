@@ -9,15 +9,15 @@ namespace kck_projekt1.View
 {
     public class NoteView
     {
-        public NoteModel WriteNote(UserModel user)
+        public NoteModel CreateNote(UserModel user)
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
-            new FigletText(Program.font,"Create")
+            new FigletText(Program.font,"ADD NOTE")
             .Centered()
             .Color(Color.Gold1));
 
-            var rule = new Rule("[gold1]Write a new note:[/]");
+            var rule = new Rule("[gold1]Create a new note:[/]");
             rule.Style = new Style(Color.Gold1);
             rule.LeftJustified();
             AnsiConsole.Write(rule);
@@ -412,7 +412,7 @@ namespace kck_projekt1.View
                 AnsiConsole.Clear();
 
                 AnsiConsole.Write(
-                new FigletText(Program.font, "Filter")
+                new FigletText(Program.font, "CATEGORIES")
                 .Centered()
                 .Color(Color.Gold1));
 
@@ -432,7 +432,7 @@ namespace kck_projekt1.View
                     .AddColumn(new TableColumn("[darkorange]Home -> {H}[/]").Centered().Width(colWidth))
                     .Expand();
 
-                table.AddRow("[darkorange]Hobby -> {F}[/]", "[darkorange]Other -> {O}[/]", "[darkorange]Custom -> {C}[/]");
+                table.AddRow("[darkorange]Hobby -> {B}[/]", "[darkorange]Other -> {O}[/]", "[darkorange]Custom -> {C}[/]");
 
                 AnsiConsole.Write(table);
 
@@ -451,7 +451,7 @@ namespace kck_projekt1.View
                     case "H":
                         category = "Home";
                         break;
-                    case "F":
+                    case "B":
                         category = "Hobby";
                         break;
                     case "O":

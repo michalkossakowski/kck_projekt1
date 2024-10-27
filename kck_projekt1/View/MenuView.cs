@@ -48,7 +48,7 @@ namespace kck_projekt1.View
                         Align.Center(
                             new Rows(
                                 new Markup("[darkorange]LOGIN -> {L}[/]"),
-                                new Markup("[gold1]Login into your account[/]")
+                                new Markup("[gold1]Log in to your account[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -57,8 +57,8 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]REGISTER -> {R}[/]"),
-                                new Markup("[gold1]Create a new user account[/]")
+                                new Markup("[darkorange]GRAPHIC MODE -> {G}[/]"),
+                                new Markup("[gold1]Open graphic version of the application[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -67,8 +67,8 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]GRAPHIC MODE -> {G}[/]"),
-                                new Markup("[gold1]Open graphic version of the application[/]")
+                                new Markup("[darkorange]REGISTER -> {R}[/]"),
+                                new Markup("[gold1]Create a new user account[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -83,7 +83,14 @@ namespace kck_projekt1.View
                             VerticalAlignment.Middle))
                         .Expand());
 
-                AnsiConsole.Write(layout);
+                try
+                {
+                    AnsiConsole.Write(layout);
+                }
+                catch
+                {
+                    AnsiConsole.Markup("[red1]Window is to small, expand the window please[/]");
+                }
 
                 var pressedKey = Console.ReadKey(true);
                 var choice = pressedKey.Key.ToString();
@@ -195,8 +202,8 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]LATEST NOTES -> {L}[/]"),
-                                new Markup("[gold1]Explore your latest written notes[/]")
+                                new Markup("[darkorange]ADD NOTE -> {A}[/]"),
+                                new Markup("[gold1]Create a new note[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -205,8 +212,8 @@ namespace kck_projekt1.View
                 new Panel(
                     Align.Center(
                         new Rows(
-                            new Markup("[darkorange]EXPLORE NOTES -> {E}[/]"),
-                            new Markup("[gold1]Explore all your notes[/]")
+                            new Markup("[darkorange]SEARCH -> {S}[/]"),
+                            new Markup("[gold1]Find notes by the title[/]")
                         ),
                         VerticalAlignment.Middle))
                     .Expand());
@@ -215,8 +222,8 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]CALENDAR -> {C}[/]"),
-                                new Markup("[gold1]Explore notes in current month[/]")
+                            new Markup("[darkorange]EXPLORE ALL NOTES -> {E}[/]"),
+                            new Markup("[gold1]Explore all your notes[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -225,8 +232,9 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]DATE -> {D}[/]"),
-                                new Markup("[gold1]Find notes by chosen date[/]")
+                                new Markup("[darkorange]FIND BY CATEGORY -> {F}[/]"),
+                                new Markup("[gold1]Find notes by chosen category[/]")
+
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -235,8 +243,8 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]ADD NOTE -> {A}[/]"),
-                                new Markup("[gold1]Create a new note[/]")
+                                new Markup("[darkorange]LATEST NOTES -> {L}[/]"),
+                                new Markup("[gold1]Your latest notes preview[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -245,8 +253,9 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]SEARCH -> {S}[/]"),
-                                new Markup("[gold1]Find note by the title[/]")
+                                new Markup("[darkorange]CALENDAR -> {C}[/]"),
+                                new Markup("[gold1]Current month notes preview[/]")
+
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -255,8 +264,8 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]FILTER -> {F}[/]"),
-                                new Markup("[gold1]Explore notes by category[/]")
+                                new Markup("[darkorange]EXPLORE BY MONTH -> {M}[/]"),
+                                new Markup("[gold1]Explore notes by chosen month[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
@@ -265,15 +274,20 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                            new Rows(
-                                new Markup("[darkorange]MONTH -> {M}[/]"),
-                                new Markup("[gold1]Explore notes by month[/]")
+                                new Markup("[darkorange]FIND BY DATE -> {D}[/]"),
+                                new Markup("[gold1]Find notes by chosen date[/]")
                             ),
                             VerticalAlignment.Middle))
                         .Expand());
 
-                AnsiConsole.Write(layout);
-
-
+                try
+                {
+                    AnsiConsole.Write(layout);
+                }
+                catch
+                {
+                    AnsiConsole.Markup("[red1]Window is to small, expand the window please[/]");
+                }
 
                 var pressedKey = Console.ReadKey(true);
                 var choice = pressedKey.Key.ToString();
@@ -281,7 +295,7 @@ namespace kck_projekt1.View
                 switch (choice)
                 {
                     case "A":
-                        var newNote = noteView.WriteNote(_loggedUser);
+                        var newNote = noteView.CreateNote(_loggedUser);
                         noteController.AddNote(newNote);
                         Console.WriteLine();
                         var newNoteRule = new Rule("[gold1]Added note:[/]");

@@ -48,7 +48,7 @@ namespace kck_projekt2
                 var user = new UserModel(nickValue, passwordValue);
                 user = await Task.Run(async () =>
                 {
-                    await Task.Delay(1000); 
+                    await Task.Delay(1500); 
                     return userController.GetUser(user); 
                 });
                 if (user == null)

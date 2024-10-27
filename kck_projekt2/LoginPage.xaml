@@ -30,13 +30,16 @@
         </materialDesign:Card>
         
         <StackPanel HorizontalAlignment="Center" >
-            <TextBlock
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <materialDesign:PackIcon Kind="LoginVariant" Foreground="#3f51b5" Width="50" Height="50" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <TextBlock
                 TextAlignment="Center"
                 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
                 Text="Log in"
-                Margin="0,20,0,20"
                 Foreground="#3f51b5"
                 />
+            </StackPanel>
 
             <Label Name="errorMessage" 
                    Visibility="Hidden" 
@@ -45,6 +48,7 @@
                    FontSize="16" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center"
+                   Margin="0,0,20,0"
                    />
 
             <TextBox Name="nick" 
@@ -70,7 +74,7 @@
                     />
 
             <Button Content="Back" 
-                    Width="70" Height="30" 
+                    Width="80" Height="30" 
                     Margin="0,20,0,0"
                     Click="BackClick" 
                     Background="#FF200E67"

@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using kck_api.Controller;
 using kck_api.Database;
+using System.Windows.Media.Animation;
 
 namespace kck_projekt2
 {
@@ -25,6 +26,39 @@ namespace kck_projekt2
         public MainWindow()
         {
             InitializeComponent();
+            StartAnimation();
+        }
+
+        private void StartAnimation()
+        {
+            DoubleAnimation moveRight = new DoubleAnimation
+            {
+                To = 30,
+                Duration = TimeSpan.FromMilliseconds(2000),
+                AutoReverse = true, 
+                RepeatBehavior = RepeatBehavior.Forever
+            };
+            iconNote.BeginAnimation(TranslateTransform.XProperty, moveRight);
+
+            DoubleAnimation moveLeft = new DoubleAnimation
+            {
+                To = -30,
+                Duration = TimeSpan.FromMilliseconds(2000),
+                AutoReverse = true,
+                RepeatBehavior = RepeatBehavior.Forever
+            };
+            iconPencil.BeginAnimation(TranslateTransform.XProperty, moveLeft);
+
+
+            DoubleAnimation moveDown = new DoubleAnimation
+            {
+                To = 5,
+                Duration = TimeSpan.FromMilliseconds(500),
+                AutoReverse = true,
+                RepeatBehavior = RepeatBehavior.Forever
+            };
+            iconPencil.BeginAnimation(TranslateTransform.YProperty, moveDown);
+
         }
 
         private void OpenLoginPage(object sender, RoutedEventArgs e)

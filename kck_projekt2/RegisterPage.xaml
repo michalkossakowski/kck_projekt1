@@ -30,7 +30,11 @@
         </materialDesign:Card>
         
         <StackPanel HorizontalAlignment="Center">
-            <TextBlock
+
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <materialDesign:PackIcon Kind="AccountPlusOutline" Foreground="#3f51b5" Width="50" Height="50" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <TextBlock
                 VerticalAlignment="Top"
                 TextAlignment="Center"
                 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
@@ -38,6 +42,8 @@
                 Margin="0,20,0,20"
                 Foreground="#3f51b5"
                 />
+            </StackPanel>
+
 
             <Label Name="errorMessage" 
                    Visibility="Visible" 
@@ -78,7 +84,7 @@
                     />
             
             <Button Content="Back" 
-                    Width="70" Height="30" 
+                    Width="90" Height="30" 
                     Margin="0,20,0,0"
                     Click="BackClick" 
                     Background="MidnightBlue" 

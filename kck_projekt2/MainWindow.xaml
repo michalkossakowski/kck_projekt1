@@ -66,43 +66,65 @@
                   HorizontalAlignment="Right">
 
                 <!-- Default Hidden Action Menu -->
-                <MenuItem Name="ActionMenuMenuItem"
-                          Header="Menu" 
-                          Click="OpenActionMenu"
-                          Visibility="Collapsed"
-                          Background="MidnightBlue"
-                          BorderBrush="MidnightBlue"
-                          Margin="5,8,5,5"
-                          Height="25"
-                          />
+                <MenuItem 
+                    Name="ActionMenuMenuItem"
+                    Click="OpenActionMenu"
+                    Visibility="Collapsed"
+                    Background="MidnightBlue"
+                    BorderBrush="MidnightBlue"
+                    Margin="5,8,5,5"
+                    Height="25"
+                    Width="48"
+                    ToolTip="Menu">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="Menu" />
+                    </MenuItem.Icon>
+                </MenuItem>
 
                 <!-- Default Hidden Logout -->
-                <MenuItem Name="LogoutMenuItem"
-                          Header="Logout" 
-                          Click="LogoutClick"
-                          Visibility="Collapsed"
-                          Background="MidnightBlue"
-                          BorderBrush="MidnightBlue"
-                          Margin="5,8,5,5"
-                          Height="25"
-                          />
+                <MenuItem 
+                    Name="LogoutMenuItem"
+                    Click="LogoutClick"
+                    Visibility="Collapsed"
+                    Background="MidnightBlue"
+                    BorderBrush="MidnightBlue"
+                    Margin="5,8,5,5"
+                    Height="25"
+                    Width="48"
+                    ToolTip="Logout">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="Logout" />
+                    </MenuItem.Icon>
+                </MenuItem>
 
-                <MenuItem Header="Console mode" 
-                          Click="SwitchToConsoleMode"
-                          Background="MidnightBlue"
-                          BorderBrush="MidnightBlue"
-                          Margin="5,8,5,5"
-                          Height="25"
-                          />
+                <MenuItem 
+                    Header="Console mode" 
+                    Click="SwitchToConsoleMode"
+                    Background="MidnightBlue"
+                    BorderBrush="MidnightBlue"
+                    Margin="5,8,5,5"
+                    Height="25"
+                    Width="48"
+                    ToolTip="Console Mode">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="Console" />
+                    </MenuItem.Icon>
+                </MenuItem>
 
-                <MenuItem Header="Exit" 
-                          Click="ExitClick"
-                          Background="MidnightBlue"
-                          BorderBrush="MidnightBlue"
-                          Margin="5,8,10,5"
-                          Height="25"
-                          />
+                <MenuItem
+                    Click="ExitClick"
+                    Background="MidnightBlue"
+                    BorderBrush="MidnightBlue"
+                    Margin="5,8,10,5"
+                    Height="25"
+                    Width="48"
+                    ToolTip="Exit">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="ExitRun" />
+                    </MenuItem.Icon>
+                </MenuItem>
             </Menu>
+
         </Grid>
 
         <Grid x:Name="ContentGrid"
@@ -116,6 +138,7 @@
             <ContentControl x:Name="contentControl" Grid.RowSpan="2"/>
 
             <StackPanel x:Name="WelcomePanel" Grid.RowSpan="2">
+                
                 <TextBlock VerticalAlignment="Top"           
                            TextAlignment="Center"
                            FontSize="70"
@@ -127,11 +150,38 @@
                 <TextBlock TextAlignment="Center"
                            FontSize="35"
                            Text="in Notes App"
-                           Margin="0,0,0,20"
+                           Margin="0,0,0,0"
                            Foreground="#3f51b5"
                            />
 
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="25,0,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                    <materialDesign:PackIcon 
+                    Kind="NotebookOutline"
+                    HorizontalAlignment="Center"
+                    Foreground="#3f51b5"           
+                    Width="150"                    
+                    Height="150"
+                    Margin="0,0,-45,0" >
+                        <materialDesign:PackIcon.RenderTransform>
+                            <TranslateTransform x:Name="iconNote" />
+                        </materialDesign:PackIcon.RenderTransform>
+                    </materialDesign:PackIcon>
+
+                    <materialDesign:PackIcon 
+                    Kind="Pencil"
+                    HorizontalAlignment="Center"
+                    Foreground="MidnightBlue"           
+                    Width="100"                    
+                    Height="100"
+                    Margin="0,10,0,0" >
+                        <materialDesign:PackIcon.RenderTransform>
+                            <TranslateTransform x:Name="iconPencil" />
+                        </materialDesign:PackIcon.RenderTransform>
+                    </materialDesign:PackIcon>
+                </StackPanel>
+
+
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
                     <Button Width="120" Height="30" Click="OpenLoginPage"  Margin="0,20,0,0">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -149,7 +199,7 @@
 
                 </StackPanel>
 
-                <materialDesign:PackIcon Kind="NotebookOutline" HorizontalAlignment="Center" Margin="0,50,0,0" Foreground="#3f51b5" Width="200" Height="200" />
+              
                 
             </StackPanel>
         </Grid>

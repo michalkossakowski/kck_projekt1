@@ -99,7 +99,7 @@ namespace kck_projekt1.View
                 AnsiConsole.Write(table);
 
 
-                var pressedKey = Console.ReadKey();
+                var pressedKey = Console.ReadKey(true);
                 var choice = pressedKey.Key.ToString();
                 switch (choice)
                 {
@@ -115,7 +115,7 @@ namespace kck_projekt1.View
                         Console.WriteLine();
                         ShowNotes(new List<NoteModel> {note});
                         AnsiConsole.Markup("[green1]\nNote successful edited, press anything to continue[/]");
-                        Console.ReadKey();
+                        Console.ReadKey(true);
                         return;
                     case "D":
                         noteController.RemoveNote(noteId);
@@ -188,7 +188,7 @@ namespace kck_projekt1.View
 
             if (notes.Count == 0)
             {
-                AnsiConsole.Markup("[red1]\nYou don't have any notes, press anything to continue[/]");
+                AnsiConsole.Markup("[red1]You don't have any notes, press anything to continue[/]");
             }
             else
             {
@@ -196,7 +196,7 @@ namespace kck_projekt1.View
                 AnsiConsole.Markup("[green1]\nHere are your notes, press anything to continue[/]");
             }
 
-            Console.ReadKey();
+            Console.ReadKey(true);
         }
         public int ExploreNotes(int userId)
         {
@@ -218,7 +218,7 @@ namespace kck_projekt1.View
             if (notes.Count == 0)
             {
                 AnsiConsole.Markup("[red1]\nYou don't have any notes, press anything to continue[/]");
-                Console.ReadKey();
+                Console.ReadKey(true);
                 return -1;
             }
             else
@@ -278,8 +278,8 @@ namespace kck_projekt1.View
 
                 if (currentMonthNotes.Count == 0)
                 {
-                    AnsiConsole.Markup($"[red1]\nYou dont have any notes in current month, press anything to continue[/]");
-                    Console.ReadKey();
+                    AnsiConsole.Markup($"[red1]\nYou don't have any notes in current month, press anything to continue[/]");
+                    Console.ReadKey(true);
                     return;
                 }
                 else
@@ -337,7 +337,7 @@ namespace kck_projekt1.View
             ShowNotes(notes);
 
             AnsiConsole.Markup("[green1]\nHere are your notes from chosen day, press anything to continue[/]");
-            Console.ReadKey();
+            Console.ReadKey(true);
             AnsiConsole.Clear();
         }
 
@@ -381,8 +381,8 @@ namespace kck_projekt1.View
             var notes = noteController.GetNotesByUserIdAndTitle(userId, searchingTitle);
             if (notes.Count == 0)
             {
-                AnsiConsole.Markup($"[red1]\nYou dont have notes with[/] [darkorange]'{searchingTitle}'[/] [red1]in the title, press anything to continue[/]");
-                Console.ReadKey();
+                AnsiConsole.Markup($"[red1]\nYou don't have notes with[/] [darkorange]'{searchingTitle}'[/] [red1]in the title, press anything to continue[/]");
+                Console.ReadKey(true);
                 return -1;
             }
             else
@@ -486,8 +486,8 @@ namespace kck_projekt1.View
             var notes = noteController.GetNotesByUserIdAndCategory(userId, categoryFilter);
             if (notes.Count == 0)
             {
-                AnsiConsole.Markup($"[red1]\nYou dont have notes from[/] [darkorange]'{categoryFilter}'[/] [red1]category, press anything to continue[/]");
-                Console.ReadKey();
+                AnsiConsole.Markup($"[red1]\nYou don't have notes from[/] [darkorange]'{categoryFilter}'[/] [red1]category, press anything to continue[/]");
+                Console.ReadKey(true);
                 return -1;
             }
             else
@@ -558,7 +558,7 @@ namespace kck_projekt1.View
             if (notes.Count == 0)
             {
                 AnsiConsole.Markup($"[red1]\nYou don't have any notes from [/][darkorange]{date.Day}.{date.Month}.{date.Year}[/][red1], press anything to continue[/]");
-                Console.ReadKey();
+                Console.ReadKey(true);
                 return -1;
             }
             else
@@ -598,6 +598,12 @@ namespace kck_projekt1.View
             var noteController = NoteController.GetInstance();
 
             var allNotes = noteController.GetNotesByUserId(userId);
+            if(allNotes.Count() == 0)
+            {
+                AnsiConsole.Markup("[red1]\nYou don't have any notes, press anything to continue[/]");
+                Console.ReadKey(true);
+                return DateTime.MinValue;
+            }
             var yearAndMonth = new HashSet<(int, int)>();
             foreach (var note in allNotes)
             {

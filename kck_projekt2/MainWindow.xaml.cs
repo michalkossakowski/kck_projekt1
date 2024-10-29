@@ -13,6 +13,9 @@ using System.Windows.Shapes;
 using kck_api.Controller;
 using kck_api.Database;
 using System.Windows.Media.Animation;
+using MaterialDesignThemes.Wpf;
+using System.ComponentModel;
+using MaterialDesignColors;
 
 namespace kck_projekt2
 {
@@ -29,31 +32,52 @@ namespace kck_projekt2
             StartAnimation();
         }
 
+        private async void SwitchThemeClick(object sender, RoutedEventArgs e) 
+        {
+            var paletteHelper = new PaletteHelper();
+            var theme = paletteHelper.GetTheme();
+            theme.SetBaseTheme(IsDarkTheme.IsChecked == true ? BaseTheme.Dark : BaseTheme.Light);
+            if (IsDarkTheme.IsChecked == true)
+            {
+                Application.Current.Resources["TextBlockColor"] = new SolidColorBrush(Colors.White);
+                Application.Current.Resources["TextBoxColor"] = new SolidColorBrush(Colors.White);
+                theme.SetBaseTheme(BaseTheme.Dark);
+            }
+            else
+            {
+
+                Application.Current.Resources["TextBlockColor"] = (SolidColorBrush)Application.Current.Resources["PrimaryColor"];
+                Application.Current.Resources["TextBoxColor"] = new SolidColorBrush(Colors.Black);
+                theme.SetBaseTheme(BaseTheme.Light);
+            }
+            paletteHelper.SetTheme(theme);
+        }
+
         private void StartAnimation()
         {
             DoubleAnimation moveRight = new DoubleAnimation
             {
-                To = 30,
-                Duration = TimeSpan.FromMilliseconds(2000),
+                To = 25,
+                Duration = TimeSpan.FromMilliseconds(2500),
                 AutoReverse = true, 
                 RepeatBehavior = RepeatBehavior.Forever
             };
             iconNote.BeginAnimation(TranslateTransform.XProperty, moveRight);
 
+
             DoubleAnimation moveLeft = new DoubleAnimation
             {
-                To = -30,
-                Duration = TimeSpan.FromMilliseconds(2000),
+                To = -20,
+                Duration = TimeSpan.FromMilliseconds(2500),
                 AutoReverse = true,
                 RepeatBehavior = RepeatBehavior.Forever
             };
             iconPencil.BeginAnimation(TranslateTransform.XProperty, moveLeft);
 
-
             DoubleAnimation moveDown = new DoubleAnimation
             {
                 To = 5,
-                Duration = TimeSpan.FromMilliseconds(500),
+                Duration = TimeSpan.FromMilliseconds(200),
                 AutoReverse = true,
                 RepeatBehavior = RepeatBehavior.Forever
             };

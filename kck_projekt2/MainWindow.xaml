@@ -21,7 +21,9 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         >
 
+
     <Grid Name="MainGrid">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -29,9 +31,10 @@
 
         <Grid x:Name="MenuGrid"
               Grid.Row="0" 
-              VerticalAlignment="Top" 
+              VerticalAlignment="Center" 
               HorizontalAlignment="Stretch"
-              Background="#3f51b5">
+              Background="{DynamicResource MaterialDesign.Brush.Primary}"
+              >
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -42,23 +45,23 @@
             <materialDesign:PackIcon  
                 Grid.Column="0"
                 Kind="NotebookOutline" 
-                HorizontalAlignment="Left" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
                 Foreground="White" 
                 Height="25"
                 Width="25"
-                Margin="5,7,0,0"/>
+                Margin="5,0,5,0"/>
             
-            <TextBlock VerticalAlignment="Top" 
+            <TextBlock
                        Grid.Column="1"                 
                        TextAlignment="Center"
                        Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                        Text="Notes App" 
-                       Margin="5,5,5,5"
+                       VerticalAlignment="Center"
                        HorizontalAlignment="Left"
-                       Foreground="White"
-                       />
+                       Foreground="White"/>
 
-            <Menu VerticalAlignment="Top" 
+            <Menu VerticalAlignment="Center" 
                   FontSize="14" 
                   Grid.Column="2"
                   Foreground="White"
@@ -70,9 +73,8 @@
                     Name="ActionMenuMenuItem"
                     Click="OpenActionMenu"
                     Visibility="Collapsed"
-                    Background="MidnightBlue"
-                    BorderBrush="MidnightBlue"
-                    Margin="5,8,5,5"
+                    Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+                    Margin="10,0,0,0"
                     Height="25"
                     Width="48"
                     ToolTip="Menu">
@@ -86,9 +88,8 @@
                     Name="LogoutMenuItem"
                     Click="LogoutClick"
                     Visibility="Collapsed"
-                    Background="MidnightBlue"
-                    BorderBrush="MidnightBlue"
-                    Margin="5,8,5,5"
+                    Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+                    Margin="10,0,0,0"
                     Height="25"
                     Width="48"
                     ToolTip="Logout">
@@ -100,9 +101,8 @@
                 <MenuItem 
                     Header="Console mode" 
                     Click="SwitchToConsoleMode"
-                    Background="MidnightBlue"
-                    BorderBrush="MidnightBlue"
-                    Margin="5,8,5,5"
+                    Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+                    Margin="10,0,0,0"
                     Height="25"
                     Width="48"
                     ToolTip="Console Mode">
@@ -113,16 +113,53 @@
 
                 <MenuItem
                     Click="ExitClick"
-                    Background="MidnightBlue"
-                    BorderBrush="MidnightBlue"
-                    Margin="5,8,10,5"
+                    Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+                    Margin="10,0,0,0"
                     Height="25"
                     Width="48"
-                    ToolTip="Exit">
+                    ToolTip="Exit"
+                    >
                     <MenuItem.Icon>
                         <materialDesign:PackIcon Kind="ExitRun" />
                     </MenuItem.Icon>
                 </MenuItem>
+
+                <ToggleButton 
+                    Margin="-5,2,-5,0"
+                    Name="IsDarkTheme" 
+                    IsChecked="{Binding IsDarkTheme}"
+                    Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                    Click="SwitchThemeClick"
+                    ToolTip="Switch Theme">
+                    
+                    <materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
+                        <SolidColorBrush Color="#aa00ff" />
+                    </materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
+                    <materialDesign:ToggleButtonAssist.SwitchTrackOffBackground>
+                        <SolidColorBrush Color="#f1f1f1" />
+                    </materialDesign:ToggleButtonAssist.SwitchTrackOffBackground>
+
+                    <materialDesign:PackIcon 
+                            Kind="WhiteBalanceSunny"
+                            Foreground="Yellow">
+                    </materialDesign:PackIcon>
+                    
+                    <materialDesign:ToggleButtonAssist.OnContent>
+                        <materialDesign:PackIcon
+                        Kind="MoonWaningCrescent"
+                            RenderTransformOrigin=".5,.5"
+                            Foreground="Yellow">
+                            <materialDesign:PackIcon.RenderTransform>
+                                <RotateTransform Angle="-45" />
+                            </materialDesign:PackIcon.RenderTransform>
+                        </materialDesign:PackIcon>
+                    </materialDesign:ToggleButtonAssist.OnContent>
+
+                    <ToggleButton.LayoutTransform>
+                        <ScaleTransform ScaleX="0.78" ScaleY="0.78" />
+                    </ToggleButton.LayoutTransform>
+                    
+                </ToggleButton>
             </Menu>
 
         </Grid>
@@ -144,24 +181,24 @@
                            FontSize="70"
                            Text="Welcome"
                            Margin="0,20,0,0"
-                           Foreground="#3f51b5"
+                           Foreground="{DynamicResource TextBlockColor}"
                            />
 
                 <TextBlock TextAlignment="Center"
                            FontSize="35"
                            Text="in Notes App"
                            Margin="0,0,0,0"
-                           Foreground="#3f51b5"
+                           Foreground="{DynamicResource TextBlockColor}"
                            />
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
                     <materialDesign:PackIcon 
-                    Kind="NotebookOutline"
+                    Kind="BookOpenBlankVariant"
                     HorizontalAlignment="Center"
-                    Foreground="#3f51b5"           
+                    Foreground="{DynamicResource MaterialDesign.Brush.Primary}"    
                     Width="150"                    
                     Height="150"
-                    Margin="0,0,-45,0" >
+                    Margin="0,0,-35,0" >
                         <materialDesign:PackIcon.RenderTransform>
                             <TranslateTransform x:Name="iconNote" />
                         </materialDesign:PackIcon.RenderTransform>
@@ -170,10 +207,10 @@
                     <materialDesign:PackIcon 
                     Kind="Pencil"
                     HorizontalAlignment="Center"
-                    Foreground="MidnightBlue"           
+                    Foreground="{DynamicResource MaterialDesign.Brush.Secondary}"        
                     Width="100"                    
                     Height="100"
-                    Margin="0,10,0,0" >
+                    Margin="0,-20,0,0" >
                         <materialDesign:PackIcon.RenderTransform>
                             <TranslateTransform x:Name="iconPencil" />
                         </materialDesign:PackIcon.RenderTransform>

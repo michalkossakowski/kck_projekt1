@@ -15,28 +15,30 @@
                 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
                 Text="Add Note" 
                 Margin="0,20,0,20"
-                Foreground="#3f51b5" />
+                Foreground="{DynamicResource TextBlockColor}"
+                />
 
             <TextBox 
                 Name="Title" 
                 materialDesign:HintAssist.HelperText="Enter note title"  
+                materialDesign:HintAssist.HelperTextFontSize="12" 
                 materialDesign:HintAssist.Hint="Title" 
                 Width="200" Height="30" Margin="0,0,0,0"
-                Foreground="Black"
-                TextChanged="Title_TextChanged" />
+                Foreground="{DynamicResource TextBoxColor}"
+                />
 
             <ComboBox
                 x:Name="SelectedCategory"
                 Width="200"
                 Height="25"
-                Margin="0,25,0,0"
+                Margin="0,30,0,0"
                 Padding="5"
-                Background="LightGray"
                 materialDesign:HintAssist.Hint="Category"
                 IsEnabled="True"
-                Foreground="Black"
+                Foreground="{DynamicResource TextBoxColor}"
                 materialDesign:HintAssist.HelperText="Select category"  
-                SelectionChanged="SelectedCategory_SelectionChanged">
+                materialDesign:HintAssist.HelperTextFontSize="12" 
+                >
 
                 <ComboBoxItem Content="Studies"/>
                 <ComboBoxItem Content="Work"/>
@@ -46,7 +48,7 @@
 
             </ComboBox>
 
-            <StackPanel  Orientation="Horizontal" Margin="-50,20,0,0" HorizontalAlignment="Center">
+            <StackPanel  Orientation="Horizontal" Margin="-50,30,0,0" HorizontalAlignment="Center">
                 <ToggleButton
                     x:Name="CategoryToggle" 
                     IsChecked="False"
@@ -59,43 +61,46 @@
                 <TextBlock
                     Margin="5,0,0,0"
                     Text="Use custom category"
-                    Foreground="gray"
+                    Foreground="{DynamicResource TextBoxColor}"
                     VerticalAlignment="Center"/>
             </StackPanel>
 
             <TextBox 
                 Name="CustomCategory" 
                 materialDesign:HintAssist.HelperText="Enter custom category"  
+                materialDesign:HintAssist.HelperTextFontSize="12" 
                 materialDesign:HintAssist.Hint="Custom category" 
-                Width="200" Height="30" Margin="0,0,0,0"
+                Width="200" Height="30" Margin="0,5,0,0"
                 IsEnabled="False"
-                Foreground="Black"
-                TextChanged="CustomCategory_TextChanged"/>
+                Foreground="{DynamicResource TextBoxColor}"
+                />
 
             <TextBox
                 Name="NoteContent"
-                Foreground="Black"
-                Height="200"
+                Foreground="{DynamicResource TextBoxColor}"
+                Height="250"
                 materialDesign:HintAssist.Hint="Write note here ..."
+                materialDesign:HintAssist.HelperTextFontSize="12" 
                 AcceptsReturn="True"
-                Margin="20,30,20,20"
+                Margin="20,35,20,20"
                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                 TextWrapping="Wrap"
                 VerticalScrollBarVisibility="Auto" 
                 Width="300"
-                TextChanged="NoteContent_TextChanged"/>
+                />
 
             <Button 
                 Name="AddNoteButton" 
                 Content="Add Note" 
-                Width="90" Height="30" Margin="0,0,0,0" 
+                Width="90" Height="30" Margin="0,15,0,0" 
                 Click="AddNoteClick"/>
 
             <Button 
                 Content="Back" 
                 Width="70" Height="30" Margin="0,20,0,0" 
                 Click="BackClick" 
-                Background="MidnightBlue" BorderBrush="MidnightBlue"/>
+                Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+                BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}"/>
 
         </StackPanel>
     </Grid>

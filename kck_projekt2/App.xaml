@@ -7,9 +7,18 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Indigo" SecondaryColor="DeepPurple" />
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Purple" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <SolidColorBrush x:Key="PrimaryColor" Color="#673ab7"/>
+            <SolidColorBrush x:Key="SecondaryColor" Color="#aa00ff"/>
+            
+            <SolidColorBrush x:Key="TextBlockColor" Color="#673ab7"/>
+            <SolidColorBrush x:Key="TextBoxColor" Color="Black"/>
+
+
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

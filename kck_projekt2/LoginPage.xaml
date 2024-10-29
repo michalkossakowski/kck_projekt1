@@ -17,7 +17,7 @@
                              UniformCornerRadius="30" 
                              Width="40"
                              Height="40"
-                             Margin="0,160,0,0"
+                             Margin="0,142,0,0"
                              VerticalAlignment="Top">
 
             <ProgressBar IsIndeterminate="True" 
@@ -32,54 +32,67 @@
         <StackPanel HorizontalAlignment="Center" >
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-                <materialDesign:PackIcon Kind="LoginVariant" Foreground="#3f51b5" Width="50" Height="50" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon 
+                    Kind="LoginVariant" 
+                    Foreground="{DynamicResource TextBlockColor}"
+                    Width="50" 
+                    Height="50" 
+                    Margin="0,0,5,0" 
+                    VerticalAlignment="Center"/>
+
                 <TextBlock
                 TextAlignment="Center"
                 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
                 Text="Log in"
-                Foreground="#3f51b5"
+                Foreground="{DynamicResource TextBlockColor}"
                 />
             </StackPanel>
-
-            <Label Name="errorMessage" 
-                   Visibility="Hidden" 
-                   Content="" 
-                   Foreground="#FFFF0000" 
-                   FontSize="16" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"
-                   Margin="0,0,20,0"
-                   />
 
             <TextBox Name="nick" 
                      materialDesign:HintAssist.HelperText="Enter your nick"  
                      materialDesign:HintAssist.Hint="Nick" 
+                      materialDesign:HintAssist.HelperTextFontSize="12" 
                      Width="200" Height="30" 
                      Margin="0,20,0,0" 
+                     Foreground="{DynamicResource TextBoxColor}"
                      />
 
             <PasswordBox Name="password" 
                          materialDesign:HintAssist.HelperText="Enter your password"  
                          materialDesign:HintAssist.Hint="Password" 
                          materialDesign:TextFieldAssist.HasClearButton="True" 
+                         materialDesign:HintAssist.HelperTextFontSize="12" 
                          Width="200" Height="30"  
-                         Margin="0,20,0,0" 
+                         Margin="0,30,0,0" 
+                         Foreground="{DynamicResource TextBoxColor}"
                          />
 
-            <Button Name="LoginButton" 
-                    Content="Login" 
-                    Width="80" Height="30" 
-                    Margin="0,30,0,0" 
-                    Click="LoginClick"
-                    />
+            <Button Width="80" Height="30" Click="LoginClick"  Margin="0,45,0,0"
+                    Name="LoginButton">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Log in" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
 
-            <Button Content="Back" 
-                    Width="80" Height="30" 
-                    Margin="0,20,0,0"
-                    Click="BackClick" 
-                    Background="#FF200E67"
-                    BorderBrush="MidnightBlue"
-                    />
+            <Button Width="80" Height="30" Click="BackClick"  Margin="0,20,0,0"
+                    Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+                    BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Back" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
+            
+            <Label Name="errorMessage" 
+                   Visibility="Collapsed" 
+                   Content="Error Message" 
+                   Foreground="#FFFF0000" 
+                   FontSize="16" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   Margin="0,10,0,-10"
+                   />
+
+
 
         </StackPanel>
     </Grid>

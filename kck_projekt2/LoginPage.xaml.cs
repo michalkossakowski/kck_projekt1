@@ -32,6 +32,7 @@ namespace kck_projekt2
 
         private async void LoginClick(object sender, RoutedEventArgs e)
         {
+            errorMessage.Visibility = Visibility.Collapsed;
             Loading.Visibility = Visibility.Visible;
             LoginButton.IsEnabled = false;
             string nickValue = nick.Text;
@@ -39,7 +40,7 @@ namespace kck_projekt2
 
             if (nickValue.Length == 0 || passwordValue.Length == 0)
             {
-                errorMessage.Content = "Nick and password cannot be null !";
+                errorMessage.Content = "Nick and password cannot be null";
                 errorMessage.Visibility = Visibility.Visible;
             }
             else
@@ -48,12 +49,12 @@ namespace kck_projekt2
                 var user = new UserModel(nickValue, passwordValue);
                 user = await Task.Run(async () =>
                 {
-                    await Task.Delay(1000); 
+                    await Task.Delay(1500); 
                     return userController.GetUser(user); 
                 });
                 if (user == null)
                 {
-                    errorMessage.Content = "Wrong nick or password !";
+                    errorMessage.Content = "Wrong nick or password";
                     errorMessage.Visibility = Visibility.Visible;
 
                 }

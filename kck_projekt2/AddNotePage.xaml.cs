@@ -77,6 +77,10 @@ namespace kck_projekt2
         {
             CustomCategory.IsEnabled = !CustomCategory.IsEnabled;
             SelectedCategory.IsEnabled = !SelectedCategory.IsEnabled;
+            if (!SelectedCategory.IsEnabled)
+            {
+                SelectedCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
+            }
         }
 
 
@@ -109,7 +113,6 @@ namespace kck_projekt2
             {
                 HintAssist.SetHelperText(CustomCategory, "Enter custom category");
                 CustomCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
-
             }
         }
 

@@ -25,6 +25,7 @@
                 materialDesign:HintAssist.Hint="Title" 
                 Width="200" Height="30" Margin="0,0,0,0"
                 Foreground="{DynamicResource TextBoxColor}"
+                TextChanged="Title_TextChanged"
                 />
 
             <ComboBox
@@ -38,6 +39,7 @@
                 Foreground="{DynamicResource TextBoxColor}"
                 materialDesign:HintAssist.HelperText="Select category"  
                 materialDesign:HintAssist.HelperTextFontSize="12" 
+                SelectionChanged="SelectedCategory_SelectionChanged"
                 >
 
                 <ComboBoxItem Content="Studies"/>
@@ -73,6 +75,7 @@
                 Width="200" Height="30" Margin="0,5,0,0"
                 IsEnabled="False"
                 Foreground="{DynamicResource TextBoxColor}"
+                TextChanged="CustomCategory_TextChanged"
                 />
 
             <TextBox
@@ -87,6 +90,7 @@
                 TextWrapping="Wrap"
                 VerticalScrollBarVisibility="Auto" 
                 Width="300"
+                TextChanged="NoteContent_TextChanged"
                 />
 
             <Button 

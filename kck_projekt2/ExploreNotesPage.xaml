@@ -24,7 +24,7 @@
                         TextAlignment="Center"
                         Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
                         Margin="0,20,0,10" 
-                        Foreground="#3f51b5"
+                        Foreground="{DynamicResource TextBlockColor}"
                         />
             
             <ScrollViewer Width="400" MaxHeight="550" Margin="17,0,0,0">
@@ -88,12 +88,14 @@
                        FontSize="14"
                        Foreground="Gray"
                        VerticalAlignment="Center"/>
-            
+
             <Button 
                 Content="Back" 
-                Width="70" Height="30" Margin="0,10,0,0" 
-                Click="BackClick" 
-                Background="MidnightBlue" BorderBrush="MidnightBlue"/>
+                Width="70" Height="30" Margin="0,20,0,0" 
+                Click="BackClick"
+                FontSize="16"
+                Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+                BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}"/>
 
         </StackPanel>
     </Grid>

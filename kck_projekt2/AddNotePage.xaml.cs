@@ -77,9 +77,17 @@ namespace kck_projekt2
         {
             CustomCategory.IsEnabled = !CustomCategory.IsEnabled;
             SelectedCategory.IsEnabled = !SelectedCategory.IsEnabled;
-            if (!SelectedCategory.IsEnabled)
+            if (SelectedCategory.IsEnabled)
             {
+                CustomCategory.Visibility = Visibility.Collapsed;
+                SelectedCategory.Visibility = Visibility.Visible;
                 SelectedCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
+            }
+            else
+            {
+                CustomCategory.Visibility = Visibility.Visible;
+                SelectedCategory.Visibility = Visibility.Collapsed;
+                CustomCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
             }
         }
 
@@ -120,7 +128,7 @@ namespace kck_projekt2
         {
             if (NoteContent.Text.Length > 0)
             {
-                HintAssist.SetHelperText(NoteContent, "");
+                HintAssist.SetHelperText(NoteContent, "Enter note content");
                 NoteContent.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
 
             }

@@ -36,9 +36,10 @@
             <Button 
                 Content="Back" 
                 Width="70" Height="30" Margin="0,20,0,0" 
-                Click="BackClick" 
-                Background="MidnightBlue" BorderBrush="MidnightBlue"/>
-
+                Click="BackClick"
+                FontSize="16"
+                Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+                BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}"/>
 
         </StackPanel>
     </Grid>

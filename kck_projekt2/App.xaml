@@ -16,7 +16,7 @@
             
             <SolidColorBrush x:Key="TextBlockColor" Color="#673ab7"/>
             <SolidColorBrush x:Key="TextBoxColor" Color="Black"/>
-
+        
 
             
         </ResourceDictionary>

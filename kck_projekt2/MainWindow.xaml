@@ -30,6 +30,7 @@
         </Grid.RowDefinitions>
 
         <Grid x:Name="MenuGrid"
+              Height="40"
               Grid.Row="0" 
               VerticalAlignment="Center" 
               HorizontalAlignment="Stretch"
@@ -74,7 +75,7 @@
                     Click="OpenActionMenu"
                     Visibility="Collapsed"
                     Background="{DynamicResource MaterialDesign.Brush.Secondary}"
-                    Margin="10,0,0,0"
+                    Margin="5,0,5,0"
                     Height="25"
                     Width="48"
                     ToolTip="Menu">
@@ -89,7 +90,7 @@
                     Click="LogoutClick"
                     Visibility="Collapsed"
                     Background="{DynamicResource MaterialDesign.Brush.Secondary}"
-                    Margin="10,0,0,0"
+                    Margin="5,0,5,0"
                     Height="25"
                     Width="48"
                     ToolTip="Logout">
@@ -102,7 +103,7 @@
                     Header="Console mode" 
                     Click="SwitchToConsoleMode"
                     Background="{DynamicResource MaterialDesign.Brush.Secondary}"
-                    Margin="10,0,0,0"
+                    Margin="5,0,5,0"
                     Height="25"
                     Width="48"
                     ToolTip="Console Mode">
@@ -114,7 +115,7 @@
                 <MenuItem
                     Click="ExitClick"
                     Background="{DynamicResource MaterialDesign.Brush.Secondary}"
-                    Margin="10,0,0,0"
+                    Margin="5,0,10,0"
                     Height="25"
                     Width="48"
                     ToolTip="Exit"
@@ -124,42 +125,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
 
-                <ToggleButton 
-                    Margin="-5,2,-5,0"
-                    Name="IsDarkTheme" 
-                    IsChecked="{Binding IsDarkTheme}"
-                    Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                    Click="SwitchThemeClick"
-                    ToolTip="Switch Theme">
-                    
-                    <materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
-                        <SolidColorBrush Color="#aa00ff" />
-                    </materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
-                    <materialDesign:ToggleButtonAssist.SwitchTrackOffBackground>
-                        <SolidColorBrush Color="#f1f1f1" />
-                    </materialDesign:ToggleButtonAssist.SwitchTrackOffBackground>
 
-                    <materialDesign:PackIcon 
-                            Kind="WhiteBalanceSunny"
-                            Foreground="Yellow">
-                    </materialDesign:PackIcon>
-                    
-                    <materialDesign:ToggleButtonAssist.OnContent>
-                        <materialDesign:PackIcon
-                        Kind="MoonWaningCrescent"
-                            RenderTransformOrigin=".5,.5"
-                            Foreground="Yellow">
-                            <materialDesign:PackIcon.RenderTransform>
-                                <RotateTransform Angle="-45" />
-                            </materialDesign:PackIcon.RenderTransform>
-                        </materialDesign:PackIcon>
-                    </materialDesign:ToggleButtonAssist.OnContent>
-
-                    <ToggleButton.LayoutTransform>
-                        <ScaleTransform ScaleX="0.78" ScaleY="0.78" />
-                    </ToggleButton.LayoutTransform>
-                    
-                </ToggleButton>
             </Menu>
 
         </Grid>
@@ -220,20 +186,68 @@
 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
-                    <Button Width="120" Height="30" Click="OpenLoginPage"  Margin="0,20,0,0">
+                    <Button 
+                        Width="120" Height="30" 
+                        Click="OpenLoginPage"  
+                        Margin="0,20,0,0"
+                        Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+                        BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}"
+                        >
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="LoginVariant" Foreground="White" Width="20" Height="20" Margin="0,0,5,0"/>
                             <TextBlock Text="Log in" VerticalAlignment="Center" Foreground="White"/>
                         </StackPanel>
                     </Button>
                     
-                    <Button Width="120" Height="30" Click="OpenRegisterPage"  Margin="0,20,0,0">
+                    <Button 
+                        Width="120" Height="30" 
+                        Click="OpenRegisterPage"  
+                        Margin="0,20,0,0"
+
+                        >
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="AccountPlusOutline" Foreground="White" Width="20" Height="20" Margin="0,0,5,0"/>
                             <TextBlock Text="Register" VerticalAlignment="Center" Foreground="White"/>
                         </StackPanel>
                     </Button>
 
+                    <ToggleButton 
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Center"
+                    Name="IsDarkTheme" 
+                    IsChecked="{Binding IsDarkTheme}"
+                    Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                    Click="SwitchThemeClick"
+                    ToolTip="Switch Theme">
+
+                        <materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
+                            <SolidColorBrush Color="#aa00ff" />
+                        </materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
+                        <materialDesign:ToggleButtonAssist.SwitchTrackOffBackground>
+                            <SolidColorBrush Color="#f1f1f1" />
+                        </materialDesign:ToggleButtonAssist.SwitchTrackOffBackground>
+
+                        <materialDesign:PackIcon 
+                            Kind="WhiteBalanceSunny"
+                            Foreground="Yellow">
+                        </materialDesign:PackIcon>
+
+                        <materialDesign:ToggleButtonAssist.OnContent>
+                            <materialDesign:PackIcon
+                        Kind="MoonWaningCrescent"
+                            RenderTransformOrigin=".5,.5"
+                            Foreground="Yellow">
+                                <materialDesign:PackIcon.RenderTransform>
+                                    <RotateTransform Angle="-45" />
+                                </materialDesign:PackIcon.RenderTransform>
+                            </materialDesign:PackIcon>
+                        </materialDesign:ToggleButtonAssist.OnContent>
+
+                        <ToggleButton.LayoutTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                        </ToggleButton.LayoutTransform>
+
+                    </ToggleButton>
                 </StackPanel>
 
               

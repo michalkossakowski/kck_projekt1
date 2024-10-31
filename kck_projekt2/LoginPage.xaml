@@ -17,14 +17,17 @@
                              UniformCornerRadius="30" 
                              Width="40"
                              Height="40"
-                             Margin="0,142,0,0"
-                             VerticalAlignment="Top">
+                             Margin="0,240,0,0"
+                             VerticalAlignment="Top"
+                             Background="{DynamicResource MaterialDesign.Brush.Primary}"
+                             >
 
             <ProgressBar IsIndeterminate="True" 
                          Style="{StaticResource MaterialDesignCircularProgressBar}" 
                          Value="70" 
                          Height="30"
                          Width="30"
+                         Foreground="White"
                          />
 
         </materialDesign:Card>

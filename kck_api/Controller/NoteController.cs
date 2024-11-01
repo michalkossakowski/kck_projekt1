@@ -1,4 +1,5 @@
 ﻿using kck_api.Database;
+using static Azure.Core.HttpHeader;
 
 namespace kck_api.Controller
 {
@@ -28,7 +29,9 @@ namespace kck_api.Controller
 
         public List<NoteModel> GetNotesByUserId(int userId)
         {
-            return _context.Notes.Where(n => n.AuthorId == userId).OrderBy(n => n.ModifiedDate).ToList();
+            var notes = _context.Notes.Where(n => n.AuthorId == userId).OrderBy(n => n.ModifiedDate).ToList();
+            notes.Reverse();
+            return notes;
         }
 
         public NoteModel GetNoteById(int noteId)
@@ -49,34 +52,44 @@ namespace kck_api.Controller
 
         public List<NoteModel> GetNotesByUserIdAndMonth(int userId, DateTime date)
         {
-            return _context.Notes.Where(n => n.AuthorId == userId
-            && n.ModifiedDate.Month == date.Month
-            && n.ModifiedDate.Year == date.Year)
+            var notes = _context.Notes.Where(n => n.AuthorId == userId
+                && n.ModifiedDate.Month == date.Month
+                && n.ModifiedDate.Year == date.Year)
                 .ToList();
+            notes.Reverse();
+            return notes;
         }
 
 
         public List<NoteModel> GetNotesByUserIdAndDay(int userId, DateTime date)
         {
-            return _context.Notes
+            var notes = _context.Notes
                   .OrderBy(n => n.ModifiedDate)
                   .Where(n => n.AuthorId == userId
                         && n.ModifiedDate.Month == date.Month
                         && n.ModifiedDate.Year == date.Year
                         && n.ModifiedDate.Day == date.Day)
                   .ToList();
+            notes.Reverse();
+            return notes;
         }
 
         public List<NoteModel> GetNotesByUserIdAndTitle(int userId, string title)
         {
-            return _context.Notes.Where(n => n.AuthorId == userId 
-            && n.Title.Contains(title)).OrderBy(n => n.ModifiedDate).ToList();
+            var notes = _context.Notes
+                .Where(n => n.AuthorId == userId
+                    && n.Title.Contains(title))
+                .OrderBy(n => n.ModifiedDate).ToList();
+            notes.Reverse();
+            return notes; 
         }
 
         public List<NoteModel> GetNotesByUserIdAndCategory(int userId, string category)
         {
-            return _context.Notes.Where(n => n.AuthorId == userId
+            var notes = _context.Notes.Where(n => n.AuthorId == userId
             && n.Category.Contains(category)).OrderBy(n => n.ModifiedDate).ToList();
+            notes.Reverse();
+            return notes;
         }
 
         public void EditNote(int noteId, string newTitle, string newCategory, string newContent)

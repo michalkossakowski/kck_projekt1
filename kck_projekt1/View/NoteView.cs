@@ -224,8 +224,8 @@ namespace kck_projekt1.View
             else
             {
                 var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.Category})[/] - {n.ModifiedDate}").ToList();
-                list.Add("Back");
-                list.Reverse();
+                list.Insert(0,"Back");
+
 
                 var choice = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
@@ -291,8 +291,7 @@ namespace kck_projekt1.View
                     AnsiConsole.Write(rule);
 
                     var list = days.OrderBy(day => day).Select(day => new DateTime(currentDate.Year, currentDate.Month, day).ToString("dd.MM.yyyy")).ToList();
-                    list.Add("Back");
-                    list.Reverse();
+                    list.Insert(0, "Back");
 
 
                     var choice = AnsiConsole.Prompt(
@@ -388,8 +387,7 @@ namespace kck_projekt1.View
             else
             {
                 var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.Category})[/] - {n.ModifiedDate}").ToList();
-                list.Add("Back");
-                list.Reverse();
+                list.Insert(0, "Back");
 
                 var choice = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
@@ -494,8 +492,7 @@ namespace kck_projekt1.View
             else
             {
                 var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.Category})[/] - {n.ModifiedDate}").ToList();
-                list.Add("Back");
-                list.Reverse();
+                list.Insert(0, "Back");
 
                 var choice = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
@@ -565,8 +562,7 @@ namespace kck_projekt1.View
             else
             {
                 var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.Category})[/] - {n.ModifiedDate}").ToList();
-                list.Add("Back");
-                list.Reverse();
+                list.Insert(0, "Back");
 
                 var choice = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
@@ -611,8 +607,7 @@ namespace kck_projekt1.View
                 yearAndMonth.Add((note.ModifiedDate.Year, note.ModifiedDate.Month));
             }
             var list = yearAndMonth.OrderBy(date => date).Select(date => new DateTime(date.Item1, date.Item2, 1).ToString("MM.yyyy")).ToList();
-            list.Add("Back");
-            list.Reverse();
+            list.Insert(0, "Back");
 
             var choice = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
@@ -653,8 +648,7 @@ namespace kck_projekt1.View
             var noteController = NoteController.GetInstance();
             var notes = noteController.GetNotesByUserIdAndMonth(userId, date);
             var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.Category})[/] - {n.ModifiedDate}").ToList();
-            list.Add("Back");
-            list.Reverse();
+            list.Insert(0, "Back");
 
             var choice = AnsiConsole.Prompt(
             new SelectionPrompt<string>()

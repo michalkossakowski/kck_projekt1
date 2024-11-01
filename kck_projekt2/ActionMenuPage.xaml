@@ -65,7 +65,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,20,0,0">
-                    <Button Width="180" Height="30" Click="OpenCalendarPage" FontSize="16">
+                    <Button Width="180" Height="30" Click="OpenFindByDatePage" FontSize="16">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="CalendarSearch" Foreground="white" Width="20" Height="20" Margin="0,0,5,0"/>
                             <TextBlock Text="Find by date" Foreground="white" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -74,7 +74,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,20,0,0">
-                    <Button Width="180" Height="30" Click="OpenCalendarPage" FontSize="16">
+                    <Button Width="180" Height="30" Click="OpenFindByCategoryPage" FontSize="16">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="ShapePlusOutline" Foreground="white" Width="20" Height="20" Margin="0,0,5,0"/>
                             <TextBlock Text="Find by category" Foreground="white" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -83,13 +83,14 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,20,0,0">
-                    <Button Width="180" Height="30" Click="OpenCalendarPage" FontSize="16">
+                    <Button Width="180" Height="30" Click="OpenExoplreNotesByMonthPage" FontSize="16">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="CalendarMonth" Foreground="white" Width="20" Height="20" Margin="0,0,5,0"/>
                             <TextBlock Text="Explore by month" Foreground="white" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>
+                
 
             </StackPanel>
         </StackPanel>

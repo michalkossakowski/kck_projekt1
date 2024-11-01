@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,11 +26,18 @@ namespace kck_projekt2
         private MainWindow _mainWindow;
         public ObservableCollection<NoteModel> Notes { get; set; }
         private NoteController _noteController;
-        public FindByDatePage(MainWindow mainWindow)
+        public DateTime _searchingDate;
+        public FindByDatePage(MainWindow mainWindow, DateTime? searchingDate)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
             _noteController = NoteController.GetInstance();
+            if (searchingDate != null)
+            {
+                DatePicker.SelectedDate = searchingDate;
+                _searchingDate = (DateTime)searchingDate;
+                Search();
+            }
         }
 
         private void BackClick(object sender, RoutedEventArgs e)
@@ -37,15 +45,22 @@ namespace kck_projekt2
             _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
         }
 
-        private void SearchClick(object sender, RoutedEventArgs e) 
+        private void SearchClick(object sender, RoutedEventArgs e)
         {
             DataContext = null;
-            var notes = _noteController.GetNotesByUserIdAndTitle(_mainWindow.loggedUserId, SearchInput.Text);
-            if (notes.Count == 0) 
-            { 
+            _searchingDate = (DateTime)DatePicker.SelectedDate;
+            Search();
+        }
+
+        private void Search()
+        {
+            var notes = _noteController.GetNotesByUserIdAndDay(_mainWindow.loggedUserId, _searchingDate);
+            if (notes.Count == 0)
+            {
+                BottomTip.Visibility = Visibility.Hidden;
                 Information.Visibility = Visibility.Visible;
-                Information.Text = "There is no notes that match your search";
-                Information.Foreground = new SolidColorBrush(Color.FromRgb(255,0,0));
+                Information.Text = $"You dont have any notes from: \"{_searchingDate:dd.MM.yyyy}\"";
+                Information.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
             }
             else
             {

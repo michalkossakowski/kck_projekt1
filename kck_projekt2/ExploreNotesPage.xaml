@@ -19,13 +19,13 @@
                    VerticalAlignment="Top"
                    TextAlignment="Center"
                    Text="You don't have any notes right now"
-                   FontSize="16"
+                   FontSize="20"
                    Margin="0,100,0,20" 
                    Foreground="Red"
                    Visibility="Collapsed"/>
 
         <!-- Header -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,0">
             <materialDesign:PackIcon 
                     Kind="FolderSearchOutline" 
                     Foreground="{DynamicResource TextBlockColor}"
@@ -45,32 +45,35 @@
         </StackPanel>
 
 
-        <!-- ScrollViewer -->
+        <!-- ScrollView -->
         <ScrollViewer 
-            Grid.Row="1"
-            VerticalAlignment="Stretch"
-            HorizontalAlignment="Stretch"
-            Margin="0,10,0,0"
-            VerticalScrollBarVisibility="Auto" 
-            MinHeight="200"
-            >
+Grid.Row="1"
+VerticalAlignment="Stretch"
+HorizontalAlignment="Stretch"
+Margin="0,10,0,0"
+VerticalScrollBarVisibility="Auto" 
+MinHeight="200"
+>
 
-            <ItemsControl ItemsSource="{Binding Notes}">
-                
+            <ItemsControl ItemsSource="{Binding Notes}"
+      HorizontalContentAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel />
+                        <WrapPanel HorizontalAlignment="Center" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-                
+
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Margin="10" Padding="0,0,0,0" CornerRadius="20" 
-                            MouseUp="OpenEditPage"
-                            BorderBrush="{DynamicResource MaterialDesign.Brush.Primary}" 
-                            BorderThickness="2"
-                            Width="250"
-                            >
+                        <Border 
+                Margin="10" 
+                Padding="0,0,0,0" 
+                CornerRadius="20" 
+                MouseUp="OpenEditPage"
+                BorderBrush="{DynamicResource MaterialDesign.Brush.Primary}" 
+                BorderThickness="2"
+                Width="250"
+                >
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="{DynamicResource NoHoverColor}" />
@@ -84,62 +87,64 @@
                             </Border.Style>
                             <StackPanel>
                                 <StackPanel 
-                                    Orientation="Horizontal" 
-                                    HorizontalAlignment="Center"
-                                    Margin="5,5,5,5"
-                                    >
+                        Orientation="Horizontal" 
+                        HorizontalAlignment="Center"
+                        Margin="5,5,5,5"
+                        >
                                     <TextBlock 
-                                        Text="{Binding Title}" 
-                                        TextAlignment="Center"
-                                        FontWeight="Bold" 
-                                        Foreground="{DynamicResource TextBlockColor}"
-                                        FontSize="16"/>
+                            Text="{Binding Title}" 
+                            TextAlignment="Center"
+                            FontWeight="Bold" 
+                            Foreground="{DynamicResource TextBlockColor}"
+                            FontSize="16"
+                            />
                                     <TextBlock 
-                                        Text="{Binding Category, StringFormat=' ({0})'}" 
-                                        TextAlignment="Center"
-                                        FontSize="16"
-                                        Foreground="{DynamicResource LightColor}" 
-                                        />
+                            Text="{Binding Category, StringFormat=' ({0})'}" 
+                            TextAlignment="Center"
+                            FontSize="16"
+                            Foreground="{DynamicResource LightColor}" 
+                            />
                                 </StackPanel>
-                                
+
                                 <TextBlock 
-                                    Text="{Binding ModifiedDate, StringFormat=' {0:dd.MM.yyyy HH:mm:ss} '}"
-                                    TextAlignment="Center"
-                                    FontSize="12"
-                                    VerticalAlignment="Center"
-                                    Margin="0,0,0,5"
-                                    Foreground="{DynamicResource TextBlockColor}"
-                                    />
+                        Text="{Binding ModifiedDate, StringFormat=' {0:dd.MM.yyyy HH:mm:ss} '}"
+                        TextAlignment="Center"
+                        FontSize="12"
+                        VerticalAlignment="Center"
+                        Margin="0,0,0,5"
+                        Foreground="{DynamicResource TextBlockColor}"
+                        />
 
                                 <Border 
-                                    Height="2" 
-                                    Background="{DynamicResource MaterialDesign.Brush.Primary}" 
-                                    Margin="-1,0,-1,0"/>
+                        Height="2" 
+                        Background="{DynamicResource MaterialDesign.Brush.Primary}" 
+                        Margin="-1,0,-1,0"
+                        />
 
                                 <TextBlock 
-                                    Text="{Binding Content}"
-                                    TextAlignment="Center"
-                                    TextWrapping="Wrap" 
-                                    FontSize="16"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Margin="5"
-                                    Padding="5"
-                                    Foreground="{DynamicResource TextBlockColor}"
-                                    FontWeight="Bold"
-                                    />
+                        Text="{Binding Content}"
+                        TextAlignment="Center"
+                        TextWrapping="Wrap" 
+                        FontSize="16"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="5"
+                        Padding="5"
+                        Foreground="{DynamicResource TextBlockColor}"
+                        FontWeight="Bold"
+                        />
                             </StackPanel>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-        
+
         <!-- Tip -->
         <TextBlock 
             Name="BottomTip"
             Grid.Row="2"
-            Text="(Press at the note to edit)" 
+            Text="(Press at the note to edit or delete)" 
             TextAlignment="Center"
             FontSize="14"
             Foreground="Gray"
@@ -153,6 +158,7 @@
             Width="70" 
             Height="30"
             Margin="0,10,0,0" 
+            FontSize="16"
             Click="BackClick"
             Background="{DynamicResource MaterialDesign.Brush.Secondary}"
             BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}"/>

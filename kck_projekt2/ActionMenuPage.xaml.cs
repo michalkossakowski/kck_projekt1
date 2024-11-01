@@ -48,5 +48,17 @@ namespace kck_projekt2
         {
             _mainWindow.contentControl.Content = new SearchPage(_mainWindow,null);
         }
+        private void OpenFindByDatePage(object sender, RoutedEventArgs e)
+        {
+            _mainWindow.contentControl.Content = new FindByDatePage(_mainWindow,null);
+        }
+        private void OpenFindByCategoryPage(object sender, RoutedEventArgs e)
+        {
+            _mainWindow.contentControl.Content = new FindByCategoryPage(_mainWindow,null);
+        }
+        private void OpenExoplreNotesByMonthPage(object sender, RoutedEventArgs e)
+        {
+            _mainWindow.contentControl.Content = new ExploreNotesByMonthPage(_mainWindow);
+        }
     }
 }

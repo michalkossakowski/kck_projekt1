@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:kck_projekt2"
         mc:Ignorable="d"
         Title="MainWindow" 
-        MinHeight="700" 
+        MinHeight="750" 
         MinWidth="650"
-        Height="700"
+        Height="750"
         Width="650"
         Style="{StaticResource MaterialDesignWindow}"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -22,240 +22,257 @@
         >
 
 
-    <Grid Name="MainGrid">
-        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Grid>
+        <materialDesign:Snackbar
+                x:Name="Snackbar"
+                MessageQueue="{Binding ElementName=Snackbar, Path=MessageQueue}" 
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="0,30,0,0"
+                Panel.ZIndex="10"
+                Foreground="White">
+            <materialDesign:Snackbar.Resources>
+                <Style TargetType="materialDesign:SnackbarMessage">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Foreground" Value="White"/>
 
-        <Grid x:Name="MenuGrid"
-              Height="40"
-              Grid.Row="0" 
-              VerticalAlignment="Center" 
-              HorizontalAlignment="Stretch"
-              Background="{DynamicResource DarkColor}"
-              >
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <materialDesign:PackIcon  
-                Grid.Column="0"
-                Kind="NotebookOutline" 
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Foreground="White" 
-                Height="25"
-                Width="25"
-                Margin="5,0,5,0"/>
-            
-            <TextBlock
-                       Grid.Column="1"                 
-                       TextAlignment="Center"
-                       Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                       Text="Notes App" 
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       Foreground="White"/>
-
-            <Menu VerticalAlignment="Center" 
-                  FontSize="14" 
-                  Grid.Column="2"
-                  Foreground="White"
-                  Style="{StaticResource MaterialDesignMenu}"
-                  HorizontalAlignment="Right">
-
-                <!-- Default Hidden Action Menu -->
-                <MenuItem 
-                    Name="ActionMenuMenuItem"
-                    Click="OpenActionMenu"
-                    Visibility="Collapsed"
-                    Background="{DynamicResource LightColor}"
-                    Margin="5,0,5,0"
-                    Height="25"
-                    Width="48"
-                    ToolTip="Menu">
-                    <MenuItem.Icon>
-                        <materialDesign:PackIcon Kind="Menu" />
-                    </MenuItem.Icon>
-                </MenuItem>
-
-                <!-- Default Hidden Logout -->
-                <MenuItem 
-                    Name="LogoutMenuItem"
-                    Click="LogoutClick"
-                    Visibility="Collapsed"
-                    Background="{DynamicResource LightColor}"
-                    Margin="5,0,5,0"
-                    Height="25"
-                    Width="48"
-                    ToolTip="Logout">
-                    <MenuItem.Icon>
-                        <materialDesign:PackIcon Kind="Logout" />
-                    </MenuItem.Icon>
-                </MenuItem>
-
-                <MenuItem 
-                    Header="Console mode" 
-                    Click="SwitchToConsoleMode"
-                    Background="{DynamicResource LightColor}"
-                    Margin="5,0,5,0"
-                    Height="25"
-                    Width="48"
-                    ToolTip="Console Mode">
-                    <MenuItem.Icon>
-                        <materialDesign:PackIcon Kind="Console" />
-                    </MenuItem.Icon>
-                </MenuItem>
-
-                <MenuItem
-                    Click="ExitClick"
-                    Background="{DynamicResource LightColor}"
-                    Margin="5,0,10,0"
-                    Height="25"
-                    Width="48"
-                    ToolTip="Exit"
-                    >
-                    <MenuItem.Icon>
-                        <materialDesign:PackIcon Kind="ExitRun" />
-                    </MenuItem.Icon>
-                </MenuItem>
+                </Style>
+            </materialDesign:Snackbar.Resources>
+        </materialDesign:Snackbar>
 
 
-            </Menu>
 
-        </Grid>
-
-        <Grid x:Name="ContentGrid"
-              Grid.Row="1" 
-              HorizontalAlignment="Center" >
+        <Grid Name="MainGrid">
             <Grid.RowDefinitions>
-                <RowDefinition Height="299*"/>
-                <RowDefinition Height="446*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <ContentControl x:Name="contentControl" Grid.RowSpan="2"/>
+            <Grid x:Name="MenuGrid"
+                  Height="40"
+                  Grid.Row="0" 
+                  VerticalAlignment="Center" 
+                  HorizontalAlignment="Stretch"
+                  Background="{DynamicResource DarkColor}"
+                  >
 
-            <StackPanel x:Name="WelcomePanel" Grid.RowSpan="2">
-                
-                <TextBlock VerticalAlignment="Top"           
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <materialDesign:PackIcon  
+                    Grid.Column="0"
+                    Kind="NotebookOutline" 
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Foreground="White" 
+                    Height="25"
+                    Width="25"
+                    Margin="5,0,5,0"/>
+
+                <TextBlock
+                           Grid.Column="1"                 
                            TextAlignment="Center"
-                           FontSize="70"
-                           Text="Welcome"
-                           Margin="0,20,0,0"
-                           Foreground="{DynamicResource TextBlockColor}"
-                           />
+                           Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                           Text="Notes App" 
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Foreground="White"/>
 
-                <TextBlock TextAlignment="Center"
-                           FontSize="35"
-                           Text="in Notes App"
-                           Margin="0,0,0,0"
-                           Foreground="{DynamicResource TextBlockColor}"
-                           />
+                <Menu VerticalAlignment="Center" 
+                      FontSize="14" 
+                      Grid.Column="2"
+                      Foreground="White"
+                      Style="{StaticResource MaterialDesignMenu}"
+                      HorizontalAlignment="Right">
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-                    <materialDesign:PackIcon 
-                    Kind="BookOpenBlankVariant"
-                    HorizontalAlignment="Center"
-                    Foreground="{DynamicResource DarkColor}"
-                    Width="150"                    
-                    Height="150"
-                    Margin="0,0,-35,0" >
-                        <materialDesign:PackIcon.RenderTransform>
-                            <TranslateTransform x:Name="iconNote" />
-                        </materialDesign:PackIcon.RenderTransform>
-                    </materialDesign:PackIcon>
+                    <!-- Default Hidden Action Menu -->
+                    <MenuItem 
+                        Name="ActionMenuMenuItem"
+                        Click="OpenActionMenu"
+                        Visibility="Collapsed"
+                        Background="{DynamicResource LightColor}"
+                        Margin="5,0,5,0"
+                        Height="25"
+                        Width="48"
+                        ToolTip="Menu">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Menu" />
+                        </MenuItem.Icon>
+                    </MenuItem>
 
-                    <materialDesign:PackIcon 
-                    Kind="Pencil"
-                    HorizontalAlignment="Center"
-                    Foreground="{DynamicResource LightColor}"      
-                    Width="100"                    
-                    Height="100"
-                    Margin="0,-20,0,0" >
-                        <materialDesign:PackIcon.RenderTransform>
-                            <TranslateTransform x:Name="iconPencil" />
-                        </materialDesign:PackIcon.RenderTransform>
-                    </materialDesign:PackIcon>
-                </StackPanel>
+                    <!-- Default Hidden Logout -->
+                    <MenuItem 
+                        Name="LogoutMenuItem"
+                        Click="LogoutClick"
+                        Visibility="Collapsed"
+                        Background="{DynamicResource LightColor}"
+                        Margin="5,0,5,0"
+                        Height="25"
+                        Width="48"
+                        ToolTip="Logout">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Logout" />
+                        </MenuItem.Icon>
+                    </MenuItem>
 
+                    <MenuItem 
+                        Header="Console mode" 
+                        Click="SwitchToConsoleMode"
+                        Background="{DynamicResource LightColor}"
+                        Margin="5,0,5,0"
+                        Height="25"
+                        Width="48"
+                        ToolTip="Console Mode">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Console" />
+                        </MenuItem.Icon>
+                    </MenuItem>
 
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-
-                    <Button 
-                        Width="120" Height="30" 
-                        Click="OpenLoginPage"  
-                        Margin="0,20,0,0"
-                        FontSize="16"
-                        Background="{DynamicResource DarkColor}"
-                        BorderBrush="{DynamicResource DarkColor}"
+                    <MenuItem
+                        Click="ExitClick"
+                        Background="{DynamicResource LightColor}"
+                        Margin="5,0,10,0"
+                        Height="25"
+                        Width="48"
+                        ToolTip="Exit"
                         >
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="LoginVariant" Foreground="White" Width="20" Height="20" Margin="0,0,5,0"/>
-                            <TextBlock Text="Log in" VerticalAlignment="Center" Foreground="White"/>
-                        </StackPanel>
-                    </Button>
-                    
-                    <Button 
-                        Width="120" Height="30" 
-                        Click="OpenRegisterPage"  
-                        Margin="0,20,0,0"
-                        FontSize="16"
-                        Background="{DynamicResource DarkColor}"
-                        BorderBrush="{DynamicResource DarkColor}"
-                        >
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="AccountPlusOutline" Foreground="White" Width="20" Height="20" Margin="0,0,5,0"/>
-                            <TextBlock Text="Register" VerticalAlignment="Center" Foreground="White"/>
-                        </StackPanel>
-                    </Button>
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="ExitRun" />
+                        </MenuItem.Icon>
+                    </MenuItem>
 
-                    <ToggleButton 
-                    Margin="0,20,0,0"
-                    HorizontalAlignment="Center"
-                    Name="IsDarkTheme" 
-                    IsChecked="{Binding IsDarkTheme}"
-                    Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                    Click="SwitchThemeClick"
-                    ToolTip="Switch Theme">
 
-                        <materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
-                            <SolidColorBrush Color="#673ab7" />
-                        </materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
-                        <materialDesign:ToggleButtonAssist.SwitchTrackOffBackground>
-                            <SolidColorBrush Color="#f1f1f1" />
-                        </materialDesign:ToggleButtonAssist.SwitchTrackOffBackground>
+                </Menu>
 
+            </Grid>
+            <Grid x:Name="ContentGrid"
+                  Grid.Row="1" 
+                  HorizontalAlignment="Center" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="299*"/>
+                    <RowDefinition Height="446*"/>
+                </Grid.RowDefinitions>
+
+                <ContentControl x:Name="contentControl" Grid.RowSpan="2"/>
+
+                <StackPanel x:Name="WelcomePanel" Grid.RowSpan="2">
+
+                    <TextBlock VerticalAlignment="Top"           
+                               TextAlignment="Center"
+                               FontSize="70"
+                               Text="Welcome"
+                               Margin="0,20,0,0"
+                               Foreground="{DynamicResource TextBlockColor}"
+                               />
+
+                    <TextBlock TextAlignment="Center"
+                               FontSize="35"
+                               Text="in Notes App"
+                               Margin="0,0,0,0"
+                               Foreground="{DynamicResource TextBlockColor}"
+                               />
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
                         <materialDesign:PackIcon 
-                            Kind="WhiteBalanceSunny"
-                            Foreground="Yellow">
+                        Kind="BookOpenBlankVariant"
+                        HorizontalAlignment="Center"
+                        Foreground="{DynamicResource DarkColor}"
+                        Width="150"                    
+                        Height="150"
+                        Margin="0,0,-35,0" >
+                            <materialDesign:PackIcon.RenderTransform>
+                                <TranslateTransform x:Name="iconNote" />
+                            </materialDesign:PackIcon.RenderTransform>
                         </materialDesign:PackIcon>
 
-                        <materialDesign:ToggleButtonAssist.OnContent>
-                            <materialDesign:PackIcon
-                        Kind="MoonWaningCrescent"
-                            RenderTransformOrigin=".5,.5"
-                            Foreground="Yellow">
-                                <materialDesign:PackIcon.RenderTransform>
-                                    <RotateTransform Angle="-45" />
-                                </materialDesign:PackIcon.RenderTransform>
+                        <materialDesign:PackIcon 
+                        Kind="Pencil"
+                        HorizontalAlignment="Center"
+                        Foreground="{DynamicResource LightColor}"      
+                        Width="100"                    
+                        Height="100"
+                        Margin="0,-20,0,0" >
+                            <materialDesign:PackIcon.RenderTransform>
+                                <TranslateTransform x:Name="iconPencil" />
+                            </materialDesign:PackIcon.RenderTransform>
+                        </materialDesign:PackIcon>
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+
+                        <Button 
+                            Width="120" Height="30" 
+                            Click="OpenLoginPage"  
+                            Margin="0,20,0,0"
+                            FontSize="16"
+                            Background="{DynamicResource DarkColor}"
+                            BorderBrush="{DynamicResource DarkColor}"
+                            >
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="LoginVariant" Foreground="White" Width="20" Height="20" Margin="0,0,5,0"/>
+                                <TextBlock Text="Log in" VerticalAlignment="Center" Foreground="White"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button 
+                            Width="120" Height="30" 
+                            Click="OpenRegisterPage"  
+                            Margin="0,20,0,0"
+                            FontSize="16"
+                            Background="{DynamicResource DarkColor}"
+                            BorderBrush="{DynamicResource DarkColor}"
+                            >
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="AccountPlusOutline" Foreground="White" Width="20" Height="20" Margin="0,0,5,0"/>
+                                <TextBlock Text="Register" VerticalAlignment="Center" Foreground="White"/>
+                            </StackPanel>
+                        </Button>
+
+                        <ToggleButton 
+                        Margin="0,20,0,0"
+                        HorizontalAlignment="Center"
+                        Name="IsDarkTheme" 
+                        IsChecked="{Binding IsDarkTheme}"
+                        Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                        Click="SwitchThemeClick"
+                        ToolTip="Switch Theme">
+
+                            <materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
+                                <SolidColorBrush Color="#673ab7" />
+                            </materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
+                            <materialDesign:ToggleButtonAssist.SwitchTrackOffBackground>
+                                <SolidColorBrush Color="#f1f1f1" />
+                            </materialDesign:ToggleButtonAssist.SwitchTrackOffBackground>
+
+                            <materialDesign:PackIcon 
+                                Kind="WhiteBalanceSunny"
+                                Foreground="Yellow">
                             </materialDesign:PackIcon>
-                        </materialDesign:ToggleButtonAssist.OnContent>
 
-                        <ToggleButton.LayoutTransform>
-                            <ScaleTransform ScaleX="1" ScaleY="1" />
-                        </ToggleButton.LayoutTransform>
+                            <materialDesign:ToggleButtonAssist.OnContent>
+                                <materialDesign:PackIcon
+                            Kind="MoonWaningCrescent"
+                                RenderTransformOrigin=".5,.5"
+                                Foreground="Yellow">
+                                    <materialDesign:PackIcon.RenderTransform>
+                                        <RotateTransform Angle="-45" />
+                                    </materialDesign:PackIcon.RenderTransform>
+                                </materialDesign:PackIcon>
+                            </materialDesign:ToggleButtonAssist.OnContent>
 
-                    </ToggleButton>
+                            <ToggleButton.LayoutTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </ToggleButton.LayoutTransform>
+
+                        </ToggleButton>
+                    </StackPanel>
                 </StackPanel>
-
-              
-                
-            </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

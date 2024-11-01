@@ -34,7 +34,7 @@
               Grid.Row="0" 
               VerticalAlignment="Center" 
               HorizontalAlignment="Stretch"
-              Background="{DynamicResource MaterialDesign.Brush.Primary}"
+              Background="{DynamicResource DarkColor}"
               >
 
             <Grid.ColumnDefinitions>
@@ -74,7 +74,7 @@
                     Name="ActionMenuMenuItem"
                     Click="OpenActionMenu"
                     Visibility="Collapsed"
-                    Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+                    Background="{DynamicResource LightColor}"
                     Margin="5,0,5,0"
                     Height="25"
                     Width="48"
@@ -89,7 +89,7 @@
                     Name="LogoutMenuItem"
                     Click="LogoutClick"
                     Visibility="Collapsed"
-                    Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+                    Background="{DynamicResource LightColor}"
                     Margin="5,0,5,0"
                     Height="25"
                     Width="48"
@@ -102,7 +102,7 @@
                 <MenuItem 
                     Header="Console mode" 
                     Click="SwitchToConsoleMode"
-                    Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+                    Background="{DynamicResource LightColor}"
                     Margin="5,0,5,0"
                     Height="25"
                     Width="48"
@@ -114,7 +114,7 @@
 
                 <MenuItem
                     Click="ExitClick"
-                    Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+                    Background="{DynamicResource LightColor}"
                     Margin="5,0,10,0"
                     Height="25"
                     Width="48"
@@ -161,7 +161,7 @@
                     <materialDesign:PackIcon 
                     Kind="BookOpenBlankVariant"
                     HorizontalAlignment="Center"
-                    Foreground="{DynamicResource MaterialDesign.Brush.Primary}"    
+                    Foreground="{DynamicResource DarkColor}"
                     Width="150"                    
                     Height="150"
                     Margin="0,0,-35,0" >
@@ -173,7 +173,7 @@
                     <materialDesign:PackIcon 
                     Kind="Pencil"
                     HorizontalAlignment="Center"
-                    Foreground="{DynamicResource MaterialDesign.Brush.Secondary}"        
+                    Foreground="{DynamicResource LightColor}"      
                     Width="100"                    
                     Height="100"
                     Margin="0,-20,0,0" >
@@ -191,8 +191,8 @@
                         Click="OpenLoginPage"  
                         Margin="0,20,0,0"
                         FontSize="16"
-                        Background="{DynamicResource MaterialDesign.Brush.Secondary}"
-                        BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}"
+                        Background="{DynamicResource DarkColor}"
+                        BorderBrush="{DynamicResource DarkColor}"
                         >
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="LoginVariant" Foreground="White" Width="20" Height="20" Margin="0,0,5,0"/>
@@ -205,6 +205,8 @@
                         Click="OpenRegisterPage"  
                         Margin="0,20,0,0"
                         FontSize="16"
+                        Background="{DynamicResource DarkColor}"
+                        BorderBrush="{DynamicResource DarkColor}"
                         >
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="AccountPlusOutline" Foreground="White" Width="20" Height="20" Margin="0,0,5,0"/>
@@ -222,7 +224,7 @@
                     ToolTip="Switch Theme">
 
                         <materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
-                            <SolidColorBrush Color="#aa00ff" />
+                            <SolidColorBrush Color="#673ab7" />
                         </materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
                         <materialDesign:ToggleButtonAssist.SwitchTrackOffBackground>
                             <SolidColorBrush Color="#f1f1f1" />

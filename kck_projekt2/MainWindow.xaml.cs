@@ -41,14 +41,19 @@ namespace kck_projekt2
             {
                 Application.Current.Resources["TextBlockColor"] = new SolidColorBrush(Colors.White);
                 Application.Current.Resources["TextBoxColor"] = new SolidColorBrush(Colors.White);
+                Application.Current.Resources["HoverColor"] = new SolidColorBrush(Color.FromRgb(79, 79, 79));
                 theme.SetBaseTheme(BaseTheme.Dark);
+                theme.SetPrimaryColor((Color)ColorConverter.ConvertFromString("#aa00ff"));
+                theme.SetSecondaryColor((Color)ColorConverter.ConvertFromString("#673ab7"));
             }
             else
             {
-
-                Application.Current.Resources["TextBlockColor"] = (SolidColorBrush)Application.Current.Resources["PrimaryColor"];
+                Application.Current.Resources["TextBlockColor"] = (SolidColorBrush)Application.Current.Resources["DarkColor"];
                 Application.Current.Resources["TextBoxColor"] = new SolidColorBrush(Colors.Black);
+                Application.Current.Resources["HoverColor"] = new SolidColorBrush(Color.FromRgb(221, 221, 221));
                 theme.SetBaseTheme(BaseTheme.Light);
+                theme.SetPrimaryColor((Color)ColorConverter.ConvertFromString("#673ab7"));
+                theme.SetSecondaryColor((Color)ColorConverter.ConvertFromString("#aa00ff"));
             }
             paletteHelper.SetTheme(theme);
         }

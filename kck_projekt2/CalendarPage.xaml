@@ -11,20 +11,33 @@
     <Grid>
 
         <StackPanel HorizontalAlignment="Center">
-            <TextBlock
-                VerticalAlignment="Top"
-                TextAlignment="Center"
-                Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
-                Text="Calendar" 
-                Margin="0,20,0,20" 
-                Foreground="#3f51b5"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20">
+                <materialDesign:PackIcon 
+                    Kind="Calendar" 
+                    Foreground="{DynamicResource TextBlockColor}"
+                    Width="50" 
+                    Height="50" 
+                    Margin="0,0,5,0" 
+                    VerticalAlignment="Center"/>
+
+                <TextBlock
+                    VerticalAlignment="Top"
+                    TextAlignment="Center"
+                    Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
+                    Text="Calendar"  
+                    Foreground="{DynamicResource TextBlockColor}"
+                    />
+            </StackPanel>
+
 
             <Calendar x:Name="MyCalendar" 
                   HorizontalAlignment="Center" 
                   VerticalAlignment="Center" 
                   Width="350"
                   Height="auto"
-                  Loaded="MyCalendar_Loaded">
+                  Loaded="MyCalendar_Loaded"
+                      Foreground="White"
+                      Background="#9172C8">
             </Calendar>
 
             <TextBlock Text="(Press at the date to see notes from that day)" 

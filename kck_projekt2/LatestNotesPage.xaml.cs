@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using kck_api.Controller;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace kck_projekt2
 {
@@ -32,8 +33,18 @@ namespace kck_projekt2
             var noteController = NoteController.GetInstance();
             var notes = noteController.GetLatestNotesByUserId(_mainWindow.loggedUserId, 5);
 
-            Notes = new ObservableCollection<NoteModel>(notes);
-            DataContext = this;
+            if (notes.Count == 0)
+            {
+                Information.Text = "You don't have any notes right now";
+                Information.Visibility = Visibility.Visible;
+                BottomTip.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                Information.Visibility = Visibility.Collapsed;
+                Notes = new ObservableCollection<NoteModel>(notes);
+                DataContext = this;
+            }
         }
 
         private void BackClick(object sender, RoutedEventArgs e)
@@ -45,7 +56,7 @@ namespace kck_projekt2
         {
             if (sender is Border border && border.DataContext is NoteModel note)
             {
-                _mainWindow.contentControl.Content = new EditNotePage(_mainWindow, note.Id);
+                _mainWindow.contentControl.Content = new EditNotePage(_mainWindow, note.Id, this);
             }
         }
     }

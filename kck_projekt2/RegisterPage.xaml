@@ -15,9 +15,9 @@
                              Visibility="Collapsed" 
                              Padding="5" 
                              UniformCornerRadius="30" 
-                             Width="40"
-                             Height="40"
-                             Margin="0,343,0,0"
+                             Width="30"
+                             Height="30"
+                             Margin="0,348,0,0"
                              VerticalAlignment="Top"
                              Background="{DynamicResource MaterialDesign.Brush.Primary}"
                              >
@@ -25,8 +25,8 @@
             <ProgressBar IsIndeterminate="True" 
                          Style="{StaticResource MaterialDesignCircularProgressBar}" 
                          Value="70" 
-                         Height="30"
-                         Width="30"
+                         Height="20"
+                         Width="20"
                          Foreground="White"
                          />
 

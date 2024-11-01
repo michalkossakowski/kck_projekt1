@@ -20,25 +20,37 @@ namespace kck_projekt2
     /// <summary>
     /// Logika interakcji dla klasy LoginPage.xaml
     /// </summary>
-    public partial class ExploreNotesPage : UserControl
+    public partial class FindByDatePage : UserControl
     {
         private MainWindow _mainWindow;
         public ObservableCollection<NoteModel> Notes { get; set; }
-        public ExploreNotesPage(MainWindow mainWindow)
+        private NoteController _noteController;
+        public FindByDatePage(MainWindow mainWindow)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
+            _noteController = NoteController.GetInstance();
+        }
 
-            var noteController = NoteController.GetInstance();
-            var notes = noteController.GetNotesByUserId(_mainWindow.loggedUserId);
-            if(notes.Count == 0)
-            {
+        private void BackClick(object sender, RoutedEventArgs e)
+        {
+            _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
+        }
+
+        private void SearchClick(object sender, RoutedEventArgs e) 
+        {
+            DataContext = null;
+            var notes = _noteController.GetNotesByUserIdAndTitle(_mainWindow.loggedUserId, SearchInput.Text);
+            if (notes.Count == 0) 
+            { 
                 Information.Visibility = Visibility.Visible;
-                BottomTip.Visibility = Visibility.Collapsed;
+                Information.Text = "There is no notes that match your search";
+                Information.Foreground = new SolidColorBrush(Color.FromRgb(255,0,0));
             }
             else
             {
-                notes.Reverse();
+                BottomTip.Visibility = Visibility.Visible;
+                Information.Visibility = Visibility.Collapsed;
                 Notes = new ObservableCollection<NoteModel>(notes);
                 DataContext = this;
             }
@@ -48,15 +60,8 @@ namespace kck_projekt2
         {
             if (sender is Border border && border.DataContext is NoteModel note)
             {
-                _mainWindow.contentControl.Content = new EditNotePage(_mainWindow,note.Id, this);
+                _mainWindow.contentControl.Content = new EditNotePage(_mainWindow, note.Id, this);
             }
         }
-
-
-        private void BackClick(object sender, RoutedEventArgs e)
-        {
-            _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
-        }
-
     }
 }

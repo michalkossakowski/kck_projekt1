@@ -11,14 +11,14 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <SolidColorBrush x:Key="PrimaryColor" Color="#673ab7"/>
-            <SolidColorBrush x:Key="SecondaryColor" Color="#aa00ff"/>
+            <SolidColorBrush x:Key="DarkColor" Color="#673ab7"/>
+            <SolidColorBrush x:Key="LightColor" Color="#aa00ff"/>
             
             <SolidColorBrush x:Key="TextBlockColor" Color="#673ab7"/>
             <SolidColorBrush x:Key="TextBoxColor" Color="Black"/>
-        
 
-            
+            <SolidColorBrush x:Key="HoverColor" Color="#dcccf8"/>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

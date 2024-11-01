@@ -49,6 +49,7 @@ namespace kck_projekt2
             }
             else
             {
+                BottomTip.Visibility = Visibility.Visible;
                 Information.Visibility = Visibility.Collapsed;
                 Notes = new ObservableCollection<NoteModel>(notes);
                 DataContext = this;
@@ -59,7 +60,7 @@ namespace kck_projekt2
         {
             if (sender is Border border && border.DataContext is NoteModel note)
             {
-                _mainWindow.contentControl.Content = new EditNotePage(_mainWindow, note.Id);
+                _mainWindow.contentControl.Content = new EditNotePage(_mainWindow, note.Id, this);
             }
         }
     }

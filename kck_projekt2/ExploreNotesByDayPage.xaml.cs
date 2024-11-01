@@ -36,6 +36,7 @@ namespace kck_projekt2
             {
                 Information.Text = $"You don't have any notes from: {date.Day}.{date.Month}.{date.Year}";
                 Information.Visibility = Visibility.Visible;
+                BottomTip.Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -50,7 +51,7 @@ namespace kck_projekt2
         {
             if (sender is Border border && border.DataContext is NoteModel note)
             {
-                _mainWindow.contentControl.Content = new EditNotePage(_mainWindow,note.Id);
+                _mainWindow.contentControl.Content = new EditNotePage(_mainWindow,note.Id, this);
             }
         }
 

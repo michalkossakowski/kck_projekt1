@@ -34,6 +34,7 @@ namespace kck_projekt2
         {
             Loading.Visibility = Visibility.Visible;
             LoginButton.IsEnabled = false;
+            BackButton.IsEnabled = false;
             nick.IsEnabled = false;
             password.IsEnabled = false;
             confirm.IsEnabled = false;
@@ -67,6 +68,7 @@ namespace kck_projekt2
                     nick.IsEnabled = false;
                     password.IsEnabled = false;
                     confirm.IsEnabled = false;
+                    BackButton.IsEnabled = true;
                     return;
                 }
                 else
@@ -75,6 +77,7 @@ namespace kck_projekt2
                 }
             }
             LoginButton.IsEnabled = true;
+            BackButton.IsEnabled = true;
             nick.IsEnabled = true;
             password.IsEnabled = true;
             confirm.IsEnabled = true;

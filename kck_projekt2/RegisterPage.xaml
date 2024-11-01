@@ -99,6 +99,7 @@
                     Width="90" Height="30" 
                     Margin="0,20,0,0"
                     Click="BackClick" 
+                    Name="BackButton"
                     Background="{DynamicResource MaterialDesign.Brush.Secondary}"
                     BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}"
                     />

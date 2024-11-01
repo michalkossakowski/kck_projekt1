@@ -72,6 +72,7 @@
                    Margin="0,100,0,20" 
                    Foreground="{DynamicResource TextBlockColor}"
                    Visibility="Visible"/>
+        
         <!-- ScrollViewer -->
         <ScrollViewer 
          Grid.Row="2"

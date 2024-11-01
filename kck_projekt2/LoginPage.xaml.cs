@@ -35,6 +35,7 @@ namespace kck_projekt2
             errorMessage.Visibility = Visibility.Collapsed;
             Loading.Visibility = Visibility.Visible;
             LoginButton.IsEnabled = false;
+            BackButton.IsEnabled = false;
             password.IsEnabled = false;
             nick.IsEnabled = false;
             string nickValue = nick.Text;
@@ -69,6 +70,7 @@ namespace kck_projekt2
                 }
 
             }
+            BackButton.IsEnabled = true;
             LoginButton.IsEnabled = true;
             password.IsEnabled = true;
             nick.IsEnabled = true;

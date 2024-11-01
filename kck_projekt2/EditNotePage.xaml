@@ -126,7 +126,7 @@
             VerticalAlignment="Stretch"
             HorizontalAlignment="Stretch"
             Width="400"
-            MinHeight="250"
+            MinHeight="150"
             />
 
         <!-- SaveNoteButton -->

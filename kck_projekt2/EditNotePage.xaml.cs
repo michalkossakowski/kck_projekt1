@@ -94,13 +94,33 @@ namespace kck_projekt2
                 var noteController = NoteController.GetInstance();
                 var note = new NoteModel(_mainWindow.loggedUserId, Title.Text, NoteContent.Text, category);
                 _noteController.EditNote(_noteId, Title.Text, category, NoteContent.Text);
-                _mainWindow.contentControl.Content = new ExploreNotesPage(_mainWindow);
+
+                Back();
             }
         }
 
         private void BackClick(object sender, RoutedEventArgs e)
         {
-            _mainWindow.contentControl.Content = _previousAction;
+            Back();
+        }
+
+        private void Back()
+        {
+            var previousActionType = _previousAction.GetType();
+            if (previousActionType == typeof(ExploreNotesByDayPage))
+            {
+                var previousDate = ((ExploreNotesByDayPage)_previousAction)._date;
+                _mainWindow.contentControl.Content = Activator.CreateInstance(previousActionType, _mainWindow, previousDate);
+            }
+            else if (previousActionType == typeof(SearchPage))
+            {
+                var previousSearch = ((SearchPage)_previousAction)._search;
+                _mainWindow.contentControl.Content = Activator.CreateInstance(previousActionType, _mainWindow, previousSearch);
+            }
+            else
+            {
+                _mainWindow.contentControl.Content = Activator.CreateInstance(previousActionType, _mainWindow);
+            }
         }
 
         private void CategoryToggleClick(object sender, RoutedEventArgs e)

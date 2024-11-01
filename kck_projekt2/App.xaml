@@ -18,6 +18,7 @@
             <SolidColorBrush x:Key="TextBoxColor" Color="Black"/>
 
             <SolidColorBrush x:Key="HoverColor" Color="#dcccf8"/>
+            <SolidColorBrush x:Key="NoHoverColor" Color="#ede6fa"/>
 
         </ResourceDictionary>
     </Application.Resources>

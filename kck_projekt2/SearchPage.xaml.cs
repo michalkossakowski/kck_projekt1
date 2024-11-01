@@ -25,11 +25,18 @@ namespace kck_projekt2
         private MainWindow _mainWindow;
         public ObservableCollection<NoteModel> Notes { get; set; }
         private NoteController _noteController;
-        public SearchPage(MainWindow mainWindow)
+        public string _search;
+        public SearchPage(MainWindow mainWindow, string? search)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
             _noteController = NoteController.GetInstance();
+            if (search != null)
+            {
+                SearchInput.Text = search;
+                _search = search;
+                Search();
+            }
         }
 
         private void BackClick(object sender, RoutedEventArgs e)
@@ -37,15 +44,32 @@ namespace kck_projekt2
             _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
         }
 
-        private void SearchClick(object sender, RoutedEventArgs e) 
+        private void SearchClick(object sender, RoutedEventArgs e)
         {
             DataContext = null;
-            var notes = _noteController.GetNotesByUserIdAndTitle(_mainWindow.loggedUserId, SearchInput.Text);
-            if (notes.Count == 0) 
-            { 
+            _search = SearchInput.Text;
+            if (_search.Length == 0)
+            {
+                Information.Visibility = Visibility.Visible;
+                Information.Text = "Search input cannot be empty";
+                Information.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                BottomTip.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                Search();
+            }
+        }
+
+        private void Search()
+        {
+            var notes = _noteController.GetNotesByUserIdAndTitle(_mainWindow.loggedUserId,_search);
+            if (notes.Count == 0)
+            {
+                BottomTip.Visibility = Visibility.Hidden;
                 Information.Visibility = Visibility.Visible;
                 Information.Text = "There is no notes that match your search";
-                Information.Foreground = new SolidColorBrush(Color.FromRgb(255,0,0));
+                Information.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
             }
             else
             {

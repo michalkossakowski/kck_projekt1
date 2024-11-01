@@ -46,7 +46,7 @@ namespace kck_projekt2
         }
         private void OpenSearchPage(object sender, RoutedEventArgs e)
         {
-            _mainWindow.contentControl.Content = new SearchPage(_mainWindow);
+            _mainWindow.contentControl.Content = new SearchPage(_mainWindow,null);
         }
     }
 }

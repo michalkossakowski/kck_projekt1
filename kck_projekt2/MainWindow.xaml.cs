@@ -42,6 +42,7 @@ namespace kck_projekt2
                 Application.Current.Resources["TextBlockColor"] = new SolidColorBrush(Colors.White);
                 Application.Current.Resources["TextBoxColor"] = new SolidColorBrush(Colors.White);
                 Application.Current.Resources["HoverColor"] = new SolidColorBrush(Color.FromRgb(79, 79, 79));
+                Application.Current.Resources["NoHoverColor"] = new SolidColorBrush(Color.FromRgb(39, 39, 39));
                 theme.SetBaseTheme(BaseTheme.Dark);
                 theme.SetPrimaryColor((Color)ColorConverter.ConvertFromString("#aa00ff"));
                 theme.SetSecondaryColor((Color)ColorConverter.ConvertFromString("#673ab7"));
@@ -50,7 +51,8 @@ namespace kck_projekt2
             {
                 Application.Current.Resources["TextBlockColor"] = (SolidColorBrush)Application.Current.Resources["DarkColor"];
                 Application.Current.Resources["TextBoxColor"] = new SolidColorBrush(Colors.Black);
-                Application.Current.Resources["HoverColor"] = new SolidColorBrush(Color.FromRgb(221, 221, 221));
+                Application.Current.Resources["HoverColor"] = new SolidColorBrush(Color.FromRgb(220, 204, 248));
+                Application.Current.Resources["NoHoverColor"] = new SolidColorBrush(Color.FromRgb(237, 230, 250));
                 theme.SetBaseTheme(BaseTheme.Light);
                 theme.SetPrimaryColor((Color)ColorConverter.ConvertFromString("#673ab7"));
                 theme.SetSecondaryColor((Color)ColorConverter.ConvertFromString("#aa00ff"));

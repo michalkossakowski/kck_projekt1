@@ -31,7 +31,7 @@ namespace kck_projekt2
             _mainWindow = mainWindow;
 
             var noteController = NoteController.GetInstance();
-            var notes = noteController.GetLatestNotesByUserId(_mainWindow.loggedUserId, 5);
+            var notes = noteController.GetLatestNotesByUserId(_mainWindow.loggedUserId, 8);
 
             if (notes.Count == 0)
             {

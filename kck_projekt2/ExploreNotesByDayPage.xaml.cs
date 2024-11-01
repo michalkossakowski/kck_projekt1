@@ -23,13 +23,15 @@ namespace kck_projekt2
     public partial class ExploreNotesByDayPage : UserControl
     {
         private MainWindow _mainWindow;
+        public DateTime _date;
         public ObservableCollection<NoteModel> Notes { get; set; }
         public ExploreNotesByDayPage(MainWindow mainWindow, DateTime date)
         {
             InitializeComponent();
-            HeaderTitle.Text = $"{date.Day}.{date.Month}.{date.Year}";
+            _date = date;
             _mainWindow = mainWindow;
 
+            HeaderTitle.Text = $"{date.Day}.{date.Month}.{date.Year}";
             var noteController = NoteController.GetInstance();
             var notes = noteController.GetNotesByUserIdAndDay(_mainWindow.loggedUserId, date);
             if(notes.Count == 0)

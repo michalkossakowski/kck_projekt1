@@ -128,7 +128,7 @@
             TextChanged="NoteContent_TextChanged"
             VerticalAlignment="Stretch"
             HorizontalAlignment="Stretch"
-            MinWidth="350"
+            Width="400"
             MinHeight="250"
             />
 

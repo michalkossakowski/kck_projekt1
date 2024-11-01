@@ -25,21 +25,26 @@ namespace kck_projekt2
         private MainWindow _mainWindow;
         private int _noteId;
         private NoteController _noteController;
-
-        public EditNotePage(MainWindow mainWindow,int noteId)
+        private UserControl _previousAction;
+        public EditNotePage(MainWindow mainWindow, int noteId, UserControl previousAction)
         {
             _mainWindow = mainWindow;
             _noteController = NoteController.GetInstance();
+            _previousAction = previousAction;
             _noteId = noteId;
             var note = _noteController.GetNoteById(_noteId);
             InitializeComponent();
 
             Title.Text = note.Title;
-            SelectedCategory.IsEnabled = false;
-            CategoryToggle.IsChecked = true;
-            CustomCategory.IsEnabled = true;
             CustomCategory.Text = note.Category;
             NoteContent.Text = note.Content;
+
+            CategoryToggle.IsChecked = true;
+            SelectedCategory.IsEnabled = false;
+            CustomCategory.IsEnabled = true;
+
+            SelectedCategory.Visibility = Visibility.Collapsed;
+            CustomCategory.Visibility = Visibility.Visible;
         }
 
         private async void SaveNoteClick(object sender, RoutedEventArgs e)
@@ -64,14 +69,15 @@ namespace kck_projekt2
                     CustomCategory.Foreground = new SolidColorBrush(Colors.Red);
 
                     HintAssist.SetHelperText(SelectedCategory, "Select category");
-                    SelectedCategory.Foreground = new SolidColorBrush(Colors.Black);
+                    SelectedCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
                 }
                 else
                 {
                     HintAssist.SetHelperText(CustomCategory, "Enter custom category");
-                    CustomCategory.Foreground = new SolidColorBrush(Colors.Black);
+                    CustomCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
 
-                    HintAssist.SetHelperText(SelectedCategory, "You must choose category or use custom");
+
+                    HintAssist.SetHelperText(SelectedCategory, "Choose category or use custom");
                     SelectedCategory.Foreground = new SolidColorBrush(Colors.Red);
                 }
             }
@@ -88,19 +94,51 @@ namespace kck_projekt2
                 var noteController = NoteController.GetInstance();
                 var note = new NoteModel(_mainWindow.loggedUserId, Title.Text, NoteContent.Text, category);
                 _noteController.EditNote(_noteId, Title.Text, category, NoteContent.Text);
-                _mainWindow.contentControl.Content = new ExploreNotesPage(_mainWindow);
+
+                Back();
             }
         }
 
         private void BackClick(object sender, RoutedEventArgs e)
         {
-            _mainWindow.contentControl.Content = new ExploreNotesPage(_mainWindow);
+            Back();
+        }
+
+        private void Back()
+        {
+            var previousActionType = _previousAction.GetType();
+            if (previousActionType == typeof(ExploreNotesByDayPage))
+            {
+                var previousDate = ((ExploreNotesByDayPage)_previousAction)._date;
+                _mainWindow.contentControl.Content = Activator.CreateInstance(previousActionType, _mainWindow, previousDate);
+            }
+            else if (previousActionType == typeof(SearchPage))
+            {
+                var previousSearch = ((SearchPage)_previousAction)._search;
+                _mainWindow.contentControl.Content = Activator.CreateInstance(previousActionType, _mainWindow, previousSearch);
+            }
+            else
+            {
+                _mainWindow.contentControl.Content = Activator.CreateInstance(previousActionType, _mainWindow);
+            }
         }
 
         private void CategoryToggleClick(object sender, RoutedEventArgs e)
         {
             CustomCategory.IsEnabled = !CustomCategory.IsEnabled;
             SelectedCategory.IsEnabled = !SelectedCategory.IsEnabled;
+            if (SelectedCategory.IsEnabled)
+            {
+                CustomCategory.Visibility = Visibility.Collapsed;
+                SelectedCategory.Visibility = Visibility.Visible;
+                SelectedCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
+            }
+            else
+            {
+                CustomCategory.Visibility = Visibility.Visible;
+                SelectedCategory.Visibility = Visibility.Collapsed;
+                CustomCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
+            }
         }
 
 
@@ -109,7 +147,8 @@ namespace kck_projekt2
             if (Title.Text.Length > 0)
             {
                 HintAssist.SetHelperText(Title, "Enter note title");
-                Title.Foreground = new SolidColorBrush(Colors.Black);
+                Title.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
+
             }
         }
 
@@ -118,10 +157,11 @@ namespace kck_projekt2
             if (SelectedCategory.SelectedItem != null)
             {
                 HintAssist.SetHelperText(SelectedCategory, "Select category");
-                SelectedCategory.Foreground = new SolidColorBrush(Colors.Black);
+                SelectedCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
 
                 HintAssist.SetHelperText(CustomCategory, "Enter custom category");
-                CustomCategory.Foreground = new SolidColorBrush(Colors.Black);
+                CustomCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
+
             }
         }
 
@@ -130,7 +170,7 @@ namespace kck_projekt2
             if (CustomCategory.Text.Length > 0)
             {
                 HintAssist.SetHelperText(CustomCategory, "Enter custom category");
-                CustomCategory.Foreground = new SolidColorBrush(Colors.Black);
+                CustomCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
             }
         }
 
@@ -138,8 +178,9 @@ namespace kck_projekt2
         {
             if (NoteContent.Text.Length > 0)
             {
-                HintAssist.SetHelperText(NoteContent, "");
-                NoteContent.Foreground = new SolidColorBrush(Colors.Black);
+                HintAssist.SetHelperText(NoteContent, "Enter note content");
+                NoteContent.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
+
             }
         }
     }

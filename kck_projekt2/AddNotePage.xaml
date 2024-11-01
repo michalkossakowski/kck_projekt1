@@ -6,107 +6,153 @@
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}">
 
-    <Grid>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Header -->
+            <RowDefinition Height="Auto"/> <!-- Title -->
+            <RowDefinition Height="Auto"/> <!-- CategoryToggle -->
+            <RowDefinition Height="Auto"/> <!-- SelectCategory/CustomCategory -->
+            <RowDefinition Height="*"/> <!-- NoteContent -->
+            <RowDefinition Height="Auto"/> <!-- AddNoteButton -->
+            <RowDefinition Height="Auto"/> <!-- Back -->
+        </Grid.RowDefinitions>
 
-        <StackPanel HorizontalAlignment="Center">
+        <!-- Header -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
+            <materialDesign:PackIcon 
+                    Kind="PencilPlusOutline" 
+                    Foreground="{DynamicResource TextBlockColor}"
+                    Width="50" 
+                    Height="50" 
+                    Margin="0,0,5,0" 
+                    VerticalAlignment="Center"/>
+
             <TextBlock
+                Grid.Row="0"
                 VerticalAlignment="Top"
                 TextAlignment="Center"
                 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
                 Text="Add Note" 
-                Margin="0,20,0,20"
-                Foreground="{DynamicResource TextBlockColor}"
-                />
-
-            <TextBox 
-                Name="Title" 
-                materialDesign:HintAssist.HelperText="Enter note title"  
-                materialDesign:HintAssist.HelperTextFontSize="12" 
-                materialDesign:HintAssist.Hint="Title" 
-                Width="200" Height="30" Margin="0,0,0,0"
-                Foreground="{DynamicResource TextBoxColor}"
-                TextChanged="Title_TextChanged"
-                />
-
-            <ComboBox
-                x:Name="SelectedCategory"
-                Width="200"
-                Height="25"
-                Margin="0,30,0,0"
-                Padding="5"
-                materialDesign:HintAssist.Hint="Category"
-                IsEnabled="True"
-                Foreground="{DynamicResource TextBoxColor}"
-                materialDesign:HintAssist.HelperText="Select category"  
-                materialDesign:HintAssist.HelperTextFontSize="12" 
-                SelectionChanged="SelectedCategory_SelectionChanged"
-                >
-
-                <ComboBoxItem Content="Studies"/>
-                <ComboBoxItem Content="Work"/>
-                <ComboBoxItem Content="Home"/>
-                <ComboBoxItem Content="Hobby"/>
-                <ComboBoxItem Content="Other"/>
-
-            </ComboBox>
-
-            <StackPanel  Orientation="Horizontal" Margin="-50,30,0,0" HorizontalAlignment="Center">
-                <ToggleButton
-                    x:Name="CategoryToggle" 
-                    IsChecked="False"
-                    Click="CategoryToggleClick">
-                    <ToggleButton.LayoutTransform>
-                        <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
-                    </ToggleButton.LayoutTransform>
-                </ToggleButton>
-
-                <TextBlock
-                    Margin="5,0,0,0"
-                    Text="Use custom category"
-                    Foreground="{DynamicResource TextBoxColor}"
-                    VerticalAlignment="Center"/>
-            </StackPanel>
-
-            <TextBox 
-                Name="CustomCategory" 
-                materialDesign:HintAssist.HelperText="Enter custom category"  
-                materialDesign:HintAssist.HelperTextFontSize="12" 
-                materialDesign:HintAssist.Hint="Custom category" 
-                Width="200" Height="30" Margin="0,5,0,0"
-                IsEnabled="False"
-                Foreground="{DynamicResource TextBoxColor}"
-                TextChanged="CustomCategory_TextChanged"
-                />
-
-            <TextBox
-                Name="NoteContent"
-                Foreground="{DynamicResource TextBoxColor}"
-                Height="250"
-                materialDesign:HintAssist.Hint="Write note here ..."
-                materialDesign:HintAssist.HelperTextFontSize="12" 
-                AcceptsReturn="True"
-                Margin="20,35,20,20"
-                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                TextWrapping="Wrap"
-                VerticalScrollBarVisibility="Auto" 
-                Width="300"
-                TextChanged="NoteContent_TextChanged"
-                />
-
-            <Button 
-                Name="AddNoteButton" 
-                Content="Add Note" 
-                Width="90" Height="30" Margin="0,15,0,0" 
-                Click="AddNoteClick"/>
-
-            <Button 
-                Content="Back" 
-                Width="70" Height="30" Margin="0,20,0,0" 
-                Click="BackClick" 
-                Background="{DynamicResource MaterialDesign.Brush.Secondary}"
-                BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}"/>
-
+                Margin="0,0,0,0"
+                Foreground="{DynamicResource TextBlockColor}"/>
         </StackPanel>
-    </Grid>
 
+
+        <!-- Title -->
+        <TextBox 
+            Grid.Row="1"
+            Name="Title" 
+            materialDesign:HintAssist.HelperText="Enter note title"  
+            materialDesign:HintAssist.HelperTextFontSize="12" 
+            FontSize="16"
+            materialDesign:HintAssist.Hint="Title" 
+            Margin="0,20,0,10"
+            Width="200" 
+            Height="40"
+            Padding="10,0,0,0"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            Foreground="{DynamicResource TextBoxColor}"
+            TextChanged="Title_TextChanged"/>
+
+        <!-- CategoryToggle -->
+        <CheckBox
+            Margin="0,20,0,10"
+            Grid.Row="2"
+            Style="{StaticResource MaterialDesignFilterChipPrimaryOutlineCheckBox}"
+            x:Name="CategoryToggle" 
+            IsChecked="False"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Click="CategoryToggleClick"
+            Content="Use custom category"
+            FontSize="16"
+            Foreground="{DynamicResource MaterialDesign.Brush.Primary}"
+            BorderBrush="{DynamicResource MaterialDesign.Brush.Primary}"
+            BorderThickness="2"
+            ToolTip="Switch to custom/preset category"/>
+
+        <!-- SelectCategory/CustomCategory -->
+        <ComboBox
+            Grid.Row="3"
+            x:Name="SelectedCategory"
+            Width="200"
+            Height="40"
+            Margin="0,10,0,10"
+            Padding="10,0,10,0"
+            Style="{StaticResource MaterialDesignOutlinedComboBox}"
+            materialDesign:HintAssist.Hint="Preset Category"
+            IsEnabled="True"
+            FontSize="16"
+            Foreground="{DynamicResource TextBoxColor}"
+            materialDesign:HintAssist.HelperTextFontSize="12" 
+            materialDesign:HintAssist.HelperText="Select category"  
+            SelectionChanged="SelectedCategory_SelectionChanged">
+            <ComboBoxItem Content="Studies"/>
+            <ComboBoxItem Content="Work"/>
+            <ComboBoxItem Content="Home"/>
+            <ComboBoxItem Content="Hobby"/>
+            <ComboBoxItem Content="Other"/>
+        </ComboBox>
+
+        <TextBox 
+            Grid.Row="3"
+            Name="CustomCategory" 
+            materialDesign:HintAssist.HelperText="Enter category"  
+            materialDesign:HintAssist.HelperTextFontSize="12" 
+            materialDesign:HintAssist.Hint="Custom category" 
+            IsEnabled="False"
+            FontSize="16"
+            Width="200"
+            Height="40"
+            Margin="0,10,0,10"
+            Padding="10,8,0,10"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            Foreground="{DynamicResource TextBoxColor}"
+            TextChanged="CustomCategory_TextChanged"
+            Visibility="Collapsed"/>
+
+        <!-- NoteContent -->
+        <TextBox
+            Grid.Row="4"
+            Name="NoteContent"
+            Foreground="{DynamicResource TextBoxColor}"
+            materialDesign:HintAssist.Hint="Write here ..."
+            materialDesign:HintAssist.HelperText="Enter note content"  
+            materialDesign:HintAssist.HelperTextFontSize="12"
+            FontSize="16"
+            AcceptsReturn="True"
+            Margin="0,20,0,10"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Auto" 
+            TextChanged="NoteContent_TextChanged"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            Width="400"
+            MinHeight="250"
+            />
+
+        <!-- AddNoteButton -->
+        <Button 
+            Grid.Row="5"
+            Name="AddNoteButton" 
+            Content="Add Note" 
+            Width="100" 
+            Height="30" 
+            Margin="0,20,0,0" 
+            Click="AddNoteClick"
+            FontSize="16"/>
+
+        <!-- Back -->
+        <Button 
+            Grid.Row="6"
+            Content="Back" 
+            Width="70" 
+            Height="30" 
+            Margin="0,20,0,0" 
+            Click="BackClick"
+            FontSize="16"
+            Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+            BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}"/>
+    </Grid>
 </UserControl>

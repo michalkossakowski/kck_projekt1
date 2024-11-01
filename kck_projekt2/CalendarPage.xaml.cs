@@ -53,7 +53,7 @@ namespace kck_projekt2
             {
                 foreach (var day in FindChildren<CalendarDayButton>(MyCalendar))
                     if (((DateTime)day.DataContext).Date == note.ModifiedDate.Date)
-                        day.Background = Brushes.LightSkyBlue;
+                        day.Background = (SolidColorBrush)Application.Current.Resources["LightColor"];
             }
         }
 

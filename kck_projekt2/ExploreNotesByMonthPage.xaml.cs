@@ -20,23 +20,16 @@ namespace kck_projekt2
     /// <summary>
     /// Logika interakcji dla klasy LoginPage.xaml
     /// </summary>
-    public partial class SearchPage : UserControl
+    public partial class ExploreNotesByMonthPage : UserControl
     {
         private MainWindow _mainWindow;
         public ObservableCollection<NoteModel> Notes { get; set; }
         private NoteController _noteController;
-        public string _search;
-        public SearchPage(MainWindow mainWindow, string? search)
+        public ExploreNotesByMonthPage(MainWindow mainWindow)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
             _noteController = NoteController.GetInstance();
-            if (search != null)
-            {
-                SearchInput.Text = search;
-                _search = search;
-                Search();
-            }
         }
 
         private void BackClick(object sender, RoutedEventArgs e)
@@ -44,32 +37,15 @@ namespace kck_projekt2
             _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
         }
 
-        private void SearchClick(object sender, RoutedEventArgs e)
+        private void SearchClick(object sender, RoutedEventArgs e) 
         {
             DataContext = null;
-            _search = SearchInput.Text;
-            if (_search.Length == 0)
-            {
-                Information.Visibility = Visibility.Visible;
-                Information.Text = "Search input cannot be empty";
-                Information.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
-                BottomTip.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                Search();
-            }
-        }
-
-        private void Search()
-        {
-            var notes = _noteController.GetNotesByUserIdAndTitle(_mainWindow.loggedUserId,_search);
-            if (notes.Count == 0)
-            {
-                BottomTip.Visibility = Visibility.Hidden;
+            var notes = _noteController.GetNotesByUserIdAndTitle(_mainWindow.loggedUserId, SearchInput.Text);
+            if (notes.Count == 0) 
+            { 
                 Information.Visibility = Visibility.Visible;
                 Information.Text = "There is no notes that match your search";
-                Information.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                Information.Foreground = new SolidColorBrush(Color.FromRgb(255,0,0));
             }
             else
             {

@@ -104,7 +104,7 @@ namespace kck_projekt1.View
                         .Start("[gold1]Logging in[/]", ctx =>
                         {
                             user = userController.GetUser(user);
-                            Thread.Sleep(1500);
+                            Thread.Sleep(1000);
                         });
 
                         if (user == null)

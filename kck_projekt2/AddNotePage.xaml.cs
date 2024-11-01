@@ -65,6 +65,15 @@ namespace kck_projekt2
                 var note = new NoteModel(_mainWindow.loggedUserId, Title.Text, NoteContent.Text, category);
                 noteController.AddNote(note);
                 _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
+                _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
+                _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                _mainWindow.Snackbar.MessageQueue?.Enqueue("Note successfully created");
+            }
+            else
+            {
+                _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
+                _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                _mainWindow.Snackbar.MessageQueue?.Enqueue("Meet the form requirements and try again");
             }
         }
 

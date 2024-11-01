@@ -38,7 +38,6 @@ namespace kck_projekt2
             }
             else
             {
-                notes.Reverse();
                 Notes = new ObservableCollection<NoteModel>(notes);
                 DataContext = this;
             }

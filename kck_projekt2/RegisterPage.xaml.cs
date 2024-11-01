@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using kck_api.Controller;
+using MaterialDesignThemes.Wpf;
 
 namespace kck_projekt2
 {
@@ -34,21 +35,34 @@ namespace kck_projekt2
         {
             Loading.Visibility = Visibility.Visible;
             LoginButton.IsEnabled = false;
+            BackButton.IsEnabled = false;
             nick.IsEnabled = false;
             password.IsEnabled = false;
-            confirm.IsEnabled = false;
+            confirmPassword.IsEnabled = false;
             string nickValue = nick.Text;
             string passwordValue = password.Password;
-            string confirmValue = confirm.Password;
+            string confirmPasswordValue = confirmPassword.Password;
 
-            if (nickValue.Length == 0 || passwordValue.Length == 0 || confirmValue.Length ==  0)
+            if (nickValue.Length == 0 || passwordValue.Length == 0 || confirmPasswordValue.Length ==  0)
             {
-                errorMessage.Content = "Nick, password and confirmation cannot be null !";
-                errorMessage.Visibility = Visibility.Visible;
+                _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
+                _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                _mainWindow.Snackbar.MessageQueue?.Enqueue("Nick and passwords cannot be null");
+                if (nickValue.Length == 0)
+                    nick.Foreground = new SolidColorBrush(Colors.Red);
+                if (passwordValue.Length == 0)
+                    password.Foreground = new SolidColorBrush(Colors.Red);
+                if (confirmPasswordValue.Length == 0)
+                    confirmPassword.Foreground = new SolidColorBrush(Colors.Red);
+
             }
-            else if (passwordValue != confirmValue)
+            else if (passwordValue != confirmPasswordValue)
             {
-                errorMessage.Content = ("Passwords don't match !");
+                _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
+                _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                _mainWindow.Snackbar.MessageQueue?.Enqueue("Passwords don't match");
+                password.Foreground = new SolidColorBrush(Colors.Red);
+                confirmPassword.Foreground = new SolidColorBrush(Colors.Red);
             }
             else
             {
@@ -61,23 +75,24 @@ namespace kck_projekt2
                 });
                 if (isCreated)
                 {
-                    errorMessage.Content = ("New user added you can login now !");
-                    errorMessage.Foreground = new SolidColorBrush(Colors.Green);
-                    Loading.Visibility = Visibility.Hidden;
-                    nick.IsEnabled = false;
-                    password.IsEnabled = false;
-                    confirm.IsEnabled = false;
-                    return;
+                    _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
+                    _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(2));
+                    _mainWindow.Snackbar.MessageQueue?.Enqueue("You have successfully created new accout, you can login now");
+                    _mainWindow.ReturnToMainMenu();
                 }
                 else
                 {
-                    errorMessage.Content = ("This nick is occupied !");
+                    _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
+                    _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                    nick.Foreground = new SolidColorBrush(Colors.Red);
+                    _mainWindow.Snackbar.MessageQueue?.Enqueue("This nick is occupied ");
                 }
             }
             LoginButton.IsEnabled = true;
+            BackButton.IsEnabled = true;
             nick.IsEnabled = true;
             password.IsEnabled = true;
-            confirm.IsEnabled = true;
+            confirmPassword.IsEnabled = true;
             Loading.Visibility = Visibility.Hidden;
         }
 
@@ -85,6 +100,28 @@ namespace kck_projekt2
         {
             _mainWindow.ReturnToMainMenu();
         }
+
+        private void Nick_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            nick.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
+            if (password.Password.Length != 0)
+                password.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
+        }
+
+        private void Password_TextChanged(object sender, RoutedEventArgs e)
+        {
+            password.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
+            if (nick.Text.Length != 0)
+                nick.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
+            confirmPassword.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
+        }
+        private void ConfirmPassword_TextChanged(object sender, RoutedEventArgs e)
+        {
+            confirmPassword.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
+            if (nick.Text.Length != 0)
+                nick.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
+        }
+
 
     }
 }

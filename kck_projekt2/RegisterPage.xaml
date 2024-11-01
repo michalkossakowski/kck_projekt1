@@ -35,7 +35,7 @@
         <StackPanel HorizontalAlignment="Center">
 
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,10">
                 <materialDesign:PackIcon 
                     Kind="AccountPlusOutline" 
                     Foreground="{DynamicResource TextBlockColor}" 
@@ -47,7 +47,7 @@
                 TextAlignment="Center"
                 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
                 Text="Register" 
-                Margin="0,20,0,20"
+
                 Foreground="{DynamicResource TextBlockColor}"
                 />
             </StackPanel>
@@ -62,6 +62,7 @@
                 FontSize="16"
                 Padding="10,0,0,0"
                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                TextChanged="Nick_TextChanged"
                 />
             
             <PasswordBox Name="password" 
@@ -72,11 +73,12 @@
                         Width="200" 
                         Height="40" 
                         FontSize="16"
-                        Padding="10,0,0,0"
+                        Padding="10,0,10,0"
                         Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
+                         PasswordChanged="Password_TextChanged"
                          />
 
-            <PasswordBox Name="confirm" 
+            <PasswordBox Name="confirmPassword" 
                          materialDesign:HintAssist.HelperText="Confirm your password"  
                          materialDesign:HintAssist.Hint="Confirm Password" 
                          materialDesign:TextFieldAssist.HasClearButton="True" 
@@ -84,8 +86,9 @@
                         Width="200" 
                         Height="40" 
                         FontSize="16"
-                        Padding="10,0,0,0"
+                        Padding="10,0,10,0"
                         Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
+                          PasswordChanged="Password_TextChanged"
                          />
 
             <Button Name="LoginButton" 
@@ -99,6 +102,7 @@
                     Width="90" Height="30" 
                     Margin="0,20,0,0"
                     Click="BackClick" 
+                    Name="BackButton"
                     Background="{DynamicResource MaterialDesign.Brush.Secondary}"
                     BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}"
                     />

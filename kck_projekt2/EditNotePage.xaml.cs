@@ -96,7 +96,29 @@ namespace kck_projekt2
                 _noteController.EditNote(_noteId, Title.Text, category, NoteContent.Text);
 
                 Back();
+
+                _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
+                _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                _mainWindow.Snackbar.MessageQueue?.Enqueue("Note successfully edited");
             }
+            else
+            {
+                _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
+                _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                _mainWindow.Snackbar.MessageQueue?.Enqueue("Meet the form requirements and try again");
+            }
+        }
+
+        public void DeleteNoteClick(object sender, RoutedEventArgs e)
+        {
+            var noteController = NoteController.GetInstance();
+            _noteController.RemoveNote(_noteId);
+
+            Back();
+
+            _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
+            _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+            _mainWindow.Snackbar.MessageQueue?.Enqueue("Note successfully deleted");
         }
 
         private void BackClick(object sender, RoutedEventArgs e)
@@ -106,20 +128,27 @@ namespace kck_projekt2
 
         private void Back()
         {
-            var previousActionType = _previousAction.GetType();
-            if (previousActionType == typeof(ExploreNotesByDayPage))
+            switch (_previousAction)
             {
-                var previousDate = ((ExploreNotesByDayPage)_previousAction)._date;
-                _mainWindow.contentControl.Content = Activator.CreateInstance(previousActionType, _mainWindow, previousDate);
-            }
-            else if (previousActionType == typeof(SearchPage))
-            {
-                var previousSearch = ((SearchPage)_previousAction)._search;
-                _mainWindow.contentControl.Content = Activator.CreateInstance(previousActionType, _mainWindow, previousSearch);
-            }
-            else
-            {
-                _mainWindow.contentControl.Content = Activator.CreateInstance(previousActionType, _mainWindow);
+                case ExploreNotesByDayPage explorePage:
+                    _mainWindow.contentControl.Content = Activator.CreateInstance(typeof(ExploreNotesByDayPage), _mainWindow, explorePage._date);
+                    break;
+
+                case SearchPage searchPage:
+                    _mainWindow.contentControl.Content = Activator.CreateInstance(typeof(SearchPage), _mainWindow, searchPage._search);
+                    break;
+
+                case FindByCategoryPage categoryPage:
+                    _mainWindow.contentControl.Content = Activator.CreateInstance(typeof(FindByCategoryPage), _mainWindow, categoryPage._searchingCategory);
+                    break;
+
+                case FindByDatePage categoryPage:
+                    _mainWindow.contentControl.Content = Activator.CreateInstance(typeof(FindByDatePage), _mainWindow, categoryPage._searchingDate);
+                    break;
+
+                default:
+                    _mainWindow.contentControl.Content = Activator.CreateInstance(_previousAction.GetType(), _mainWindow);
+                    break;
             }
         }
 

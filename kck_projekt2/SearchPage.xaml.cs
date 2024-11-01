@@ -68,7 +68,7 @@ namespace kck_projekt2
             {
                 BottomTip.Visibility = Visibility.Hidden;
                 Information.Visibility = Visibility.Visible;
-                Information.Text = "There is no notes that match your search";
+                Information.Text = $"There is no notes that match your search: \"{_search}\"";
                 Information.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
             }
             else

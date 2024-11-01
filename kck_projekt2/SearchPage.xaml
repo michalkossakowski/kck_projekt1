@@ -67,11 +67,12 @@
                    Name="Information"
                    VerticalAlignment="Top"
                    TextAlignment="Center"
-                   Text="Place for notes that match you searching"
-                   FontSize="16"
+                   Text="Place for notes that match your searching"
+                   FontSize="20"
                    Margin="0,100,0,20" 
                    Foreground="{DynamicResource TextBlockColor}"
                    Visibility="Visible"/>
+        
         <!-- ScrollViewer -->
         <ScrollViewer 
          Grid.Row="2"
@@ -167,7 +168,7 @@
             Name="BottomTip"
             Visibility="Collapsed"
             Grid.Row="3"
-            Text="(Press at the note to edit)" 
+            Text="(Press at the note to edit or delete)" 
             TextAlignment="Center"
             FontSize="14"
             Foreground="Gray"
@@ -182,6 +183,7 @@
             Height="30"
             Margin="0,10,0,0" 
             Click="BackClick"
+            FontSize="16"
             Background="{DynamicResource MaterialDesign.Brush.Secondary}"
             BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}"/>
 

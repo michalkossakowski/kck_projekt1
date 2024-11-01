@@ -32,7 +32,7 @@ namespace kck_projekt2
             StartAnimation();
         }
 
-        private async void SwitchThemeClick(object sender, RoutedEventArgs e) 
+        public async void SwitchThemeClick(object sender, RoutedEventArgs e) 
         {
             var paletteHelper = new PaletteHelper();
             var theme = paletteHelper.GetTheme();

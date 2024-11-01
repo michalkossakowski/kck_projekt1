@@ -43,7 +43,6 @@ namespace kck_projekt2
             else
             {
                 Information.Visibility = Visibility.Collapsed;
-                notes.Reverse();
                 Notes = new ObservableCollection<NoteModel>(notes);
                 DataContext = this;
             }

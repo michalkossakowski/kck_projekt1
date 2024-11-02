@@ -7,6 +7,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using kck_api.Controller;
+using MaterialDesignThemes.Wpf;
 
 namespace kck_projekt2
 {
@@ -34,7 +35,6 @@ namespace kck_projekt2
             DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
             MyCalendar.DisplayDateStart = firstDayOfMonth;
             MyCalendar.DisplayDateEnd = lastDayOfMonth;
-            _selectedDay = DateTime.Now;
             UpdateCalendarDays();
         }
 
@@ -47,7 +47,7 @@ namespace kck_projekt2
 
                 if (((DateTime)day.DataContext).Date == _selectedDay.Date)
                 {
-                    day.Background = (SolidColorBrush)Application.Current.Resources["DarkColor"];
+                    day.BorderBrush = (SolidColorBrush)Application.Current.Resources["DarkColor"];
                 }
                 else if (_currentMonthnotes.Any(note => note.ModifiedDate.Date == ((DateTime)day.DataContext).Date))
                 {
@@ -58,7 +58,16 @@ namespace kck_projekt2
 
         private void ShowNotesClick(object sender, RoutedEventArgs e)
         {
-            _mainWindow.contentControl.Content = new ExploreNotesByDayPage(_mainWindow, _selectedDay);
+            if (_selectedDay == DateTime.MinValue)
+            {
+                _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
+                _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                _mainWindow.Snackbar.MessageQueue?.Enqueue("Select date in the calendar to show notes");
+            }
+            else
+            {
+                _mainWindow.contentControl.Content = new ExploreNotesByDayPage(_mainWindow, _selectedDay);
+            }
         }
 
         private void MyCalendar_SelectedDateChanged(object sender, SelectionChangedEventArgs e)

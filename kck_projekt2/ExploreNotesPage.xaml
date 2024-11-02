@@ -47,16 +47,16 @@
 
         <!-- ScrollView -->
         <ScrollViewer 
-Grid.Row="1"
-VerticalAlignment="Stretch"
-HorizontalAlignment="Stretch"
-Margin="0,10,0,0"
-VerticalScrollBarVisibility="Auto" 
-MinHeight="200"
->
+            Grid.Row="1"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Center"
+            Margin="0,10,0,0"
+            VerticalScrollBarVisibility="Auto" 
+            MinHeight="200"
+            >
 
             <ItemsControl ItemsSource="{Binding Notes}"
-      HorizontalContentAlignment="Center">
+                     HorizontalContentAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel HorizontalAlignment="Center" />
@@ -66,14 +66,14 @@ MinHeight="200"
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border 
-                Margin="10" 
-                Padding="0,0,0,0" 
-                CornerRadius="20" 
-                MouseUp="OpenEditPage"
-                BorderBrush="{DynamicResource MaterialDesign.Brush.Primary}" 
-                BorderThickness="2"
-                Width="250"
-                >
+                            Margin="10" 
+                            Padding="0,0,0,0" 
+                            CornerRadius="20" 
+                            MouseUp="OpenEditPage"
+                            BorderBrush="{DynamicResource MaterialDesign.Brush.Primary}" 
+                            BorderThickness="2"
+                            Width="250"
+                            >
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="{DynamicResource NoHoverColor}" />
@@ -87,33 +87,34 @@ MinHeight="200"
                             </Border.Style>
                             <StackPanel>
                                 <StackPanel 
-                        Orientation="Horizontal" 
-                        HorizontalAlignment="Center"
-                        Margin="5,5,5,5"
-                        >
+                                    Orientation="Vertical" 
+                                    HorizontalAlignment="Center"
+                                    Margin="5,5,5,0"
+                                    >
                                     <TextBlock 
-                            Text="{Binding Title}" 
-                            TextAlignment="Center"
-                            FontWeight="Bold" 
-                            Foreground="{DynamicResource TextBlockColor}"
-                            FontSize="16"
-                            />
+                                        Text="{Binding Title}" 
+                                        TextAlignment="Center"
+                                        FontWeight="Bold" 
+                                        Foreground="{DynamicResource TextBlockColor}"
+                                        FontSize="16"
+                                        />
                                     <TextBlock 
-                            Text="{Binding Category, StringFormat=' ({0})'}" 
-                            TextAlignment="Center"
-                            FontSize="16"
-                            Foreground="{DynamicResource LightColor}" 
-                            />
+                                        Text="{Binding Category, StringFormat='({0})'}" 
+                                        TextAlignment="Center"
+                                        FontSize="12"
+                                        Margin="0,0,0,2"
+                                        Foreground="{DynamicResource LightColor}" 
+                                        />
                                 </StackPanel>
 
                                 <TextBlock 
-                        Text="{Binding ModifiedDate, StringFormat=' {0:dd.MM.yyyy HH:mm:ss} '}"
-                        TextAlignment="Center"
-                        FontSize="12"
-                        VerticalAlignment="Center"
-                        Margin="0,0,0,5"
-                        Foreground="{DynamicResource TextBlockColor}"
-                        />
+                                    Text="{Binding ModifiedDate, StringFormat=' {0:dd.MM.yyyy HH:mm:ss} '}"
+                                    TextAlignment="Center"
+                                    FontSize="12"
+                                    VerticalAlignment="Center"
+                                    Margin="0,0,0,5"
+                                    Foreground="{DynamicResource TextBlockColor}"
+                                    />
 
                                 <Border 
                         Height="2" 

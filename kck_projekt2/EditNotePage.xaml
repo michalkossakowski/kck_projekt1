@@ -49,7 +49,8 @@
             Padding="10,0,0,0"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             Foreground="{DynamicResource TextBoxColor}"
-            TextChanged="Title_TextChanged"/>
+            TextChanged="Title_TextChanged"
+            MaxLength="12"/>
 
         <!-- CategoryToggle -->
         <CheckBox
@@ -106,7 +107,8 @@
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             Foreground="{DynamicResource TextBoxColor}"
             TextChanged="CustomCategory_TextChanged"
-            Visibility="Collapsed"/>
+            Visibility="Collapsed"
+            MaxLength="12"/>
 
         <!-- NoteContent -->
         <TextBox

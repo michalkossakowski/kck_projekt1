@@ -58,7 +58,7 @@ namespace kck_projekt2
         }
         private void OpenExoplreNotesByMonthPage(object sender, RoutedEventArgs e)
         {
-            _mainWindow.contentControl.Content = new ExploreNotesByMonthPage(_mainWindow);
+            _mainWindow.contentControl.Content = new ExploreNotesByMonthPage(_mainWindow, null);
         }
     }
 }

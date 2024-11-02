@@ -42,34 +42,21 @@
             Orientation="Horizontal" 
             HorizontalAlignment="Center"
             Margin="0,20,0,0">
-            <TextBox 
-                Name="SearchInput" 
-                materialDesign:HintAssist.HelperText="Enter searching note title"  
-                materialDesign:HintAssist.Hint="Search" 
-                materialDesign:HintAssist.HelperTextFontSize="12" 
-                Width="200" Height="40" Margin="0,0,0,0"
-                Padding="10,0,0,0"
-                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                FontSize="16"/>
-
 
             <ComboBox
-                Grid.Row="1"
                 x:Name="SelectedMonth"
                 Width="200"
                 Height="40"
-                Margin="10,10,10,10"
+                Margin="0,0,0,0"
                 Padding="10,0,10,0"
                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
                 materialDesign:HintAssist.Hint="Month"
                 FontSize="16"
                 Foreground="{DynamicResource TextBoxColor}"
                 materialDesign:HintAssist.HelperTextFontSize="12" 
-                materialDesign:HintAssist.HelperText="Select month"  
-                >
-                <ComboBoxItem Content="bind1"/>
-                <ComboBoxItem Content="bind2"/>
-                <ComboBoxItem Content="bind3"/>
+                materialDesign:HintAssist.HelperText="Select month"
+                ItemsSource="{Binding YearAndMonth}"
+                SelectedItem="{Binding SelectedYearMonth, Mode=TwoWay}">
             </ComboBox>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -97,21 +84,21 @@
                    Name="Information"
                    VerticalAlignment="Top"
                    TextAlignment="Center"
-                   Text="Place for notes that match you searching"
-                   FontSize="16"
+                   Text="Place for notes that match chosen month"
+                   FontSize="20"
                    Margin="0,100,0,20" 
                    Foreground="{DynamicResource TextBlockColor}"
                    Visibility="Visible"/>
 
         <!-- ScrollViewer -->
         <ScrollViewer 
-     Grid.Row="2"
-     VerticalAlignment="Stretch"
-     HorizontalAlignment="Stretch"
-     Margin="0,10,0,0"
-     VerticalScrollBarVisibility="Auto" 
-     MinHeight="200"
-     >
+             Grid.Row="2"
+             VerticalAlignment="Stretch"
+             HorizontalAlignment="Center"
+             Margin="0,25,0,0"
+             VerticalScrollBarVisibility="Auto" 
+             MinHeight="200"
+             >
 
             <ItemsControl ItemsSource="{Binding Notes}">
 

@@ -1,61 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using kck_api.Controller;
-using Microsoft.VisualBasic.ApplicationServices;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace kck_projekt2
 {
     /// <summary>
-    /// Logika interakcji dla klasy LoginPage.xaml
+    /// Logika interakcji dla klasy CalendarPage.xaml
     /// </summary>
     public partial class CalendarPage : UserControl
     {
         private MainWindow _mainWindow;
+        private DateTime _selectedDay;
+        NoteController _noteController;
+        List<NoteModel> _currentMonthnotes;
+
         public CalendarPage(MainWindow mainWindow)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-            MyCalendar.SelectedDatesChanged += MyCalendar_SelectedDatesChanged;
-        }
-
-        private void MyCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
-        {
-            _mainWindow.contentControl.Content = new ExploreNotesByDayPage(_mainWindow, MyCalendar.SelectedDate.Value);
+            _noteController  = NoteController.GetInstance();
+            _currentMonthnotes = _noteController.GetNotesByUserIdAndMonth(_mainWindow.loggedUserId, DateTime.Now);
         }
 
         private void MyCalendar_Loaded(object sender, RoutedEventArgs e)
         {
-            var noteController = NoteController.GetInstance();
-            var currentMonthNotes = noteController.GetNotesByUserIdAndMonth(_mainWindow.loggedUserId, DateTime.Now);
-
             DateTime firstDayOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
             MyCalendar.DisplayDateStart = firstDayOfMonth;
             MyCalendar.DisplayDateEnd = lastDayOfMonth;
+            _selectedDay = DateTime.Now;
+            UpdateCalendarDays();
+        }
 
-            foreach (var note in currentMonthNotes)
+        private void UpdateCalendarDays()
+        {
+
+            foreach (var day in FindChildren<CalendarDayButton>(MyCalendar))
             {
-                foreach (var day in FindChildren<CalendarDayButton>(MyCalendar))
-                    if (((DateTime)day.DataContext).Date == note.ModifiedDate.Date)
-                        day.Background = (SolidColorBrush)Application.Current.Resources["LightColor"];
+                day.Background = Brushes.Transparent; // Resetuj tło dla wszystkich dni
+
+                if (((DateTime)day.DataContext).Date == _selectedDay.Date)
+                {
+                    day.Background = (SolidColorBrush)Application.Current.Resources["DarkColor"];
+                }
+                else if (_currentMonthnotes.Any(note => note.ModifiedDate.Date == ((DateTime)day.DataContext).Date))
+                {
+                    day.Background = (SolidColorBrush)Application.Current.Resources["LightColor"];
+                }
             }
         }
+
+        private void ShowNotesClick(object sender, RoutedEventArgs e)
+        {
+            _mainWindow.contentControl.Content = new ExploreNotesByDayPage(_mainWindow, _selectedDay);
+        }
+
+        private void MyCalendar_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _selectedDay = MyCalendar.SelectedDate.Value;
+            UpdateCalendarDays();
+            this.Focus();
+        }
+
 
         public static List<CalendarDayButton> FindChildren<CalendarDayButton>(DependencyObject parent)
         {
@@ -77,6 +89,5 @@ namespace kck_projekt2
         {
             _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
         }
-
     }
 }

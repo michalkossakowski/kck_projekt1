@@ -33,7 +33,11 @@ namespace kck_projekt2
             _noteController = NoteController.GetInstance();
             if (searchingCategory != null)
             {
-                CategoryInput.Text = searchingCategory;
+                SelectedCategory.IsEnabled = false;
+                SelectedCategory.Visibility = Visibility.Collapsed;
+                CustomCategory.IsEnabled = true;
+                CustomCategory.Visibility = Visibility.Visible;
+                CustomCategory.Text = searchingCategory;
                 _searchingCategory = searchingCategory;
                 Search();
             }
@@ -47,7 +51,12 @@ namespace kck_projekt2
         private void SearchClick(object sender, RoutedEventArgs e)
         {
             DataContext = null;
-            _searchingCategory = CategoryInput.Text;
+            var searchingCategory = SelectedCategory.SelectedItem as ComboBoxItem;
+            string category = CustomCategory.IsEnabled
+                ? CustomCategory.Text
+                : searchingCategory?.Content?.ToString() ?? "";
+            _searchingCategory = category;
+
             if (_searchingCategory.Length == 0)
             {
                 Information.Visibility = Visibility.Visible;
@@ -79,6 +88,23 @@ namespace kck_projekt2
                 DataContext = this;
             }
         }
+
+        private void CategoryToggleClick(object sender, RoutedEventArgs e)
+        {
+            CustomCategory.IsEnabled = !CustomCategory.IsEnabled;
+            SelectedCategory.IsEnabled = !SelectedCategory.IsEnabled;
+            if (SelectedCategory.IsEnabled)
+            {
+                CustomCategory.Visibility = Visibility.Collapsed;
+                SelectedCategory.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                CustomCategory.Visibility = Visibility.Visible;
+                SelectedCategory.Visibility = Visibility.Collapsed;
+            }
+        }
+
 
         private void OpenEditPage(object sender, MouseButtonEventArgs e)
         {

@@ -20,7 +20,7 @@
                    TextAlignment="Center"
                    Text="You don't have any notes right now"
                    FontSize="20"
-                   Margin="0,100,0,20" 
+                   Margin="0,200,0,20" 
                    Foreground="Red"
                    Visibility="Collapsed"/>
 

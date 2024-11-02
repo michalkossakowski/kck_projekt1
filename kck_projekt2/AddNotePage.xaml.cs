@@ -43,7 +43,7 @@ namespace kck_projekt2
                 }
                 else
                 {
-                    HintAssist.SetHelperText(CustomCategory, "Enter custom category");
+                    HintAssist.SetHelperText(CustomCategory, "Enter category");
                     CustomCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
 
 

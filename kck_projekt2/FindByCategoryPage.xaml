@@ -39,22 +39,63 @@
         <!-- Search Area -->
         <StackPanel 
             Grid.Row="1" 
-            Orientation="Horizontal" 
+            Orientation="Horizontal"
+            VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Margin="0,20,0,0">
+            Margin="0,10,0,0">
+            <!-- CategoryToggle -->
+            <CheckBox
+                    Margin="0,0,10,0"
+                    Style="{StaticResource MaterialDesignFilterChipPrimaryOutlineCheckBox}"
+                    x:Name="CategoryToggle" 
+                    IsChecked="False"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Click="CategoryToggleClick"
+                    Content="Custom"
+                    FontSize="16"
+                    Foreground="{DynamicResource MaterialDesign.Brush.Primary}"
+                    BorderBrush="{DynamicResource MaterialDesign.Brush.Primary}"
+                    BorderThickness="2"
+                    ToolTip="Switch to custom/preset category"/>
+                
+            <!-- SelectCategory/CustomCategory -->
+            <ComboBox
+                            x:Name="SelectedCategory"
+                            Width="200"
+                            Height="40"
+                            Margin="0,10,0,10"
+                            Padding="10,0,10,0"
+                            Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                            materialDesign:HintAssist.Hint="Preset Category"
+                            IsEnabled="True"
+                            FontSize="16"
+                            Foreground="{DynamicResource TextBoxColor}"
+                            materialDesign:HintAssist.HelperTextFontSize="12" 
+                            materialDesign:HintAssist.HelperText="Select category"  >
+                <ComboBoxItem Content="Studies"/>
+                <ComboBoxItem Content="Work"/>
+                <ComboBoxItem Content="Home"/>
+                <ComboBoxItem Content="Hobby"/>
+                <ComboBoxItem Content="Other"/>
+            </ComboBox>
+
             <TextBox 
-                Name="CategoryInput" 
-                materialDesign:HintAssist.HelperText="Enter searching category"  
-                materialDesign:HintAssist.Hint="Category" 
+                Name="CustomCategory" 
+                materialDesign:HintAssist.HelperText="Enter category"  
                 materialDesign:HintAssist.HelperTextFontSize="12" 
-                Width="200" Height="40" Margin="0,0,0,0"
-                Padding="10,0,0,0"
+                materialDesign:HintAssist.Hint="Custom category" 
+                IsEnabled="False"
+                FontSize="16"
+                Width="200"
+                Height="40"
+                Margin="0,10,0,10"
+                Padding="10,8,0,10"
                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                FontSize="16"/>
+                Foreground="{DynamicResource TextBoxColor}"
+                Visibility="Collapsed"/>
 
-
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Button 
+            <Button 
                     Name="SearchButton" 
                     Padding="5,0,0,0"
                     Width="30" 
@@ -62,17 +103,16 @@
                     Click="SearchClick" 
                     FontSize="16"
                     Margin="10,0,0,0">
-                    <StackPanel 
-                        Orientation="Horizontal" 
-                        HorizontalAlignment="Center" 
-                        VerticalAlignment="Center">
-                        <materialDesign:PackIcon Kind="Magnify" Foreground="white" Width="20" Height="20" Margin="0,0,5,0"/>
-
-                    </StackPanel>
-                </Button>
-            </StackPanel>
-
+                <StackPanel 
+                                Orientation="Horizontal" 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Magnify" Foreground="white" Width="20" Height="20" Margin="0,0,5,0"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
+
+        
         <TextBlock 
                 Grid.Row="2"
                 Name="Information"
@@ -87,16 +127,16 @@
 
         <!-- ScrollView -->
         <ScrollViewer 
-            Grid.Row="2"
-            VerticalAlignment="Stretch"
-            HorizontalAlignment="Stretch"
-            Margin="0,20,0,0"
-            VerticalScrollBarVisibility="Auto" 
-            MinHeight="200"
-            >
+    Grid.Row="2"
+    VerticalAlignment="Stretch"
+    HorizontalAlignment="Center"
+    Margin="0,25,0,0"
+    VerticalScrollBarVisibility="Auto" 
+    MinHeight="200"
+    >
 
             <ItemsControl ItemsSource="{Binding Notes}"
-                  HorizontalContentAlignment="Center">
+             HorizontalContentAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel HorizontalAlignment="Center" />
@@ -106,14 +146,14 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border 
-                            Margin="10" 
-                            Padding="0,0,0,0" 
-                            CornerRadius="20" 
-                            MouseUp="OpenEditPage"
-                            BorderBrush="{DynamicResource MaterialDesign.Brush.Primary}" 
-                            BorderThickness="2"
-                            Width="250"
-                            >
+                    Margin="10" 
+                    Padding="0,0,0,0" 
+                    CornerRadius="20" 
+                    MouseUp="OpenEditPage"
+                    BorderBrush="{DynamicResource MaterialDesign.Brush.Primary}" 
+                    BorderThickness="2"
+                    Width="250"
+                    >
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="{DynamicResource NoHoverColor}" />
@@ -127,52 +167,53 @@
                             </Border.Style>
                             <StackPanel>
                                 <StackPanel 
-                                    Orientation="Horizontal" 
-                                    HorizontalAlignment="Center"
-                                    Margin="5,5,5,5"
-                                    >
+                            Orientation="Vertical" 
+                            HorizontalAlignment="Center"
+                            Margin="5,5,5,0"
+                            >
                                     <TextBlock 
-                                        Text="{Binding Title}" 
-                                        TextAlignment="Center"
-                                        FontWeight="Bold" 
-                                        Foreground="{DynamicResource TextBlockColor}"
-                                        FontSize="16"
-                                        />
+                                Text="{Binding Title}" 
+                                TextAlignment="Center"
+                                FontWeight="Bold" 
+                                Foreground="{DynamicResource TextBlockColor}"
+                                FontSize="16"
+                                />
                                     <TextBlock 
-                                        Text="{Binding Category, StringFormat=' ({0})'}" 
-                                        TextAlignment="Center"
-                                        FontSize="16"
-                                        Foreground="{DynamicResource LightColor}" 
-                                        />
+                                Text="{Binding Category, StringFormat='({0})'}" 
+                                TextAlignment="Center"
+                                FontSize="12"
+                                Margin="0,0,0,2"
+                                Foreground="{DynamicResource LightColor}" 
+                                />
                                 </StackPanel>
 
                                 <TextBlock 
-                                    Text="{Binding ModifiedDate, StringFormat=' {0:dd.MM.yyyy HH:mm:ss} '}"
-                                    TextAlignment="Center"
-                                    FontSize="12"
-                                    VerticalAlignment="Center"
-                                    Margin="0,0,0,5"
-                                    Foreground="{DynamicResource TextBlockColor}"
-                                    />
+                            Text="{Binding ModifiedDate, StringFormat=' {0:dd.MM.yyyy HH:mm:ss} '}"
+                            TextAlignment="Center"
+                            FontSize="12"
+                            VerticalAlignment="Center"
+                            Margin="0,0,0,5"
+                            Foreground="{DynamicResource TextBlockColor}"
+                            />
 
                                 <Border 
-                                    Height="2" 
-                                    Background="{DynamicResource MaterialDesign.Brush.Primary}" 
-                                    Margin="-1,0,-1,0"
-                                    />
+                Height="2" 
+                Background="{DynamicResource MaterialDesign.Brush.Primary}" 
+                Margin="-1,0,-1,0"
+                />
 
                                 <TextBlock 
-                                    Text="{Binding Content}"
-                                    TextAlignment="Center"
-                                    TextWrapping="Wrap" 
-                                    FontSize="16"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Margin="5"
-                                    Padding="5"
-                                    Foreground="{DynamicResource TextBlockColor}"
-                                    FontWeight="Bold"
-                                    />
+                Text="{Binding Content}"
+                TextAlignment="Center"
+                TextWrapping="Wrap" 
+                FontSize="16"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Margin="5"
+                Padding="5"
+                Foreground="{DynamicResource TextBlockColor}"
+                FontWeight="Bold"
+                />
                             </StackPanel>
                         </Border>
                     </DataTemplate>

@@ -146,6 +146,10 @@ namespace kck_projekt2
                     _mainWindow.contentControl.Content = Activator.CreateInstance(typeof(FindByDatePage), _mainWindow, categoryPage._searchingDate);
                     break;
 
+                case ExploreNotesByMonthPage categoryPage:
+                    _mainWindow.contentControl.Content = Activator.CreateInstance(typeof(ExploreNotesByMonthPage), _mainWindow, categoryPage._searchingDate);
+                    break;
+
                 default:
                     _mainWindow.contentControl.Content = Activator.CreateInstance(_previousAction.GetType(), _mainWindow);
                     break;

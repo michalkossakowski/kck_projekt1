@@ -62,7 +62,7 @@ namespace kck_projekt2
                 });
                 if (user == null)
                 {
-                    _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Red);
+                    _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
                     _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
                     nick.Foreground = new SolidColorBrush(Colors.Red);
                     password.Foreground = new SolidColorBrush(Colors.Red);

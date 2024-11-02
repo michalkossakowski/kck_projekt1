@@ -19,7 +19,7 @@
                    TextAlignment="Center"
                    Text="You don't have any notes right now"
                    FontSize="20"
-                   Margin="0,100,0,20" 
+                   Margin="0,200,0,20" 
                    Foreground="Red"
                    Visibility="Collapsed"/>
         
@@ -48,14 +48,14 @@
         <ScrollViewer 
     Grid.Row="1"
     VerticalAlignment="Stretch"
-    HorizontalAlignment="Stretch"
+    HorizontalAlignment="Center"
     Margin="0,10,0,0"
     VerticalScrollBarVisibility="Auto" 
     MinHeight="200"
     >
 
             <ItemsControl ItemsSource="{Binding Notes}"
-          HorizontalContentAlignment="Center">
+             HorizontalContentAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel HorizontalAlignment="Center" />
@@ -86,9 +86,9 @@
                             </Border.Style>
                             <StackPanel>
                                 <StackPanel 
-                            Orientation="Horizontal" 
+                            Orientation="Vertical" 
                             HorizontalAlignment="Center"
-                            Margin="5,5,5,5"
+                            Margin="5,5,5,0"
                             >
                                     <TextBlock 
                                 Text="{Binding Title}" 
@@ -98,9 +98,10 @@
                                 FontSize="16"
                                 />
                                     <TextBlock 
-                                Text="{Binding Category, StringFormat=' ({0})'}" 
+                                Text="{Binding Category, StringFormat='({0})'}" 
                                 TextAlignment="Center"
-                                FontSize="16"
+                                FontSize="12"
+                                Margin="0,0,0,2"
                                 Foreground="{DynamicResource LightColor}" 
                                 />
                                 </StackPanel>
@@ -115,23 +116,23 @@
                             />
 
                                 <Border 
-                            Height="2" 
-                            Background="{DynamicResource MaterialDesign.Brush.Primary}" 
-                            Margin="-1,0,-1,0"
-                            />
+                Height="2" 
+                Background="{DynamicResource MaterialDesign.Brush.Primary}" 
+                Margin="-1,0,-1,0"
+                />
 
                                 <TextBlock 
-                            Text="{Binding Content}"
-                            TextAlignment="Center"
-                            TextWrapping="Wrap" 
-                            FontSize="16"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            Margin="5"
-                            Padding="5"
-                            Foreground="{DynamicResource TextBlockColor}"
-                            FontWeight="Bold"
-                            />
+                Text="{Binding Content}"
+                TextAlignment="Center"
+                TextWrapping="Wrap" 
+                FontSize="16"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Margin="5"
+                Padding="5"
+                Foreground="{DynamicResource TextBlockColor}"
+                FontWeight="Bold"
+                />
                             </StackPanel>
                         </Border>
                     </DataTemplate>

@@ -51,7 +51,7 @@ namespace kck_projekt2
                 }
                 else if (_currentMonthnotes.Any(note => note.ModifiedDate.Date == ((DateTime)day.DataContext).Date))
                 {
-                    day.Background = (SolidColorBrush)Application.Current.Resources["LightColor"];
+                    day.Background = (SolidColorBrush)Application.Current.Resources["MaterialDesign.Brush.Secondary"];
                 }
             }
         }

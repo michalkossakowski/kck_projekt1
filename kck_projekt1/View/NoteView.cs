@@ -118,10 +118,36 @@ namespace kck_projekt1.View
                         Console.ReadKey(true);
                         return;
                     case "D":
-                        noteController.RemoveNote(noteId);
+                        var sure = ShowDeleteConfirmation();
+                        if (sure)
+                        {
+                            noteController.RemoveNote(noteId);
+                            AnsiConsole.Markup("[green1]\n✅ Note successful deleted, press anything to continue...[/]");
+                        }
+                        else
+                        {
+                            AnsiConsole.Markup("[green1]\n⏪ Deleting note canceled, press anything to continue...[/]");
+                        }
+                        Console.ReadKey(true);
                         return;
                 }
             }
+        }
+
+        public bool ShowDeleteConfirmation()
+        {
+            var choice = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+            .HighlightStyle(Color.DarkOrange)
+            .Title("[gold1]Are you sure you want to delete the note ?[/]")
+            .AddChoices(new[] {
+                "Yes",
+                "No"
+            }));
+
+            if(choice == "Yes") 
+                return true;
+            return false;
         }
 
         public void ShowEditNote(NoteModel note)

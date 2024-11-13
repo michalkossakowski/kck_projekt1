@@ -390,13 +390,8 @@ namespace kck_projekt1.View
 
         public int ShowNotesBySearch(int userId, string searchingTitle)
         {
-            AnsiConsole.Clear();
-            AnsiConsole.Write(
-            new FigletText(Program.font,"Results")
-            .Centered()
-                .Color(Color.Gold1));
-
-            var rule = new Rule("[gold1]Choose note to show:[/]");
+            Console.WriteLine();
+            var rule = new Rule($"[gold1]Notes with '{searchingTitle}' in title:[/]");
             rule.Style = new Style(Color.Gold1);
             rule.LeftJustified();
             AnsiConsole.Write(rule);
@@ -496,13 +491,9 @@ namespace kck_projekt1.View
 
         public int ShowNotesByCategory(int userId, string categoryFilter)
         {
-            AnsiConsole.Clear();
-            AnsiConsole.Write(
-            new FigletText(Program.font, "Results")
-            .Centered()
-                .Color(Color.Gold1));
+            Console.WriteLine();
 
-            var rule = new Rule("[gold1]Choose note to show:[/]");
+            var rule = new Rule($"[gold1]Notes from category '{categoryFilter}':[/]");
             rule.Style = new Style(Color.Gold1);
             rule.LeftJustified();
             AnsiConsole.Write(rule);

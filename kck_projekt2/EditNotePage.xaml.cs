@@ -111,14 +111,28 @@ namespace kck_projekt2
 
         public void DeleteNoteClick(object sender, RoutedEventArgs e)
         {
-            var noteController = NoteController.GetInstance();
-            _noteController.RemoveNote(_noteId);
+            MessageBoxResult result = MessageBox.Show(
+            "Are you sure you want to delete the note ?",
+            "Delete confirmation",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Question);
 
+            if (result == MessageBoxResult.Yes)
+            {
+                var noteController = NoteController.GetInstance();
+                _noteController.RemoveNote(_noteId);
+
+                _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
+                _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                _mainWindow.Snackbar.MessageQueue?.Enqueue("Note successfully deleted");
+            }
+            else
+            {
+                _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
+                _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                _mainWindow.Snackbar.MessageQueue?.Enqueue("Deleting note canceled");
+            }
             Back();
-
-            _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
-            _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-            _mainWindow.Snackbar.MessageQueue?.Enqueue("Note successfully deleted");
         }
 
         private void BackClick(object sender, RoutedEventArgs e)

@@ -49,6 +49,7 @@ namespace kck_projekt2
 
         private async void SaveNoteClick(object sender, RoutedEventArgs e)
         {
+
             var selectedCategory = SelectedCategory.SelectedItem as ComboBoxItem;
             string category = CustomCategory.IsEnabled
                 ? CustomCategory.Text
@@ -88,18 +89,28 @@ namespace kck_projekt2
                 NoteContent.Foreground = new SolidColorBrush(Colors.Red);
             }
 
-
             if ((!string.IsNullOrWhiteSpace(Title.Text)) && (category.Length > 0) && (NoteContent.Text.Length > 0))
             {
                 var noteController = NoteController.GetInstance();
                 var note = new NoteModel(_mainWindow.loggedUserId, Title.Text, NoteContent.Text, category);
                 _noteController.EditNote(_noteId, Title.Text, category, NoteContent.Text);
 
-                Back();
+                YesNoDialog dialog = new YesNoDialog("Are you sure you want to save changes?");
+                dialog.Owner = _mainWindow;
+                if (dialog.ShowDialog() == true)
+                {
+                    _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
+                    _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                    _mainWindow.Snackbar.MessageQueue?.Enqueue("Note successfully edited");
+                    Back();
+                }
+                else
+                {
+                    _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
+                    _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                    _mainWindow.Snackbar.MessageQueue?.Enqueue("Note edit canceled");
 
-                _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
-                _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-                _mainWindow.Snackbar.MessageQueue?.Enqueue("Note successfully edited");
+                }
             }
             else
             {
@@ -111,13 +122,9 @@ namespace kck_projekt2
 
         public void DeleteNoteClick(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show(
-            "Are you sure you want to delete the note ?",
-            "Delete confirmation",
-            MessageBoxButton.YesNo,
-            MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.Yes)
+            YesNoDialog dialog = new YesNoDialog("Are you sure you want to delete the note?");
+            dialog.Owner = _mainWindow;
+            if (dialog.ShowDialog() == true)
             {
                 var noteController = NoteController.GetInstance();
                 _noteController.RemoveNote(_noteId);
@@ -125,6 +132,7 @@ namespace kck_projekt2
                 _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
                 _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
                 _mainWindow.Snackbar.MessageQueue?.Enqueue("Note successfully deleted");
+                Back();
             }
             else
             {
@@ -132,7 +140,6 @@ namespace kck_projekt2
                 _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
                 _mainWindow.Snackbar.MessageQueue?.Enqueue("Deleting note canceled");
             }
-            Back();
         }
 
         private void BackClick(object sender, RoutedEventArgs e)

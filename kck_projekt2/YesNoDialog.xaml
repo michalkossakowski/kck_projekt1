@@ -1,0 +1,33 @@
+﻿<Window x:Class="kck_projekt2.YesNoDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Confirmation"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Style="{StaticResource MaterialDesignWindow}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"  
+        >
+    <Border 
+        Padding="20"
+        Background="{DynamicResource MaterialDesignPaper}"
+        BorderBrush="{DynamicResource MaterialDesignPaper}">
+        <StackPanel>
+            <TextBlock 
+                x:Name="Message" 
+                HorizontalAlignment="Center" Text="Question ?" FontSize="16" Margin="0,0,0,10" TextWrapping="Wrap"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                <Button 
+                    Content="Yes"
+                    Background="{DynamicResource LightColor}"
+                    BorderBrush="{DynamicResource LightColor}"    
+                    Width="80" Margin="5" Click="YesClick"/>
+                <Button 
+                    Content="No"
+                    Background="{DynamicResource DarkColor}"
+                    BorderBrush="{DynamicResource DarkColor}" 
+                    Width="80" Margin="5" Click="NoClick"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>

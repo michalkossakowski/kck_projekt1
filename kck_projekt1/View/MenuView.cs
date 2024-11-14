@@ -342,7 +342,9 @@ namespace kck_projekt1.View
                         break;
 
                     case "S":
-                        var searchingTitle = noteView.SearchNotes();
+                        var searchingTitle = noteView.SearchNotes(_loggedUser.Id);
+                        if(searchingTitle == null)
+                            break;
                         bool fromBackSearch = false;
                         while (true)
                         {
@@ -355,7 +357,9 @@ namespace kck_projekt1.View
                         break;
 
                     case "F":
-                        var categoryFilter = noteView.ChooseCategoryToFilter();
+                        var categoryFilter = noteView.ChooseCategoryToFilter(_loggedUser.Id);
+                        if (categoryFilter == null)
+                            break;
                         bool fromBackCat = false;
                         while (true)
                         {
@@ -368,7 +372,7 @@ namespace kck_projekt1.View
                         break;
 
                     case "D":
-                        DateTime chosenDate = noteView.ChooseDate();
+                        DateTime chosenDate = noteView.ChooseDate(_loggedUser.Id);
                         while (chosenDate!= DateTime.MinValue)
                         {
                             var chosenNoteId = noteView.ExploreNotesByDate(_loggedUser.Id, chosenDate);

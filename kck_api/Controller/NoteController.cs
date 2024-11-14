@@ -108,5 +108,9 @@ namespace kck_api.Controller
             _context.SaveChanges();
         }
 
+        public bool IsUserHasAnyNotes(int userId)
+        {
+            return _context.Notes.Where(n => n.AuthorId == userId).Any();
+        }
     }
 }

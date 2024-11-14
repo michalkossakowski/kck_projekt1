@@ -252,7 +252,7 @@ namespace kck_projekt1.View
 
             if (notes?.Count == 0)
             {
-                AnsiConsole.Markup("[red1]\n⛔You don't have any notes, press anything to continue...[/]");
+                AnsiConsole.Markup("[red1]\n⛔ You don't have any notes, press anything to continue...[/]");
                 Console.ReadKey(true);
                 return -1;
             }
@@ -373,7 +373,7 @@ namespace kck_projekt1.View
             AnsiConsole.Clear();
         }
 
-        public string SearchNotes()
+        public string SearchNotes(int userId)
         {
             AnsiConsole.Clear();
 
@@ -386,6 +386,13 @@ namespace kck_projekt1.View
             rule.Style = new Style(Color.Gold1);
             rule.LeftJustified();
             AnsiConsole.Write(rule);
+
+            if (!_noteController.IsUserHasAnyNotes(userId))
+            {
+                AnsiConsole.Markup("[red1]\n⛔ You don't have any notes, press anything to continue...[/]");
+                Console.ReadKey(true);
+                return null;
+            }
 
             Console.WriteLine("");
 
@@ -451,23 +458,29 @@ namespace kck_projekt1.View
             }
         }
 
-        public string ChooseCategoryToFilter()
+        public string ChooseCategoryToFilter(int userId)
         {
 
+            AnsiConsole.Clear();
 
-                AnsiConsole.Clear();
+            AnsiConsole.Write(
+            new FigletText(Program.font, "CATEGORIES")
+            .Centered()
+            .Color(Color.Gold1));
 
-                AnsiConsole.Write(
-                new FigletText(Program.font, "CATEGORIES")
-                .Centered()
-                .Color(Color.Gold1));
-
-                var rule = new Rule("[gold1]Select a category to filter:[/]");
+            var rule = new Rule("[gold1]Select a category to filter:[/]");
                 rule.Style = new Style(Color.Gold1);
                 rule.LeftJustified();
                 AnsiConsole.Write(rule);
 
-                Console.WriteLine("");
+            if (!_noteController.IsUserHasAnyNotes(userId))
+            {
+                AnsiConsole.Markup("[red1]\n⛔ You don't have any notes, press anything to continue...[/]");
+                Console.ReadKey(true);
+                return null;
+            }
+
+            Console.WriteLine("");
 
                 var colWidth = 30;
                 var table = new Table()
@@ -564,7 +577,7 @@ namespace kck_projekt1.View
             }
         }
 
-        public DateTime ChooseDate()
+        public DateTime ChooseDate(int userId)
         {
             AnsiConsole.Clear();
 
@@ -577,6 +590,13 @@ namespace kck_projekt1.View
             rule.Style = new Style(Color.Gold1);
             rule.LeftJustified();
             AnsiConsole.Write(rule);
+
+            if (!_noteController.IsUserHasAnyNotes(userId))
+            {
+                AnsiConsole.Markup("[red1]\n⛔ You don't have any notes, press anything to continue...[/]");
+                Console.ReadKey(true);
+                return DateTime.MinValue;
+            }
 
             Console.WriteLine();
 

@@ -38,7 +38,8 @@ namespace kck_projekt1.View
                                 new FigletText(Program.font, "Notes App")
                                     .LeftJustified()
                                     .Color(Color.Gold1),
-                                new Rule("[gold1]Press the[/] [darkorange]{KEY}[/] [gold1]on your keyboard to select the action[/]").RuleStyle("gold1")
+                                new Rule("[gold1]Press the[/] [darkorange]{KEY}[/] [gold1]on your keyboard to select the action[/]").RuleStyle("gold1"),
+                                new Markup("[gold1]Press[/] [darkorange]{Spacebar}[/] [gold1]to refresh view after resizing window[/]")
                             ),
                             VerticalAlignment.Middle))
                     .Expand());
@@ -89,11 +90,18 @@ namespace kck_projekt1.View
                 }
                 catch
                 {
-                    AnsiConsole.Markup("[red1]⛔ Window is to small, expand the window please...[/]");
+                    AnsiConsole.Markup("[red1]⛔ Window is to small, expand the window and press {Spacebar} to refresh please...[/]");
                 }
 
-                var pressedKey = Console.ReadKey(true);
-                var choice = pressedKey.Key.ToString();
+                ConsoleKeyInfo pressedKey;
+                string choice = "";
+                var choices = new List<string> { "L", "R", "G", "Escape", "Spacebar" };
+                while (!choices.Contains(choice))
+                {
+                    pressedKey = Console.ReadKey(true);
+                    choice = pressedKey.Key.ToString();
+                }
+
                 switch (choice)
                 {
                     case "L":
@@ -131,7 +139,7 @@ namespace kck_projekt1.View
 
                         bool isAdded = false;
                         AnsiConsole.Status()
-                        .Spinner(Spinner.Known.BouncingBar)
+                        .Spinner(Spinner.Known.Moon)
                         .SpinnerStyle(Style.Parse("darkorange"))
                         .Start("[gold1]Loading[/]", ctx =>
                         {
@@ -287,11 +295,17 @@ namespace kck_projekt1.View
                 }
                 catch
                 {
-                    AnsiConsole.Markup("[red1]⛔ Window is to small, expand the window please...[/]");
+                    AnsiConsole.Markup("[red1]⛔ Window is to small, expand the window and press {Spacebar} to refresh please...[/]");
                 }
 
-                var pressedKey = Console.ReadKey(true);
-                var choice = pressedKey.Key.ToString();
+                ConsoleKeyInfo pressedKey;
+                string choice = "";
+                var choices = new List<string> { "A", "L" , "E", "C", "S", "F", "D", "M", "Escape", "Spacebar" };
+                while (!choices.Contains(choice))
+                {
+                    pressedKey = Console.ReadKey(true);
+                    choice = pressedKey.Key.ToString();
+                }
 
                 switch (choice)
                 {
@@ -329,23 +343,27 @@ namespace kck_projekt1.View
 
                     case "S":
                         var searchingTitle = noteView.SearchNotes();
+                        bool fromBackSearch = false;
                         while (true)
                         {
-                            var searchingNoteId = noteView.ShowNotesBySearch(_loggedUser.Id, searchingTitle);
+                            var searchingNoteId = noteView.ShowNotesBySearch(_loggedUser.Id, searchingTitle, fromBackSearch);
                             if (searchingNoteId == -1)
                                 break;
                             noteView.ShowNote(searchingNoteId);
+                            fromBackSearch = true;
                         }
                         break;
 
                     case "F":
                         var categoryFilter = noteView.ChooseCategoryToFilter();
+                        bool fromBackCat = false;
                         while (true)
                         {
-                            var chosenNoteId = noteView.ShowNotesByCategory(_loggedUser.Id, categoryFilter);
+                            var chosenNoteId = noteView.ShowNotesByCategory(_loggedUser.Id, categoryFilter, fromBackCat);
                             if (chosenNoteId == -1)
                                 break;
                             noteView.ShowNote(chosenNoteId);
+                            fromBackCat = true;
                         }
                         break;
 
@@ -362,12 +380,14 @@ namespace kck_projekt1.View
 
                     case "M":
                         var chosenMonth = noteView.ChooseMonth(_loggedUser.Id);
+                        bool fromBackMonth = false;
                         while (chosenMonth != DateTime.MinValue)
                         {
-                            var chosenNoteId = noteView.ShowNotesByMonth(_loggedUser.Id, chosenMonth);
+                            var chosenNoteId = noteView.ShowNotesByMonth(_loggedUser.Id, chosenMonth, fromBackMonth);
                             if (chosenNoteId == -1)
                                 break;
                             noteView.ShowNote(chosenNoteId);
+                            fromBackMonth = true;
                         }
                         break;
 

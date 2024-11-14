@@ -95,7 +95,7 @@ namespace kck_projekt2
                 var note = new NoteModel(_mainWindow.loggedUserId, Title.Text, NoteContent.Text, category);
                 _noteController.EditNote(_noteId, Title.Text, category, NoteContent.Text);
 
-                YesNoDialog dialog = new YesNoDialog("Are you sure you want to save changes?");
+                YesNoDialog dialog = new YesNoDialog("Are you sure you want to save changes ?");
                 dialog.Owner = _mainWindow;
                 if (dialog.ShowDialog() == true)
                 {

@@ -325,6 +325,7 @@ namespace kck_projekt1.View
                     AnsiConsole.Write(rule);
 
                     var list = days.OrderBy(day => day).Select(day => new DateTime(currentDate.Year, currentDate.Month, day).ToString("dd.MM.yyyy")).ToList();
+                    list.Reverse();
                     list.Insert(0, "Back");
 
 

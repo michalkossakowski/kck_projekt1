@@ -58,7 +58,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]🖥️ GRAPHIC MODE ▶ {G}[/]"),
+                                new Markup("[darkorange]💻 GRAPHIC MODE ▶ {G}[/]"),
                                 new Markup("[gold1]Open graphic version of the application[/]")
                             ),
                             VerticalAlignment.Middle))
@@ -211,7 +211,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]🖋️ ADD NOTE ▶ {A}[/]"),
+                                new Markup("[darkorange]📝 ADD NOTE ▶ {A}[/]"),
                                 new Markup("[gold1]Create a new note[/]")
                             ),
                             VerticalAlignment.Middle))
@@ -262,7 +262,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                             new Rows(
-                                new Markup("[darkorange]🗓️ CALENDAR ▶ {C}[/]"),
+                                new Markup("[darkorange]📅 CALENDAR ▶ {C}[/]"),
                                 new Markup("[gold1]Current month notes preview[/]")
 
                             ),
@@ -283,7 +283,7 @@ namespace kck_projekt1.View
                     new Panel(
                         Align.Center(
                            new Rows(
-                                new Markup("[darkorange]📅 FIND BY DATE ▶ {D}[/]"),
+                                new Markup("[darkorange]🕓 FIND BY DATE ▶ {D}[/]"),
                                 new Markup("[gold1]Find notes by chosen date[/]")
                             ),
                             VerticalAlignment.Middle))

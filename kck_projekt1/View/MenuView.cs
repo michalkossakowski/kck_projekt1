@@ -39,7 +39,7 @@ namespace kck_projekt1.View
                                     .LeftJustified()
                                     .Color(Color.Gold1),
                                 new Rule("[gold1]Press the[/] [darkorange]{KEY}[/] [gold1]on your keyboard to select the action[/]").RuleStyle("gold1"),
-                                new Markup("[gold1]Press[/] [darkorange]{Spacebar}[/] [gold1]to refresh view after resizing window[/]")
+                                new Markup("[gold1]Press[/] [darkorange]{Space}[/] [gold1]to refresh view after resizing window[/]")
                             ),
                             VerticalAlignment.Middle))
                     .Expand());
@@ -90,7 +90,7 @@ namespace kck_projekt1.View
                 }
                 catch
                 {
-                    AnsiConsole.Markup("[red1]⛔ Window is to small, expand the window and press {Spacebar} to refresh please...[/]");
+                    AnsiConsole.Markup("[red1]⛔ Window is to small, expand the window and press {Space} to refresh please...[/]");
                 }
 
                 ConsoleKeyInfo pressedKey;
@@ -295,7 +295,7 @@ namespace kck_projekt1.View
                 }
                 catch
                 {
-                    AnsiConsole.Markup("[red1]⛔ Window is to small, expand the window and press {Spacebar} to refresh please...[/]");
+                    AnsiConsole.Markup("[red1]⛔ Window is to small, expand the window and press {Space} to refresh please...[/]");
                 }
 
                 ConsoleKeyInfo pressedKey;

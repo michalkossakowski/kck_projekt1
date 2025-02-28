@@ -62,7 +62,7 @@ namespace kck_projekt2
             {
                 var noteController = NoteController.GetInstance();
                 var note = new NoteModel(_mainWindow.loggedUserId, Title.Text, NoteContent.Text, category);
-                noteController.AddNote(note);
+                noteController.AddNoteAsync(note);
                 _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
                 _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
                 _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));

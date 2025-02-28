@@ -38,9 +38,9 @@ namespace kck_projekt2
             Search();
         }
 
-        private void Search()
+        private async void Search()
         {
-            var notes = _noteController.GetNotesByUserIdAndDay(_mainWindow.loggedUserId, _searchingDate);
+            var notes = await _noteController.GetNotesByUserIdAndDayAsync(_mainWindow.loggedUserId, _searchingDate);
             if (notes.Count == 0)
             {
                 BottomTip.Visibility = Visibility.Hidden;

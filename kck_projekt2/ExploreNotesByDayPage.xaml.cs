@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using kck_api.Controller;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace kck_projekt2
 {
@@ -18,11 +19,16 @@ namespace kck_projekt2
             _mainWindow = mainWindow;
 
             HeaderTitle.Text = $"{date.Day}.{date.Month}.{date.Year}";
+
+            InitializeNotes();
+        }
+        private async void InitializeNotes()
+        {
             var noteController = NoteController.GetInstance();
-            var notes = noteController.GetNotesByUserIdAndDay(_mainWindow.loggedUserId, date);
-            if(notes.Count == 0)
+            var notes = await noteController.GetNotesByUserIdAndDayAsync(_mainWindow.loggedUserId, _date);
+            if (notes.Count == 0)
             {
-                Information.Text = $"You don't have any notes from: {date.Day}.{date.Month}.{date.Year}";
+                Information.Text = $"You don't have any notes from: {_date.Day}.{_date.Month}.{_date.Year}";
                 Information.Visibility = Visibility.Visible;
                 BottomTip.Visibility = Visibility.Collapsed;
             }

@@ -57,9 +57,9 @@ namespace kck_projekt2
             }
         }
 
-        private void Search()
+        private async void Search()
         {
-            var notes = _noteController.GetNotesByUserIdAndCategory(_mainWindow.loggedUserId, _searchingCategory);
+            var notes = await _noteController.GetNotesByUserIdAndCategoryAsync(_mainWindow.loggedUserId, _searchingCategory);
             if (notes.Count == 0)
             {
                 BottomTip.Visibility = Visibility.Hidden;

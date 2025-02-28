@@ -14,12 +14,19 @@ namespace kck_projekt2
         private UserControl _previousAction;
         public EditNotePage(MainWindow mainWindow, int noteId, UserControl previousAction)
         {
+            InitializeComponent();
+
             _mainWindow = mainWindow;
             _noteController = NoteController.GetInstance();
             _previousAction = previousAction;
             _noteId = noteId;
-            var note = _noteController.GetNoteById(_noteId);
-            InitializeComponent();
+
+            InitializeNote();
+        }
+
+        private async void InitializeNote()
+        {
+            var note = await _noteController.GetNoteByIdAsync(_noteId);
 
             Title.Text = note.Title;
             CustomCategory.Text = note.Category;
@@ -79,7 +86,7 @@ namespace kck_projekt2
             {
                 var noteController = NoteController.GetInstance();
                 var note = new NoteModel(_mainWindow.loggedUserId, Title.Text, NoteContent.Text, category);
-                _noteController.EditNote(_noteId, Title.Text, category, NoteContent.Text);
+                await _noteController.EditNoteAsync(_noteId, Title.Text, category, NoteContent.Text);
 
                 YesNoDialog dialog = new YesNoDialog("Are you sure you want to save changes ?");
                 dialog.Owner = _mainWindow;
@@ -106,14 +113,14 @@ namespace kck_projekt2
             }
         }
 
-        public void DeleteNoteClick(object sender, RoutedEventArgs e)
+        public async void DeleteNoteClick(object sender, RoutedEventArgs e)
         {
             YesNoDialog dialog = new YesNoDialog("Are you sure you want to delete the note?");
             dialog.Owner = _mainWindow;
             if (dialog.ShowDialog() == true)
             {
                 var noteController = NoteController.GetInstance();
-                _noteController.RemoveNote(_noteId);
+                await _noteController.RemoveNoteAsync(_noteId);
 
                 _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
                 _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));

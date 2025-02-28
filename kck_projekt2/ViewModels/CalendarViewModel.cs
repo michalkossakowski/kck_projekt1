@@ -50,12 +50,17 @@ namespace kck_projekt2
         {
             _mainWindow = mainWindow;
             _noteController = NoteController.GetInstance();
-            _currentMonthNotes = _noteController.GetNotesByUserIdAndMonth(_mainWindow.loggedUserId, DateTime.Now);
 
             ShowNotesCommand = new RelayCommand(ShowNotes);
             BackCommand = new RelayCommand(Back);
 
             InitializeCalendar();
+            InitializeNotes();
+        }
+
+        private async void InitializeNotes()
+        {
+            _currentMonthNotes = await _noteController.GetNotesByUserIdAndMonthAsync(_mainWindow.loggedUserId, DateTime.Now);
         }
 
         private void InitializeCalendar()

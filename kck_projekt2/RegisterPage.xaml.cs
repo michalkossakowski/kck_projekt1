@@ -54,9 +54,9 @@ namespace kck_projekt2
                 var userController = UserController.GetInstance();
                 var user = new UserModel(nickValue, passwordValue);
                 var isCreated = await Task.Run(async () =>
-                {
-                    await Task.Delay(1500);
-                    return userController.AddUser(user);
+               {
+                    await Task.Delay(1000);
+                    return await userController.AddUserAsync(user);
                 });
                 if (isCreated)
                 {

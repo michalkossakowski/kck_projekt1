@@ -15,8 +15,13 @@ namespace kck_projekt2
             InitializeComponent();
             _mainWindow = mainWindow;
 
+            InitializeNotes();
+        }
+
+        private async void InitializeNotes()
+        {
             var noteController = NoteController.GetInstance();
-            var notes = noteController.GetLatestNotesByUserId(_mainWindow.loggedUserId, 8);
+            var notes = await noteController.GetLatestNotesByUserIdAsync(_mainWindow.loggedUserId, 8);
 
             if (notes.Count == 0)
             {

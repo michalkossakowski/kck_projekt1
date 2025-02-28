@@ -29,12 +29,12 @@
                       VerticalAlignment="Center" 
                       Width="350"
                       Height="auto"
-                      Loaded="MyCalendar_Loaded"
                       Foreground="White"
                       Background="#9172C8"
-                      SelectedDatesChanged="MyCalendar_SelectedDateChanged"
-                      >
-            </Calendar>
+                      SelectedDate="{Binding SelectedDay, UpdateSourceTrigger=PropertyChanged}"
+                      DisplayDateStart="{Binding DisplayDateStart, Mode=OneWay}"
+                      DisplayDateEnd="{Binding DisplayDateEnd, Mode=OneWay}"
+                      SelectedDatesChanged="MyCalendar_SelectedDateChanged"/>
 
             <TextBlock Text="(Select date and press the button to see notes from that day)" 
                        TextAlignment="Center"
@@ -49,7 +49,7 @@
                 Width="120" 
                 Height="30" 
                 Margin="0,20,0,0" 
-                Click="ShowNotesClick"
+                Command="{Binding ShowNotesCommand}"
                 FontSize="16"/>
 
             <Button 
@@ -57,11 +57,10 @@
                 Width="70" 
                 Height="30" 
                 Margin="0,20,0,0" 
-                Click="BackClick"
+                Command="{Binding BackCommand}"
                 FontSize="16"
                 Background="{DynamicResource MaterialDesign.Brush.Secondary}"
                 BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}"/>
-
         </StackPanel>
     </Grid>
 </UserControl>

@@ -1,28 +1,12 @@
 ﻿using System.Diagnostics;
 using System.IO;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using kck_api.Controller;
-using kck_api.Database;
 using System.Windows.Media.Animation;
 using MaterialDesignThemes.Wpf;
-using System.ComponentModel;
-using MaterialDesignColors;
 
 namespace kck_projekt2
 {
-
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public int loggedUserId;
@@ -111,10 +95,17 @@ namespace kck_projekt2
 
         private void SwitchToConsoleMode(object sender, RoutedEventArgs e)
         {
-            Process process = new Process();
-            process.StartInfo.FileName = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "kck_projekt1.exe");
-            process.Start();
-            Environment.Exit(0);
+            try
+            {
+                Process process = new Process();
+                process.StartInfo.FileName = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "kck_projekt1.exe");
+                process.Start();
+                Environment.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Console Mode is not currently available");
+            }
         }
 
         private void ExitClick(object sender, RoutedEventArgs e)

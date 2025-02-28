@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,9 +8,6 @@ using kck_api.Controller;
 
 namespace kck_projekt2
 {
-    /// <summary>
-    /// Logika interakcji dla klasy LoginPage.xaml
-    /// </summary>
     public partial class ExploreNotesByMonthPage : UserControl, INotifyPropertyChanged
     {
         private MainWindow _mainWindow;
@@ -22,6 +16,7 @@ namespace kck_projekt2
         private NoteController _noteController;
         public DateTime _searchingDate;
         private string _selectedYearMonth;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public ExploreNotesByMonthPage(MainWindow mainWindow, DateTime? searchingDate)
         {
@@ -57,9 +52,6 @@ namespace kck_projekt2
                 DataContext = this;
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
 
         public string SelectedYearMonth
         {

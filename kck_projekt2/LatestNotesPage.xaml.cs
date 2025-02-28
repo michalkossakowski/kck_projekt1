@@ -1,26 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using kck_api.Controller;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace kck_projekt2
 {
-    /// <summary>
-    /// Logika interakcji dla klasy LoginPage.xaml
-    /// </summary>
     public partial class LatestNotesPage : UserControl
     {
         private MainWindow _mainWindow;

@@ -1,25 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using kck_api.Controller;
 using MaterialDesignThemes.Wpf;
 
 namespace kck_projekt2
 {
-    /// <summary>
-    /// Logika interakcji dla klasy LoginPage.xaml
-    /// </summary>
+
     public partial class LoginPage : UserControl
     {
         private MainWindow _mainWindow;
@@ -57,7 +44,7 @@ namespace kck_projekt2
                 var user = new UserModel(nickValue, passwordValue);
                 user = await Task.Run(async () =>
                 {
-                    await Task.Delay(1500); 
+                    await Task.Delay(1000); 
                     return userController.GetUser(user); 
                 });
                 if (user == null)
@@ -88,7 +75,6 @@ namespace kck_projekt2
             Loading.Visibility = Visibility.Hidden;
         }
 
-
         private void Nick_TextChanged(object sender, TextChangedEventArgs e)
         {
             nick.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
@@ -107,7 +93,5 @@ namespace kck_projekt2
         {
             _mainWindow.ReturnToMainMenu();
         }
-
-
     }
 }

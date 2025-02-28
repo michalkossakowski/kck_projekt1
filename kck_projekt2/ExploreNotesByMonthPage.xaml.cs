@@ -30,8 +30,14 @@ namespace kck_projekt2
                 SelectedYearMonth = $"{_searchingDate.Month}.{_searchingDate.Year}";
                 Search();
             }
-            var allNotes = _noteController.GetNotesByUserId(_mainWindow.loggedUserId);
-            if(allNotes.Count() == 0)
+
+            InitializeNotes();
+        }
+
+        private async void InitializeNotes()
+        {
+            var allNotes = await _noteController.GetNotesByUserIdAsync(_mainWindow.loggedUserId);
+            if (allNotes.Count() == 0)
             {
                 Information.Visibility = Visibility.Visible;
                 Information.Text = "You dont have any notes";
@@ -90,9 +96,9 @@ namespace kck_projekt2
             }
         }
 
-        private void Search()
+        private async void Search()
         {
-            var notes = _noteController.GetNotesByUserIdAndMonth(_mainWindow.loggedUserId, _searchingDate);
+            var notes = await _noteController.GetNotesByUserIdAndMonthAsync(_mainWindow.loggedUserId, _searchingDate);
             if (notes.Count == 0)
             {
                 Information.Visibility = Visibility.Visible;

@@ -45,7 +45,7 @@ namespace kck_projekt2
                 user = await Task.Run(async () =>
                 {
                     await Task.Delay(1000); 
-                    return userController.GetUser(user); 
+                    return await userController.GetUserAsync(user); 
                 });
                 if (user == null)
                 {

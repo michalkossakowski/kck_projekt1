@@ -14,10 +14,14 @@ namespace kck_projekt2
         {
             InitializeComponent();
             _mainWindow = mainWindow;
+            InitializeNotes();
+        }
 
+        private async void InitializeNotes()
+        {
             var noteController = NoteController.GetInstance();
-            var notes = noteController.GetNotesByUserId(_mainWindow.loggedUserId);
-            if(notes.Count == 0)
+            var notes = await noteController.GetNotesByUserIdAsync(_mainWindow.loggedUserId);
+            if (notes.Count == 0)
             {
                 Information.Visibility = Visibility.Visible;
                 BottomTip.Visibility = Visibility.Collapsed;

@@ -1,82 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using System.Windows.Media;
-using kck_api.Controller;
-using MaterialDesignThemes.Wpf;
 
 namespace kck_projekt2
 {
-    /// <summary>
-    /// Logika interakcji dla klasy CalendarPage.xaml
-    /// </summary>
     public partial class CalendarPage : UserControl
     {
-        private MainWindow _mainWindow;
-        private DateTime _selectedDay;
-        NoteController _noteController;
-        List<NoteModel> _currentMonthnotes;
+        private readonly CalendarViewModel _viewModel;
 
         public CalendarPage(MainWindow mainWindow)
         {
             InitializeComponent();
-            _mainWindow = mainWindow;
-            _noteController  = NoteController.GetInstance();
-            _currentMonthnotes = _noteController.GetNotesByUserIdAndMonth(_mainWindow.loggedUserId, DateTime.Now);
+            _viewModel = new CalendarViewModel(mainWindow);
+            DataContext = _viewModel;
+            MyCalendar.Loaded += MyCalendar_Loaded;
+            _viewModel.PropertyChanged += ViewModel_PropertyChanged;
         }
 
         private void MyCalendar_Loaded(object sender, RoutedEventArgs e)
         {
-            DateTime firstDayOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
-            MyCalendar.DisplayDateStart = firstDayOfMonth;
-            MyCalendar.DisplayDateEnd = lastDayOfMonth;
             UpdateCalendarDays();
+        }
+
+        private void MyCalendar_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MyCalendar.SelectedDate.HasValue)
+            {
+                _viewModel.SelectedDay = MyCalendar.SelectedDate.Value;
+            }
+            this.Focus();
+        }
+
+        private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(_viewModel.SelectedDay) || e.PropertyName == nameof(_viewModel.CurrentMonthNotes))
+            {
+                UpdateCalendarDays();
+            }
         }
 
         private void UpdateCalendarDays()
         {
-
             foreach (var day in FindChildren<CalendarDayButton>(MyCalendar))
             {
-                day.Background = Brushes.Transparent; // Resetuj tło dla wszystkich dni
+                day.Background = Brushes.Transparent;
 
-                if (((DateTime)day.DataContext).Date == _selectedDay.Date)
+                if (((DateTime)day.DataContext).Date == _viewModel.SelectedDay.Date)
                 {
                     day.BorderBrush = (SolidColorBrush)Application.Current.Resources["DarkColor"];
                 }
-                else if (_currentMonthnotes.Any(note => note.ModifiedDate.Date == ((DateTime)day.DataContext).Date))
+                else if (_viewModel.CurrentMonthNotes.Any(note => note.ModifiedDate.Date == ((DateTime)day.DataContext).Date))
                 {
                     day.Background = (SolidColorBrush)Application.Current.Resources["MaterialDesign.Brush.Secondary"];
                 }
             }
         }
-
-        private void ShowNotesClick(object sender, RoutedEventArgs e)
-        {
-            if (_selectedDay == DateTime.MinValue)
-            {
-                _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
-                _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-                _mainWindow.Snackbar.MessageQueue?.Enqueue("Select date in the calendar to show notes");
-            }
-            else
-            {
-                _mainWindow.contentControl.Content = new ExploreNotesByDayPage(_mainWindow, _selectedDay);
-            }
-        }
-
-        private void MyCalendar_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            _selectedDay = MyCalendar.SelectedDate.Value;
-            UpdateCalendarDays();
-            this.Focus();
-        }
-
 
         public static List<CalendarDayButton> FindChildren<CalendarDayButton>(DependencyObject parent)
         {
@@ -92,11 +71,6 @@ namespace kck_projekt2
             }
 
             return days;
-        }
-
-        private void BackClick(object sender, RoutedEventArgs e)
-        {
-            _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
         }
     }
 }

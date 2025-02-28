@@ -1,25 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using kck_api.Controller;
 using MaterialDesignThemes.Wpf;
 
 namespace kck_projekt2
 {
-    /// <summary>
-    /// Logika interakcji dla klasy LoginPage.xaml
-    /// </summary>
     public partial class RegisterPage : UserControl
     {
         private MainWindow _mainWindow;
@@ -28,7 +14,6 @@ namespace kck_projekt2
         {
             InitializeComponent();
             _mainWindow = mainWindow;
-
         }
 
         private async void RegisterClick(object sender, RoutedEventArgs e)
@@ -115,13 +100,12 @@ namespace kck_projekt2
                 nick.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
             confirmPassword.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
         }
+
         private void ConfirmPassword_TextChanged(object sender, RoutedEventArgs e)
         {
             confirmPassword.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
             if (nick.Text.Length != 0)
                 nick.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
         }
-
-
     }
 }

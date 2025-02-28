@@ -4,9 +4,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"      
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              Background="{DynamicResource MaterialDesignPaper}"
-             FontFamily="{DynamicResource MaterialDesignFont}"
-             >
-
+             FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
         <StackPanel HorizontalAlignment="Center">
 
@@ -15,12 +13,11 @@
                 TextAlignment="Center"
                 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
                 Foreground="{DynamicResource TextBlockColor}"
-                Margin="0,20,0,20"
-                />
+                Margin="0,20,0,20"/>
 
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,20,0,0">
-                    <Button Width="180" Height="30" Click="OpenAddNotePage" FontSize="16">
+                    <Button Width="180" Height="30" Command="{Binding OpenAddNotePageCommand}" FontSize="16">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="PencilPlusOutline" Foreground="white" Width="20" Height="20" Margin="0,0,5,0"/>
                             <TextBlock Text="Add Note" Foreground="white" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -29,7 +26,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,20,0,0">
-                    <Button Width="180" Height="30" Click="OpenLatestNotesPage" FontSize="16">
+                    <Button Width="180" Height="30" Command="{Binding OpenLatestNotesPageCommand}" FontSize="16">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="NoteMultipleOutline" Foreground="white" Width="20" Height="20" Margin="0,0,5,0"/>
                             <TextBlock Text="Latest notes" Foreground="white" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -38,7 +35,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,20,0,0">
-                    <Button Width="180" Height="30" Click="OpenCalendarPage" FontSize="16">
+                    <Button Width="180" Height="30" Command="{Binding OpenCalendarPageCommand}" FontSize="16">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="Calendar" Foreground="white" Width="20" Height="20" Margin="0,0,5,0"/>
                             <TextBlock Text="Calendar" Foreground="white" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -47,7 +44,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,20,0,0">
-                    <Button Width="180" Height="30" Click="OpenExploreNotesPage" FontSize="16">
+                    <Button Width="180" Height="30" Command="{Binding OpenExploreNotesPageCommand}" FontSize="16">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="FolderSearchOutline" Foreground="white" Width="20" Height="20" Margin="0,0,5,0"/>
                             <TextBlock Text="Explore all notes" Foreground="white" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -56,7 +53,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,20,0,0">
-                    <Button Width="180" Height="30" Click="OpenSearchPage" FontSize="16">
+                    <Button Width="180" Height="30" Command="{Binding OpenSearchPageCommand}" FontSize="16">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="Magnify" Foreground="white" Width="20" Height="20" Margin="0,0,5,0"/>
                             <TextBlock Text="Search" Foreground="white" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -65,7 +62,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,20,0,0">
-                    <Button Width="180" Height="30" Click="OpenFindByDatePage" FontSize="16">
+                    <Button Width="180" Height="30" Command="{Binding OpenFindByDatePageCommand}" FontSize="16">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="CalendarSearch" Foreground="white" Width="20" Height="20" Margin="0,0,5,0"/>
                             <TextBlock Text="Find by date" Foreground="white" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -74,7 +71,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,20,0,0">
-                    <Button Width="180" Height="30" Click="OpenFindByCategoryPage" FontSize="16">
+                    <Button Width="180" Height="30" Command="{Binding OpenFindByCategoryPageCommand}" FontSize="16">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="ShapePlusOutline" Foreground="white" Width="20" Height="20" Margin="0,0,5,0"/>
                             <TextBlock Text="Find by category" Foreground="white" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -83,17 +80,15 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,20,0,0">
-                    <Button Width="180" Height="30" Click="OpenExoplreNotesByMonthPage" FontSize="16">
+                    <Button Width="180" Height="30" Command="{Binding OpenExploreNotesByMonthPageCommand}" FontSize="16">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="CalendarMonth" Foreground="white" Width="20" Height="20" Margin="0,0,5,0"/>
                             <TextBlock Text="Explore by month" Foreground="white" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>
-                
 
             </StackPanel>
         </StackPanel>
     </Grid>
-    
 </UserControl>

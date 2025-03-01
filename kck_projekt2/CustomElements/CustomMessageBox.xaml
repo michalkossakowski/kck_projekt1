@@ -1,0 +1,36 @@
+﻿<Window xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  x:Class="kck_projekt2.CustomElements.CustomMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:kck_projekt2.CustomElements"
+        mc:Ignorable="d"
+        Title="About Program" 
+        HorizontalAlignment="Center" 
+        VerticalAlignment="Center" 
+        Width="400" 
+        Height="240"
+        
+        ResizeMode="NoResize"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="72*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <StackPanel Margin="0,10,20,0">
+                <TextBlock FontSize="24" FontWeight="Bold" FontFamily="Calibri"> CNote#</TextBlock>
+                <TextBlock>Version: 1.0</TextBlock>
+            </StackPanel>
+            <Image Source="pack://application:,,,/Resources/icon192x192.png" Width="96" Height="96"/>
+        </StackPanel>
+        <materialDesign:ColorZone Grid.Row="1" VerticalAlignment="Stretch">
+            <StackPanel Margin="10" Orientation="Horizontal" Cursor="" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="CNote# is a simple note-taking application."
+                    VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" Height="48" Width="230"/>
+                <Button Content="OK" Width="80" Margin="10"  Click="CloseWindow" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            </StackPanel>
+        </materialDesign:ColorZone>
+    </Grid>
+</Window>

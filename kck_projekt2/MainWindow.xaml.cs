@@ -3,6 +3,8 @@ using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using kck_projekt2.Commands;
+using kck_projekt2.ViewModels;
 using MaterialDesignThemes.Wpf;
 
 namespace kck_projekt2
@@ -96,7 +98,7 @@ namespace kck_projekt2
         private void SwitchToConsoleMode(object sender, RoutedEventArgs e)
         {
             try
-            {
+            { 
                 Process process = new Process();
                 process.StartInfo.FileName = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "kck_projekt1.exe");
                 process.Start();

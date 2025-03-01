@@ -42,29 +42,38 @@ namespace kck_projekt2
             {
                 var userController = UserController.GetInstance();
                 var user = new UserModel(nickValue, passwordValue);
-                user = await Task.Run(async () =>
+                try
                 {
-                    await Task.Delay(1000); 
-                    return await userController.GetUserAsync(user); 
-                });
-                if (user == null)
+                    user = await Task.Run(async () =>
+                    {
+                        await Task.Delay(1000);
+                        return await userController.GetUserAsync(user);
+                    });
+                    if (user == null)
+                    {
+                        _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
+                        _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                        nick.Foreground = new SolidColorBrush(Colors.Red);
+                        password.Foreground = new SolidColorBrush(Colors.Red);
+                        _mainWindow.Snackbar.MessageQueue?.Enqueue("Wrong nick or password, try again");
+                    }
+                    else
+                    {
+                        _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
+                        _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                        _mainWindow.Snackbar.MessageQueue?.Enqueue("You have logged in successfully");
+
+                        _mainWindow.LogoutMenuItem.Visibility = Visibility.Visible;
+                        _mainWindow.ActionMenuMenuItem.Visibility = Visibility.Visible;
+                        _mainWindow.loggedUserId = user.Id;
+                        _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
+                    }
+                }
+                catch(InvalidOperationException ex)
                 {
                     _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
                     _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-                    nick.Foreground = new SolidColorBrush(Colors.Red);
-                    password.Foreground = new SolidColorBrush(Colors.Red);
-                    _mainWindow.Snackbar.MessageQueue?.Enqueue("Wrong nick or password, try again");
-                }
-                else
-                {
-                    _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
-                    _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-                    _mainWindow.Snackbar.MessageQueue?.Enqueue("You have logged in successfully");
-
-                    _mainWindow.LogoutMenuItem.Visibility = Visibility.Visible;
-                    _mainWindow.ActionMenuMenuItem.Visibility = Visibility.Visible;
-                    _mainWindow.loggedUserId = user.Id;
-                    _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
+                    _mainWindow.Snackbar.MessageQueue?.Enqueue("Database error, contact Administrator");
                 }
 
             }

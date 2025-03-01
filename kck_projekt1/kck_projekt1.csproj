@@ -5,6 +5,7 @@
 	<TargetFramework>net8.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ApplicationIcon>icongray.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -59,6 +60,7 @@
     <Content Include="Fonts\DOS Rebel.flf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="icongray.ico" />
   </ItemGroup>
 
 </Project>

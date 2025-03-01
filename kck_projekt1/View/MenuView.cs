@@ -405,7 +405,7 @@ namespace kck_projekt1.View
         public static void SwitchToGraphicMode()
         {
             Process process = new Process();
-            process.StartInfo.FileName = Path.Combine(Directory.GetCurrentDirectory(), "kck_projekt2.exe");
+            process.StartInfo.FileName = Path.Combine(Directory.GetCurrentDirectory(), "CNote#.exe");
             process.Start();
             Environment.Exit(0);
         }

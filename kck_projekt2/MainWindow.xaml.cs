@@ -100,7 +100,7 @@ namespace kck_projekt2
             try
             { 
                 Process process = new Process();
-                process.StartInfo.FileName = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "kck_projekt1.exe");
+                process.StartInfo.FileName = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "CNote#Console.exe");
                 process.Start();
                 Environment.Exit(0);
             }

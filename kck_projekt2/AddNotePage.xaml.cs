@@ -25,7 +25,7 @@ namespace kck_projekt2
 
             if (string.IsNullOrWhiteSpace(Title.Text))
             {
-                HintAssist.SetHelperText(Title, (string)Application.Current.Resources["TitleEnmptyStr"]);
+                HintAssist.SetHelperText(Title, (string)Application.Current.Resources["TitleEmptyStr"]);
                 Title.Foreground = new SolidColorBrush(Colors.Red);
             }
 

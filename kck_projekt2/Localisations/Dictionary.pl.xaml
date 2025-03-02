@@ -64,7 +64,7 @@
     <System:String x:Key="DeleteBtnStr">Usuń notatkę</System:String>
     <System:String x:Key="AddNoteBtnStr">Dodaj notatkę</System:String>
     <System:String x:Key="ChosenCategoryHintStr">Miejsce na notatki pasujące do wybranej kategorii</System:String>
-    <System:String x:Key="TitleEnmptyStrStr">Tytuł nie może być pusty</System:String>
+    <System:String x:Key="TitleEmptyStr">Tytuł nie może być pusty</System:String>
     <System:String x:Key="CategoryEmptyStr">Kategoria nie może być pusta</System:String>
     <System:String x:Key="NoCategoryChosedStr">Wybierz kategorię lub użyj własnej</System:String>
     <System:String x:Key="ContentEmptyStr">Treść notatki nie może być pusta</System:String>
@@ -93,4 +93,12 @@
     <System:String x:Key="NickOccupiedStr">Ten nick jest już zajęty</System:String>
     <System:String x:Key="EmptySearchStr">Pole wyszukiwania nie może być puste</System:String>
     <System:String x:Key="NoSearchResultStr">Brak notatek pasujących do wyszukiwania:</System:String>
+    <System:String x:Key="AskAIAboutAnythingStr">Zapytaj AI o cokolwiek</System:String>
+    <System:String x:Key="WriteQuestionHereStr">Wpisz pytanie tutaj ...</System:String>
+    <System:String x:Key="EnterYourQuestionForAIStr">Wprowadź swoje pytanie do AI</System:String>
+    <System:String x:Key="PlaceForAIResponseStr">Miejsce na odpowiedź AI ...</System:String>
+    <System:String x:Key="AskAIStr">Zapytaj AI</System:String>
+    <System:String x:Key="MessageCannotBeEmptyStr">Wiadomość nie może być pusta</System:String>
+    <System:String x:Key="ProcessingStr">Przetwarzanie ...</System:String>
+    <System:String x:Key="GeminiApiKeyNotFoundStr">Nie znaleziono klucz do Gemini API w sekretach</System:String>
 </ResourceDictionary>

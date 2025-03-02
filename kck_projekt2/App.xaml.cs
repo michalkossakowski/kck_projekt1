@@ -56,6 +56,7 @@ namespace kck_projekt2
         }
         private void OnExitClick(object? sender, EventArgs e)
         {
+            _notifyIcon.Dispose();
             Shutdown();
         }
         private void OnHideTrayClick(object? sender, EventArgs e)

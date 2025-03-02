@@ -7,7 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
-    <AssemblyName>CNote.exe</AssemblyName>
+    <AssemblyName>CNote</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,12 +15,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\icon.ico" />
+    <Content Include="Resources\icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="3.1.0" />
     <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
+    <PackageReference Include="ScottPlot.WPF" Version="5.0.54" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -43,6 +46,12 @@
 	  <None Update="Resources\iconred.ico">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Charts\NotesInMonthPage.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

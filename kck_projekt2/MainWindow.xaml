@@ -101,6 +101,16 @@
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="Menu" />
                         </MenuItem.Icon>
+                        <MenuItem
+                            Background="{DynamicResource SecondaryHueMidBrush}"
+                            Command="{Binding MenuVM.OpenNotesInMonthPageCommand}"
+                            Header="Month notes chart"    
+                        />
+                        <MenuItem
+                            Background="{DynamicResource SecondaryHueMidBrush}"
+                            Command="{Binding MenuVM.OpenNotesByCategoryCommand}"
+                            Header="Category notes chart"    
+                        />
                     </MenuItem>
 
                     <!-- Default Hidden Logout -->
@@ -120,8 +130,8 @@
 
                     <MenuItem 
                         Header="Console mode" 
-                        Command="{Binding NotifyCommand}" 
-                        CommandParameter="{Binding ConsoleModeNotificationMessage}"
+                        Command="{Binding NotifyVM.NotifyCommand}" 
+                        CommandParameter="{Binding NotifyVM.ConsoleModeNotificationMessage}"
                         Click="SwitchToConsoleMode"
                         Background="{DynamicResource LightColor}"
                         Margin="5,0,5,0"
@@ -240,8 +250,8 @@
                         Name="IsDarkTheme" 
                         IsChecked="{Binding IsDarkTheme}"
                         Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                        Command="{Binding NotifyCommand}" 
-                        CommandParameter="{Binding SwitchThemeModeNotificationMessage}"
+                        Command="{Binding NotifyVM.NotifyCommand}" 
+                        CommandParameter="{Binding NotifyVM.SwitchThemeModeNotificationMessage}"
                         Click="SwitchThemeClick"
                         ToolTip="Switch Theme">
 

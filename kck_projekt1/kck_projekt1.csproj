@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <ApplicationIcon>icongray.ico</ApplicationIcon>
-    <AssemblyName>CNote#Console.exe</AssemblyName>
+    <AssemblyName>CNote#Console</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

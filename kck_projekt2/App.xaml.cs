@@ -9,11 +9,9 @@ namespace kck_projekt2
     public partial class App : Application
     {
         private readonly Forms.NotifyIcon _notifyIcon;
-        private readonly NotifyViewModel _notifyViewModel;
         public App()
         {
             _notifyIcon = new Forms.NotifyIcon();
-            _notifyViewModel = new NotifyViewModel(_notifyIcon);
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -23,18 +21,10 @@ namespace kck_projekt2
             Current.MainWindow.Show();
 
             TrayImplementaion();
+            MainViewModel mainViewModel = new MainViewModel(Current.MainWindow as MainWindow, _notifyIcon);
+            Current.MainWindow.DataContext = mainViewModel;
+            MainWindow.StateChanged += mainViewModel.MainWindow_StateChanged;
 
-            MainWindow.DataContext = _notifyViewModel;
-            MainWindow.StateChanged += MainWindow_StateChanged;
-
-        }
-
-        private void MainWindow_StateChanged(object? sender, EventArgs e)
-        {
-            if (MainWindow.WindowState == WindowState.Minimized)
-            {
-                _notifyViewModel.NotifyCommand.Execute(new NotificationMessage("CNote#", "Aplikacja działa w tle.", Forms.ToolTipIcon.Info, 1000));
-            }
         }
 
         private void TrayImplementaion() 

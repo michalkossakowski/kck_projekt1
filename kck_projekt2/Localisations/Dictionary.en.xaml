@@ -108,5 +108,6 @@
     <System:String x:Key="TrayHideTrayStr">Hide tray</System:String>
     <System:String x:Key="TrayExitStr">Close program</System:String>
     <System:String x:Key="TrayChangeLanguagetoStr">Change languge to: Polish</System:String>
+    <System:String x:Key="LoadingNotesStr">Loading Notes ...</System:String>
 
 </ResourceDictionary>

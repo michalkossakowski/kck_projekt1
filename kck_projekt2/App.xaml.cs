@@ -2,6 +2,7 @@
 using kck_projekt2.CustomElements;
 using kck_projekt2.ViewModels;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using Forms = System.Windows.Forms;
 
 namespace kck_projekt2
@@ -41,7 +42,18 @@ namespace kck_projekt2
             _notifyIcon.ContextMenuStrip.Items.Add("About Program", null, OnAboutProgramClicked);
             _notifyIcon.ContextMenuStrip.Items.Add("Hide Tray", null, OnHideTrayClick);
             _notifyIcon.ContextMenuStrip.Items.Add("Exit", null, OnExitClick);
+            _notifyIcon.ContextMenuStrip.Items.Add("Change language to", null, SwitchLanguage);
         }
+
+        private void SwitchLanguage(object? sender, EventArgs e)
+        {
+            var mainWindow = Current.MainWindow as MainWindow;
+            if(mainWindow.IsPolish is ToggleButton toggleButton)
+                toggleButton.IsChecked = !toggleButton.IsChecked;
+
+            mainWindow.SwitchLang(sender, e as RoutedEventArgs);
+        }
+
         protected override void OnExit(ExitEventArgs e)
         {
             _notifyIcon.Dispose();

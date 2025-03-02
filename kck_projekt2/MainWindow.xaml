@@ -114,7 +114,7 @@
                         Margin="5,0,5,0"
                         Height="25"
                         Width="48"
-                        ToolTip="Menu">
+                        ToolTip="{DynamicResource MenuToolTipStr}">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="Menu" />
                         </MenuItem.Icon>
@@ -129,7 +129,7 @@
                         Margin="5,0,5,0"
                         Height="25"
                         Width="48"
-                        ToolTip="Logout">
+                        ToolTip="{DynamicResource LogoutToolTipStr}">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="Logout" />
                         </MenuItem.Icon>
@@ -144,7 +144,7 @@
                         Margin="5,0,5,0"
                         Height="25"
                         Width="48"
-                        ToolTip="Console Mode">
+                        ToolTip="{DynamicResource ConsoleToolTipStr}">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="Console" />
                         </MenuItem.Icon>
@@ -156,7 +156,7 @@
                         Margin="5,0,10,0"
                         Height="25"
                         Width="48"
-                        ToolTip="Exit"
+                        ToolTip="{DynamicResource ExitToolTipStr}"
                         >
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="ExitRun" />
@@ -180,14 +180,14 @@
                     <TextBlock VerticalAlignment="Top"           
                                TextAlignment="Center"
                                FontSize="70"
-                               Text="Welcome"
+                               Text="{DynamicResource WelcomeStr}"
                                Margin="0,20,0,0"
                                Foreground="{DynamicResource TextBlockColor}"
                                />
 
                     <TextBlock TextAlignment="Center"
                                FontSize="35"
-                               Text="in CNote#"
+                               Text="{DynamicResource AppNameStr}"
                                Margin="0,0,0,0"
                                Foreground="{DynamicResource TextBlockColor}"
                                />
@@ -222,7 +222,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
 
                         <Button 
-                            Width="120" Height="30" 
+                            Width="160" Height="30" 
                             Click="OpenLoginPage"  
                             Margin="0,20,0,0"
                             FontSize="16"
@@ -231,12 +231,12 @@
                             >
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <materialDesign:PackIcon Kind="LoginVariant" Foreground="White" Width="20" Height="20" Margin="0,0,5,0"/>
-                                <TextBlock Text="Log in" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Text="{DynamicResource LoginBtnStr}" VerticalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </Button>
 
                         <Button 
-                            Width="120" Height="30" 
+                            Width="160" Height="30" 
                             Click="OpenRegisterPage"  
                             Margin="0,20,0,0"
                             FontSize="16"
@@ -245,7 +245,7 @@
                             >
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <materialDesign:PackIcon Kind="AccountPlusOutline" Foreground="White" Width="20" Height="20" Margin="0,0,5,0"/>
-                                <TextBlock Text="Register" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Text="{DynamicResource RegisterBtnStr}" VerticalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </Button>
 
@@ -258,7 +258,7 @@
                         Command="{Binding NotifyCommand}" 
                         CommandParameter="{Binding SwitchThemeModeNotificationMessage}"
                         Click="SwitchThemeClick"
-                        ToolTip="Switch Theme">
+                        ToolTip="{DynamicResource ThemeToolTipStr}">
 
                             <materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
                                 <SolidColorBrush Color="#673ab7" />
@@ -288,6 +288,13 @@
                             </ToggleButton.LayoutTransform>
 
                         </ToggleButton>
+
+                        <ToggleButton
+                            Name="IsPolish" 
+                            IsChecked="{Binding IsPolish}"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                            ToolTip="{DynamicResource LangToolTipStr}"
+                            Click="SwitchLang"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>

@@ -36,7 +36,7 @@
             VerticalAlignment="Top"
             TextAlignment="Center"
             Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
-            Text="Find by date" 
+            Text="{DynamicResource FindByDateHeaderStr}" 
             Margin="0,0,0,0"
             Foreground="{DynamicResource TextBlockColor}"/>
         </StackPanel>
@@ -58,7 +58,7 @@
                 FontSize="16"
                 SelectedDate="{x:Static sys:DateTime.Now}"
                 Style="{StaticResource MaterialDesignOutlinedDatePicker}"
-                materialDesign:HintAssist.Hint="Select date" 
+                materialDesign:HintAssist.Hint="{DynamicResource DatePickerHintStr}" 
             />
 
 
@@ -90,7 +90,7 @@
                    Name="Information"
                    VerticalAlignment="Top"
                    TextAlignment="Center"
-                   Text="Place for notes that match your searching"
+                   Text="{DynamicResource SearchPlaceHolderStr}"
                    FontSize="20"
                    Margin="0,100,0,20" 
                    Foreground="{DynamicResource TextBlockColor}"
@@ -197,7 +197,7 @@
             Name="BottomTip"
             Visibility="Collapsed"
             Grid.Row="3"
-            Text="(Press at the note to edit or delete)" 
+            Text="{DynamicResource NoteSelectionHintStr}" 
             TextAlignment="Center"
             FontSize="14"
             Foreground="Gray"
@@ -207,8 +207,8 @@
         <!-- Back Button -->
         <Button 
             Grid.Row="4"
-            Content="Back" 
-            Width="70" 
+            Content="{DynamicResource BackBtnStr}" 
+            Width="90" 
             Height="30"
             Margin="0,10,0,0" 
             Click="BackClick"

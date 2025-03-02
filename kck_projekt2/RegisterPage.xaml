@@ -44,7 +44,7 @@
                 VerticalAlignment="Top"
                 TextAlignment="Center"
                 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
-                Text="Register" 
+                Text="{DynamicResource RegisterHeaderStr}" 
 
                 Foreground="{DynamicResource TextBlockColor}"
                 />
@@ -52,8 +52,8 @@
 
             <TextBox 
                 Name="nick" 
-                materialDesign:HintAssist.HelperText="Enter your nick"    
-                materialDesign:HintAssist.Hint="Nick" 
+                materialDesign:HintAssist.HelperText="{DynamicResource NickHelperStr}"    
+                materialDesign:HintAssist.Hint="{DynamicResource NickHintStr}" 
                 Margin="0,20,0,0"
                 Width="200" 
                 Height="40" 
@@ -64,8 +64,8 @@
                 />
 
             <PasswordBox Name="password" 
-                         materialDesign:HintAssist.HelperText="Enter your password"  
-                         materialDesign:HintAssist.Hint="Password" 
+                         materialDesign:HintAssist.HelperText="{DynamicResource PasswordHelperStr}"  
+                         materialDesign:HintAssist.Hint="{DynamicResource PasswordHintStr}" 
                          materialDesign:TextFieldAssist.HasClearButton="True" 
                         Margin="0,30,0,0"
                         Width="200" 
@@ -77,8 +77,8 @@
                          />
 
             <PasswordBox Name="confirmPassword" 
-                         materialDesign:HintAssist.HelperText="Confirm your password"  
-                         materialDesign:HintAssist.Hint="Confirm Password" 
+                         materialDesign:HintAssist.HelperText="{DynamicResource ConfirmPasswordHelperStr}"  
+                         materialDesign:HintAssist.Hint="{DynamicResource ConfirmPasswordHintStr}" 
                          materialDesign:TextFieldAssist.HasClearButton="True" 
                         Margin="0,30,0,0"
                         Width="200" 
@@ -90,14 +90,14 @@
                          />
 
             <Button Name="LoginButton" 
-                    Content="Register" 
-                    Width="90" Height="30" 
+                    Content="{DynamicResource RegisterBtnStr}" 
+                    Width="100" Height="30" 
                     Margin="0,40,0,0" 
                     Click="RegisterClick"
                     />
 
-            <Button Content="Back" 
-                    Width="90" Height="30" 
+            <Button Content="{DynamicResource BackBtnStr}" 
+                    Width="100" Height="30" 
                     Margin="0,20,0,0"
                     Click="BackClick" 
                     Name="BackButton"

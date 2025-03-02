@@ -28,7 +28,7 @@ namespace kck_projekt2
             var notes = await noteController.GetNotesByUserIdAndDayAsync(_mainWindow.loggedUserId, _date);
             if (notes.Count == 0)
             {
-                Information.Text = $"You don't have any notes from: {_date.Day}.{_date.Month}.{_date.Year}";
+                Information.Text = (string)Application.Current.Resources["NoneNotesForDateStr"] + $" {_date.Day}.{_date.Month}.{_date.Year}";
                 Information.Visibility = Visibility.Visible;
                 BottomTip.Visibility = Visibility.Collapsed;
             }

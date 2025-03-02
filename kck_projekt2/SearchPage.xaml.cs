@@ -38,7 +38,7 @@ namespace kck_projekt2
             if (_search.Length == 0)
             {
                 Information.Visibility = Visibility.Visible;
-                Information.Text = "Search input cannot be empty";
+                Information.Text = (string)Application.Current.Resources["EmptySearchStr"];
                 Information.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
                 BottomTip.Visibility = Visibility.Hidden;
             }
@@ -55,7 +55,7 @@ namespace kck_projekt2
             {
                 BottomTip.Visibility = Visibility.Hidden;
                 Information.Visibility = Visibility.Visible;
-                Information.Text = $"There is no notes that match your search: \"{_search}\"";
+                Information.Text = (string)Application.Current.Resources["NoSearchResultStr"] + $" \"{_search}\"";
                 Information.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
             }
             else

@@ -45,7 +45,7 @@ namespace kck_projekt2
             {
                 BottomTip.Visibility = Visibility.Hidden;
                 Information.Visibility = Visibility.Visible;
-                Information.Text = $"You dont have any notes from: \"{_searchingDate:dd.MM.yyyy}\"";
+                Information.Text = (string)Application.Current.Resources["NoneNotesForDateStr"] + $" \"{_searchingDate:dd.MM.yyyy}\"";
                 Information.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
             }
             else

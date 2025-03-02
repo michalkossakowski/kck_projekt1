@@ -25,7 +25,7 @@ namespace kck_projekt2
 
             if (notes.Count == 0)
             {
-                Information.Text = "You don't have any notes right now";
+                Information.Text = (string)Application.Current.Resources["NoneLatestNotesStr"];
                 Information.Visibility = Visibility.Visible;
                 BottomTip.Visibility = Visibility.Collapsed;
             }

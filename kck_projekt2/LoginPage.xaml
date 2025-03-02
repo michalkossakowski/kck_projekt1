@@ -46,14 +46,14 @@
                 <TextBlock
                 TextAlignment="Center"
                 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
-                Text="Log in"
+                Text="{DynamicResource LoginHeaderStr}"
                 Foreground="{DynamicResource TextBlockColor}"
                 />
             </StackPanel>
 
             <TextBox Name="nick" 
-                     materialDesign:HintAssist.HelperText="Enter your nick"  
-                     materialDesign:HintAssist.Hint="Nick" 
+                     materialDesign:HintAssist.HelperText="{DynamicResource NickHelperStr}"  
+                     materialDesign:HintAssist.Hint="{DynamicResource NickHintStr}" 
                      materialDesign:HintAssist.HelperTextFontSize="12" 
                      Margin="0,30,0,0"
                      Width="200" 
@@ -66,8 +66,8 @@
                      />
 
             <PasswordBox Name="password" 
-                         materialDesign:HintAssist.HelperText="Enter your password"  
-                         materialDesign:HintAssist.Hint="Password" 
+                         materialDesign:HintAssist.HelperText="{DynamicResource PasswordHelperStr}"  
+                         materialDesign:HintAssist.Hint="{DynamicResource PasswordHintStr}" 
                          materialDesign:TextFieldAssist.HasClearButton="True" 
                          materialDesign:HintAssist.HelperTextFontSize="12" 
                          FontSize="16"
@@ -80,21 +80,21 @@
                          PasswordChanged="Password_TextChanged"
                          />
 
-            <Button Width="80" Height="30" Click="LoginClick"  Margin="0,35,0,0"
+            <Button Width="120" Height="30" Click="LoginClick"  Margin="0,35,0,0"
                     Name="LoginButton"
                     FontSize="16">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="Log in" VerticalAlignment="Center" Foreground="White"/>
+                    <TextBlock Text="{DynamicResource LoginBtnStr}" VerticalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Button>
 
-            <Button Width="80" Height="30" Click="BackClick"  Margin="0,20,0,0"
+            <Button Width="120" Height="30" Click="BackClick"  Margin="0,20,0,0"
                     FontSize="16"
                     Name="BackButton"
                     Background="{DynamicResource MaterialDesign.Brush.Secondary}"
                     BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="Back" VerticalAlignment="Center" Foreground="White"/>
+                    <TextBlock Text="{DynamicResource BackBtnStr}" VerticalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Button>
         </StackPanel>

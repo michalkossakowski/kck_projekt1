@@ -32,7 +32,7 @@ namespace kck_projekt2
             {
                 _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
                 _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-                _mainWindow.Snackbar.MessageQueue?.Enqueue("Nick and passwords cannot be null");
+                _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["NickAndPasswordEmptyStr"]);
                 if (nickValue.Length == 0)
                     nick.Foreground = new SolidColorBrush(Colors.Red);
                 if (passwordValue.Length == 0)
@@ -45,7 +45,7 @@ namespace kck_projekt2
             {
                 _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
                 _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-                _mainWindow.Snackbar.MessageQueue?.Enqueue("Passwords don't match");
+                _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["PasswordsDontMatchStr"]);
                 password.Foreground = new SolidColorBrush(Colors.Red);
                 confirmPassword.Foreground = new SolidColorBrush(Colors.Red);
             }
@@ -66,7 +66,7 @@ namespace kck_projekt2
                     {
                         _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
                         _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(2));
-                        _mainWindow.Snackbar.MessageQueue?.Enqueue("You have successfully created new accout, you can login now");
+                        _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["RegisterSuccesStr"]);
                         _mainWindow.ReturnToMainMenu();
                     }
                     else
@@ -74,14 +74,14 @@ namespace kck_projekt2
                         _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
                         _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
                         nick.Foreground = new SolidColorBrush(Colors.Red);
-                        _mainWindow.Snackbar.MessageQueue?.Enqueue("This nick is occupied");
+                        _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["NickOccupiedStr"]);
                     }
                 }
                 catch(InvalidOperationException ex)
                 {
                     _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
                     _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-                    _mainWindow.Snackbar.MessageQueue?.Enqueue("Database error, contact Administrator");
+                    _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["DBErrorStr"]);
                 }    
             }
             LoginButton.IsEnabled = true;

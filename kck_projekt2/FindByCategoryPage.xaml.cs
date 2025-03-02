@@ -47,7 +47,7 @@ namespace kck_projekt2
             if (_searchingCategory.Length == 0)
             {
                 Information.Visibility = Visibility.Visible;
-                Information.Text = "Category search input cannot be empty";
+                Information.Text = (string)Application.Current.Resources["EmptyCategorySearchStr"];
                 Information.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
                 BottomTip.Visibility = Visibility.Hidden;
             }
@@ -64,7 +64,7 @@ namespace kck_projekt2
             {
                 BottomTip.Visibility = Visibility.Hidden;
                 Information.Visibility = Visibility.Visible;
-                Information.Text = $"There is no notes with category: \"{_searchingCategory}\"";
+                Information.Text = (string)Application.Current.Resources["NoCategorySearchResultsStr"] + $" \"{_searchingCategory}\"";
                 Information.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
             }
             else

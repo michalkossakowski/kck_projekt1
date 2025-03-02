@@ -3,9 +3,11 @@ using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Controls;
 using kck_projekt2.Commands;
 using kck_projekt2.ViewModels;
 using MaterialDesignThemes.Wpf;
+using System.Windows.Controls.Primitives;
 
 namespace kck_projekt2
 {
@@ -106,7 +108,7 @@ namespace kck_projekt2
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Console Mode is not currently available");
+                MessageBox.Show((string)Application.Current.Resources["ConsoleModeNotAvaibleStr"]);
             }
         }
 
@@ -128,5 +130,34 @@ namespace kck_projekt2
             contentControl.Content = null;
             loggedUserId = -1;
         }
+        private void SwitchLang(object sender, RoutedEventArgs e)
+        {
+            bool isChecked = IsPolish.IsChecked ?? false;
+            string lang = isChecked ? "pl" : "en";
+            ChangeLanguage(lang);
+        }
+
+        private void ChangeLanguage(string lang)
+        {
+            string resourcePath = $"Localisations/Dictionary.{lang}.xaml";
+            var newDict = new ResourceDictionary { Source = new Uri(resourcePath, UriKind.Relative) };
+
+            // Pobierz kolekcję słowników
+            var dictionaries = Application.Current.Resources.MergedDictionaries;
+
+            // Znajdź istniejący słownik językowy
+            var existingLangDict = dictionaries
+                .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains("Strings."));
+
+            // Usuń tylko poprzedni słownik językowy
+            if (existingLangDict != null)
+            {
+                dictionaries.Remove(existingLangDict);
+            }
+
+            // Dodaj nowy słownik językowy
+            dictionaries.Add(newDict);
+        }
+
     }
 }

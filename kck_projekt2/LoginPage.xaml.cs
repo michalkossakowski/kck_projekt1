@@ -36,7 +36,7 @@ namespace kck_projekt2
 
                 _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
                 _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-                _mainWindow.Snackbar.MessageQueue?.Enqueue("Nick and password cannot be null, try again");
+                _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["NickAndPasswordEmptyStr"]);
             }
             else
             {
@@ -55,13 +55,13 @@ namespace kck_projekt2
                         _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
                         nick.Foreground = new SolidColorBrush(Colors.Red);
                         password.Foreground = new SolidColorBrush(Colors.Red);
-                        _mainWindow.Snackbar.MessageQueue?.Enqueue("Wrong nick or password, try again");
+                        _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["WrongLoginDataStr"]);
                     }
                     else
                     {
                         _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
                         _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-                        _mainWindow.Snackbar.MessageQueue?.Enqueue("You have logged in successfully");
+                        _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["LoginSuccesStr"]);
 
                         _mainWindow.LogoutMenuItem.Visibility = Visibility.Visible;
                         _mainWindow.ActionMenuMenuItem.Visibility = Visibility.Visible;
@@ -73,7 +73,7 @@ namespace kck_projekt2
                 {
                     _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
                     _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-                    _mainWindow.Snackbar.MessageQueue?.Enqueue("Database error, contact Administrator");
+                    _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["DBErrorStr"]);
                 }
 
             }

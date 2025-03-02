@@ -32,7 +32,7 @@
                 VerticalAlignment="Top"
                 TextAlignment="Center"
                 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
-                Text="Add Note" 
+                Text="{DynamicResource AddNoteHeaderStr}" 
                 Margin="0,0,0,0"
                 Foreground="{DynamicResource TextBlockColor}"/>
         </StackPanel>
@@ -42,10 +42,10 @@
         <TextBox 
             Grid.Row="1"
             Name="Title" 
-            materialDesign:HintAssist.HelperText="Enter note title"  
+            materialDesign:HintAssist.HelperText="{DynamicResource TitleHelperStr}"  
             materialDesign:HintAssist.HelperTextFontSize="12" 
             FontSize="16"
-            materialDesign:HintAssist.Hint="Title" 
+            materialDesign:HintAssist.Hint="{DynamicResource TitleHintStr}" 
             Margin="0,20,0,10"
             Width="200" 
             Height="40"
@@ -66,12 +66,12 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             Click="CategoryToggleClick"
-            Content="Use custom category"
+            Content="{DynamicResource UseCustomCategoryStr}"
             FontSize="16"
             Foreground="{DynamicResource MaterialDesign.Brush.Primary}"
             BorderBrush="{DynamicResource MaterialDesign.Brush.Primary}"
             BorderThickness="2"
-            ToolTip="Switch to custom/preset category"/>
+            ToolTip="{DynamicResource SwitchCategoryTypeStr}"/>
 
         <!-- SelectCategory/CustomCategory -->
         <ComboBox
@@ -82,12 +82,12 @@
             Margin="0,10,0,10"
             Padding="10,0,10,0"
             Style="{StaticResource MaterialDesignOutlinedComboBox}"
-            materialDesign:HintAssist.Hint="Preset Category"
+            materialDesign:HintAssist.Hint="{DynamicResource CategoryHintStr}"
             IsEnabled="True"
             FontSize="16"
             Foreground="{DynamicResource TextBoxColor}"
             materialDesign:HintAssist.HelperTextFontSize="12" 
-            materialDesign:HintAssist.HelperText="Select category"  
+            materialDesign:HintAssist.HelperText="{DynamicResource CategoryHelperStr}"  
             SelectionChanged="SelectedCategory_SelectionChanged">
             <ComboBoxItem Content="Studies"/>
             <ComboBoxItem Content="Work"/>
@@ -99,9 +99,9 @@
         <TextBox 
             Grid.Row="3"
             Name="CustomCategory" 
-            materialDesign:HintAssist.HelperText="Enter category"  
+            materialDesign:HintAssist.HelperText="{DynamicResource CustomCategoryHelperStr}"  
             materialDesign:HintAssist.HelperTextFontSize="12" 
-            materialDesign:HintAssist.Hint="Custom category" 
+            materialDesign:HintAssist.Hint="{DynamicResource CustomCategoryHintStr}" 
             IsEnabled="False"
             FontSize="16"
             Width="200"
@@ -119,8 +119,8 @@
             Grid.Row="4"
             Name="NoteContent"
             Foreground="{DynamicResource TextBoxColor}"
-            materialDesign:HintAssist.Hint="Write here ..."
-            materialDesign:HintAssist.HelperText="Enter note content"  
+            materialDesign:HintAssist.Hint="{DynamicResource ContentHintStr}"
+            materialDesign:HintAssist.HelperText="{DynamicResource ContentHelperStr}"  
             materialDesign:HintAssist.HelperTextFontSize="12"
             FontSize="16"
             AcceptsReturn="True"
@@ -139,8 +139,8 @@
         <Button 
             Grid.Row="5"
             Name="AddNoteButton" 
-            Content="Add Note" 
-            Width="100" 
+            Content="{DynamicResource AddNoteBtnStr}" 
+            Width="140" 
             Height="30" 
             Margin="0,20,0,0" 
             Click="AddNoteClick"
@@ -149,8 +149,8 @@
         <!-- Back -->
         <Button 
             Grid.Row="6"
-            Content="Back" 
-            Width="70" 
+            Content="{DynamicResource BackBtnStr}" 
+            Width="90" 
             Height="30" 
             Margin="0,20,0,0" 
             Click="BackClick"

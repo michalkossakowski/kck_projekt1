@@ -40,7 +40,7 @@ namespace kck_projekt2
             if (allNotes.Count() == 0)
             {
                 Information.Visibility = Visibility.Visible;
-                Information.Text = "You dont have any notes";
+                Information.Text = (string)Application.Current.Resources["NoneNotesStr"];
                 Information.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
                 SelectedMonth.IsEnabled = false;
                 SearchButton.IsEnabled = false;
@@ -91,7 +91,7 @@ namespace kck_projekt2
             else
             {
                 Information.Visibility = Visibility.Visible;
-                Information.Text = "Searching month cannot be null";
+                Information.Text = (string)Application.Current.Resources["EmptyMonthSearchStr"];
                 Information.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
             }
         }
@@ -102,7 +102,7 @@ namespace kck_projekt2
             if (notes.Count == 0)
             {
                 Information.Visibility = Visibility.Visible;
-                Information.Text = "There is no notes that match chosen month";
+                Information.Text = (string)Application.Current.Resources["NoMonthSearchResultsStr"];
                 Information.Foreground = new SolidColorBrush(Color.FromRgb(255, 0, 0));
             }
             else

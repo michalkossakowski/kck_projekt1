@@ -50,7 +50,7 @@ namespace kck_projekt2
 
             if (string.IsNullOrWhiteSpace(Title.Text))
             {
-                HintAssist.SetHelperText(Title, "Title cannot be empty");
+                HintAssist.SetHelperText(Title, (string)Application.Current.Resources["TitleEnmptyStrStr"]);
                 Title.Foreground = new SolidColorBrush(Colors.Red);
             }
 
@@ -59,26 +59,26 @@ namespace kck_projekt2
             {
                 if (CustomCategory.IsEnabled)
                 {
-                    HintAssist.SetHelperText(CustomCategory, "Category cannot be empty");
+                    HintAssist.SetHelperText(CustomCategory, (string)Application.Current.Resources["CategoryEmptyStr"]);
                     CustomCategory.Foreground = new SolidColorBrush(Colors.Red);
 
-                    HintAssist.SetHelperText(SelectedCategory, "Select category");
+                    HintAssist.SetHelperText(SelectedCategory, (string)Application.Current.Resources["CategoryHelperStr"]);
                     SelectedCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
                 }
                 else
                 {
-                    HintAssist.SetHelperText(CustomCategory, "Enter custom category");
+                    HintAssist.SetHelperText(CustomCategory, (string)Application.Current.Resources["CustomCategoryHelperStr"]);
                     CustomCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
 
 
-                    HintAssist.SetHelperText(SelectedCategory, "Choose category or use custom");
+                    HintAssist.SetHelperText(SelectedCategory, (string)Application.Current.Resources["NoCategoryChosedStr"]);
                     SelectedCategory.Foreground = new SolidColorBrush(Colors.Red);
                 }
             }
 
             if (NoteContent.Text.Length == 0)
             {
-                HintAssist.SetHelperText(NoteContent, "Note content cannot be empty");
+                HintAssist.SetHelperText(NoteContent, (string)Application.Current.Resources["ContentEmptyStr"]);
                 NoteContent.Foreground = new SolidColorBrush(Colors.Red);
             }
 
@@ -88,20 +88,20 @@ namespace kck_projekt2
                 var note = new NoteModel(_mainWindow.loggedUserId, Title.Text, NoteContent.Text, category);
                 await _noteController.EditNoteAsync(_noteId, Title.Text, category, NoteContent.Text);
 
-                YesNoDialog dialog = new YesNoDialog("Are you sure you want to save changes ?");
+                YesNoDialog dialog = new YesNoDialog((string)Application.Current.Resources["SaveChangesConfirmStr"]);
                 dialog.Owner = _mainWindow;
                 if (dialog.ShowDialog() == true)
                 {
                     _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
                     _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-                    _mainWindow.Snackbar.MessageQueue?.Enqueue("Note successfully edited");
+                    _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["NoteEditSuccesStr"]);
                     Back();
                 }
                 else
                 {
                     _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
                     _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-                    _mainWindow.Snackbar.MessageQueue?.Enqueue("Note edit canceled");
+                    _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["NoteEditCancelStr"]);
 
                 }
             }
@@ -109,13 +109,13 @@ namespace kck_projekt2
             {
                 _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
                 _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-                _mainWindow.Snackbar.MessageQueue?.Enqueue("Meet the form requirements and try again");
+                _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["RequirementsNotMeetStr"]);
             }
         }
 
         public async void DeleteNoteClick(object sender, RoutedEventArgs e)
         {
-            YesNoDialog dialog = new YesNoDialog("Are you sure you want to delete the note?");
+            YesNoDialog dialog = new YesNoDialog((string)Application.Current.Resources["DeleteConfirmStr"]);
             dialog.Owner = _mainWindow;
             if (dialog.ShowDialog() == true)
             {
@@ -124,14 +124,14 @@ namespace kck_projekt2
 
                 _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
                 _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-                _mainWindow.Snackbar.MessageQueue?.Enqueue("Note successfully deleted");
+                _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["NoteDeleteSuccesStr"]);
                 Back();
             }
             else
             {
                 _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
                 _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-                _mainWindow.Snackbar.MessageQueue?.Enqueue("Deleting note canceled");
+                _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["NoteDeleteCancelStr"]);
             }
         }
 
@@ -193,7 +193,7 @@ namespace kck_projekt2
         {
             if (Title.Text.Length > 0)
             {
-                HintAssist.SetHelperText(Title, "Enter note title");
+                HintAssist.SetHelperText(Title, (string)Application.Current.Resources["TitleHelperStr"]);
                 Title.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
 
             }
@@ -203,10 +203,10 @@ namespace kck_projekt2
         {
             if (SelectedCategory.SelectedItem != null)
             {
-                HintAssist.SetHelperText(SelectedCategory, "Select category");
+                HintAssist.SetHelperText(SelectedCategory, (string)Application.Current.Resources["CategoryHelperStr"]);
                 SelectedCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
 
-                HintAssist.SetHelperText(CustomCategory, "Enter custom category");
+                HintAssist.SetHelperText(CustomCategory, (string)Application.Current.Resources["CustomCategoryHelperStr"]);
                 CustomCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
 
             }
@@ -216,7 +216,7 @@ namespace kck_projekt2
         {
             if (CustomCategory.Text.Length > 0)
             {
-                HintAssist.SetHelperText(CustomCategory, "Enter custom category");
+                HintAssist.SetHelperText(CustomCategory, (string)Application.Current.Resources["CustomCategoryHelperStr"]);
                 CustomCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
             }
         }
@@ -225,7 +225,7 @@ namespace kck_projekt2
         {
             if (NoteContent.Text.Length > 0)
             {
-                HintAssist.SetHelperText(NoteContent, "Enter note content");
+                HintAssist.SetHelperText(NoteContent, (string)Application.Current.Resources["ContentHelperStr"]);
                 NoteContent.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
 
             }

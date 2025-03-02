@@ -38,12 +38,22 @@ namespace kck_projekt2
             _notifyIcon.Text = "CNote#";
 
             _notifyIcon.Click += NotifyIcon_Click;
-            _notifyIcon.ContextMenuStrip = new Forms.ContextMenuStrip();
-            _notifyIcon.ContextMenuStrip.Items.Add("About Program", null, OnAboutProgramClicked);
-            _notifyIcon.ContextMenuStrip.Items.Add("Hide Tray", null, OnHideTrayClick);
-            _notifyIcon.ContextMenuStrip.Items.Add("Exit", null, OnExitClick);
-            _notifyIcon.ContextMenuStrip.Items.Add("Change language to", null, SwitchLanguage);
+            UpdateTrayMenu();
         }
+        private void UpdateTrayMenu()
+        {
+            if (_notifyIcon.ContextMenuStrip != null)
+            {
+                _notifyIcon.ContextMenuStrip.Dispose();
+            }
+
+            _notifyIcon.ContextMenuStrip = new Forms.ContextMenuStrip();
+            _notifyIcon.ContextMenuStrip.Items.Add((string)Application.Current.Resources["TrayAboutProgramStr"], null, OnAboutProgramClicked);
+            _notifyIcon.ContextMenuStrip.Items.Add((string)Application.Current.Resources["TrayHideTrayStr"], null, OnHideTrayClick);
+            _notifyIcon.ContextMenuStrip.Items.Add((string)Application.Current.Resources["TrayExitStr"], null, OnExitClick);
+            _notifyIcon.ContextMenuStrip.Items.Add((string)Application.Current.Resources["TrayChangeLanguagetoStr"], null, SwitchLanguage);
+        }
+
 
         private void SwitchLanguage(object? sender, EventArgs e)
         {

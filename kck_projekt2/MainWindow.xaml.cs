@@ -119,6 +119,7 @@ namespace kck_projekt2
         {
             LogoutMenuItem.Visibility = Visibility.Collapsed;
             ActionMenuMenuItem.Visibility = Visibility.Collapsed;
+            AIMenuItem.Visibility = Visibility.Collapsed;
             ReturnToMainMenu();
         }
 
@@ -127,6 +128,18 @@ namespace kck_projekt2
             WelcomePanel.Visibility = Visibility.Visible;
             contentControl.Content = null;
             loggedUserId = -1;
+        }
+        private void OpenChatButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ChatWindow chatWindow = new ChatWindow();
+                chatWindow.ShowDialog();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

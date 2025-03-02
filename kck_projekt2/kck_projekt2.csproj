@@ -8,6 +8,7 @@
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
     <AssemblyName>CNote.exe</AssemblyName>
+    <UserSecretsId>b27a63cd-1185-4d4f-9f66-73a6c624a733</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

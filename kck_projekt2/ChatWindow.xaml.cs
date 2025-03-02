@@ -22,7 +22,7 @@ namespace kck_projekt2
 
             if (string.IsNullOrEmpty(_geminiApiKey))
             {
-                throw new Exception("Gemini API key not found in User Secrets.");
+                throw new Exception((string)Application.Current.Resources["GeminiApiKeyNotFoundStr"]);
             }
         }
 
@@ -45,14 +45,14 @@ namespace kck_projekt2
                 string prompt = PromptTextBox.Text.Trim();
                 if (string.IsNullOrEmpty(prompt))
                 {
-                    HintAssist.SetHelperText(PromptTextBox, "Message cannot be empty");
+                    HintAssist.SetHelperText(PromptTextBox, (string)Application.Current.Resources["MessageCannotBeEmptyStr"]);
                     PromptTextBox.Foreground = new SolidColorBrush(Colors.Red);
                     Loading.Visibility = Visibility.Collapsed;
                     return;
                 }
 
                 SubmitButton.IsEnabled = false;
-                ResponseTextBlock.Text = "Processing...";
+                ResponseTextBlock.Text = (string)Application.Current.Resources["ProcessingStr"];
 
                 using (var client = new HttpClient())
                 {
@@ -95,7 +95,7 @@ namespace kck_projekt2
         {
             if (PromptTextBox.Text.Length > 0)
             {
-                HintAssist.SetHelperText(PromptTextBox, "Enter your question for AI");
+                HintAssist.SetHelperText(PromptTextBox, (string)Application.Current.Resources["EnterYourQuestionForAIStr"]); 
                 PromptTextBox.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
             }
         }

@@ -28,6 +28,14 @@
     <System:String x:Key="ExploreNotesHeaderStr">Explore notes</System:String>
     <System:String x:Key="RegisterHeaderStr">Register</System:String>
     <System:String x:Key="CalendarHintStr">(Select date and press the button to see notes from that day)</System:String>
+    <System:String x:Key="AskAIAboutAnythingStr">Ask AI about anything</System:String>
+    <System:String x:Key="WriteQuestionHereStr">Write question here ...</System:String>
+    <System:String x:Key="EnterYourQuestionForAIStr">Enter your question for AI</System:String>
+    <System:String x:Key="PlaceForAIResponseStr">Place for AI response ...</System:String>
+    <System:String x:Key="AskAIStr">Ask AI</System:String>
+    <System:String x:Key="MessageCannotBeEmptyStr">Message cannot be empty</System:String>
+    <System:String x:Key="ProcessingStr">Processing ...</System:String>
+    <System:String x:Key="GeminiApiKeyNotFoundStr">Gemini API key not found in User Secrets</System:String>
     <System:String x:Key="NickHelperStr">Enter your nick</System:String>
     <System:String x:Key="NickHintStr">Nick</System:String>
     <System:String x:Key="ShowNotesBtnStr">Show notes</System:String>
@@ -64,7 +72,7 @@
     <System:String x:Key="DeleteBtnStr">Delete Note</System:String>
     <System:String x:Key="AddNoteBtnStr">Add Note</System:String>
     <System:String x:Key="ChosenCategoryHintStr">Place for notes that match your chosen category</System:String>
-    <System:String x:Key="TitleEnmptyStrStr">Title cannot be empty</System:String>
+    <System:String x:Key="TitleEmptyStr">Title cannot be empty</System:String>
     <System:String x:Key="CategoryEmptyStr">Category cannot be empty</System:String>
     <System:String x:Key="NoCategoryChosedStr">Choose category or use custom</System:String>
     <System:String x:Key="ContentEmptyStr">Note content cannot be empty</System:String>

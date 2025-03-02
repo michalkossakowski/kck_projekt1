@@ -93,12 +93,12 @@
                         Name="AIMenuItem"
                         Visibility="Collapsed"
                         Click="OpenChatButton_Click"
-                        Foreground="{DynamicResource LightColor}"
-                        Background="White"
+                        Foreground="White"
+                        Background="{DynamicResource LightColor}"
                         Margin="5,0,6,0"
                         Height="25"
                         Width="48"
-                        ToolTip="Ask AI"
+                        ToolTip="{DynamicResource AskAIStr}"
                         >
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="Sparkles" />

@@ -65,6 +65,7 @@ namespace kck_projekt2
 
                         _mainWindow.LogoutMenuItem.Visibility = Visibility.Visible;
                         _mainWindow.ActionMenuMenuItem.Visibility = Visibility.Visible;
+                        _mainWindow.AIMenuItem.Visibility = Visibility.Visible;
                         _mainWindow.loggedUserId = user.Id;
                         _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
                     }

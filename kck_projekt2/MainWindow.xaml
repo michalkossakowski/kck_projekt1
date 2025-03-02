@@ -88,6 +88,23 @@
                       Style="{StaticResource MaterialDesignMenu}"
                       HorizontalAlignment="Right">
 
+                    <!-- Default Hidden AI -->
+                    <MenuItem
+                        Name="AIMenuItem"
+                        Visibility="Collapsed"
+                        Click="OpenChatButton_Click"
+                        Foreground="{DynamicResource LightColor}"
+                        Background="White"
+                        Margin="5,0,6,0"
+                        Height="25"
+                        Width="48"
+                        ToolTip="Ask AI"
+                        >
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Sparkles" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    
                     <!-- Default Hidden Action Menu -->
                     <MenuItem 
                         Name="ActionMenuMenuItem"
@@ -145,8 +162,6 @@
                             <materialDesign:PackIcon Kind="ExitRun" />
                         </MenuItem.Icon>
                     </MenuItem>
-
-
                 </Menu>
 
             </Grid>

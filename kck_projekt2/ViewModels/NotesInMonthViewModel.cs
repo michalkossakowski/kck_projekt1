@@ -1,0 +1,120 @@
+﻿using kck_api.Controller;
+using ScottPlot;
+using ScottPlot.WPF;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace kck_projekt2.ViewModels
+{
+    public class NotesInMonthViewModel : INotifyPropertyChanged
+    {
+        private readonly NoteController _noteController;
+        private readonly MainWindow _mainWindow;
+        private Dictionary<(int year, int month), List<NoteModel>> _notesByMonthYear;
+        private int? _yearFrom;
+        private int? _yearTo;
+        private WpfPlot _plotControl;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ObservableCollection<int> Years { get; set; }
+        public double[] ChartData { get; private set; } = new double[12];
+
+        public WpfPlot PlotControl
+        {
+            get => _plotControl;
+            private set
+            {
+                _plotControl = value;
+                OnPropertyChanged(nameof(PlotControl));
+            }
+        }
+        public int? YearFrom
+        {
+            get => _yearFrom;
+            set
+            {
+                _yearFrom = value;
+                OnPropertyChanged(nameof(YearFrom));
+                UpdateChart();
+            }
+        }
+        public int? YearTo
+        {
+            get => _yearTo;
+            set
+            {
+                _yearTo = value;
+                OnPropertyChanged(nameof(YearTo));
+                UpdateChart();
+            }
+        }
+
+        public NotesInMonthViewModel(MainWindow mainWindow)
+        {
+            _noteController = NoteController.GetInstance();
+            _mainWindow = mainWindow;
+            PlotControl = new WpfPlot();
+            LoadNotes();
+            SetYears();
+            UpdateChart();
+        }
+
+        private void LoadNotes()
+        {
+            _notesByMonthYear = new Dictionary<(int, int), List<NoteModel>>();
+            List<NoteModel> userNotes = _noteController.GetNotesByUserId(_mainWindow.loggedUserId);
+
+            foreach (var note in userNotes)
+            {
+                var key = (note.ModifiedDate.Year, note.ModifiedDate.Month);
+                if (!_notesByMonthYear.ContainsKey(key))
+                    _notesByMonthYear[key] = new List<NoteModel>();
+
+                _notesByMonthYear[key].Add(note);
+            }
+        }
+
+        private void UpdateChart()
+        {
+            ChartData = GetChartData();
+            var plt = PlotControl.Plot;
+            plt.Clear();
+
+            string[] monthNames = { "Sty", "Lut", "Mar", "Kwi", "Maj", "Cze", "Lip", "Sie", "Wrz", "Paź", "Lis", "Gru" };
+            plt.Add.Bars(Enumerable.Range(0, 12).Select(x => (double)x).ToArray(), ChartData);
+
+            var tickGen = new ScottPlot.TickGenerators.NumericManual();
+            for (int i = 0; i < 12; i++)
+                tickGen.AddMajor(i, monthNames[i]);
+
+            plt.Axes.Bottom.TickGenerator = tickGen;
+            plt.Axes.Margins(bottom: 0);
+            PlotControl.Refresh();
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ChartData)));
+        }
+        private double[] GetChartData()
+        {
+            double[] values = new double[12];
+            for (int i = 0; i < 12; i++)
+            {
+                values[i] = _notesByMonthYear.Count(x => x.Key.month == i + 1 && x.Key.year >= (YearFrom ?? 1900) && x.Key.year <= (YearTo ?? 9999));
+            }
+            return values;
+        }
+        private void SetYears()
+        {
+            Years = new ObservableCollection<int>(_notesByMonthYear.Select(x => x.Key.year).Distinct().OrderBy(x => x));
+        }
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+}

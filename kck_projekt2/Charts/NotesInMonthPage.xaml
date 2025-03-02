@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="kck_projekt2.NotesInMonthPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:kck_projekt2"
+             xmlns:ScottPlot="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"      
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+              >
+    <Grid Margin="20" Width="400">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel 
+            Grid.Row="0"
+            Margin="0,0,0,30" Orientation="Horizontal" Height="80" Width="400" HorizontalAlignment="Center">
+
+            <ComboBox
+                x:Name="SelectedYearFrom"
+                Width="100"
+                Height="40"
+                Margin="43,0,20,0"
+                Padding="10,0,10,0"
+                Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                materialDesign:HintAssist.Hint="Year"
+                FontSize="16"
+                Foreground="{DynamicResource TextBoxColor}"
+                materialDesign:HintAssist.HelperTextFontSize="12" 
+                materialDesign:HintAssist.HelperText="From year"
+                ItemsSource="{Binding Years}"
+                SelectedItem="{Binding YearFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center">
+            </ComboBox>
+            <ComboBox
+                x:Name="SelectedYearTo"
+                Width="100"
+                Height="40"
+                Margin="95,0,45,0"
+                Padding="10,0,10,0"
+                Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                materialDesign:HintAssist.Hint="Year"
+                FontSize="16"
+                Foreground="{DynamicResource TextBoxColor}"
+                materialDesign:HintAssist.HelperTextFontSize="12" 
+                materialDesign:HintAssist.HelperText="To year"
+                ItemsSource="{Binding Years}"
+                SelectedItem="{Binding YearTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        </StackPanel>
+        <ContentControl Grid.Row="1">
+            <Grid>
+                <ContentPresenter 
+                    Content="{Binding PlotControl, Mode=OneTime}"          
+                    MinHeight="300" 
+                    MaxHeight="400" 
+                    VerticalAlignment="Center" 
+                    />
+            </Grid>
+        </ContentControl>
+        <Button 
+            Width="80" 
+            Height="30" 
+            Click="BackClick"  
+            Margin="160,20,160,0"
+            Grid.Row="2" 
+            FontSize="16"
+            Name="BackButton"
+            Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+            BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Back" VerticalAlignment="Center" Foreground="White"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+</UserControl>

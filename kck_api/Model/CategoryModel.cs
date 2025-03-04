@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace kck_api.Model
 {
-    public class Category
+    public class CategoryModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public Category() { }
+        public CategoryModel() { }
 
-        public Category(string name)
+        public CategoryModel(string name)
         {
             this.Name = name;
         }

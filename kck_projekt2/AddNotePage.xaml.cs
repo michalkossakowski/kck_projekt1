@@ -19,7 +19,7 @@ namespace kck_projekt2
         private async void AddNoteClick(object sender, RoutedEventArgs e)
         {
             var selectedCategory = SelectedCategory.SelectedItem as ComboBoxItem;
-            string category = CustomCategory.IsEnabled
+            string categoryName = CustomCategory.IsEnabled
                 ? CustomCategory.Text
                 : selectedCategory?.Content?.ToString() ?? "";
 
@@ -29,8 +29,7 @@ namespace kck_projekt2
                 Title.Foreground = new SolidColorBrush(Colors.Red);
             }
 
-
-            if (category.Length == 0)
+            if (categoryName.Length == 0)
             {
                 if (CustomCategory.IsEnabled)
                 {
@@ -45,7 +44,6 @@ namespace kck_projekt2
                     HintAssist.SetHelperText(CustomCategory, (string)Application.Current.Resources["CustomCategoryHelperStr"]);
                     CustomCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
 
-
                     HintAssist.SetHelperText(SelectedCategory, (string)Application.Current.Resources["NoCategoryChosedStr"]);
                     SelectedCategory.Foreground = new SolidColorBrush(Colors.Red);
                 }
@@ -57,12 +55,15 @@ namespace kck_projekt2
                 NoteContent.Foreground = new SolidColorBrush(Colors.Red);
             }
 
-
-            if((!string.IsNullOrWhiteSpace(Title.Text)) && (category.Length > 0) && (NoteContent.Text.Length > 0))
+            if ((!string.IsNullOrWhiteSpace(Title.Text)) && (categoryName.Length > 0) && (NoteContent.Text.Length > 0))
             {
+                var categoryController = CategoryController.GetInstance();
+                int categoryId = await categoryController.GetOrCreateCategoryIdAsync(categoryName); // Pobieramy ID kategorii
+
                 var noteController = NoteController.GetInstance();
-                var note = new NoteModel(_mainWindow.loggedUserId, Title.Text, NoteContent.Text, category);
-                noteController.AddNoteAsync(note);
+                var note = new NoteModel(_mainWindow.loggedUserId, Title.Text, NoteContent.Text, categoryId);
+                await noteController.AddNoteAsync(note);
+
                 _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
                 _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
                 _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
@@ -75,6 +76,7 @@ namespace kck_projekt2
                 _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["RequirementsNotMeetStr"]);
             }
         }
+
 
         private void BackClick(object sender, RoutedEventArgs e)
         {

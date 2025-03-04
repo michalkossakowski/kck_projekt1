@@ -16,7 +16,7 @@ namespace kck_api.Database
 
         public DbSet<UserModel> Users { get; set; }
         public DbSet<NoteModel> Notes { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<CategoryModel> Categories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

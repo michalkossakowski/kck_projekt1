@@ -11,6 +11,7 @@ namespace kck_projekt1.View
     public class NoteView
     {
         protected readonly NoteController _noteController;
+        protected readonly CategoryController _categoryController;
         public NoteView()
         {
             _noteController = NoteController.GetInstance();
@@ -48,7 +49,6 @@ namespace kck_projekt1.View
                             "Other",
                             "[grey50]Custom[/]"
              }));
-
             if(category == "[grey50]Custom[/]")
             {
                 category = AnsiConsole.Prompt(
@@ -59,8 +59,8 @@ namespace kck_projekt1.View
                 AnsiConsole.Markup("[gold1]Choosen[/] [darkorange]category: [/]" + category);
                 Console.WriteLine("");
             }
-           
-            return new NoteModel(user.Id, title, note, category);
+           int CategoryId = _categoryController.GetOrCreateCategoryIdAsync(category).Result;
+            return new NoteModel(user.Id, title, note, CategoryId);
         }
         public void ShowNote(int noteId)
         {
@@ -167,21 +167,21 @@ namespace kck_projekt1.View
             new TextPrompt<string>("[gold1]Enter[/] [darkorange]title[/]")
             .DefaultValue(note.Title)
             .HideDefaultValue());
-
+            string category = _categoryController.GetCategoryByIdAsync(note.CategoryId).Result.Name;
             AnsiConsole.MarkupLine("[grey35]\nLeave blank and press {Enter} to use old category[/]");
             var newCategory = AnsiConsole.Prompt(
             new TextPrompt<string>("[gold1]Enter new[/] [darkorange]category[/]")
-            .DefaultValue(note.Category)
+            .DefaultValue(category)
             .HideDefaultValue());
 
             ClipboardService.SetText(note.Content);
             AnsiConsole.MarkupLine("[grey35]\nPress {Ctrl+V} to edit old content[/]");
             var newContent = AnsiConsole.Prompt(
             new TextPrompt<string>("[gold1]Enter new[/] [darkorange]content:[/]"));
-
+            int newCategoryId = _categoryController.GetOrCreateCategoryIdAsync(newCategory).Result;
             var sure = ShowConfirmation("\nAre you sure you want to save changes ?");
             if(sure){
-                _noteController.EditNote(note.Id, newTitle, newCategory, newContent);
+                _noteController.EditNote(note.Id, newTitle, newCategoryId, newContent);
 
                 Console.WriteLine();
                 var editedNoteRule = new Rule("[gold1]Edited note:[/]");
@@ -258,7 +258,7 @@ namespace kck_projekt1.View
             }
             else
             {
-                var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.Category})[/] - {n.ModifiedDate}").ToList();
+                var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.CategoryId})[/] - {n.ModifiedDate}").ToList();
                 list.Insert(0,"Back");
 
 
@@ -443,7 +443,7 @@ namespace kck_projekt1.View
                 rule.LeftJustified();
                 AnsiConsole.Write(rule);
 
-                var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.Category})[/] - {n.ModifiedDate}").ToList();
+                var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.CategoryId})[/] - {n.ModifiedDate}").ToList();
                 list.Insert(0, "Back");
 
                 var choice = AnsiConsole.Prompt(
@@ -547,8 +547,8 @@ namespace kck_projekt1.View
             }
             else
                 Console.WriteLine();
-
-            var notes = _noteController.GetNotesByUserIdAndCategory(userId, categoryFilter);
+            int categoryFiltredId = _categoryController.GetOrCreateCategoryIdAsync(categoryFilter).Result;
+            var notes = _noteController.GetNotesByUserIdAndCategory(userId, categoryFiltredId);
             if (notes.Count == 0)
             {
                 AnsiConsole.Markup($"[red1]⛔ You don't have notes from [/][darkorange]'{categoryFilter}'[/] [red1]category, press anything to continue...[/]");
@@ -562,7 +562,7 @@ namespace kck_projekt1.View
                 rule.LeftJustified();
                 AnsiConsole.Write(rule);
 
-                var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.Category})[/] - {n.ModifiedDate}").ToList();
+                var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.CategoryId})[/] - {n.ModifiedDate}").ToList();
                 list.Insert(0, "Back");
 
                 var choice = AnsiConsole.Prompt(
@@ -638,7 +638,7 @@ namespace kck_projekt1.View
             }
             else
             {
-                var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.Category})[/] - {n.ModifiedDate}").ToList();
+                var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.CategoryId})[/] - {n.ModifiedDate}").ToList();
                 list.Insert(0, "Back");
 
                 var choice = AnsiConsole.Prompt(
@@ -731,7 +731,7 @@ namespace kck_projekt1.View
             AnsiConsole.Write(rule);
 
             var notes = _noteController.GetNotesByUserIdAndMonth(userId, date);
-            var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.Category})[/] - {n.ModifiedDate}").ToList();
+            var list = notes.Select(n => $"{n.Id}: [darkorange]{n.Title}[/] [gold1]({n.CategoryId})[/] - {n.ModifiedDate}").ToList();
             list.Insert(0, "Back");
 
             var choice = AnsiConsole.Prompt(
@@ -761,7 +761,7 @@ namespace kck_projekt1.View
                 var table = new Table()
                     .BorderColor(Color.Grey35)
                     .Border(TableBorder.Rounded)
-                    .AddColumn(new TableColumn($"[darkorange]{note.Title}[/] [gold1]({note.Category})[/]")
+                    .AddColumn(new TableColumn($"[darkorange]{note.Title}[/] [gold1]({note.CategoryId})[/]")
                     .Centered()
                     .Width(columnWidth))
                     .AddRow($"[grey50]{note.ModifiedDate}[/]")

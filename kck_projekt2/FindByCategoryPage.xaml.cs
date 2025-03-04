@@ -12,12 +12,14 @@ namespace kck_projekt2
         private MainWindow _mainWindow;
         public ObservableCollection<NoteModel> Notes { get; set; }
         private NoteController _noteController;
+        private CategoryController _categoryController;
         public string _searchingCategory;
         public FindByCategoryPage(MainWindow mainWindow, string? searchingCategory)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
             _noteController = NoteController.GetInstance();
+            _categoryController = CategoryController.GetInstance();
             if (searchingCategory != null)
             {
                 SelectedCategory.IsEnabled = false;
@@ -59,7 +61,8 @@ namespace kck_projekt2
 
         private async void Search()
         {
-            var notes = await _noteController.GetNotesByUserIdAndCategoryAsync(_mainWindow.loggedUserId, _searchingCategory);
+            int searchingCategoryId = await _categoryController.GetOrCreateCategoryIdAsync(_searchingCategory);
+            var notes = await _noteController.GetNotesByUserIdAndCategoryAsync(_mainWindow.loggedUserId, searchingCategoryId);
             if (notes.Count == 0)
             {
                 BottomTip.Visibility = Visibility.Hidden;

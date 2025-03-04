@@ -8,11 +8,14 @@ namespace kck_projekt2.ViewModels
     public class NotifyViewModel : BaseViewModel
     {
         public ICommand NotifyCommand { get; }
+        public ICommand UpdateTrayCommand { get; }
 
         private bool _isDarkTheme;
+        private readonly Forms.NotifyIcon _notifyIcon;
 
         public NotifyViewModel(Forms.NotifyIcon notifyIcon)
         {
+            _notifyIcon = notifyIcon;
             NotifyCommand = new NotifyCommand(notifyIcon);
         }
         public NotificationMessage ConsoleModeNotificationMessage
@@ -27,6 +30,7 @@ namespace kck_projekt2.ViewModels
                 );
             }
         }
+
         public bool IsDarkTheme
         {
             get => _isDarkTheme;

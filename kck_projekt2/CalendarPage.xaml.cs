@@ -14,12 +14,16 @@ namespace kck_projekt2
             InitializeComponent();
             _viewModel = new CalendarViewModel(mainWindow);
             DataContext = _viewModel;
-            MyCalendar.Loaded += MyCalendar_Loaded;
             _viewModel.PropertyChanged += ViewModel_PropertyChanged;
         }
 
         private void MyCalendar_Loaded(object sender, RoutedEventArgs e)
         {
+            DateTime firstDayOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+            MyCalendar.DisplayDateStart = firstDayOfMonth;
+            MyCalendar.DisplayDateEnd = lastDayOfMonth;
+            _viewModel.SelectedDay = DateTime.Now;
             UpdateCalendarDays();
         }
 

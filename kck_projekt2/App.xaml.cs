@@ -2,6 +2,7 @@
 using kck_projekt2.CustomElements;
 using kck_projekt2.ViewModels;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using Forms = System.Windows.Forms;
 
 namespace kck_projekt2
@@ -37,11 +38,32 @@ namespace kck_projekt2
             _notifyIcon.Text = "CNote#";
 
             _notifyIcon.Click += NotifyIcon_Click;
-            _notifyIcon.ContextMenuStrip = new Forms.ContextMenuStrip();
-            _notifyIcon.ContextMenuStrip.Items.Add("About Program", null, OnAboutProgramClicked);
-            _notifyIcon.ContextMenuStrip.Items.Add("Hide Tray", null, OnHideTrayClick);
-            _notifyIcon.ContextMenuStrip.Items.Add("Exit", null, OnExitClick);
+            UpdateTrayMenu();
         }
+        private void UpdateTrayMenu()
+        {
+            if (_notifyIcon.ContextMenuStrip != null)
+            {
+                _notifyIcon.ContextMenuStrip.Dispose();
+            }
+
+            _notifyIcon.ContextMenuStrip = new Forms.ContextMenuStrip();
+            _notifyIcon.ContextMenuStrip.Items.Add((string)Application.Current.Resources["TrayAboutProgramStr"], null, OnAboutProgramClicked);
+            _notifyIcon.ContextMenuStrip.Items.Add((string)Application.Current.Resources["TrayHideTrayStr"], null, OnHideTrayClick);
+            _notifyIcon.ContextMenuStrip.Items.Add((string)Application.Current.Resources["TrayExitStr"], null, OnExitClick);
+            _notifyIcon.ContextMenuStrip.Items.Add((string)Application.Current.Resources["TrayChangeLanguagetoStr"], null, SwitchLanguage);
+        }
+
+
+        private void SwitchLanguage(object? sender, EventArgs e)
+        {
+            var mainWindow = Current.MainWindow as MainWindow;
+            if(mainWindow.IsPolish is ToggleButton toggleButton)
+                toggleButton.IsChecked = !toggleButton.IsChecked;
+
+            mainWindow.SwitchLang(sender, e as RoutedEventArgs);
+        }
+
         protected override void OnExit(ExitEventArgs e)
         {
             _notifyIcon.Dispose();
@@ -56,6 +78,7 @@ namespace kck_projekt2
         }
         private void OnExitClick(object? sender, EventArgs e)
         {
+            _notifyIcon.Dispose();
             Shutdown();
         }
         private void OnHideTrayClick(object? sender, EventArgs e)

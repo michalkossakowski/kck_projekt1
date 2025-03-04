@@ -122,6 +122,7 @@ namespace kck_projekt2
             LogoutMenuItem.Visibility = Visibility.Collapsed;
             ActionMenuMenuItem.Visibility = Visibility.Collapsed;
             AIMenuItem.Visibility = Visibility.Collapsed;
+            BackToMenu.Visibility = Visibility.Collapsed;
             ReturnToMainMenu();
         }
 
@@ -143,7 +144,7 @@ namespace kck_projekt2
                 MessageBox.Show(ex.Message);
             }
         }
-        private void SwitchLang(object sender, RoutedEventArgs e)
+        public void SwitchLang(object sender, RoutedEventArgs e)
         {
             bool isChecked = IsPolish.IsChecked ?? false;
             string lang = isChecked ? "pl" : "en";

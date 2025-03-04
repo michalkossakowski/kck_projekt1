@@ -23,7 +23,6 @@ namespace kck_projekt2.ViewModels
                 NotifyVM.NotifyCommand.Execute(new NotificationMessage("CNote#", "Aplikacja działa w tle.", Forms.ToolTipIcon.Info, 1000));
             }
         }
-
         public bool IsDarkTheme
         {
             get => NotifyVM.IsDarkTheme;

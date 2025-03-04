@@ -88,7 +88,6 @@
                       Style="{StaticResource MaterialDesignMenu}"
                       HorizontalAlignment="Right">
 
-                    <!-- Default Hidden AI -->
                     <MenuItem
                         Name="AIMenuItem"
                         Visibility="Collapsed"
@@ -102,6 +101,21 @@
                         >
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="Sparkles" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    
+                    <!-- Default Hidden AI -->
+                    <MenuItem
+                        Name="BackToMenu"
+                        Visibility="Collapsed"
+                        Click="OpenActionMenu"
+                        Background="{DynamicResource LightColor}"
+                        Margin="5,0,6,0"
+                        Height="25"
+                        Width="48"
+                        ToolTip="{DynamicResource BackHomeToolTipStr}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Home" />
                         </MenuItem.Icon>
                     </MenuItem>
                     
@@ -121,12 +135,12 @@
                         <MenuItem
                             Background="{DynamicResource SecondaryHueMidBrush}"
                             Command="{Binding MenuVM.OpenNotesInMonthPageCommand}"
-                            Header="Month notes chart"    
+                            Header="{DynamicResource MonthNotesChartStr}"
                         />
                         <MenuItem
                             Background="{DynamicResource SecondaryHueMidBrush}"
                             Command="{Binding MenuVM.OpenNotesByCategoryCommand}"
-                            Header="Category notes chart"    
+                            Header="{DynamicResource CategoryNotesChartStr}"
                         />
                     </MenuItem>
 

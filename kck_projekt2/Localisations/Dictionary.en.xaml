@@ -107,4 +107,12 @@
     <System:String x:Key="EditCatStr">Edit Category</System:String>
     <System:String x:Key="DeleteCatStr">Delete Category</System:String>
     <System:String x:Key="NewNameCatPopStr">New Category Name:</System:String>
+    <System:String x:Key="BackHomeToolTipStr">Go Home</System:String>
+    <System:String x:Key="MonthNotesChartStr">Notes chart by modification date</System:String>
+    <System:String x:Key="CategoryNotesChartStr">Notes chart by categories</System:String>
+    <System:String x:Key="TrayAboutProgramStr">About Program</System:String>
+    <System:String x:Key="TrayHideTrayStr">Hide tray</System:String>
+    <System:String x:Key="TrayExitStr">Close program</System:String>
+    <System:String x:Key="TrayChangeLanguagetoStr">Change languge to: Polish</System:String>
+    <System:String x:Key="LoadingNotesStr">Loading Notes ...</System:String>
 </ResourceDictionary>

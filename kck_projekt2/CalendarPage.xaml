@@ -29,11 +29,10 @@
                       VerticalAlignment="Center" 
                       Width="350"
                       Height="auto"
+                       Loaded="MyCalendar_Loaded"
                       Foreground="White"
                       Background="#9172C8"
                       SelectedDate="{Binding SelectedDay, UpdateSourceTrigger=PropertyChanged}"
-                      DisplayDateStart="{Binding DisplayDateStart, Mode=OneWay}"
-                      DisplayDateEnd="{Binding DisplayDateEnd, Mode=OneWay}"
                       SelectedDatesChanged="MyCalendar_SelectedDateChanged"/>
 
             <TextBlock Text="{DynamicResource CalendarHintStr}" 

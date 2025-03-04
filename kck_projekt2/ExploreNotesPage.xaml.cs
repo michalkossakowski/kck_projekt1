@@ -19,6 +19,7 @@ namespace kck_projekt2
 
         private async void InitializeNotes()
         {
+            Loading.Visibility = Visibility.Visible;
             var noteController = NoteController.GetInstance();
             var notes = await noteController.GetNotesByUserIdAsync(_mainWindow.loggedUserId);
             if (notes.Count == 0)
@@ -31,6 +32,7 @@ namespace kck_projekt2
                 Notes = new ObservableCollection<NoteModel>(notes);
                 DataContext = this;
             }
+            Loading.Visibility = Visibility.Hidden;
         }
 
         private void OpenEditPage(object sender, MouseButtonEventArgs e)

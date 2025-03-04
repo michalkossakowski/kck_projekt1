@@ -154,42 +154,42 @@ namespace kck_api.Controller
             return notes;
         }
 
-        public List<NoteModel> GetNotesByUserIdAndCategory(int userId, string category)
+        public List<NoteModel> GetNotesByUserIdAndCategory(int userId, int category)
         {
             var notes = _context.Notes.Where(n => n.AuthorId == userId
-            && n.Category.Contains(category))
+            && n.CategoryId == category)
             .OrderByDescending(n => n.ModifiedDate)
             .ToList();
 
             return notes;
         }
 
-        public async Task<List<NoteModel>> GetNotesByUserIdAndCategoryAsync(int userId, string category)
+        public async Task<List<NoteModel>> GetNotesByUserIdAndCategoryAsync(int userId, int category)
         {
             var notes = await _context.Notes.Where(n => n.AuthorId == userId
-            && n.Category.Contains(category))
+            && n.CategoryId==category)
             .OrderByDescending(n => n.ModifiedDate)
             .ToListAsync();
 
             return notes;
         }
 
-        public void EditNote(int noteId, string newTitle, string newCategory, string newContent)
+        public void EditNote(int noteId, string newTitle, int newCategory, string newContent)
         {
             var note = _context.Notes.FirstOrDefault(n => n.Id == noteId);
             note.Title = newTitle;
-            note.Category = newCategory;
+            note.CategoryId = newCategory;
             note.Content = newContent;
             note.ModifiedDate = DateTime.Now;
 
             _context.SaveChanges();
         }
 
-        public async Task EditNoteAsync(int noteId, string newTitle, string newCategory, string newContent)
+        public async Task EditNoteAsync(int noteId, string newTitle, int newCategory, string newContent)
         {
             var note = await _context.Notes.FirstOrDefaultAsync(n => n.Id == noteId);
             note.Title = newTitle;
-            note.Category = newCategory;
+            note.CategoryId = newCategory;
             note.Content = newContent;
             note.ModifiedDate = DateTime.Now;
 

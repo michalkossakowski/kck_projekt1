@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using kck_api.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace kck_api.Database
 {
@@ -15,6 +16,7 @@ namespace kck_api.Database
 
         public DbSet<UserModel> Users { get; set; }
         public DbSet<NoteModel> Notes { get; set; }
+        public DbSet<CategoryModel> Categories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

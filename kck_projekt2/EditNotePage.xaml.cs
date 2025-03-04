@@ -12,12 +12,14 @@ namespace kck_projekt2
         private int _noteId;
         private NoteController _noteController;
         private UserControl _previousAction;
+        private CategoryController _categoryController;
         public EditNotePage(MainWindow mainWindow, int noteId, UserControl previousAction)
         {
             InitializeComponent();
 
             _mainWindow = mainWindow;
             _noteController = NoteController.GetInstance();
+            _categoryController = CategoryController.GetInstance();
             _previousAction = previousAction;
             _noteId = noteId;
 
@@ -29,8 +31,12 @@ namespace kck_projekt2
             var note = await _noteController.GetNoteByIdAsync(_noteId);
 
             Title.Text = note.Title;
-            CustomCategory.Text = note.Category;
             NoteContent.Text = note.Content;
+
+            var categoryController = CategoryController.GetInstance();
+            string categoryName = await categoryController.GetCategoryNameByIdAsync(note.CategoryId); 
+
+            CustomCategory.Text = categoryName;
 
             CategoryToggle.IsChecked = true;
             SelectedCategory.IsEnabled = false;
@@ -40,6 +46,7 @@ namespace kck_projekt2
             CustomCategory.Visibility = Visibility.Visible;
         }
 
+
         private async void SaveNoteClick(object sender, RoutedEventArgs e)
         {
 
@@ -47,6 +54,7 @@ namespace kck_projekt2
             string category = CustomCategory.IsEnabled
                 ? CustomCategory.Text
                 : selectedCategory?.Content?.ToString() ?? "";
+            int categoryId = await _categoryController.GetOrCreateCategoryIdAsync(category);
 
             if (string.IsNullOrWhiteSpace(Title.Text))
             {
@@ -85,8 +93,8 @@ namespace kck_projekt2
             if ((!string.IsNullOrWhiteSpace(Title.Text)) && (category.Length > 0) && (NoteContent.Text.Length > 0))
             {
                 var noteController = NoteController.GetInstance();
-                var note = new NoteModel(_mainWindow.loggedUserId, Title.Text, NoteContent.Text, category);
-                await _noteController.EditNoteAsync(_noteId, Title.Text, category, NoteContent.Text);
+                var note = new NoteModel(_mainWindow.loggedUserId, Title.Text, NoteContent.Text, categoryId);
+                await _noteController.EditNoteAsync(_noteId, Title.Text, categoryId, NoteContent.Text);
 
                 YesNoDialog dialog = new YesNoDialog((string)Application.Current.Resources["SaveChangesConfirmStr"]);
                 dialog.Owner = _mainWindow;

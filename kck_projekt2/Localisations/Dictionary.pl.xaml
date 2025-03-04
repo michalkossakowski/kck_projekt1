@@ -107,4 +107,12 @@
     <System:String x:Key="EditCatStr">Edytuj Kategorię</System:String>
     <System:String x:Key="DeleteCatStr">Usuń Kategorię</System:String>
     <System:String x:Key="NewNameCatPopStr">Nowa Nazwa Kategorii:</System:String>
+    <System:String x:Key="BackHomeToolTipStr">Wróć do Menu</System:String>
+    <System:String x:Key="MonthNotesChartStr">Wykres notatek wg daty modyfikacji</System:String>
+    <System:String x:Key="CategoryNotesChartStr">Wykres notatek wg kategorii</System:String>
+    <System:String x:Key="TrayAboutProgramStr">O programie</System:String>
+    <System:String x:Key="TrayHideTrayStr">Ukryj zasobnik</System:String>
+    <System:String x:Key="TrayExitStr">Zamknij program</System:String>
+    <System:String x:Key="TrayChangeLanguagetoStr">Zmień język na: angielski</System:String>
+    <System:String x:Key="LoadingNotesStr">Wczytywanie notatek ...</System:String>
 </ResourceDictionary>

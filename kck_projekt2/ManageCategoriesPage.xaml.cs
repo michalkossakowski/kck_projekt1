@@ -53,7 +53,7 @@ namespace kck_projekt2
             string editCategoryText = (string)Application.Current.Resources["EditCatStr"];
             if (CategoriesListBox.SelectedItem is CategoryModel selectedCategory)
             {
-                string newName = Microsoft.VisualBasic.Interaction.InputBox(categoryListText, editCategoryText, selectedCategory.Name);
+                string newName = CategoryNameTextBox.Text;
                 if (!string.IsNullOrWhiteSpace(newName))
                 {
                     await _categoryController.EditCategoryAsync(selectedCategory.Id, newName);

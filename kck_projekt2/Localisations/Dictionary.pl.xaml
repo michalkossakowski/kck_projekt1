@@ -101,4 +101,10 @@
     <System:String x:Key="MessageCannotBeEmptyStr">Wiadomość nie może być pusta</System:String>
     <System:String x:Key="ProcessingStr">Przetwarzanie ...</System:String>
     <System:String x:Key="GeminiApiKeyNotFoundStr">Nie znaleziono klucz do Gemini API w sekretach</System:String>
+    <System:String x:Key="ManageCategoriesStr">Zarządzaj Kategoriami</System:String>
+    <System:String x:Key="CategoryListStr">Lista Kategorii:</System:String>
+    <System:String x:Key="AddCatStr">Dodaj Kategorię</System:String>
+    <System:String x:Key="EditCatStr">Edytuj Kategorię</System:String>
+    <System:String x:Key="DeleteCatStr">Usuń Kategorię</System:String>
+    <System:String x:Key="NewNameCatPopStr">Nowa Nazwa Kategorii:</System:String>
 </ResourceDictionary>

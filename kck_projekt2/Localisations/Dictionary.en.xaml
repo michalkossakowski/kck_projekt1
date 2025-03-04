@@ -101,4 +101,10 @@
     <System:String x:Key="NickOccupiedStr">This nick is occupied</System:String>
     <System:String x:Key="EmptySearchStr">Search input cannot be empty</System:String>
     <System:String x:Key="NoSearchResultStr">There is no notes that match your search:</System:String>
+    <System:String x:Key="ManageCategoriesStr">Manage Categories</System:String>
+    <System:String x:Key="CategoryListStr">Category List:</System:String>
+    <System:String x:Key="AddCatStr">Add Category</System:String>
+    <System:String x:Key="EditCatStr">Edit Category</System:String>
+    <System:String x:Key="DeleteCatStr">Delete Category</System:String>
+    <System:String x:Key="NewNameCatPopStr">New Category Name:</System:String>
 </ResourceDictionary>

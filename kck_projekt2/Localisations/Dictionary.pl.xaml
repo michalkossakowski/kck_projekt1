@@ -81,6 +81,7 @@
     <System:String x:Key="EmptyMonthSearchStr">Wyszukiwany miesiąc nie może być pusty</System:String>
     <System:String x:Key="NoMonthSearchResultsStr">Brak notatek pasujących do wybranego miesiąca</System:String>
     <System:String x:Key="EmptyCategorySearchStr">Pole wyszukiwania kategorii nie może być puste</System:String>
+    <System:String x:Key="PrintButtonStr">Drukuj</System:String>
     <System:String x:Key="NoCategorySearchResultsStr">Brak notatek w kategorii:</System:String>
     <System:String x:Key="NoneLatestNotesStr">Nie masz obecnie żadnych notatek</System:String>
     <System:String x:Key="NickAndPasswordEmptyStr">Nick i hasło nie mogą być puste, spróbuj ponownie</System:String>
@@ -115,4 +116,9 @@
     <System:String x:Key="TrayExitStr">Zamknij program</System:String>
     <System:String x:Key="TrayChangeLanguagetoStr">Zmień język na: angielski</System:String>
     <System:String x:Key="LoadingNotesStr">Wczytywanie notatek ...</System:String>
+    <System:String x:Key="CategoryStr">Kategoria:</System:String>
+    <System:String x:Key="ModificationDateStr">Data modyfikacji:</System:String>
+    <System:String x:Key="ChoosePrinterStr">Wybierz drukarkę 'Microsoft Print to PDF'</System:String>
+    <System:String x:Key="ErrorStr">Błąd</System:String>
+    
 </ResourceDictionary>

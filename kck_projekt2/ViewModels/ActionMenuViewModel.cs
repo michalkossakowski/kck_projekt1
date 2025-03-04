@@ -14,7 +14,7 @@ namespace kck_projekt2
         public ICommand OpenFindByDatePageCommand { get; }
         public ICommand OpenFindByCategoryPageCommand { get; }
         public ICommand OpenExploreNotesByMonthPageCommand { get; }
-
+        public ICommand OpenManageCategoriesPageCommand { get; }
         public ActionMenuViewModel(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
@@ -27,6 +27,7 @@ namespace kck_projekt2
             OpenFindByDatePageCommand = new RelayCommand(OpenFindByDatePage);
             OpenFindByCategoryPageCommand = new RelayCommand(OpenFindByCategoryPage);
             OpenExploreNotesByMonthPageCommand = new RelayCommand(OpenExploreNotesByMonthPage);
+            OpenManageCategoriesPageCommand = new RelayCommand(OpenManageCategoriesPage);
         }
 
         private void OpenAddNotePage() => _mainWindow.contentControl.Content = new AddNotePage(_mainWindow);
@@ -37,5 +38,6 @@ namespace kck_projekt2
         private void OpenFindByDatePage() => _mainWindow.contentControl.Content = new FindByDatePage(_mainWindow, null);
         private void OpenFindByCategoryPage() => _mainWindow.contentControl.Content = new FindByCategoryPage(_mainWindow, null);
         private void OpenExploreNotesByMonthPage() => _mainWindow.contentControl.Content = new ExploreNotesByMonthPage(_mainWindow, null);
+        private void OpenManageCategoriesPage() => _mainWindow.contentControl.Content = new ManageCategoriesPage(_mainWindow);
     }
 }

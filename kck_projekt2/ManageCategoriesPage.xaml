@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="kck_projekt2.ManageCategoriesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:kck_projekt2"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" Width="613">
+
+    <Grid Margin="0,0,0,-142">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <TextBox x:Name="CategoryNameTextBox" Width="200"/>
+            <Button Content="{DynamicResource AddCatStr}" Click="AddCategory_Click" Margin="10,0,0,0"/>
+            <Button Content="{DynamicResource EditCatStr}" Click="EditCategory_Click" Margin="5,0,0,0"/>
+            <Button Content="{DynamicResource DeleteCatStr}" Click="RemoveCategory_Click" Margin="5,0,0,0"/>
+        </StackPanel>
+        <TextBlock 
+        Grid.Row="1"
+        Name="Information"
+        VerticalAlignment="Top"
+        TextAlignment="Center"
+        Text="{DynamicResource CategoryListStr}"
+        FontSize="20"
+        Margin="10,0,-10,0" 
+        Foreground="{DynamicResource TextBlockColor}"
+        Visibility="Visible"
+        />
+        <ListBox x:Name="CategoriesListBox" Grid.Row="1" Margin="10,45,10,260" SelectionChanged="CategoriesListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" Width="200"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button 
+Grid.Row="1"
+Content="{DynamicResource BackBtnStr}" 
+Width="90" 
+Height="30"
+Margin="262,448,261,62" 
+FontSize="16"
+Click="BackClick"
+Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}"/>
+    </Grid>
+</UserControl>

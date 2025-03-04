@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using kck_api.Controller;
+using kck_api.Model;
 using MaterialDesignThemes.Wpf;
 
 namespace kck_projekt2
@@ -9,19 +10,23 @@ namespace kck_projekt2
     public partial class AddNotePage : UserControl
     {
         private MainWindow _mainWindow;
+        private CategoryController _categoryController;
 
         public AddNotePage(MainWindow mainWindow)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
+            _categoryController = CategoryController.GetInstance();
+            LoadCategoriesAsync();
         }
 
         private async void AddNoteClick(object sender, RoutedEventArgs e)
         {
-            var selectedCategory = SelectedCategory.SelectedItem as ComboBoxItem;
+
+            var selectedCategory = SelectedCategory.SelectedItem as CategoryModel;
             string categoryName = CustomCategory.IsEnabled
                 ? CustomCategory.Text
-                : selectedCategory?.Content?.ToString() ?? "";
+                : selectedCategory?.Name?? "";
 
             if (string.IsNullOrWhiteSpace(Title.Text))
             {
@@ -143,5 +148,14 @@ namespace kck_projekt2
 
             }
         }
+        public async Task LoadCategoriesAsync()
+        {
+            // Pobieramy kategorie z bazy danych
+            var categories = await _categoryController.GetAllCategoriesAsync();
+
+            // Przypisujemy je do ComboBox
+            SelectedCategory.ItemsSource = categories;
+        }
+
     }
 }

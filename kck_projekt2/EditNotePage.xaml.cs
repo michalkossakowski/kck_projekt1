@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using kck_api.Controller;
+using kck_api.Model;
 using MaterialDesignThemes.Wpf;
 
 namespace kck_projekt2
@@ -44,16 +45,21 @@ namespace kck_projekt2
 
             SelectedCategory.Visibility = Visibility.Collapsed;
             CustomCategory.Visibility = Visibility.Visible;
+            await LoadCategoriesAsync();
         }
 
-
+        public async Task LoadCategoriesAsync()
+        {
+            var categories = await _categoryController.GetAllCategoriesAsync();
+            SelectedCategory.ItemsSource = categories;
+        }
         private async void SaveNoteClick(object sender, RoutedEventArgs e)
         {
 
-            var selectedCategory = SelectedCategory.SelectedItem as ComboBoxItem;
+            var selectedCategory = SelectedCategory.SelectedItem as CategoryModel;
             string category = CustomCategory.IsEnabled
                 ? CustomCategory.Text
-                : selectedCategory?.Content?.ToString() ?? "";
+                : selectedCategory?.Name ?? "";
             int categoryId = await _categoryController.GetOrCreateCategoryIdAsync(category);
 
             if (string.IsNullOrWhiteSpace(Title.Text))

@@ -84,23 +84,6 @@ namespace kck_projekt2
             }
         }
 
-        private void CategoryToggleClick(object sender, RoutedEventArgs e)
-        {
-            CustomCategory.IsEnabled = !CustomCategory.IsEnabled;
-            SelectedCategory.IsEnabled = !SelectedCategory.IsEnabled;
-            if (SelectedCategory.IsEnabled)
-            {
-                CustomCategory.Visibility = Visibility.Collapsed;
-                SelectedCategory.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                CustomCategory.Visibility = Visibility.Visible;
-                SelectedCategory.Visibility = Visibility.Collapsed;
-            }
-        }
-
-
         private void OpenEditPage(object sender, MouseButtonEventArgs e)
         {
             if (sender is Border border && border.DataContext is NoteModel note)

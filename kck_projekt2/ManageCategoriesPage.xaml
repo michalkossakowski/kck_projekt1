@@ -31,6 +31,26 @@
         Foreground="{DynamicResource TextBlockColor}"
         Visibility="Visible"
         />
+        <TextBlock 
+        Grid.Row="1"
+        Name="InformationEmpty"
+        VerticalAlignment="Top"
+        TextAlignment="Center"
+        Text="{DynamicResource EmptyCategoryListStr}"
+        FontSize="20"
+        Margin="-5,69,-29,0" 
+        Foreground="{DynamicResource TextBlockColor}"
+        Visibility="Visible" RenderTransformOrigin="0.5,0.5"
+        >
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.029"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
         <ListBox x:Name="CategoriesListBox" Grid.Row="1" Margin="10,45,10,260" SelectionChanged="CategoriesListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>

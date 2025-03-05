@@ -72,12 +72,9 @@
                             FontSize="16"
                             Foreground="{DynamicResource TextBoxColor}"
                             materialDesign:HintAssist.HelperTextFontSize="12" 
-                            materialDesign:HintAssist.HelperText="{DynamicResource CategoryHelperStr}"  >
-                <ComboBoxItem Content="{DynamicResource StudiesStr}"/>
-                <ComboBoxItem Content="{DynamicResource WorkStr}"/>
-                <ComboBoxItem Content="{DynamicResource HomeStr}"/>
-                <ComboBoxItem Content="{DynamicResource HobbyStr}"/>
-                <ComboBoxItem Content="{DynamicResource OtherStr}"/>
+                            materialDesign:HintAssist.HelperText="{DynamicResource CategoryHelperStr}"  
+                            DisplayMemberPath="Name"
+                            SelectedValuePath="Id">
             </ComboBox>
 
             <TextBox 

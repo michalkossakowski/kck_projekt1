@@ -28,13 +28,24 @@ namespace kck_projekt2
         {
             InitializeComponent();
             _categoryController = CategoryController.GetInstance();
-            LoadCategories();
             _mainWindow = mainW;
+            LoadCategories();
         }
 
         private async void LoadCategories()
         {
-            CategoriesListBox.ItemsSource = await _categoryController.GetAllCategoriesAsync();
+            List<CategoryModel> categories = await _categoryController.GetAllCategoriesAsync();
+            if (categories.Count == 0)
+            {
+                InformationEmpty.Text = (string)Application.Current.Resources["EmptyCategoryListStr"];
+                InformationEmpty.Visibility = Visibility.Visible;
+                CategoriesListBox.ItemsSource = categories;
+            }
+            else
+            {
+                InformationEmpty.Visibility = Visibility.Collapsed;
+                CategoriesListBox.ItemsSource = categories;
+            }
         }
 
         private async void AddCategory_Click(object sender, RoutedEventArgs e)

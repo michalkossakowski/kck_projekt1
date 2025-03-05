@@ -31,23 +31,33 @@ namespace kck_projekt2
 
         private async void InitializeNote()
         {
-            var note = await _noteController.GetNoteByIdAsync(_noteId);
+            try
+            {
+                var note = await _noteController.GetNoteByIdAsync(_noteId);
+                if (note == null)
+                {
+                    MessageBox.Show((string)Application.Current.Resources["NoteNotFoundStr"], (string)Application.Current.Resources["ErrorStr"], MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
 
-            Title.Text = note.Title;
-            NoteContent.Text = note.Content;
+                Title.Text = note.Title;
+                NoteContent.Text = note.Content;
 
-            var categoryController = CategoryController.GetInstance();
-            string categoryName = await categoryController.GetCategoryNameByIdAsync(note.CategoryId); 
+                string categoryName = await _categoryController.GetCategoryNameByIdAsync(note.CategoryId);
+                CustomCategory.Text = categoryName ?? string.Empty;
 
-            CustomCategory.Text = categoryName;
+                CategoryToggle.IsChecked = true;
+                SelectedCategory.IsEnabled = false;
+                CustomCategory.IsEnabled = true;
 
-            CategoryToggle.IsChecked = true;
-            SelectedCategory.IsEnabled = false;
-            CustomCategory.IsEnabled = true;
-
-            SelectedCategory.Visibility = Visibility.Collapsed;
-            CustomCategory.Visibility = Visibility.Visible;
-            await LoadCategoriesAsync();
+                SelectedCategory.Visibility = Visibility.Collapsed;
+                CustomCategory.Visibility = Visibility.Visible;
+                await LoadCategoriesAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{Application.Current.Resources["LoadingErrorStr"]}: {ex.Message}", (string)Application.Current.Resources["ErrorStr"], MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public async Task LoadCategoriesAsync()
@@ -63,7 +73,11 @@ namespace kck_projekt2
                 ? CustomCategory.Text
                 : selectedCategory?.Name ?? "";
             int categoryId = await _categoryController.GetOrCreateCategoryIdAsync(category);
-
+            if (categoryId == -1)
+            {
+                MessageBox.Show($"{Application.Current.Resources["SaveFailedStr"]}", (string)Application.Current.Resources["ErrorStr"], MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             if (string.IsNullOrWhiteSpace(Title.Text))
             {
                 HintAssist.SetHelperText(Title, (string)Application.Current.Resources["TitleEmptyStr"]);
@@ -136,8 +150,12 @@ namespace kck_projekt2
             if (dialog.ShowDialog() == true)
             {
                 var noteController = NoteController.GetInstance();
-                await _noteController.RemoveNoteAsync(_noteId);
-
+                bool resault= await _noteController.RemoveNoteAsync(_noteId);
+                if(!resault)
+                {
+                    MessageBox.Show($"{Application.Current.Resources["DeleteFailedStr"]}", (string)Application.Current.Resources["ErrorStr"], MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
                 _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
                 _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["NoteDeleteSuccesStr"]);

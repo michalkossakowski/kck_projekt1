@@ -105,7 +105,7 @@
     <System:String x:Key="ManageCategoriesStr">Manage Categories</System:String>
     <System:String x:Key="CategoryListStr">Category List:</System:String>
     <System:String x:Key="AddCatStr">Add</System:String>
-    <System:String x:Key="EditCatStr">Edit</System:String>
+    <System:String x:Key="EditCatStr">Edit Selected</System:String>
     <System:String x:Key="DeleteCatStr">Delete</System:String>
     <System:String x:Key="NewNameCatPopStr">New Category Name:</System:String>
     <System:String x:Key="BackHomeToolTipStr">Go Home</System:String>
@@ -121,4 +121,12 @@
     <System:String x:Key="ModificationDateStr">Modification date: </System:String>
     <System:String x:Key="ChoosePrinterStr">Choose printer 'Microsoft Print to PDF'</System:String>
     <System:String x:Key="ErrorStr">Error</System:String>
+    <System:String x:Key="SaveFailedStr">Error during save process</System:String>
+    <System:String x:Key="LoadingErrorStr">Error during loading process</System:String>
+    <System:String x:Key="DeleteFailedStr">Error during delete process</System:String>
+    <System:String x:Key="NameChangeStr">Category name changed succesfully</System:String>
+    <System:String x:Key="CategoryAddSuccesStr">New category added succesfully</System:String>
+    <System:String x:Key="CategoryDeleteSuccesStr">Selected category deleted succesfully</System:String>
+    <System:String x:Key="CategoryDeleteCancelStr">Deleting category canceled</System:String>
+    <System:String x:Key="CategoryExistsStr">Category with this name already exists</System:String>
 </ResourceDictionary>

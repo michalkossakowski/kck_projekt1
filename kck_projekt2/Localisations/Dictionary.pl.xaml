@@ -105,7 +105,7 @@
     <System:String x:Key="ManageCategoriesStr">Zarządzaj Kategoriami</System:String>
     <System:String x:Key="CategoryListStr">Lista Kategorii:</System:String>
     <System:String x:Key="AddCatStr">Dodaj</System:String>
-    <System:String x:Key="EditCatStr">Edytuj</System:String>
+    <System:String x:Key="EditCatStr">Edytuj Wybrany</System:String>
     <System:String x:Key="DeleteCatStr">Usuń</System:String>
     <System:String x:Key="NewNameCatPopStr">Nowa Nazwa Kategorii:</System:String>
     <System:String x:Key="BackHomeToolTipStr">Wróć do Menu</System:String>
@@ -121,5 +121,12 @@
     <System:String x:Key="ModificationDateStr">Data modyfikacji:</System:String>
     <System:String x:Key="ChoosePrinterStr">Wybierz drukarkę 'Microsoft Print to PDF'</System:String>
     <System:String x:Key="ErrorStr">Błąd</System:String>
-
+    <System:String x:Key="SaveFailedStr">Błąd podczas zapisu</System:String>
+    <System:String x:Key="LoadingErrorStr">Błąd podczas ładowania</System:String>
+    <System:String x:Key="DeleteFailedStr">Błąd podczas usuwania</System:String>
+    <System:String x:Key="NameChangeStr">Nazwa kategorii została pomyślnie zmieniona</System:String>
+    <System:String x:Key="CategoryAddSuccesStr">Nowa kategoria została pomyślnie dodana</System:String>
+    <System:String x:Key="CategoryDeleteSuccesStr">Wybrana kategoria została pomyślnie usunięta</System:String>
+    <System:String x:Key="CategoryDeleteCancelStr">Usuwanie kategorii anulowane</System:String>
+    <System:String x:Key="CategoryExistsStr">Kategoria z taką nazwą już istnieje</System:String>
 </ResourceDictionary>

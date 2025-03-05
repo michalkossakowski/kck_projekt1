@@ -104,9 +104,9 @@
     <System:String x:Key="NoSearchResultStr">There is no notes that match your search:</System:String>
     <System:String x:Key="ManageCategoriesStr">Manage Categories</System:String>
     <System:String x:Key="CategoryListStr">Category List:</System:String>
-    <System:String x:Key="AddCatStr">Add Category</System:String>
-    <System:String x:Key="EditCatStr">Edit Category</System:String>
-    <System:String x:Key="DeleteCatStr">Delete Category</System:String>
+    <System:String x:Key="AddCatStr">Add</System:String>
+    <System:String x:Key="EditCatStr">Edit</System:String>
+    <System:String x:Key="DeleteCatStr">Delete</System:String>
     <System:String x:Key="NewNameCatPopStr">New Category Name:</System:String>
     <System:String x:Key="BackHomeToolTipStr">Go Home</System:String>
     <System:String x:Key="MonthNotesChartStr">Notes chart by modification date</System:String>
@@ -116,9 +116,9 @@
     <System:String x:Key="TrayExitStr">Close program</System:String>
     <System:String x:Key="TrayChangeLanguagetoStr">Change languge to: Polish</System:String>
     <System:String x:Key="LoadingNotesStr">Loading Notes ...</System:String>
+    <System:String x:Key="EmptyCategoryListStr">This list is empty</System:String>
     <System:String x:Key="CategoryStr">Category: </System:String>
     <System:String x:Key="ModificationDateStr">Modification date: </System:String>
     <System:String x:Key="ChoosePrinterStr">Choose printer 'Microsoft Print to PDF'</System:String>
     <System:String x:Key="ErrorStr">Error</System:String>
-
 </ResourceDictionary>

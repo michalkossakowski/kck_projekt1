@@ -104,9 +104,9 @@
     <System:String x:Key="GeminiApiKeyNotFoundStr">Nie znaleziono klucz do Gemini API w sekretach</System:String>
     <System:String x:Key="ManageCategoriesStr">Zarządzaj Kategoriami</System:String>
     <System:String x:Key="CategoryListStr">Lista Kategorii:</System:String>
-    <System:String x:Key="AddCatStr">Dodaj Kategorię</System:String>
-    <System:String x:Key="EditCatStr">Edytuj Kategorię</System:String>
-    <System:String x:Key="DeleteCatStr">Usuń Kategorię</System:String>
+    <System:String x:Key="AddCatStr">Dodaj</System:String>
+    <System:String x:Key="EditCatStr">Edytuj</System:String>
+    <System:String x:Key="DeleteCatStr">Usuń</System:String>
     <System:String x:Key="NewNameCatPopStr">Nowa Nazwa Kategorii:</System:String>
     <System:String x:Key="BackHomeToolTipStr">Wróć do Menu</System:String>
     <System:String x:Key="MonthNotesChartStr">Wykres notatek wg daty modyfikacji</System:String>
@@ -116,9 +116,10 @@
     <System:String x:Key="TrayExitStr">Zamknij program</System:String>
     <System:String x:Key="TrayChangeLanguagetoStr">Zmień język na: angielski</System:String>
     <System:String x:Key="LoadingNotesStr">Wczytywanie notatek ...</System:String>
+    <System:String x:Key="EmptyCategoryListStr">Ta lista jest pusta</System:String>
     <System:String x:Key="CategoryStr">Kategoria:</System:String>
     <System:String x:Key="ModificationDateStr">Data modyfikacji:</System:String>
     <System:String x:Key="ChoosePrinterStr">Wybierz drukarkę 'Microsoft Print to PDF'</System:String>
     <System:String x:Key="ErrorStr">Błąd</System:String>
-    
+
 </ResourceDictionary>

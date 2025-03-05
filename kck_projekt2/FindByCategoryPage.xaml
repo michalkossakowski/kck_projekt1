@@ -43,23 +43,7 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             Margin="0,10,0,0">
-            <!-- CategoryToggle -->
-            <CheckBox
-                    Margin="0,0,10,0"
-                    Style="{StaticResource MaterialDesignFilterChipPrimaryOutlineCheckBox}"
-                    x:Name="CategoryToggle" 
-                    IsChecked="False"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Click="CategoryToggleClick"
-                    Content="{DynamicResource CustomStr}"
-                    FontSize="16"
-                    Foreground="{DynamicResource MaterialDesign.Brush.Primary}"
-                    BorderBrush="{DynamicResource MaterialDesign.Brush.Primary}"
-                    BorderThickness="2"
-                    ToolTip="{DynamicResource SwitchCategoryTypeStr}"/>
-                
-            <!-- SelectCategory/CustomCategory -->
+
             <ComboBox
                             x:Name="SelectedCategory"
                             Width="200"

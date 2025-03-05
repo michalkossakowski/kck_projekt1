@@ -81,6 +81,7 @@
     <System:String x:Key="NoteDeleteSuccesStr">Note successfully deleted</System:String>
     <System:String x:Key="NoteDeleteCancelStr">Deleting note canceled</System:String>
     <System:String x:Key="NoteEditCancelStr">Note edit canceled</System:String>
+    <System:String x:Key="PrintButtonStr">Print</System:String>
     <System:String x:Key="RequirementsNotMeetStr">Meet the form requirements and try again</System:String>
     <System:String x:Key="SaveChangesConfirmStr">Are you sure you want to save changes?</System:String>
     <System:String x:Key="DeleteConfirmStrStr">Are you sure you want to delete the note?</System:String>
@@ -116,4 +117,8 @@
     <System:String x:Key="TrayChangeLanguagetoStr">Change languge to: Polish</System:String>
     <System:String x:Key="LoadingNotesStr">Loading Notes ...</System:String>
     <System:String x:Key="EmptyCategoryListStr">This list is empty</System:String>
+    <System:String x:Key="CategoryStr">Category: </System:String>
+    <System:String x:Key="ModificationDateStr">Modification date: </System:String>
+    <System:String x:Key="ChoosePrinterStr">Choose printer 'Microsoft Print to PDF'</System:String>
+    <System:String x:Key="ErrorStr">Error</System:String>
 </ResourceDictionary>

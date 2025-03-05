@@ -22,11 +22,10 @@ namespace kck_projekt2
 
         private async void AddNoteClick(object sender, RoutedEventArgs e)
         {
-
             var selectedCategory = SelectedCategory.SelectedItem as CategoryModel;
             string categoryName = CustomCategory.IsEnabled
                 ? CustomCategory.Text
-                : selectedCategory?.Name?? "";
+                : selectedCategory?.Name ?? "";
 
             if (string.IsNullOrWhiteSpace(Title.Text))
             {
@@ -40,15 +39,9 @@ namespace kck_projekt2
                 {
                     HintAssist.SetHelperText(CustomCategory, (string)Application.Current.Resources["CategoryEmptyStr"]);
                     CustomCategory.Foreground = new SolidColorBrush(Colors.Red);
-
-                    HintAssist.SetHelperText(SelectedCategory, (string)Application.Current.Resources["CategoryHelperStr"]);
-                    SelectedCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
                 }
                 else
                 {
-                    HintAssist.SetHelperText(CustomCategory, (string)Application.Current.Resources["CustomCategoryHelperStr"]);
-                    CustomCategory.Foreground = (SolidColorBrush)Application.Current.Resources["TextBoxColor"];
-
                     HintAssist.SetHelperText(SelectedCategory, (string)Application.Current.Resources["NoCategoryChosedStr"]);
                     SelectedCategory.Foreground = new SolidColorBrush(Colors.Red);
                 }
@@ -60,19 +53,28 @@ namespace kck_projekt2
                 NoteContent.Foreground = new SolidColorBrush(Colors.Red);
             }
 
-            if ((!string.IsNullOrWhiteSpace(Title.Text)) && (categoryName.Length > 0) && (NoteContent.Text.Length > 0))
+            if (!string.IsNullOrWhiteSpace(Title.Text) && categoryName.Length > 0 && NoteContent.Text.Length > 0)
             {
                 var categoryController = CategoryController.GetInstance();
-                int categoryId = await categoryController.GetOrCreateCategoryIdAsync(categoryName); // Pobieramy ID kategorii
+                int categoryId = await categoryController.GetOrCreateCategoryIdAsync(categoryName);
 
                 var noteController = NoteController.GetInstance();
                 var note = new NoteModel(_mainWindow.loggedUserId, Title.Text, NoteContent.Text, categoryId);
-                await noteController.AddNoteAsync(note);
+                bool success = await noteController.AddNoteAsync(note);
 
-                _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
-                _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
-                _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-                _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["NoteCreationSuccesStr"]);
+                if (success)
+                {
+                    _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
+                    _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
+                    _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                    _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["NoteCreationSuccesStr"]);
+                }
+                else
+                {
+                    _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.DarkRed);
+                    _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                    _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["NoteCreationErrorStr"]);
+                }
             }
             else
             {
@@ -81,6 +83,7 @@ namespace kck_projekt2
                 _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["RequirementsNotMeetStr"]);
             }
         }
+
 
 
         private void BackClick(object sender, RoutedEventArgs e)

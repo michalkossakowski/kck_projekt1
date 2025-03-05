@@ -43,15 +43,23 @@ namespace kck_api.Controller
 
         public async Task<bool> AddUserAsync(UserModel user)
         {
-            if (GetUserByNick(user.Nick) == null)
+            try
             {
-                user.Password = HashPassword(user.Password);
-                await _context.Users.AddAsync(user);
-                await _context.SaveChangesAsync();
 
-                return true;
+                if (GetUserByNick(user.Nick) == null)
+                {
+                    user.Password = HashPassword(user.Password);
+                    await _context.Users.AddAsync(user);
+                    await _context.SaveChangesAsync();
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception)
             {
                 return false;
             }

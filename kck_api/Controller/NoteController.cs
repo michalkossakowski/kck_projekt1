@@ -29,11 +29,20 @@ namespace kck_api.Controller
             _context.SaveChanges();
         }
 
-        public async Task AddNoteAsync(NoteModel note)
+        public async Task<bool> AddNoteAsync(NoteModel note)
         {
-            await _context.Notes.AddAsync(note);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.Notes.AddAsync(note);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
+
 
         public List<NoteModel> GetNotesByUserId(int userId)
         {
@@ -44,9 +53,16 @@ namespace kck_api.Controller
 
         public async Task<List<NoteModel>> GetNotesByUserIdAsync(int userId)
         {
-            var notes = await _context.Notes.Where(n => n.AuthorId == userId).OrderByDescending(n => n.ModifiedDate).ToListAsync();
-            
-            return notes;
+            try
+            {
+                return await _context.Notes.Where(n => n.AuthorId == userId)
+                                           .OrderByDescending(n => n.ModifiedDate)
+                                           .ToListAsync();
+            }
+            catch (Exception)
+            {
+                return new List<NoteModel>();
+            }
         }
 
         public NoteModel GetNoteById(int noteId)
@@ -54,9 +70,16 @@ namespace kck_api.Controller
             return _context.Notes.FirstOrDefault(n => n.Id == noteId);
         }
 
-        public async Task<NoteModel> GetNoteByIdAsync(int noteId)
+        public async Task<NoteModel?> GetNoteByIdAsync(int noteId)
         {
-            return await _context.Notes.FirstOrDefaultAsync(n => n.Id == noteId);
+            try
+            {
+                return await _context.Notes.FirstOrDefaultAsync(n => n.Id == noteId);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public List<NoteModel> GetLatestNotesByUserId(int userId, int count)
@@ -185,15 +208,26 @@ namespace kck_api.Controller
             _context.SaveChanges();
         }
 
-        public async Task EditNoteAsync(int noteId, string newTitle, int newCategory, string newContent)
+        public async Task<bool> EditNoteAsync(int noteId, string newTitle, int newCategory, string newContent)
         {
-            var note = await _context.Notes.FirstOrDefaultAsync(n => n.Id == noteId);
-            note.Title = newTitle;
-            note.CategoryId = newCategory;
-            note.Content = newContent;
-            note.ModifiedDate = DateTime.Now;
-
-            await _context.SaveChangesAsync();
+            try
+            {
+                var note = await _context.Notes.FirstOrDefaultAsync(n => n.Id == noteId);
+                if (note != null)
+                {
+                    note.Title = newTitle;
+                    note.CategoryId = newCategory;
+                    note.Content = newContent;
+                    note.ModifiedDate = DateTime.Now;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public void RemoveNote(int noteId)
@@ -204,12 +238,23 @@ namespace kck_api.Controller
             _context.SaveChanges();
         }
 
-        public async Task RemoveNoteAsync(int noteId)
+        public async Task<bool> RemoveNoteAsync(int noteId)
         {
-            var note = await _context.Notes.FirstOrDefaultAsync(n => n.Id == noteId);
-            _context.Notes.Remove(note);
-
-            await _context.SaveChangesAsync();
+            try
+            {
+                var note = await _context.Notes.FirstOrDefaultAsync(n => n.Id == noteId);
+                if (note != null)
+                {
+                    _context.Notes.Remove(note);
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool IsUserHasAnyNotes(int userId)

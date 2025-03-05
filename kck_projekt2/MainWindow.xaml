@@ -103,7 +103,7 @@
                             <materialDesign:PackIcon Kind="Sparkles" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    
+
                     <!-- Default Hidden AI -->
                     <MenuItem
                         Name="BackToMenu"
@@ -118,7 +118,7 @@
                             <materialDesign:PackIcon Kind="Home" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    
+
                     <!-- Default Hidden Action Menu -->
                     <MenuItem 
                         Name="ActionMenuMenuItem"
@@ -287,9 +287,7 @@
                             <materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
                                 <SolidColorBrush Color="#673ab7" />
                             </materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
-                            <materialDesign:ToggleButtonAssist.SwitchTrackOffBackground>
-                                <SolidColorBrush Color="#f1f1f1" />
-                            </materialDesign:ToggleButtonAssist.SwitchTrackOffBackground>
+                            
 
                             <materialDesign:PackIcon 
                                 Kind="WhiteBalanceSunny"
@@ -312,13 +310,29 @@
                             </ToggleButton.LayoutTransform>
 
                         </ToggleButton>
+                        <StackPanel
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0,20,0,0"
+                            >
+                            
+                            <ToggleButton
+                                Name="IsPolish" 
+                                Grid.Column="2"
+                                IsChecked="{Binding IsPolish}"
+                                Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                ToolTip="{DynamicResource LangToolTipStr}"
+                                Click="SwitchLang" Margin="5,0,5,0">EN
 
-                        <ToggleButton
-                            Name="IsPolish" 
-                            IsChecked="{Binding IsPolish}"
-                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                            ToolTip="{DynamicResource LangToolTipStr}"
-                            Click="SwitchLang"/>
+                                <materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
+                                        <SolidColorBrush Color="#673ab7" />
+                                    </materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
+                                <materialDesign:ToggleButtonAssist.OnContent>PL</materialDesign:ToggleButtonAssist.OnContent>
+                            </ToggleButton>
+                                
+                            
+                        </StackPanel>
+
                     </StackPanel>
                 </StackPanel>
             </Grid>

@@ -15,11 +15,19 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StackPanel 
+        <TextBlock 
+            Text="{DynamicResource GraphInYearsStr}"
             Grid.Row="0"
+            VerticalAlignment="Top"
+            TextAlignment="Center"
+            Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
+            Foreground="{DynamicResource TextBlockColor}"
+            Margin="0,20,0,20" FontSize="36"/>
+        <StackPanel 
+            Grid.Row="1"
             Margin="0,0,0,30" Orientation="Horizontal" Height="80" Width="400" HorizontalAlignment="Center">
-
             <ComboBox
                 x:Name="SelectedYearFrom"
                 Width="100"
@@ -27,11 +35,11 @@
                 Margin="43,0,20,0"
                 Padding="10,0,10,0"
                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                materialDesign:HintAssist.Hint="Year"
+                materialDesign:HintAssist.Hint="{DynamicResource YearStr}"
                 FontSize="16"
                 Foreground="{DynamicResource TextBoxColor}"
                 materialDesign:HintAssist.HelperTextFontSize="12" 
-                materialDesign:HintAssist.HelperText="From year"
+                materialDesign:HintAssist.HelperText="{DynamicResource FromYearStr}"
                 ItemsSource="{Binding Years}"
                 SelectedItem="{Binding YearFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center">
             </ComboBox>
@@ -42,15 +50,15 @@
                 Margin="95,0,45,0"
                 Padding="10,0,10,0"
                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                materialDesign:HintAssist.Hint="Year"
+                materialDesign:HintAssist.Hint="{DynamicResource YearStr}"
                 FontSize="16"
                 Foreground="{DynamicResource TextBoxColor}"
                 materialDesign:HintAssist.HelperTextFontSize="12" 
-                materialDesign:HintAssist.HelperText="To year"
+                materialDesign:HintAssist.HelperText="{DynamicResource ToYearStr}"
                 ItemsSource="{Binding Years}"
                 SelectedItem="{Binding YearTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
         </StackPanel>
-        <ContentControl Grid.Row="1">
+        <ContentControl Grid.Row="2">
             <Grid>
                 <ContentPresenter 
                     Content="{Binding PlotControl, Mode=OneTime}"          
@@ -61,18 +69,16 @@
             </Grid>
         </ContentControl>
         <Button 
-            Width="80" 
+            Width="90" 
             Height="30" 
             Click="BackClick"  
-            Margin="160,20,160,0"
-            Grid.Row="2" 
+            Margin="155,20,155,0"
+            Grid.Row="3" 
+            Content="{DynamicResource BackBtnStr}" 
             FontSize="16"
             Name="BackButton"
             Background="{DynamicResource MaterialDesign.Brush.Secondary}"
             BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}" VerticalAlignment="Center">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="Back" VerticalAlignment="Center" Foreground="White"/>
-            </StackPanel>
         </Button>
     </Grid>
 </UserControl>

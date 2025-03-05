@@ -3,10 +3,87 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:kck_projekt2.Charts"
+             xmlns:local="clr-namespace:kck_projekt2"
+             xmlns:catViewModel="clr-namespace:kck_projekt2.ViewModels"
+             xmlns:ScottPlot="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"    
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid Margin="20" Width="400">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock 
+            Text="{DynamicResource ChartByCatStr}"
+            Grid.Row="0"
+            VerticalAlignment="Top"
+            TextAlignment="Center"
+            Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
+            Foreground="{DynamicResource TextBlockColor}"
+            Margin="0,20,0,20" FontSize="36"/>
+        <ScrollViewer
+            Grid.Row="1"
+            Margin="0,0,0,20"
+            MaxHeight="150"
+        >
+            <ItemsControl 
+                Grid.IsSharedSizeScope="True"
+                ItemsSource="{Binding CategoriesView}">
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="2" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type catViewModel:CategoryViewModel}">
+                        <Border x:Name="Border" Padding="8" Margin="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="30" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Margin="20,1,0,0">
+                                    <TextBlock FontWeight="Bold" Text="{Binding Name}" />
+                                </StackPanel>
+                                <CheckBox 
+                                VerticalAlignment="Center" 
+                                IsChecked="{Binding IsSelected, Mode=OneWayToSource}" />
+                            </Grid>
+                        </Border>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <ContentControl Grid.Row="2">
+            <Grid>
+                <ContentPresenter 
+                Content="{Binding PlotControl, Mode=OneTime}"          
+                MinHeight="300" 
+                MaxHeight="400" 
+                VerticalAlignment="Center" 
+                />
+            </Grid>
+        </ContentControl>
+        <Button 
+            Width="90" 
+            Height="30" 
+            Click="BackClick"  
+            Margin="155,20,155,0"
+            Grid.Row="3" 
+            Content="{DynamicResource BackBtnStr}" 
+            FontSize="16"
+            Name="BackButton"
+            Background="{DynamicResource MaterialDesign.Brush.Secondary}"
+            BorderBrush="{DynamicResource MaterialDesign.Brush.Secondary}" VerticalAlignment="Center">
+        </Button>
     </Grid>
 </UserControl>

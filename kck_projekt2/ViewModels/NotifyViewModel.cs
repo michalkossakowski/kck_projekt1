@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using System.Windows.Input;
 using Forms = System.Windows.Forms;
-
+using W = System.Windows;
 namespace kck_projekt2.ViewModels
 {
     public class NotifyViewModel : BaseViewModel
@@ -23,8 +23,8 @@ namespace kck_projekt2.ViewModels
             get
             {
                 return new NotificationMessage(
-                    "Aplikacja w trybie konsolowym",
-                    "Aplikacja została uruchomiona w trybie konsolowym.",
+                    (string)W.Application.Current.Resources["NotifConsoleTitleStr"],
+                    (string)W.Application.Current.Resources["NotifConsoleContentStr"],
                     ToolTipIcon.Info,
                     3000
                 );
@@ -50,8 +50,13 @@ namespace kck_projekt2.ViewModels
         {
             get
             {
-                string title = _isDarkTheme ? "Ciemny motyw" : "Jasny motyw";
-                string content = _isDarkTheme ? "Aplikacja została przełączona na ciemny motyw." : "Aplikacja została przełączona na jasny motyw.";
+                string title = _isDarkTheme ? 
+                    (string)W.Application.Current.Resources["DarkModeStr"] 
+                    : (string)W.Application.Current.Resources["LightModeStr"];
+
+                string content = _isDarkTheme 
+                    ? (string)W.Application.Current.Resources["DarkModeMessageContentStr"] 
+                    : (string)W.Application.Current.Resources["LightModeMessageContentStr"];
                 return new NotificationMessage(title, content, ToolTipIcon.Info, 3000);
             }
         }

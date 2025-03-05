@@ -1,13 +1,9 @@
 ﻿using kck_api.Controller;
 using ScottPlot;
 using ScottPlot.WPF;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace kck_projekt2.ViewModels
 {
@@ -63,8 +59,9 @@ namespace kck_projekt2.ViewModels
             LoadNotes();
             SetYears();
             UpdateChart();
-        }
 
+            App.LanguageChanged += UpdateChart;
+        }
         private void LoadNotes()
         {
             _notesByMonthYear = new Dictionary<(int, int), List<NoteModel>>();
@@ -86,8 +83,12 @@ namespace kck_projekt2.ViewModels
             var plt = PlotControl.Plot;
             plt.Clear();
 
-            string[] monthNames = { "Sty", "Lut", "Mar", "Kwi", "Maj", "Cze", "Lip", "Sie", "Wrz", "Paź", "Lis", "Gru" };
+            string[] monthNames = GetLocalizedMonthNames();
             plt.Add.Bars(Enumerable.Range(0, 12).Select(x => (double)x).ToArray(), ChartData);
+
+            plt.Title((string)Application.Current.Resources["NotesInYears"]);
+            plt.YLabel((string)Application.Current.Resources["NumberOfNotes"]);
+            plt.XLabel((string)Application.Current.Resources["Month"]);
 
             var tickGen = new ScottPlot.TickGenerators.NumericManual();
             for (int i = 0; i < 12; i++)
@@ -99,6 +100,7 @@ namespace kck_projekt2.ViewModels
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ChartData)));
         }
+
         private double[] GetChartData()
         {
             double[] values = new double[12];
@@ -115,6 +117,25 @@ namespace kck_projekt2.ViewModels
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private string[] GetLocalizedMonthNames()
+        {
+            return new string[]
+            {
+                (string)Application.Current.Resources["January"],
+                (string)Application.Current.Resources["February"],
+                (string)Application.Current.Resources["March"],
+                (string)Application.Current.Resources["April"],
+                (string)Application.Current.Resources["May"],
+                (string)Application.Current.Resources["June"],
+                (string)Application.Current.Resources["July"],
+                (string)Application.Current.Resources["August"],
+                (string)Application.Current.Resources["September"],
+                (string)Application.Current.Resources["October"],
+                (string)Application.Current.Resources["November"],
+                (string)Application.Current.Resources["December"]
+            };
         }
     }
 }

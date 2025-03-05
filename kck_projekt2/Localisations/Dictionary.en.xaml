@@ -109,5 +109,12 @@
     <System:String x:Key="TrayExitStr">Close program</System:String>
     <System:String x:Key="TrayChangeLanguagetoStr">Change languge to: Polish</System:String>
     <System:String x:Key="LoadingNotesStr">Loading Notes ...</System:String>
+    <System:String x:Key="NotesInYears">Notes in years</System:String>
+    <System:String x:Key="NumberOfNotes">Number of notes</System:String>
+    <System:String x:Key="ChartByCatStr">Chart by categories</System:String>
+    <System:String x:Key="GraphInYearsStr">Graph in years</System:String>
+    <System:String x:Key="YearStr">year</System:String>
+    <System:String x:Key="FromYearStr">From year</System:String>
+    <System:String x:Key="ToYearStr">To year</System:String>
 
 </ResourceDictionary>

@@ -9,7 +9,7 @@ namespace kck_projekt2.ViewModels
         public TopNavMenuViewModel MenuVM { get; }
 
         private readonly MainWindow _mainWindow;
-        public MainViewModel(kck_projekt2.MainWindow mainWindow, Forms.NotifyIcon notifyIcon)
+        public MainViewModel(MainWindow mainWindow, Forms.NotifyIcon notifyIcon)
         {
             _mainWindow = mainWindow;
             NotifyVM = new NotifyViewModel(notifyIcon);
@@ -20,7 +20,7 @@ namespace kck_projekt2.ViewModels
         {
             if (_mainWindow.WindowState == WindowState.Minimized)
             {
-                NotifyVM.NotifyCommand.Execute(new NotificationMessage("CNote#", "Aplikacja działa w tle.", Forms.ToolTipIcon.Info, 1000));
+                NotifyVM.NotifyCommand.Execute(new NotificationMessage("CNote#", (string)Application.Current.Resources["SteelRunningSTr"], Forms.ToolTipIcon.Info, 1000));
             }
         }
         public bool IsDarkTheme

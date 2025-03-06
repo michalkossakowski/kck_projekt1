@@ -106,6 +106,8 @@ namespace kck_projekt2
                     _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
                     _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
                     _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["CategoryDeleteSuccesStr"]);
+                    EditBtn.IsEnabled = false;
+                    RemoveBtn.IsEnabled = false;
                 }
             }
             else
@@ -120,6 +122,8 @@ namespace kck_projekt2
             if (CategoriesListBox.SelectedItem is CategoryModel selectedCategory)
             {
                 CategoryNameTextBox.Text = selectedCategory.Name;
+                EditBtn.IsEnabled = true;
+                RemoveBtn.IsEnabled = true;
             }
         }
 

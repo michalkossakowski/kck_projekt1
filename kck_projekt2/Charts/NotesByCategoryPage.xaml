@@ -8,9 +8,13 @@
              xmlns:ScottPlot="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"    
              mc:Ignorable="d" 
+             xmlns:converter="clr-namespace:kck_projekt2.Converters"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}">
+    <UserControl.Resources>
+        <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
     <Grid Margin="20" Width="400">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -70,6 +74,14 @@
                 MinHeight="300" 
                 MaxHeight="400" 
                 VerticalAlignment="Center" 
+                />
+                <TextBlock 
+                    Text="{DynamicResource EmptyChartStr}"
+                    Foreground="#E5FF2A2A"
+                    FontSize="26"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Visibility="{Binding EmptyChart, Converter={StaticResource BooleanToVisibilityConverter}}" 
                 />
             </Grid>
         </ContentControl>

@@ -15,14 +15,12 @@ namespace kck_projekt2.ViewModels
 
         private readonly MainWindow _mainWindow;
         private List<NoteModel> userNotes;
-
-        private WpfPlot _plotControl;
-
         public List<CategoryViewModel> CategoriesView { get; set; }
         public List<int> SelectedCategories { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        private WpfPlot _plotControl;
         public WpfPlot PlotControl
         {
             get => _plotControl;
@@ -32,7 +30,19 @@ namespace kck_projekt2.ViewModels
                 OnPropertyChanged(nameof(PlotControl));
             }
         }
-
+        private bool _emptyChart;
+        public bool EmptyChart
+        {
+            get => SelectedCategories.Count == 0;
+            set
+            {
+                if (_emptyChart != value)
+                {
+                    _emptyChart = value;
+                    OnPropertyChanged(nameof(EmptyChart));
+                }
+            }
+        }
         public NotesByCategoryViewModel(MainWindow mainWindow)
         {
             _noteController = NoteController.GetInstance();
@@ -67,25 +77,30 @@ namespace kck_projekt2.ViewModels
             var ChartData = GetChartData();
             var ChartDataCount = ChartData.Count();
             var plt = PlotControl.Plot;
-            
+
             plt.Clear();
-
             var pie = plt.Add.Pie(ChartData.Values.ToArray());
-            pie.ExplodeFraction = 0.1;
-            pie.SliceLabelDistance = 0.5;
 
-            double total = pie.Slices.Select(x => x.Value).Sum();
-            for (int i = 0; i < pie.Slices.Count; i++)
+            if (ChartData.Count == 0)
+                EmptyChart = true;
+            else 
             {
-                pie.Slices[i].LabelFontSize = 20;
-                pie.Slices[i].Label = $"{pie.Slices[i].Value}";
-                pie.Slices[i].LegendText = $"{CategoriesView.First(CV => CV.Id == ChartData.ElementAt(i).Key).Name} " +
-                    $"({pie.Slices[i].Value / total:p1})";
+                EmptyChart = false;
+                pie.ExplodeFraction = 0.1;
+                pie.SliceLabelDistance = 0.5;
+
+                double total = pie.Slices.Select(x => x.Value).Sum();
+                for (int i = 0; i < pie.Slices.Count; i++)
+                {
+                    pie.Slices[i].LabelFontSize = 20;
+                    pie.Slices[i].Label = $"{pie.Slices[i].Value}";
+                    pie.Slices[i].LegendText = $"{CategoriesView.First(CV => CV.Id == ChartData.ElementAt(i).Key).Name} " +
+                        $"({pie.Slices[i].Value / total:p1})";
+                }
             }
             plt.Axes.Frameless();
             plt.HideGrid();
             PlotControl.Refresh();
-
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ChartData)));
         }
         private Dictionary<int, double> GetChartData()

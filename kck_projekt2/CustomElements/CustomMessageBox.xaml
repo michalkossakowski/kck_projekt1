@@ -27,7 +27,7 @@
         </StackPanel>
         <materialDesign:ColorZone Grid.Row="1" VerticalAlignment="Stretch">
             <StackPanel Margin="10" Orientation="Horizontal" Cursor="" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock Text="CNote# is a simple note-taking application."
+                <TextBlock Text="{StaticResource CNoteDescription}"
                     VerticalAlignment="Center" FontSize="14" TextWrapping="Wrap" Height="48" Width="230"/>
                 <Button Content="OK" Width="80" Margin="10"  Click="CloseWindow" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             </StackPanel>

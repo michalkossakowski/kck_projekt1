@@ -123,18 +123,18 @@ namespace kck_projekt2.ViewModels
         {
             return new string[]
             {
-                (string)Application.Current.Resources["January"],
-                (string)Application.Current.Resources["February"],
-                (string)Application.Current.Resources["March"],
-                (string)Application.Current.Resources["April"],
-                (string)Application.Current.Resources["May"],
-                (string)Application.Current.Resources["June"],
-                (string)Application.Current.Resources["July"],
-                (string)Application.Current.Resources["August"],
-                (string)Application.Current.Resources["September"],
-                (string)Application.Current.Resources["October"],
-                (string)Application.Current.Resources["November"],
-                (string)Application.Current.Resources["December"]
+                (string)Application.Current.Resources["JanuaryStr"],
+                (string)Application.Current.Resources["FebruaryStr"],
+                (string)Application.Current.Resources["MarchStr"],
+                (string)Application.Current.Resources["AprilStr"],
+                (string)Application.Current.Resources["MayStr"],
+                (string)Application.Current.Resources["JuneStr"],
+                (string)Application.Current.Resources["JulyStr"],
+                (string)Application.Current.Resources["AugustStr"],
+                (string)Application.Current.Resources["SeptemberStr"],
+                (string)Application.Current.Resources["OctoberStr"],
+                (string)Application.Current.Resources["NovemberStr"],
+                (string)Application.Current.Resources["DecemberStr"]
             };
         }
     }

@@ -144,4 +144,17 @@
     <System:String x:Key="CategoryDeleteSuccesStr">Wybrana kategoria została pomyślnie usunięta</System:String>
     <System:String x:Key="CategoryDeleteCancelStr">Usuwanie kategorii anulowane</System:String>
     <System:String x:Key="CategoryExistsStr">Kategoria z taką nazwą już istnieje</System:String>
+    <System:String x:Key="NotifyRunningInBackStr">Aplikacja nadal działa w tle</System:String>
+    <System:String x:Key="JanuaryStr">Sty</System:String>
+    <System:String x:Key="FebruaryStr">Lut</System:String>
+    <System:String x:Key="MarchStr">Mar</System:String>
+    <System:String x:Key="AprilStr">Kwi</System:String>
+    <System:String x:Key="MayStr">Maj</System:String>
+    <System:String x:Key="JuneStr">Cze</System:String>
+    <System:String x:Key="JulyStr">Lip</System:String>
+    <System:String x:Key="AugustStr">Sie</System:String>
+    <System:String x:Key="SeptemberStr">Wrz</System:String>
+    <System:String x:Key="OctoberStr">Paź</System:String>
+    <System:String x:Key="NovemberStr">Lis</System:String>
+    <System:String x:Key="DecemberStr">Gru</System:String>
 </ResourceDictionary>

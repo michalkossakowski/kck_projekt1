@@ -120,10 +120,9 @@
     <System:String x:Key="NumberOfNotes">Number of notes</System:String>
     <System:String x:Key="ChartByCatStr">Chart by categories</System:String>
     <System:String x:Key="GraphInYearsStr">Graph in years</System:String>
-    <System:String x:Key="YearStr">year</System:String>
+    <System:String x:Key="YearStr">Year</System:String>
     <System:String x:Key="FromYearStr">From year</System:String>
     <System:String x:Key="ToYearStr">To year</System:String>
-
     <System:String x:Key="EmptyCategoryListStr">This list is empty</System:String>
     <System:String x:Key="CategoryStr">Category: </System:String>
     <System:String x:Key="ModificationDateStr">Modification date: </System:String>
@@ -137,4 +136,17 @@
     <System:String x:Key="CategoryDeleteSuccesStr">Selected category deleted succesfully</System:String>
     <System:String x:Key="CategoryDeleteCancelStr">Deleting category canceled</System:String>
     <System:String x:Key="CategoryExistsStr">Category with this name already exists</System:String>
+    <System:String x:Key="NotifyRunningInBackStr">Application is running in the background</System:String>
+    <System:String x:Key="JanuaryStr">Jan</System:String>
+    <System:String x:Key="FebruaryStr">Feb</System:String>
+    <System:String x:Key="MarchStr">Mar</System:String>
+    <System:String x:Key="AprilStr">Apr</System:String>
+    <System:String x:Key="MayStr">May</System:String>
+    <System:String x:Key="JuneStr">Jun</System:String>
+    <System:String x:Key="JulyStr">Jul</System:String>
+    <System:String x:Key="AugustStr">Aug</System:String>
+    <System:String x:Key="SeptemberStr">Sept</System:String>
+    <System:String x:Key="OctoberStr">Oct</System:String>
+    <System:String x:Key="NovemberStr">Nov</System:String>
+    <System:String x:Key="DecemberStr">Dec</System:String>
 </ResourceDictionary>

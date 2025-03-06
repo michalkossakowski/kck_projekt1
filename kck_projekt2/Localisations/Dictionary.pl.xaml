@@ -157,4 +157,5 @@
     <System:String x:Key="OctoberStr">Paź</System:String>
     <System:String x:Key="NovemberStr">Lis</System:String>
     <System:String x:Key="DecemberStr">Gru</System:String>
+    <System:String x:Key="AddCategoryHeaderStr">Dodaj Kategorię</System:String>
 </ResourceDictionary>

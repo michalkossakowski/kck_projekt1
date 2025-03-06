@@ -149,4 +149,5 @@
     <System:String x:Key="OctoberStr">Oct</System:String>
     <System:String x:Key="NovemberStr">Nov</System:String>
     <System:String x:Key="DecemberStr">Dec</System:String>
+    <System:String x:Key="AddCategoryHeaderStr">Add Category</System:String>
 </ResourceDictionary>

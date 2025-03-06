@@ -157,4 +157,6 @@
     <System:String x:Key="DarkModeMessageContentStr">The application has been switched to dark mode.</System:String>
     <System:String x:Key="LightModeMessageContentStr">The application has been switched to light mode.</System:String>
     <System:String x:Key="Month">Miesiąc</System:String>
+    <System:String x:Key="EmptyChartStr">Not enough data to display</System:String>
+    <System:String x:Key="AddCategoryHeaderStr">Add Category</System:String>
 </ResourceDictionary>

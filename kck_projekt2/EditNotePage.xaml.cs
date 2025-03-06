@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Markup;
 using System.Windows.Media;
 using kck_api.Controller;
 using kck_api.Model;
@@ -254,7 +255,7 @@ namespace kck_projekt2
             var categoryController = CategoryController.GetInstance();
             string categoryName = await categoryController.GetCategoryNameByIdAsync(note.CategoryId);
             // Tworzenie dokumentu do wydruku
-            FlowDocument doc = GenerateFlowDocument(note.Title, categoryName, note.Content, note.ModifiedDate);
+            FixedDocument doc = GenerateFlowDocument(note.Title, categoryName, note.Content, note.ModifiedDate);
 
             // Wywołanie okna drukowania
             PrintDialog printDialog = new PrintDialog();
@@ -274,57 +275,84 @@ namespace kck_projekt2
             }
         }
 
-        private FlowDocument GenerateFlowDocument(string noteTitle, string noteCategory, string noteContent, DateTime noteModifiedDate)
+        private FixedDocument GenerateFlowDocument(string noteTitle, string noteCategory, string noteContent, DateTime noteModifiedDate)
         {
-            // Tworzenie FlowDocument
-            FlowDocument doc = new FlowDocument
+            FixedDocument fixedDoc = new FixedDocument();
+
+            // Tworzenie strony (A4 - 96 dpi)
+            PageContent pageContent = new PageContent();
+            FixedPage page = new FixedPage
             {
-                PageWidth = 500,
-                FontFamily = new FontFamily("Arial"),
-                FontSize = 14,
-                PagePadding = new Thickness(20)
+                Width = 8.27 * 96,  // Szerokość A4 w DPI (8.27 cala * 96 dpi)
+                Height = 11.69 * 96  // Wysokość A4 w DPI (11.69 cala * 96 dpi)
+            };
+
+            // Tworzenie kontenera dla treści (dopasowanie do rozmiaru zawartości)
+            StackPanel contentPanel = new StackPanel
+            {
+                Width = page.Width - 40,
+                Margin = new Thickness(20) // Marginesy po bokach
             };
 
             // Nagłówek
-            Paragraph title = new Paragraph(new Run(noteTitle))
+            TextBlock titleBlock = new TextBlock
             {
+                Text = noteTitle,
                 FontSize = 18,
                 FontWeight = FontWeights.Bold,
-                TextAlignment = TextAlignment.Center
+                TextAlignment = TextAlignment.Center,
+                Margin = new Thickness(0, 0, 0, 10)
             };
 
             // Kategoria
-            Paragraph category = new Paragraph(new Run($"{(string)Application.Current.Resources["CategoryStr"]} {noteCategory}"))
+            TextBlock categoryBlock = new TextBlock
             {
+                Text = $"{(string)Application.Current.Resources["CategoryStr"]} {noteCategory}",
                 FontSize = 14,
                 FontStyle = FontStyles.Italic,
                 Foreground = Brushes.Gray,
-                Margin = new Thickness(0, 5, 0, 10)
+                Margin = new Thickness(0, 0, 0, 10)
             };
 
-            // Treść notatki
-            Paragraph content = new Paragraph(new Run(noteContent))
+            // Treść
+            TextBlock contentBlock = new TextBlock
             {
+                Text = noteContent,
                 FontSize = 14,
+                TextWrapping = TextWrapping.Wrap,
                 TextAlignment = TextAlignment.Left
             };
 
-            // Data utworzenia
-            Paragraph date = new Paragraph(new Run($"{(string)Application.Current.Resources["ModificationDateStr"]} {noteModifiedDate:g}"))
+            // Data modyfikacji
+            TextBlock dateBlock = new TextBlock
             {
+                Text = $"{(string)Application.Current.Resources["ModificationDateStr"]} {noteModifiedDate:g}",
                 FontSize = 12,
                 Foreground = Brushes.DarkGray,
-                Margin = new Thickness(0, 10, 0, 0),
-                TextAlignment = TextAlignment.Right
+                TextAlignment = TextAlignment.Right,
+                Margin = new Thickness(0, 10, 0, 0)
             };
 
-            // Dodajemy elementy do dokumentu
-            doc.Blocks.Add(title);
-            doc.Blocks.Add(category);
-            doc.Blocks.Add(content);
-            doc.Blocks.Add(date);
+            // Dodanie elementów do panelu
+            contentPanel.Children.Add(titleBlock);
+            contentPanel.Children.Add(categoryBlock);
+            contentPanel.Children.Add(contentBlock);
+            contentPanel.Children.Add(dateBlock);
 
-            return doc;
+            double contentHeight = MeasureContentHeight(contentPanel);
+            page.Height = Math.Max(contentHeight + 40, 100); // Dynamiczna wysokość, minimum 100px
+
+            page.Children.Add(contentPanel);
+            ((IAddChild)pageContent).AddChild(page);
+            fixedDoc.Pages.Add(pageContent);
+
+            return fixedDoc;
         }
+        private double MeasureContentHeight(StackPanel contentPanel)
+        {
+            contentPanel.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            return contentPanel.DesiredSize.Height;
+        }
+
     }
 }

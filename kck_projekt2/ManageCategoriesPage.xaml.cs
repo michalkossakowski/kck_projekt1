@@ -84,7 +84,12 @@ namespace kck_projekt2
                 string newName = CategoryNameTextBox.Text;
                 if (!string.IsNullOrWhiteSpace(newName))
                 {
-                    await _categoryController.EditCategoryAsync(selectedCategory.Id, newName);
+                    bool isEdited = await _categoryController.EditCategoryAsync(selectedCategory.Id, newName);
+                    if (!isEdited)
+                    {
+                        MessageBox.Show((string)Application.Current.Resources["Error"]);
+                        return;
+                    }
                     LoadCategories();
                     _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
                     _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
@@ -101,7 +106,12 @@ namespace kck_projekt2
             {
                 if (CategoriesListBox.SelectedItem is CategoryModel selectedCategory)
                 {
-                    await _categoryController.RemoveCategoryAsync(selectedCategory.Id);
+                    bool isDeleted = await _categoryController.RemoveCategoryAsync(selectedCategory.Id);
+                    if(!isDeleted)
+                    {
+                        MessageBox.Show((string)Application.Current.Resources["Error"]);
+                        return;
+                    }
                     LoadCategories();
                     _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
                     _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));

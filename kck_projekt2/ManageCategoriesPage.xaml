@@ -30,7 +30,7 @@ TextAlignment="Center"
 Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
 Text="{DynamicResource AddCategoryHeaderStr}" 
 Margin="0,0,0,0"
-Foreground="{DynamicResource TextBlockColor}" Height="80"/>
+Foreground="{DynamicResource TextBlockColor}" Height="79"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="10,-39,9,501" Grid.RowSpan="2">
             <TextBox x:Name="CategoryNameTextBox" Width="200" MaxLength="16" Height="30"/>

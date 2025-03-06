@@ -149,6 +149,8 @@ namespace kck_projekt2
             bool isChecked = IsPolish.IsChecked ?? false;
             string lang = isChecked ? "pl" : "en";
             ChangeLanguage(lang);
+
+            App.OnLanguageChanged();
         }
 
         private void ChangeLanguage(string lang)

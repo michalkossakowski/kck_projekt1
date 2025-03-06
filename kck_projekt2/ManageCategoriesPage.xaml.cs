@@ -1,5 +1,6 @@
 ﻿using kck_api.Controller;
 using kck_api.Model;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,22 +29,49 @@ namespace kck_projekt2
         {
             InitializeComponent();
             _categoryController = CategoryController.GetInstance();
-            LoadCategories();
             _mainWindow = mainW;
+            LoadCategories();
         }
 
         private async void LoadCategories()
         {
-            CategoriesListBox.ItemsSource = await _categoryController.GetAllCategoriesAsync();
+            List<CategoryModel> categories = await _categoryController.GetAllCategoriesAsync();
+            if (categories.Count == 0)
+            {
+                InformationEmpty.Text = (string)Application.Current.Resources["EmptyCategoryListStr"];
+                InformationEmpty.Visibility = Visibility.Visible;
+                CategoriesListBox.ItemsSource = categories;
+            }
+            else
+            {
+                InformationEmpty.Visibility = Visibility.Collapsed;
+                CategoriesListBox.ItemsSource = categories;
+            }
         }
 
         private async void AddCategory_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(CategoryNameTextBox.Text))
             {
-                await _categoryController.GetOrCreateCategoryIdAsync(CategoryNameTextBox.Text);
+                bool exists = await _categoryController.IsCategoryExistsAsync(CategoryNameTextBox.Text);
+                if (exists)
+                {
+                    _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
+                    _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                    _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["CategoryExistsStr"]);
+                    return;
+                }
+                int id = await _categoryController.GetOrCreateCategoryIdAsync(CategoryNameTextBox.Text);
+                if(id==-1)
+                {
+                    MessageBox.Show((string)Application.Current.Resources["Error"]);
+                    return;
+                }
                 CategoryNameTextBox.Clear();
                 LoadCategories();
+                _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
+                _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["CategoryAddSuccesStr"]);
             }
         }
 
@@ -56,18 +84,47 @@ namespace kck_projekt2
                 string newName = CategoryNameTextBox.Text;
                 if (!string.IsNullOrWhiteSpace(newName))
                 {
-                    await _categoryController.EditCategoryAsync(selectedCategory.Id, newName);
+                    bool isEdited = await _categoryController.EditCategoryAsync(selectedCategory.Id, newName);
+                    if (!isEdited)
+                    {
+                        MessageBox.Show((string)Application.Current.Resources["Error"]);
+                        return;
+                    }
                     LoadCategories();
+                    _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
+                    _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                    _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["NameChangeStr"]);
                 }
             }
         }
 
         private async void RemoveCategory_Click(object sender, RoutedEventArgs e)
         {
-            if (CategoriesListBox.SelectedItem is CategoryModel selectedCategory)
+            YesNoDialog dialog = new YesNoDialog((string)Application.Current.Resources["DeleteConfirmStr"]);
+            dialog.Owner = _mainWindow;
+            if (dialog.ShowDialog() == true)
             {
-                await _categoryController.RemoveCategoryAsync(selectedCategory.Id);
-                LoadCategories();
+                if (CategoriesListBox.SelectedItem is CategoryModel selectedCategory)
+                {
+                    bool isDeleted = await _categoryController.RemoveCategoryAsync(selectedCategory.Id);
+                    if(!isDeleted)
+                    {
+                        MessageBox.Show((string)Application.Current.Resources["Error"]);
+                        return;
+                    }
+                    LoadCategories();
+                    _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
+                    _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                    _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["CategoryDeleteSuccesStr"]);
+                    EditBtn.IsEnabled = false;
+                    RemoveBtn.IsEnabled = false;
+                }
+            }
+            else
+            {
+                _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Green);
+                _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["CategoryDeleteCancelStr"]);
             }
         }
         private void CategoriesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -75,6 +132,8 @@ namespace kck_projekt2
             if (CategoriesListBox.SelectedItem is CategoryModel selectedCategory)
             {
                 CategoryNameTextBox.Text = selectedCategory.Name;
+                EditBtn.IsEnabled = true;
+                RemoveBtn.IsEnabled = true;
             }
         }
 

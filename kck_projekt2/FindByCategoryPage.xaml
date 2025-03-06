@@ -43,23 +43,7 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             Margin="0,10,0,0">
-            <!-- CategoryToggle -->
-            <CheckBox
-                    Margin="0,0,10,0"
-                    Style="{StaticResource MaterialDesignFilterChipPrimaryOutlineCheckBox}"
-                    x:Name="CategoryToggle" 
-                    IsChecked="False"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Click="CategoryToggleClick"
-                    Content="{DynamicResource CustomStr}"
-                    FontSize="16"
-                    Foreground="{DynamicResource MaterialDesign.Brush.Primary}"
-                    BorderBrush="{DynamicResource MaterialDesign.Brush.Primary}"
-                    BorderThickness="2"
-                    ToolTip="{DynamicResource SwitchCategoryTypeStr}"/>
-                
-            <!-- SelectCategory/CustomCategory -->
+
             <ComboBox
                             x:Name="SelectedCategory"
                             Width="200"
@@ -72,12 +56,9 @@
                             FontSize="16"
                             Foreground="{DynamicResource TextBoxColor}"
                             materialDesign:HintAssist.HelperTextFontSize="12" 
-                            materialDesign:HintAssist.HelperText="{DynamicResource CategoryHelperStr}"  >
-                <ComboBoxItem Content="{DynamicResource StudiesStr}"/>
-                <ComboBoxItem Content="{DynamicResource WorkStr}"/>
-                <ComboBoxItem Content="{DynamicResource HomeStr}"/>
-                <ComboBoxItem Content="{DynamicResource HobbyStr}"/>
-                <ComboBoxItem Content="{DynamicResource OtherStr}"/>
+                            materialDesign:HintAssist.HelperText="{DynamicResource CategoryHelperStr}"  
+                            DisplayMemberPath="Name"
+                            SelectedValuePath="Id">
             </ComboBox>
 
             <TextBox 
@@ -179,7 +160,7 @@
                                 FontSize="16"
                                 />
                                     <TextBlock 
-                                Text="{Binding Category, StringFormat='({0})'}" 
+                                Text="{Binding Category.Name, StringFormat='({0})'}" 
                                 TextAlignment="Center"
                                 FontSize="12"
                                 Margin="0,0,0,2"

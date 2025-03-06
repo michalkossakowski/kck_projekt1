@@ -9,12 +9,19 @@ namespace kck_projekt2
 {
     public partial class App : Application
     {
+        public static event Action LanguageChanged;
+
+        public static void OnLanguageChanged()
+        {
+            LanguageChanged?.Invoke();
+        }
+
         private readonly Forms.NotifyIcon _notifyIcon;
         public App()
         {
             _notifyIcon = new Forms.NotifyIcon();
         }
-
+   
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -25,7 +32,6 @@ namespace kck_projekt2
             MainViewModel mainViewModel = new MainViewModel(Current.MainWindow as MainWindow, _notifyIcon);
             Current.MainWindow.DataContext = mainViewModel;
             MainWindow.StateChanged += mainViewModel.MainWindow_StateChanged;
-
         }
 
         private void TrayImplementaion() 
@@ -39,6 +45,7 @@ namespace kck_projekt2
 
             _notifyIcon.Click += NotifyIcon_Click;
             UpdateTrayMenu();
+            LanguageChanged += UpdateTrayMenu;
         }
         private void UpdateTrayMenu()
         {
@@ -62,6 +69,7 @@ namespace kck_projekt2
                 toggleButton.IsChecked = !toggleButton.IsChecked;
 
             mainWindow.SwitchLang(sender, e as RoutedEventArgs);
+            LanguageChanged?.Invoke();
         }
 
         protected override void OnExit(ExitEventArgs e)

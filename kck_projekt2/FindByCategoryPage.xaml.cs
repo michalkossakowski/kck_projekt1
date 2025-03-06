@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using kck_api.Controller;
+using kck_api.Model;
 
 namespace kck_projekt2
 {
@@ -20,6 +21,7 @@ namespace kck_projekt2
             _mainWindow = mainWindow;
             _noteController = NoteController.GetInstance();
             _categoryController = CategoryController.GetInstance();
+            LoadCategoriesAsync();
             if (searchingCategory != null)
             {
                 SelectedCategory.IsEnabled = false;
@@ -31,7 +33,10 @@ namespace kck_projekt2
                 Search();
             }
         }
-
+        private async void LoadCategoriesAsync()
+        {
+            SelectedCategory.ItemsSource = await _categoryController.GetAllCategoriesAsync();
+        }
         private void BackClick(object sender, RoutedEventArgs e)
         {
             _mainWindow.contentControl.Content = new ActionMenuPage(_mainWindow);
@@ -40,10 +45,10 @@ namespace kck_projekt2
         private void SearchClick(object sender, RoutedEventArgs e)
         {
             DataContext = null;
-            var searchingCategory = SelectedCategory.SelectedItem as ComboBoxItem;
+            var searchingCategory = SelectedCategory.SelectedItem as CategoryModel;
             string category = CustomCategory.IsEnabled
                 ? CustomCategory.Text
-                : searchingCategory?.Content?.ToString() ?? "";
+                : searchingCategory?.Name ?? "";
             _searchingCategory = category;
 
             if (_searchingCategory.Length == 0)
@@ -78,23 +83,6 @@ namespace kck_projekt2
                 DataContext = this;
             }
         }
-
-        private void CategoryToggleClick(object sender, RoutedEventArgs e)
-        {
-            CustomCategory.IsEnabled = !CustomCategory.IsEnabled;
-            SelectedCategory.IsEnabled = !SelectedCategory.IsEnabled;
-            if (SelectedCategory.IsEnabled)
-            {
-                CustomCategory.Visibility = Visibility.Collapsed;
-                SelectedCategory.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                CustomCategory.Visibility = Visibility.Visible;
-                SelectedCategory.Visibility = Visibility.Collapsed;
-            }
-        }
-
 
         private void OpenEditPage(object sender, MouseButtonEventArgs e)
         {

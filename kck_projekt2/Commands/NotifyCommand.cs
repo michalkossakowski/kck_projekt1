@@ -32,7 +32,7 @@ namespace kck_projekt2.Commands
             }
             else
             {
-                _notifyIcon.ShowBalloonTip(2000, "CNote#", "CNote# is running in the background.", ToolTipIcon.Info);
+                _notifyIcon.ShowBalloonTip(2000, "CNote#", (string)System.Windows.Application.Current.Resources["NotifyRunningInBackStr"], ToolTipIcon.Info);
             }
         }
     }

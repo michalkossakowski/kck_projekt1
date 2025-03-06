@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:kck_projekt2"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" Width="613">
 
@@ -13,25 +14,51 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
+            <materialDesign:PackIcon 
+    Kind="PencilPlusOutline" 
+    Foreground="{DynamicResource TextBlockColor}"
+    Width="50" 
+    Height="50" 
+    Margin="0,0,5,0" 
+    VerticalAlignment="Center"/>
 
-        <StackPanel Orientation="Horizontal" Margin="10">
-            <TextBox x:Name="CategoryNameTextBox" Width="200"/>
+            <TextBlock
+Grid.Row="0"
+VerticalAlignment="Top"
+TextAlignment="Center"
+Style="{StaticResource MaterialDesignDisplayLargeTextBlock}"
+Text="{DynamicResource AddCategoryHeaderStr}" 
+Margin="0,0,0,0"
+Foreground="{DynamicResource TextBlockColor}" Height="79"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="10,-39,9,501" Grid.RowSpan="2">
+            <TextBox x:Name="CategoryNameTextBox" Width="200" MaxLength="16" Height="30"/>
             <Button Content="{DynamicResource AddCatStr}" Click="AddCategory_Click" Margin="10,0,0,0"/>
-            <Button Content="{DynamicResource EditCatStr}" Click="EditCategory_Click" Margin="5,0,0,0"/>
-            <Button Content="{DynamicResource DeleteCatStr}" Click="RemoveCategory_Click" Margin="5,0,0,0"/>
+            <Button x:Name="EditBtn" Content="{DynamicResource EditCatStr}" Click="EditCategory_Click" Margin="5,0,0,0" IsEnabled="False"/>
+            <Button x:Name="RemoveBtn" Content="{DynamicResource DeleteCatStr}" Click="RemoveCategory_Click" Margin="5,0,0,0" IsEnabled="False"/>
         </StackPanel>
         <TextBlock 
         Grid.Row="1"
-        Name="Information"
+        Name="InformationEmpty"
         VerticalAlignment="Top"
         TextAlignment="Center"
-        Text="{DynamicResource CategoryListStr}"
+        Text="{DynamicResource EmptyCategoryListStr}"
         FontSize="20"
-        Margin="10,0,-10,0" 
+        Margin="-19,179,-15,0" 
         Foreground="{DynamicResource TextBlockColor}"
-        Visibility="Visible"
-        />
-        <ListBox x:Name="CategoriesListBox" Grid.Row="1" Margin="10,45,10,260" SelectionChanged="CategoriesListBox_SelectionChanged">
+        Visibility="Visible" RenderTransformOrigin="0.5,0.5"
+        >
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.029"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <ListBox x:Name="CategoriesListBox" Grid.Row="1" Margin="10,99,9,227" SelectionChanged="CategoriesListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

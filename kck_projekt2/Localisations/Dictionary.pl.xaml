@@ -130,7 +130,6 @@
     <System:String x:Key="LightModeStr">Jasny motyw</System:String>
     <System:String x:Key="DarkModeMessageContentStr">Aplikacja została przełączona na ciemny motyw.</System:String>
     <System:String x:Key="LightModeMessageContentStr">Aplikacja została przełączona na jasny motyw.</System:String>
-    <System:String x:Key="SteelRunningSTr">Aplikacja działa w tle.</System:String>
     <System:String x:Key="EmptyCategoryListStr">Ta lista jest pusta</System:String>
     <System:String x:Key="CategoryStr">Kategoria:</System:String>
     <System:String x:Key="ModificationDateStr">Data modyfikacji:</System:String>
@@ -157,4 +156,5 @@
     <System:String x:Key="OctoberStr">Paź</System:String>
     <System:String x:Key="NovemberStr">Lis</System:String>
     <System:String x:Key="DecemberStr">Gru</System:String>
+    <System:String x:Key="CNoteDescription">CNote# jest prostą aplikacją do robienia notatek</System:String>
 </ResourceDictionary>

@@ -149,4 +149,12 @@
     <System:String x:Key="OctoberStr">Oct</System:String>
     <System:String x:Key="NovemberStr">Nov</System:String>
     <System:String x:Key="DecemberStr">Dec</System:String>
+    <System:String x:Key="CNoteDescription">CNote# is a simple note-taking application.</System:String>
+    <System:String x:Key="NotifConsoleTitleStr">Application in Console Mode</System:String>
+    <System:String x:Key="NotifConsoleContentStr">The application has been started in console mode.</System:String>
+    <System:String x:Key="DarkModeStr">Dark Mode</System:String>
+    <System:String x:Key="LightModeStr">Light Mode</System:String>
+    <System:String x:Key="DarkModeMessageContentStr">The application has been switched to dark mode.</System:String>
+    <System:String x:Key="LightModeMessageContentStr">The application has been switched to light mode.</System:String>
+    <System:String x:Key="Month">Miesiąc</System:String>
 </ResourceDictionary>

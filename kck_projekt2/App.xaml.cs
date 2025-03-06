@@ -11,12 +11,17 @@ namespace kck_projekt2
     {
         public static event Action LanguageChanged;
 
+        public static void OnLanguageChanged()
+        {
+            LanguageChanged?.Invoke();
+        }
+
         private readonly Forms.NotifyIcon _notifyIcon;
         public App()
         {
             _notifyIcon = new Forms.NotifyIcon();
         }
-
+   
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);

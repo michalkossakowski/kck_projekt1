@@ -157,4 +157,5 @@
     <System:String x:Key="NovemberStr">Lis</System:String>
     <System:String x:Key="DecemberStr">Gru</System:String>
     <System:String x:Key="CNoteDescription">CNote# jest prostą aplikacją do robienia notatek</System:String>
+    <System:String x:Key="EmptyChartStr">Brak danych do wyświetlenia</System:String>
 </ResourceDictionary>

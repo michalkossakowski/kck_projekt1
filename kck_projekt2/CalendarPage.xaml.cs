@@ -46,6 +46,8 @@ namespace kck_projekt2
 
         private void UpdateCalendarDays()
         {
+            if (_viewModel == null || MyCalendar == null)
+                return;
             foreach (var day in FindChildren<CalendarDayButton>(MyCalendar))
             {
                 day.Background = Brushes.Transparent;

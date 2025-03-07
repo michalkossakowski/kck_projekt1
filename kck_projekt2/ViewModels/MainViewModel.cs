@@ -20,7 +20,7 @@ namespace kck_projekt2.ViewModels
         {
             if (_mainWindow.WindowState == WindowState.Minimized)
             {
-                NotifyVM.NotifyCommand.Execute(new NotificationMessage("CNote#", (string)Application.Current.Resources["SteelRunningSTr"], Forms.ToolTipIcon.Info, 1000));
+                NotifyVM.NotifyCommand.Execute(new NotificationMessage("CNote#", (string)Application.Current.Resources["NotifyRunningInBackStr"], Forms.ToolTipIcon.Info, 1000));
             }
         }
         public bool IsDarkTheme

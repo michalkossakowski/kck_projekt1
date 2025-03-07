@@ -84,7 +84,7 @@
     <System:String x:Key="PrintButtonStr">Print</System:String>
     <System:String x:Key="RequirementsNotMeetStr">Meet the form requirements and try again</System:String>
     <System:String x:Key="SaveChangesConfirmStr">Are you sure you want to save changes?</System:String>
-    <System:String x:Key="DeleteConfirmStrStr">Are you sure you want to delete the note?</System:String>
+    <System:String x:Key="DeleteConfirmStr">Are you sure you want to delete the note?</System:String>
     <System:String x:Key="NoneNotesForDateStr">You don't have any notes from:</System:String>
     <System:String x:Key="NoneNotesStr">You dont have any notes</System:String>
     <System:String x:Key="EmptyMonthSearchStr">Searching month cannot be null</System:String>

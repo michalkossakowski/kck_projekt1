@@ -109,7 +109,9 @@ namespace kck_projekt2
                     bool isDeleted = await _categoryController.RemoveCategoryAsync(selectedCategory.Id);
                     if(!isDeleted)
                     {
-                        MessageBox.Show((string)Application.Current.Resources["Error"]);
+                        _mainWindow.Snackbar.Background = new SolidColorBrush(Colors.Red);
+                        _mainWindow.Snackbar.MessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
+                        _mainWindow.Snackbar.MessageQueue?.Enqueue((string)Application.Current.Resources["CategoryInUseStr"]);
                         return;
                     }
                     LoadCategories();

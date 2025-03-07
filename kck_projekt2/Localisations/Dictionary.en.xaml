@@ -159,4 +159,5 @@
     <System:String x:Key="Month">Miesiąc</System:String>
     <System:String x:Key="EmptyChartStr">Not enough data to display</System:String>
     <System:String x:Key="AddCategoryHeaderStr">Add Category</System:String>
+    <System:String x:Key="CategoryInUseStr">Category in use. Deleting has been canceled</System:String>
 </ResourceDictionary>

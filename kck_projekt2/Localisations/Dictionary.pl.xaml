@@ -159,4 +159,5 @@
     <System:String x:Key="CNoteDescription">CNote# jest prostą aplikacją do robienia notatek</System:String>
     <System:String x:Key="EmptyChartStr">Brak danych do wyświetlenia</System:String>
     <System:String x:Key="AddCategoryHeaderStr">Dodaj Kategorię</System:String>
+    <System:String x:Key="CategoryInUseStr">Kategoria jest w użyciu. Usuwanie anulowane</System:String>
 </ResourceDictionary>

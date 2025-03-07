@@ -125,6 +125,12 @@ using static System.Net.Mime.MediaTypeNames;
                 var category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == categoryId);
                 if (category != null)
                 {
+                    var notesWithCategory = await _context.Notes.AnyAsync(n => n.CategoryId == categoryId);
+                    if (notesWithCategory)
+                    {
+                        return false;
+                    }
+
                     _context.Categories.Remove(category);
                     await _context.SaveChangesAsync();
                     return true;
@@ -136,6 +142,7 @@ using static System.Net.Mime.MediaTypeNames;
                 return false;
             }
         }
+            
             public async Task<string> GetCategoryNameByIdAsync(int categoryId)
             {
                 var category = await _context.Categories.FindAsync(categoryId);
